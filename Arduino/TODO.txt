@@ -1,0 +1,9 @@
+
+
+[ ] Test the other motor driver.
+    [ ] How are they different?
+[ ] figure out how fast we have to move to get the ball flying.
+    [ ] check how fast the old build moves?
+
+[X] Test the camera
+
