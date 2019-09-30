@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\git\HighPrecisionStepperJuggler\Unity\HighPrecisionStepperJuggler" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="HighPrecisionStepperJuggler" t="Include">
+            <e p="BasicJoint.cs" t="Include" />
+            <e p="InverseKinematic.cs" t="Include" />
+            <e p="PositionLogger.cs" t="Include" />
+          </e>
+          <e p="SimpleCameraController.cs" t="Include" />
+        </e>
+        <e p="TutorialInfo" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="Editor" t="Include">
+              <e p="ReadmeEditor.cs" t="Include" />
+            </e>
+            <e p="Readme.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="HighPrecisionStepperJuggler.sln" t="IncludeFlat" />
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+    <e p="C:\Users\owner\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\owner\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_HighPrecisionStepperJuggler.-1767816841.00" t="ExcludeRecursive" />
+  </component>
+</project>
