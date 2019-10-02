@@ -50,7 +50,5 @@
 // NOTE: SineStepper and MoveBatch ids must be lower then MAX_NUM_OF_STEPPERS
 #define MAX_NUM_OF_STEPPERS 10
 #define MAX_NUM_OF_BATCHED_MOVES 100
-#define M_PI 3.14159265358979323846f
-#define M_PI_2 1.57079632679489661923f
 
 #endif
