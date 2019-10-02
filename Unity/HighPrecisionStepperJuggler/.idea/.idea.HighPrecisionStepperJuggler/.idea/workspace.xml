@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4f15dfba-10f7-4f08-9501-b9bfb8f9a2c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/IKValidationScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/IKValidationScene.unity" afterDir="false" />
-    </list>
+    <list default="true" id="4f15dfba-10f7-4f08-9501-b9bfb8f9a2c8" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,19 +12,14 @@
     <leaf>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Desktop/TODO.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/HighPrecisionStepperJuggler/BasicJoint.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="69" selection-start-line="19" selection-start-column="69" selection-end-line="19" selection-end-column="69" />
+            <state relative-caret-position="255">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/HighPrecisionStepperJuggler/InverseKinematic.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
@@ -34,15 +27,6 @@
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/HighPrecisionStepperJuggler/PositionLogger.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="12" selection-start-column="12" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -138,12 +122,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1569851407561</updated>
-      <workItem from="1569851412613" duration="3228000" />
+      <workItem from="1569851412613" duration="3917000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3228000" />
+    <option name="totallyTimeSpent" value="3917000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -156,7 +140,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
       <window_info id="Favorites" side_tool="true" />
@@ -215,13 +198,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/TODO.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HighPrecisionStepperJuggler/PositionLogger.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/HighPrecisionStepperJuggler/BasicJoint.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="69" selection-start-line="19" selection-start-column="69" selection-end-line="19" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/TODO.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
@@ -232,13 +226,6 @@
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HighPrecisionStepperJuggler/PositionLogger.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" selection-start-column="12" selection-end-column="12" />
         </state>
       </provider>
     </entry>

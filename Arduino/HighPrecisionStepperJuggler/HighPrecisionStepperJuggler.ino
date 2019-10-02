@@ -27,12 +27,9 @@ Encoder Encoder1(ROTARY_ENC_1_A, ROTARY_ENC_1_B);
 
 SineStepper sineStepper1(STEPPER1_STEP_PIN, STEPPER1_DIR_PIN, /*id:*/ 0);
 SineStepperController sineStepperController(/*endlessRepeat:*/ true);
+IntervalTimer myTimer;
 
 int buttonCoolDownCounter = 0;
-hw_timer_t *timer = NULL;
-portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
-volatile SemaphoreHandle_t timerSemaphore;
-uint32_t cp0_regs[18];
 
 void handleModeChange(Mode newMode)
 {
@@ -47,22 +44,9 @@ void handleModeChange(Mode newMode)
     }
 }
 
-void IRAM_ATTR onTimer()
+void onTimer()
 {
     digitalWrite(EXECUTING_ISR_CODE, HIGH);
-    // get FPU state
-    uint32_t cp_state = xthal_get_cpenable();
-
-    if (cp_state)
-    {
-        // Save FPU registers
-        xthal_save_cp0(cp0_regs);
-    }
-    else
-    {
-        // enable FPU
-        xthal_set_cpenable(1);
-    }
 
     switch (currentMode)
     {
@@ -104,19 +88,7 @@ void IRAM_ATTR onTimer()
     default:
         break;
     }
-    xSemaphoreGiveFromISR(timerSemaphore, NULL);
     digitalWrite(EXECUTING_ISR_CODE, LOW);
-
-    if (cp_state)
-    {
-        // Restore FPU registers
-        xthal_restore_cp0(cp0_regs);
-    }
-    else
-    {
-        // turn it back off
-        xthal_set_cpenable(0);
-    }
 }
 
 void setupMoveBatch(MoveBatch mb)
@@ -141,11 +113,12 @@ void setupMoveBatch(MoveBatch mb)
 void setup()
 {
     Serial.begin(115200);
+    myTimer.begin(onTimer, 2);
 
     pinMode(EXECUTING_ISR_CODE, OUTPUT);
     pinMode(BUTTON_PIN, INPUT);
+    pinMode(13, OUTPUT);
 
-    timerSemaphore = xSemaphoreCreateBinary();
     sineStepperController.attach(&sineStepper1);
 
     // initialize MoveBatches
@@ -154,26 +127,12 @@ void setup()
 
     //repeatabilityTest(mb);
     setupMoveBatch(mb);
-
-    // Set 80 divider for prescaler
-    timer = timerBegin(0, 80, true);
-    timerAttachInterrupt(timer, &onTimer, true);
-    // onTimer gets called every 50uS.
-    timerAlarmWrite(timer, TIMER_US, true);
-
-    timerAlarmEnable(timer);
 }
 
 void loop()
 {
-    if (xSemaphoreTake(timerSemaphore, 0) == pdTRUE)
-    {
-        int32_t pos = 0;
-
-        //portENTER_CRITICAL(&timerMux);
-        pos = sineStepper1.currentPos;
-        //portEXIT_CRITICAL(&timerMux);
-
-        delay(10);
-    }
+    digitalWrite(13, HIGH);
+    delay(500);
+    digitalWrite(13, LOW);
+    delay(500);
 }
