@@ -113,7 +113,7 @@ void setupMoveBatch(MoveBatch mb)
 void setup()
 {
     Serial.begin(115200);
-    myTimer.begin(onTimer, 2);
+    myTimer.begin(onTimer, TIMER_US);
 
     pinMode(EXECUTING_ISR_CODE, OUTPUT);
     pinMode(BUTTON_PIN, INPUT);

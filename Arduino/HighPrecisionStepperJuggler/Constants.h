@@ -9,7 +9,7 @@
 #include "Arduino.h"
 
 #define STEPPER1_STEP_PIN 2
-#define STEPPER1_DIR_PIN 4
+#define STEPPER1_DIR_PIN 1
 #define STEPPER2_STEP_PIN 16
 #define STEPPER2_DIR_PIN 17
 #define STEPPER3_STEP_PIN 5
@@ -17,9 +17,9 @@
 #define STEPPER4_STEP_PIN 19
 #define STEPPER4_DIR_PIN 21
 
-#define BUTTON_PIN 34
+#define BUTTON_PIN 12
 #define NAN_ALERT_LED 25
-#define BUTTON_COOLDOWN_CYCLES 20000
+#define BUTTON_COOLDOWN_CYCLES 500000
 
 #define EXECUTING_ISR_CODE 0
 #define ROTARY_ENC_1_A 32
@@ -40,12 +40,12 @@
 // we want to figure out what setting will allow us to do 1 full rev the fastest.
 
 #define PULSES_PER_REVOLUTION
-#define PULSES_TO_MOVE 2000
-#define MOVE_DURATION 0.04f
-#define PAUSE_DURATION 0.1f
+#define PULSES_TO_MOVE 85920
+#define MOVE_DURATION 0.55f
+#define PAUSE_DURATION 1.0f
 
-#define FREQUENCY_MULTIPLIER 0.000010f
-#define TIMER_US 10
+#define FREQUENCY_MULTIPLIER 0.000002f
+#define TIMER_US 2
 
 // NOTE: SineStepper and MoveBatch ids must be lower then MAX_NUM_OF_STEPPERS
 #define MAX_NUM_OF_STEPPERS 10
