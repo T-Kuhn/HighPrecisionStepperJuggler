@@ -13,6 +13,7 @@
           </e>
           <e p="SimpleCameraController.cs" t="Include" />
         </e>
+        <e p="TODO.txt" t="Include" />
         <e p="TutorialInfo" t="Include">
           <e p="Scripts" t="Include">
             <e p="Editor" t="Include">

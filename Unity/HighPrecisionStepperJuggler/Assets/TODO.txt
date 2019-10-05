@@ -1,0 +1,14 @@
+
+[X] Test the other motor driver.
+[ ] figure out how fast we have to move to get the ball flying.
+    [ ] check how fast the old build moves?
+[X] Test the camera
+
+// UNITY
+
+[ ] implement the cos() motor driving to get the model to move just like the real machine
+[ ] implement the how-far-to-rotate-from target y-move-distance
+[ ] test whether or not the table's tilt will be constant when moving up tilted
+[ ] create a table mesh thing
+[ ] add new offset variable to compensate for changing table width in x dir when tilting in y dir
+[ ] ...
