@@ -5,24 +5,28 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Scripts" t="Include">
-          <e p="HighPrecisionStepperJuggler" t="Include">
+        <e p="HDRPTestScene" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="SimpleCameraController.cs" t="Include" />
+          </e>
+          <e p="TutorialInfo" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Editor" t="Include">
+                <e p="ReadmeEditor.cs" t="Include" />
+              </e>
+              <e p="Readme.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="HighPrecisionStepperJuggler" t="Include">
+          <e p="Scripts" t="Include">
             <e p="BasicJoint.cs" t="Include" />
             <e p="InverseKinematic.cs" t="Include" />
             <e p="Motor.cs" t="Include" />
             <e p="MotorController.cs" t="Include" />
             <e p="PositionLogger.cs" t="Include" />
           </e>
-          <e p="SimpleCameraController.cs" t="Include" />
-        </e>
-        <e p="TODO.txt" t="Include" />
-        <e p="TutorialInfo" t="Include">
-          <e p="Scripts" t="Include">
-            <e p="Editor" t="Include">
-              <e p="ReadmeEditor.cs" t="Include" />
-            </e>
-            <e p="Readme.cs" t="Include" />
-          </e>
+          <e p="TODO.txt" t="Include" />
         </e>
       </e>
       <e p="HighPrecisionStepperJuggler.sln" t="IncludeFlat" />
