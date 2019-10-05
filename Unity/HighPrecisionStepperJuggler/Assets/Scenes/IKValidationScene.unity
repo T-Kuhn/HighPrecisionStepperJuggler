@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f3cce517e31784ba002d6362069e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetY: 0.006
+  TargetY: 0.0044
   _joint1: {fileID: 1596873050}
   _joint2: {fileID: 653294766}
 --- !u!1 &208456529
@@ -520,7 +520,7 @@ MonoBehaviour:
   _link: {fileID: 208456530}
   _tip: {fileID: 1627371424}
   _attachToTip: {fileID: 0}
-  JointRotation: 0
+  JointRotation: 2.4411643
 --- !u!4 &653294767
 Transform:
   m_ObjectHideFlags: 0
@@ -528,8 +528,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653294765}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.54}
+  m_LocalRotation: {x: -0, y: -0, z: 0.9392993, w: 0.34309903}
+  m_LocalPosition: {x: 1.911415, y: 0.5886365, z: -0.5400001}
   m_LocalScale: {x: 50, y: 50, z: 33.333336}
   m_Children:
   - {fileID: 208456530}
@@ -822,7 +822,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596873048}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.14881621, w: 0.9888649}
   m_LocalPosition: {x: 0, y: 0, z: -0.54}
   m_LocalScale: {x: 50, y: 50, z: 33.333336}
   m_Children:
@@ -846,7 +846,7 @@ MonoBehaviour:
   _link: {fileID: 1081256991}
   _tip: {fileID: 1717869168}
   _attachToTip: {fileID: 653294767}
-  JointRotation: 0
+  JointRotation: 0.2987421
 --- !u!1 &1627371423
 GameObject:
   m_ObjectHideFlags: 0

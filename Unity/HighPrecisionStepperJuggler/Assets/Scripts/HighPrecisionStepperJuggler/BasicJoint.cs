@@ -2,6 +2,7 @@
 
 namespace HighPrecisionStepperJuggler
 {
+    [ExecuteInEditMode]
     public class BasicJoint : MonoBehaviour
     {
         [SerializeField] private Transform _link;
@@ -10,14 +11,14 @@ namespace HighPrecisionStepperJuggler
 
         public float JointRotation;
 
-        private void Update()
+        public void UpdatePositionAndRotation()
         {
+            transform.rotation = Quaternion.Euler(0f, 0f, JointRotation * Mathf.Rad2Deg);
+            
             if (_attachToTip != null)
             {
                 _attachToTip.position = _tip.position;
             }
-
-            transform.rotation = Quaternion.Euler(0f, 0f, JointRotation * Mathf.Rad2Deg);
         }
     }
 }

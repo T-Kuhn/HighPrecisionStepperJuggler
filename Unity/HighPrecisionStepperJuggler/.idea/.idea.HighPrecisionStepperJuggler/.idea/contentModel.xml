@@ -9,6 +9,8 @@
           <e p="HighPrecisionStepperJuggler" t="Include">
             <e p="BasicJoint.cs" t="Include" />
             <e p="InverseKinematic.cs" t="Include" />
+            <e p="Motor.cs" t="Include" />
+            <e p="MotorController.cs" t="Include" />
             <e p="PositionLogger.cs" t="Include" />
           </e>
           <e p="SimpleCameraController.cs" t="Include" />

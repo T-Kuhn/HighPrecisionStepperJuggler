@@ -6,9 +6,32 @@
 
 // UNITY
 
-[ ] implement the cos() motor driving to get the model to move just like the real machine
+[X] edit mode script execution
+[X] fix buggy render jumps
+[ ] IK needs to become part of MotorController (and shouldn't be a MonoBehaviour)
+[ ] Add MotorController
+[ ] fix assertion failed error
 [ ] implement the how-far-to-rotate-from target y-move-distance
+[ ] implement the cos() motor driving to get the model to move just like the real machine
 [ ] test whether or not the table's tilt will be constant when moving up tilted
 [ ] create a table mesh thing
 [ ] add new offset variable to compensate for changing table width in x dir when tilting in y dir
+[ ] make it look nicer (nicer shading)
 [ ] ...
+
+
+
+memo:
+
+
+right now we got:
+
+TargetY     -->      [   InverseKinematic   ]     ->     [   basicJoints   ]
+
+
+What we want:
+
+TargetYCurrent     -->      [   InverseKinematic   ]     ->     [   basicJoints   ]
+TargetYGoal        -->      [   InverseKinematic   ]     ->     [   basicJoints   ]
+
+
