@@ -1,10 +1,10 @@
 # ---------------[ Unity generated ]------------------ #
 [Ll]ibrary/
+[Bb]uild/
 [Tt]emp/
 [Oo]bj/
 [Ee]xe/
 UnityGenerated/
-ProjectSettings/*.asset
 
 # ----[ Visual Studio / MonoDevelop generated ]------- #
 
