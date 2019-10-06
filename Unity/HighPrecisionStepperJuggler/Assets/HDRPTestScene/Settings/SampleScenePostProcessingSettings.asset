@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Value: {fileID: 0}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0.2
     min: 0
     max: 1
   maxSamples:
@@ -64,7 +64,7 @@ MonoBehaviour:
     min: -100
     max: 100
   tint:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
     min: -100
     max: 100
@@ -96,13 +96,13 @@ MonoBehaviour:
     m_Value: 0
   compensation:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.55
   limitMin:
     m_OverrideState: 0
     m_Value: -10
   limitMax:
     m_OverrideState: 1
-    m_Value: 9.5
+    m_Value: 10
   curveMap:
     m_OverrideState: 0
     m_Value:
