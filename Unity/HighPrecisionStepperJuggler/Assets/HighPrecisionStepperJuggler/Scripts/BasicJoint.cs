@@ -2,12 +2,10 @@
 
 namespace HighPrecisionStepperJuggler
 {
-    [ExecuteInEditMode]
     public class BasicJoint : MonoBehaviour
     {
-        [SerializeField] private Transform _link;
-        [SerializeField] private Transform _tip;
-        [SerializeField] private Transform _attachToTip;
+        [SerializeField] private Transform _tip = null;
+        [SerializeField] private Transform _attachToTip = null;
 
         public float JointRotation;
 
