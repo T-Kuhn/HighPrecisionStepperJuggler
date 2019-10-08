@@ -185,7 +185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168218571}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.020001084, y: 1.385, z: -0.019001083}
+  m_LocalPosition: {x: 0.02000112, y: 1.385, z: -0.01900112}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 405591765}
@@ -1594,7 +1594,7 @@ GameObject:
   - component: {fileID: 1384183383}
   - component: {fileID: 1384183382}
   m_Layer: 0
-  m_Name: Motor3
+  m_Name: Motor4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2175,7 +2175,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805878157}
-  m_LocalRotation: {x: 0, y: 0, z: -0.00000009934108, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.060000006, z: 0}
   m_LocalScale: {x: 0.08, y: 0.001, z: 0.08}
   m_Children: []
@@ -2255,6 +2255,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _motor1Joint2Tip: {fileID: 6823614981542264247}
   _motor2Joint2Tip: {fileID: 6823614980934861193}
+  _motor3Joint2Tip: {fileID: 1439380670}
+  _motor4Joint2Tip: {fileID: 707725124}
 --- !u!1 &1847340766
 GameObject:
   m_ObjectHideFlags: 19

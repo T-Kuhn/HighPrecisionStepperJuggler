@@ -8,6 +8,8 @@ namespace HighPrecisionStepperJuggler
         
         [SerializeField] private Transform _motor1Joint2Tip = null;
         [SerializeField] private Transform _motor2Joint2Tip = null;
+        [SerializeField] private Transform _motor3Joint2Tip = null;
+        [SerializeField] private Transform _motor4Joint2Tip = null;
 
         void LateUpdate()
         {
@@ -15,11 +17,18 @@ namespace HighPrecisionStepperJuggler
             var meanHeight = (_motor1Joint2Tip.position.y + _motor2Joint2Tip.position.y) / 2f;
             transform.position = Vector3.up * meanHeight;
 
-            // set x-axis tilt
-            var h = _plateWidth / 2f;
-            var o = (_motor1Joint2Tip.position.y / 30f - _motor2Joint2Tip.position.y / 30.0f)/2f;
-            var gamma = Mathf.Asin(o / h);
-            transform.localRotation = Quaternion.Euler(0f, 0f, gamma * Mathf.Rad2Deg);
+            float TiltFromOpposingPositions(Vector3 position1, Vector3 position2)
+            {
+                var h = _plateWidth / 2f;
+                var o = (position1.y / 30f - position2.y / 30.0f) / 2f;
+                return Mathf.Asin(o / h);
+            }
+
+            var gamma = TiltFromOpposingPositions(_motor1Joint2Tip.position, _motor2Joint2Tip.position);
+            var beta = TiltFromOpposingPositions(_motor3Joint2Tip.position, _motor4Joint2Tip.position);
+
+
+            transform.localRotation = Quaternion.Euler(beta * Mathf.Rad2Deg, 0f, gamma * Mathf.Rad2Deg);
         }
     }
 }
