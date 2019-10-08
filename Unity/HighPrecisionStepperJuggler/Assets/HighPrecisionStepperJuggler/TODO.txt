@@ -11,9 +11,9 @@
 [X] IK needs to become part of MotorController (and shouldn't be a MonoBehaviour)
 [X] Add MotorController
 [X] create a table mesh thing
-[ ] implement the how-far-to-rotate-from target y-move-distance
+[X] implement the how-far-to-rotate-from target y-move-distance
+[X] test whether or not the table's tilt will be constant when moving up tilted
 [ ] implement the cos() motor driving to get the model to move just like the real machine
-[ ] test whether or not the table's tilt will be constant when moving up tilted
 [ ] add new offset variable to compensate for changing table width in x dir when tilting in y dir
 [ ] make it look nicer (nicer shading)
 [ ] ...

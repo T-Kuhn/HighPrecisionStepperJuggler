@@ -4,24 +4,41 @@ namespace HighPrecisionStepperJuggler
 {
     public class MotorController : MonoBehaviour
     {
-        public float StartY;
-        public float EndY;
+        public Heights Motor1Heights;
+        public Heights Motor2Heights;
         
         [SerializeField] private Motor _motor1 = null;
         [SerializeField] private Motor _motor2 = null;
 
         private void Update()
         {
-            var startJointRotations = InverseKinematics.CalculateJointRotationsFromTargetY(StartY);
-            var endJointRotations = InverseKinematics.CalculateJointRotationsFromTargetY(EndY);
+            (float startRot, float totalRot) RotationsFromHeights(Heights heights)
+            {
+                var startRotation = InverseKinematics.CalculateJoint1RotationFromTargetY(heights.Start);
+                var endRotation = InverseKinematics.CalculateJoint1RotationFromTargetY(heights.End);
 
-            var totalRotation = endJointRotations.theta1 - startJointRotations.theta1;
+                var totalRotation = endRotation - startRotation;
 
-            _motor1.ShaftRotation = startJointRotations.theta1 + totalRotation / 10 * ((Mathf.Cos(Time.time * 2) + 1) / 2f);
-            _motor2.ShaftRotation = startJointRotations.theta1 + totalRotation  * ((Mathf.Cos(Time.time * 2) + 1) / 2f);
-            
-            _motor1.UpdateMotor();
-            _motor2.UpdateMotor();
+                return (startRot: startRotation, totalRot: totalRotation);
+            }
+
+            void UpdateMotor(Motor m, (float startRot, float totalRot) r)
+            {
+                var cosineFromZeroToOne = ((Mathf.Cos(Time.time * 2) + 1) / 2f);
+                
+                m.ShaftRotation = r.startRot + r.totalRot * cosineFromZeroToOne;
+                m.UpdateMotor();
+            }
+
+            UpdateMotor(_motor1, RotationsFromHeights(Motor1Heights));
+            UpdateMotor(_motor2, RotationsFromHeights(Motor2Heights));
         }
+    }
+
+    [System.Serializable]
+    public struct Heights
+    {
+        public float Start;
+        public float End;
     }
 }
