@@ -13,10 +13,12 @@
 [X] create a table mesh thing
 [X] implement the how-far-to-rotate-from target y-move-distance
 [X] test whether or not the table's tilt will be constant when moving up tilted
-[ ] implement the cos() motor driving to get the model to move just like the real machine
+[X] implement the cos() motor driving to get the model to move just like the real machine
+[ ] add another 2 motors
+[ ] make the plate tilt accordingly
+
 [ ] add new offset variable to compensate for changing table width in x dir when tilting in y dir
 [ ] make it look nicer (nicer shading)
-[ ] ...
 
 
 

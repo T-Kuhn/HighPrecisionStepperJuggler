@@ -6,9 +6,13 @@ namespace HighPrecisionStepperJuggler
     {
         public Heights Motor1Heights;
         public Heights Motor2Heights;
+        public Heights Motor3Heights;
+        public Heights Motor4Heights;
         
         [SerializeField] private Motor _motor1 = null;
         [SerializeField] private Motor _motor2 = null;
+        [SerializeField] private Motor _motor3 = null;
+        [SerializeField] private Motor _motor4 = null;
 
         private void Update()
         {
@@ -32,6 +36,8 @@ namespace HighPrecisionStepperJuggler
 
             UpdateMotor(_motor1, RotationsFromHeights(Motor1Heights));
             UpdateMotor(_motor2, RotationsFromHeights(Motor2Heights));
+            UpdateMotor(_motor3, RotationsFromHeights(Motor3Heights));
+            UpdateMotor(_motor4, RotationsFromHeights(Motor4Heights));
         }
     }
 
