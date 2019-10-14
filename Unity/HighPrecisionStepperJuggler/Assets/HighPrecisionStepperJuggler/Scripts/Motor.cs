@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using ik = HighPrecisionStepperJuggler.InverseKinematics;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -17,12 +18,12 @@ namespace HighPrecisionStepperJuggler
             if (InverseEllbow)
             {
                 _joint1.JointRotation = Mathf.PI - ShaftRotation;
-                _joint2.JointRotation = Mathf.PI - InverseKinematics.CalculateJoint2RotationFromJoint1Rotation(ShaftRotation);
+                _joint2.JointRotation = Mathf.PI - ik.CalculateJoint2RotationFromJoint1Rotation(ShaftRotation);
             }
             else
             {
                 _joint1.JointRotation = ShaftRotation;
-                _joint2.JointRotation = InverseKinematics.CalculateJoint2RotationFromJoint1Rotation(ShaftRotation);
+                _joint2.JointRotation = ik.CalculateJoint2RotationFromJoint1Rotation(ShaftRotation);
             }
             
             _joint1.UpdatePositionAndRotation();

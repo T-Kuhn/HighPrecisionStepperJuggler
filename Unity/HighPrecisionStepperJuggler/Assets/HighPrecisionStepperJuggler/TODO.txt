@@ -15,7 +15,7 @@
 [X] add another 2 motors
 [X] make the plate tilt accordingly
 [X] make it look nicer (nicer shading)
-[ ] Add code which allows us to...
+[X] Add code which allows us to...
     ...set a min max height for the centre of the plate
     ...set a tilt correction (in mm) for the x and y axis
 [ ] add new offset variable to compensate for changing table width on x-axis when tilting around y axis

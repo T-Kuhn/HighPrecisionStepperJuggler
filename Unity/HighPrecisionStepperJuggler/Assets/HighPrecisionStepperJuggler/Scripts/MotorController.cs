@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using ik = HighPrecisionStepperJuggler.InverseKinematics;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -17,8 +18,8 @@ namespace HighPrecisionStepperJuggler
         {
             (float startRot, float totalRot) RotationsFromHeights(Heights heights)
             {
-                var startRotation = InverseKinematics.CalculateJoint1RotationFromTargetY(heights.Start);
-                var endRotation = InverseKinematics.CalculateJoint1RotationFromTargetY(heights.End);
+                var startRotation = ik.CalculateJoint1RotationFromTargetY(heights.Start);
+                var endRotation = ik.CalculateJoint1RotationFromTargetY(heights.End);
 
                 var totalRotation = endRotation - startRotation;
 
