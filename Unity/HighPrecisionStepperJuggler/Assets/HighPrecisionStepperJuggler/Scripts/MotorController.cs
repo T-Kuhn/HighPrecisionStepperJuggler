@@ -33,6 +33,10 @@ namespace HighPrecisionStepperJuggler
                 m.ShaftRotation = r.startRot + r.totalRot * cosineFromZeroToOne;
                 m.UpdateMotor();
             }
+            
+            // Circle tilting
+            //XTilt = Mathf.Sin(Time.time) * 0.2f;
+            //YTilt = Mathf.Cos(Time.time) * 0.2f;
 
             var xHeightDiff = MiscMath.HeightDifferenceFromTilt(XTilt);
             var yHeightDiff = MiscMath.HeightDifferenceFromTilt(YTilt);
