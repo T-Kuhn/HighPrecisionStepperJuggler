@@ -1,7 +1,5 @@
 
 [X] Test the other motor driver.
-[ ] figure out how fast we have to move to get the ball flying.
-    [ ] check how fast the old build moves?
 [X] Test the camera
 
 // UNITY
@@ -14,11 +12,14 @@
 [X] implement the how-far-to-rotate-from target y-move-distance
 [X] test whether or not the table's tilt will be constant when moving up tilted
 [X] implement the cos() motor driving to get the model to move just like the real machine
-[ ] add another 2 motors
-[ ] make the plate tilt accordingly
-
-[ ] add new offset variable to compensate for changing table width in x dir when tilting in y dir
-[ ] make it look nicer (nicer shading)
+[X] add another 2 motors
+[X] make the plate tilt accordingly
+[X] make it look nicer (nicer shading)
+[ ] Add code which allows us to...
+    ...set a min max height for the centre of the plate
+    ...set a tilt correction (in mm) for the x and y axis
+[ ] add new offset variable to compensate for changing table width on x-axis when tilting around y axis
+[ ] start work on designing the actual parts
 
 
 

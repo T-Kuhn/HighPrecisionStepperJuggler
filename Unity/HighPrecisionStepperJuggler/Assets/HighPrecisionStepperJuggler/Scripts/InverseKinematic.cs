@@ -1,13 +1,11 @@
 ﻿using System;
 using UnityEngine;
+using c = HighPrecisionStepperJuggler.Constants;
 
 namespace HighPrecisionStepperJuggler
 {
     public static class InverseKinematics
     {
-        private static readonly float _l1 = 0.004f;
-        private static readonly float _l2 = 0.005f;
-        
         /// <summary>
         /// Get theta1 and theta2 with a given target height (tip of link2)
         /// </summary>
@@ -28,7 +26,7 @@ namespace HighPrecisionStepperJuggler
         /// <returns>theta2 (rotation of joint2)</returns>
         public static float CalculateJoint2RotationFromJoint1Rotation(float theta1)
         {
-            return (float)(Mathf.PI - Math.Acos(Mathf.Cos(theta1) * _l1 / _l2));
+            return (float)(Mathf.PI - Math.Acos(Mathf.Cos(theta1) * c.L1 / c.L2));
         }
         
         /// <summary>
@@ -38,7 +36,7 @@ namespace HighPrecisionStepperJuggler
         /// <returns>theta1 (rotation of joint1)</returns>
         public static float CalculateJoint1RotationFromTargetY(float targetY)
         {
-            return Mathf.Asin((targetY * targetY + _l1 * _l1 - _l2 * _l2) / (2f * _l1 * targetY));
+            return Mathf.Asin((targetY * targetY + c.L1 * c.L1 - c.L2 * c.L2) / (2f * c.L1 * targetY));
         }
     }
 }

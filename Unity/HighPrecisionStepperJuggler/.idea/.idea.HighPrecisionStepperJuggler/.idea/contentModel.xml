@@ -7,7 +7,9 @@
         <e p="HighPrecisionStepperJuggler" t="Include">
           <e p="Scripts" t="Include">
             <e p="BasicJoint.cs" t="Include" />
+            <e p="Constants.cs" t="Include" />
             <e p="InverseKinematic.cs" t="Include" />
+            <e p="MiscMath.cs" t="Include" />
             <e p="Motor.cs" t="Include" />
             <e p="MotorController.cs" t="Include" />
             <e p="Plate.cs" t="Include" />
@@ -27,5 +29,7 @@
     </e>
     <e p="C:\Users\owner\.Rider2018.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\owner\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_HighPrecisionStepperJuggler.-1767816841.00" t="ExcludeRecursive" />
+    <e p="C:\Users\owner\AppData\local\Android\sdk\platforms\android-25\data\res" t="IncludeRecursive" />
+    <e p="C:\Users\owner\AppData\local\Android\sdk\sources\android-25" t="IncludeRecursive" />
   </component>
 </project>

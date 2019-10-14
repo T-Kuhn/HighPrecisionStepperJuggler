@@ -4,10 +4,9 @@ namespace HighPrecisionStepperJuggler
 {
     public class MotorController : MonoBehaviour
     {
-        public Heights Motor1Heights;
-        public Heights Motor2Heights;
-        public Heights Motor3Heights;
-        public Heights Motor4Heights;
+        public Heights CentreHeigths;
+        public float XTilt;
+        public float YTilt;
         
         [SerializeField] private Motor _motor1 = null;
         [SerializeField] private Motor _motor2 = null;
@@ -34,10 +33,29 @@ namespace HighPrecisionStepperJuggler
                 m.UpdateMotor();
             }
 
-            UpdateMotor(_motor1, RotationsFromHeights(Motor1Heights));
-            UpdateMotor(_motor2, RotationsFromHeights(Motor2Heights));
-            UpdateMotor(_motor3, RotationsFromHeights(Motor3Heights));
-            UpdateMotor(_motor4, RotationsFromHeights(Motor4Heights));
+            var xHeightDiff = MiscMath.HeightDifferenceFromTilt(XTilt);
+            var yHeightDiff = MiscMath.HeightDifferenceFromTilt(YTilt);
+
+            UpdateMotor(_motor1, RotationsFromHeights(new Heights()
+            {
+                Start = CentreHeigths.Start + xHeightDiff / 2, 
+                End = CentreHeigths.End + xHeightDiff / 2
+            }));
+            UpdateMotor(_motor2, RotationsFromHeights(new Heights()
+            {
+                Start = CentreHeigths.Start - xHeightDiff / 2,
+                End = CentreHeigths.End - xHeightDiff / 2
+            }));
+            UpdateMotor(_motor3, RotationsFromHeights(new Heights()
+            {
+                Start = CentreHeigths.Start + yHeightDiff / 2,
+                End = CentreHeigths.End + yHeightDiff / 2
+            }));
+            UpdateMotor(_motor4, RotationsFromHeights(new Heights()
+            {
+                Start = CentreHeigths.Start - yHeightDiff / 2,
+                End = CentreHeigths.End - yHeightDiff / 2
+            }));
         }
     }
 

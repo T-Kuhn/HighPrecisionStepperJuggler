@@ -185,7 +185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168218571}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02000112, y: 1.385, z: -0.01900112}
+  m_LocalPosition: {x: 0.020001136, y: 1.385, z: -0.019001136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 405591765}
@@ -3441,18 +3441,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ee010a17969da439cd108b4d0146d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Motor1Heights:
+  CentreHeigths:
     Start: 0.004
     End: 0.006
-  Motor2Heights:
-    Start: 0.004
-    End: 0.006
-  Motor3Heights:
-    Start: 0.004
-    End: 0.006
-  Motor4Heights:
-    Start: 0.004
-    End: 0.006
+  XTilt: 0
+  YTilt: 0
   _motor1: {fileID: 6823614982096337833}
   _motor2: {fileID: 6823614980795832193}
   _motor3: {fileID: 2022585528}
