@@ -40,9 +40,9 @@
 // we want to figure out what setting will allow us to do 1 full rev the fastest.
 
 #define PULSES_PER_REVOLUTION
-#define PULSES_TO_MOVE 85920
-#define MOVE_DURATION 0.55f
-#define PAUSE_DURATION 1.0f
+#define PULSES_TO_MOVE 15480
+#define MOVE_DURATION 0.2f
+#define PAUSE_DURATION 0.05f
 
 #define FREQUENCY_MULTIPLIER 0.000002f
 #define TIMER_US 2

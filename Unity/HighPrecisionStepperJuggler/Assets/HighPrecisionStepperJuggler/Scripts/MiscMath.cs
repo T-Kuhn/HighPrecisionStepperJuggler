@@ -29,5 +29,11 @@ namespace HighPrecisionStepperJuggler
             var o = Mathf.Sin(tilt) * h;
             return o;
         }
+
+        /*public static float WidthCorrectionFromTilt(float tilt)
+        {
+            
+        }
+        */
     }
 }
