@@ -25,11 +25,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Camera/CameraValidation.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="391">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$USER_HOME$/Downloads/See3CAM_CU135_Extension_Unit_SDK_1.0.63.418_Windows_20170919/eCAMFwSw.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="765">
+              <caret line="69" column="11" selection-start-line="69" selection-start-column="11" selection-end-line="69" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -48,18 +57,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
               <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Motor.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#76#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -155,7 +152,7 @@
       <facet id="riderModule/invalid/Default Android Facet" />
     </ignored-facets>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="294" />
     <option name="y" value="96" />
     <option name="width" value="1440" />
@@ -223,12 +220,12 @@
       <workItem from="1570847544184" duration="3731000" />
       <workItem from="1571026024707" duration="3227000" />
       <workItem from="1571038994204" duration="2369000" />
-      <workItem from="1571535837295" duration="4314000" />
+      <workItem from="1571535837295" duration="5074000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35703000" />
+    <option name="totallyTimeSpent" value="36463000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -240,8 +237,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.18390192" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -436,8 +432,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Camera/CameraValidation.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="391">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/See3CAM_CU135_Extension_Unit_SDK_1.0.63.418_Windows_20170919/eCAMFwSw.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="69" column="11" selection-start-line="69" selection-start-column="11" selection-end-line="69" selection-end-column="11" />
         </state>
       </provider>
     </entry>
