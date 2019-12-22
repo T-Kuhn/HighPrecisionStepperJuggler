@@ -8,14 +8,14 @@
 #define Constants_h
 #include "Arduino.h"
 
-#define STEPPER1_STEP_PIN 2
 #define STEPPER1_DIR_PIN 1
-#define STEPPER2_STEP_PIN 16
-#define STEPPER2_DIR_PIN 17
-#define STEPPER3_STEP_PIN 5
-#define STEPPER3_DIR_PIN 18
-#define STEPPER4_STEP_PIN 19
-#define STEPPER4_DIR_PIN 21
+#define STEPPER1_STEP_PIN 2
+#define STEPPER2_DIR_PIN 3
+#define STEPPER2_STEP_PIN 4
+#define STEPPER3_DIR_PIN 5
+#define STEPPER3_STEP_PIN 6
+#define STEPPER4_DIR_PIN 7
+#define STEPPER4_STEP_PIN 8
 
 #define BUTTON_PIN 12
 #define NAN_ALERT_LED 25
@@ -39,10 +39,12 @@
 
 // we want to figure out what setting will allow us to do 1 full rev the fastest.
 
-#define PULSES_PER_REVOLUTION
-#define PULSES_TO_MOVE 15480
-#define MOVE_DURATION 0.2f
-#define PAUSE_DURATION 0.05f
+#define STARTUP_PULSES_TO_MOVE 2000
+#define STARTUP_MOVE_DURATION 0.5f
+
+#define PULSES_TO_MOVE 5000
+#define MOVE_DURATION 0.5f
+#define PAUSE_DURATION 0.2f
 
 #define FREQUENCY_MULTIPLIER 0.000002f
 #define TIMER_US 2
