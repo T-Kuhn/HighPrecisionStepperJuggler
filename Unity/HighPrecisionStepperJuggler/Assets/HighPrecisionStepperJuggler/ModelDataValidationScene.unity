@@ -185,7 +185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168218571}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.020001572, y: 1.385, z: -0.019001571}
+  m_LocalPosition: {x: 0.020001601, y: 1.385, z: -0.019001601}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 405591765}
@@ -888,12 +888,12 @@ PrefabInstance:
     - target: {fileID: 4479322176669253145, guid: 93ad51e6f85578a4aa3c4ace4286c613,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4479322176669253145, guid: 93ad51e6f85578a4aa3c4ace4286c613,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.81
+      value: 0.746
       objectReference: {fileID: 0}
     - target: {fileID: 4479322176669253145, guid: 93ad51e6f85578a4aa3c4ace4286c613,
         type: 3}
@@ -1731,7 +1731,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 2
+  antialiasing: 1
   SMAAQuality: 2
   dithering: 1
   stopNaNs: 0
@@ -1862,7 +1862,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297650280}
   m_LocalRotation: {x: -0, y: 0.9612703, z: -0.27560747, w: 0}
-  m_LocalPosition: {x: -4.74, y: 3.5, z: 4.7}
+  m_LocalPosition: {x: 0.21, y: 3.5, z: 4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
