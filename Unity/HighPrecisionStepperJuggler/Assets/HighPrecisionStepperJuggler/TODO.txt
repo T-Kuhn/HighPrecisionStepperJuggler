@@ -1,27 +1,37 @@
-
-[X] Test the other motor driver.
-[X] Test the camera
-
 // UNITY
 
-[X] edit mode script execution
-[X] fix buggy render jumps
-[X] IK needs to become part of MotorController (and shouldn't be a MonoBehaviour)
-[X] Add MotorController
-[X] create a table mesh thing
-[X] implement the how-far-to-rotate-from target y-move-distance
-[X] test whether or not the table's tilt will be constant when moving up tilted
-[X] implement the cos() motor driving to get the model to move just like the real machine
-[X] add another 2 motors
-[X] make the plate tilt accordingly
-[X] make it look nicer (nicer shading)
-[X] Add code which allows us to...
-    ...set a min max height for the centre of the plate
-    ...set a tilt correction (in mm) for the x and y axis
 [ ] Write latex math file
 [ ] add new offset variable to compensate for changing table width on x-axis when tilting around y axis
     [ ] WidthCompensationFromTilt
 [ ] start work on designing the actual parts
+[ ] get new model moving
+
+// 1:
+center x: -80.477 mm
+center y: -5.205 mm
+center z: -55.30 mm
+
+// 2:
+center x: 5.205
+center y: -80.477 mm
+center z: -55.30 mm
+
+// 3:
+center x: 5.205
+center y: 80.477 mm
+center z: -55.30 mm
+
+// 4:
+center x: -5.205
+center y: 80.477 mm
+center z: -55.30 mm
+
+lower link length: 89
+upper link length: 80
+
+
+
+[ ] drill holes in acryl and mount it on machine.
 
 
 
