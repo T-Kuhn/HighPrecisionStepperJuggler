@@ -1,31 +1,17 @@
 // UNITY
 
-[ ] Write latex math file
+[ ] fix problem where we're not able to turn the lower link below horizontal.
+[ ] drill holes in acryl and mount it on machine.
 [ ] add new offset variable to compensate for changing table width on x-axis when tilting around y axis
     [ ] WidthCompensationFromTilt
-[ ] start work on designing the actual parts
-[ ] get new model moving
+[ ] Write latex math file
+
+
 
 lower link length: 89
 upper link length: 80
 upper most link length: 35 + 6.5 + 8 = 49.5 (from plate edge to joint) 
 upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
-[ ] drill holes in acryl and mount it on machine.
-
-
-
 memo:
-
-
-right now we got:
-
-TargetY     -->      [   InverseKinematic   ]     ->     [   basicJoints   ]
-
-
-What we want:
-
-TargetYCurrent     -->      [   InverseKinematic   ]     ->     [   basicJoints   ]
-TargetYGoal        -->      [   InverseKinematic   ]     ->     [   basicJoints   ]
-
 

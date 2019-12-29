@@ -6952,7 +6952,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 3cc4d58bd7ffdce4a832f44fe2f35926, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8462,7 +8462,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CentreHeigths:
     Start: 0.08
-    End: 0.1
+    End: 0.12
+  StartStopHeight: 0
   XTilt: 0
   YTilt: 0
   _motor1: {fileID: 415035607188147448}

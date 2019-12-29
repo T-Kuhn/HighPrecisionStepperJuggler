@@ -38,10 +38,9 @@ namespace HighPrecisionStepperJuggler
         /// <returns>theta1 (rotation of joint1)</returns>
         public static float CalculateJoint1RotationFromTargetY(float targetY)
         {
+            // NOTE: ↓ old IK without q-correction.
             //return Mathf.Asin((targetY * targetY + c.L1 * c.L1 - c.L2 * c.L2) / (2f * c.L1 * targetY));
 
-            var q = 0.069023f;
-            
             // y = l_1 sin(x) + sqrt(l_2^2-(-l_1cos(x) + q)^2)
             //     ↓ solve for x (wolfram alpha) ↓
             //
@@ -49,6 +48,7 @@ namespace HighPrecisionStepperJuggler
             //     - 4 sqrt(-l_1^2 q^4 y^2 - 2 l_1^2 q^2 y^4 + 2 l_1^4 q^2 y^2 + 2 l_1^2 l_2^2 q^2 y^2
             //     - l_1^2 y^6 + 2 l_1^4 y^4 + 2 l_1^2 l_2^2 y^4 - l_1^6 y^2 - l_1^2 l_2^4 y^2 + 2 l_1^4 l_2^2 y^2))
             //     /(2 l_1^2 (4 q^2 + 4 y^2)))
+            var q = 0.069023f;
 
             var a1 = 1f / (2f * c.L1 * c.L1 * (4f * q * q + 4f * targetY * targetY));
             var a2 = -c.L1 * q * (-4f * c.L1 * c.L1 + 4f * c.L2 * c.L2 - 4f * q * q - 4 * targetY * targetY);
@@ -64,7 +64,14 @@ namespace HighPrecisionStepperJuggler
                          - c.L1 * c.L1 * c.L2 * c.L2 * c.L2 * c.L2 * targetY * targetY
                          + 2f * c.L1 * c.L1 * c.L1 * c.L1 * c.L2 * c.L2 * targetY * targetY);
 
-            return Mathf.Acos(a1 * (a2 - a3));
+            // Note: The localMaximum of Mathf.Acos(a1 * (a2 - a3)).
+            //       e.g. the target_y where Mathf.Acos(a1 * (a2 - a3)) returns exactly 1.0.
+            var localMaximum = c.L1 * Mathf.Sin(0f) + Mathf.Sqrt(c.L2*c.L2-Mathf.Pow((-c.L1 * Mathf.Cos(0f) + q), 2f));
+            var result = targetY < localMaximum
+                ? -Mathf.Acos(a1 * (a2 - a3))
+                : Mathf.Acos(a1 * (a2 - a3));
+            
+            return result;
         }
     }
 }

@@ -6,6 +6,10 @@ namespace HighPrecisionStepperJuggler
     public class MotorController : MonoBehaviour
     {
         public Heights CentreHeigths;
+        
+        [Range(0.0f, 0.14f)]
+        public float StartStopHeight;
+        
         public float XTilt;
         public float YTilt;
         
@@ -41,6 +45,12 @@ namespace HighPrecisionStepperJuggler
             var xHeightDiff = MiscMath.HeightDifferenceFromTilt(XTilt);
             var yHeightDiff = MiscMath.HeightDifferenceFromTilt(YTilt);
 
+            if (Mathf.Abs(StartStopHeight) > 0f)
+            {
+                CentreHeigths.Start = StartStopHeight;
+                CentreHeigths.End = StartStopHeight;
+            }
+            
             UpdateMotor(_motor1, RotationsFromHeights(new Heights()
             {
                 Start = CentreHeigths.Start + xHeightDiff / 2, 
