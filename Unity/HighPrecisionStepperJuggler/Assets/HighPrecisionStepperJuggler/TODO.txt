@@ -1,6 +1,5 @@
 // UNITY
 
-[ ] fix problem where we're not able to turn the lower link below horizontal.
 [ ] drill holes in acryl and mount it on machine.
 [ ] add new offset variable to compensate for changing table width on x-axis when tilting around y axis
     [ ] WidthCompensationFromTilt
