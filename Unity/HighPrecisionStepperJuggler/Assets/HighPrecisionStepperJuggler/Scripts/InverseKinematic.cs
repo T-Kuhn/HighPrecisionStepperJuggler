@@ -26,7 +26,7 @@ namespace HighPrecisionStepperJuggler
         /// <returns>theta2 (rotation of joint2)</returns>
         public static float CalculateJoint2RotationFromJoint1Rotation(float theta1)
         {
-            var q = 0.07f;
+            var q = 0.069023f;
             
             return (float)(Mathf.PI - Math.Acos((Mathf.Cos(theta1) * c.L1 - q) / c.L2));
         }
@@ -40,7 +40,7 @@ namespace HighPrecisionStepperJuggler
         {
             //return Mathf.Asin((targetY * targetY + c.L1 * c.L1 - c.L2 * c.L2) / (2f * c.L1 * targetY));
 
-            var q = 0.07f;
+            var q = 0.069023f;
             
             // y = l_1 sin(x) + sqrt(l_2^2-(-l_1cos(x) + q)^2)
             //     ↓ solve for x (wolfram alpha) ↓

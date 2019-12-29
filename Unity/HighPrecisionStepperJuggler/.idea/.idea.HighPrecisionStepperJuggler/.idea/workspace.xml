@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4f15dfba-10f7-4f08-9501-b9bfb8f9a2c8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HighPrecisionStepperJuggler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HighPrecisionStepperJuggler/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/ModelDataValidationScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/ModelDataValidationScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Models/Scale Container.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Models/Scale Container.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/InverseKinematic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/InverseKinematic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +36,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Plate.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
@@ -43,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+            <state relative-caret-position="170">
+              <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -52,8 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="170">
+              <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -85,8 +98,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/InverseKinematic.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="30" column="74" selection-start-line="30" selection-start-column="74" selection-end-line="30" selection-end-column="74" />
+            <state relative-caret-position="422">
+              <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
               <folding>
                 <element signature="e#0#81#0" expanded="true" />
               </folding>
@@ -95,10 +108,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../.gitignore">
+        <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/DebugRay.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="221">
+              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -121,6 +134,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/InverseKinematic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Motor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.high-definition@6.9.0-preview/Runtime/Lighting/Light/HDAdditionalLightData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/DebugRay.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs" root0="FORCE_HIGHLIGHTING" />
@@ -142,9 +156,10 @@
         <option value="$PROJECT_DIR$/../.gitignore" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Camera/CameraValidation.cs" />
+        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs" />
-        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs" />
+        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/DebugRay.cs" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/InverseKinematic.cs" />
       </list>
     </option>
@@ -226,11 +241,12 @@
       <workItem from="1577517633954" duration="5939000" />
       <workItem from="1577542925931" duration="4121000" />
       <workItem from="1577591313560" duration="3333000" />
+      <workItem from="1577606044070" duration="2443000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50824000" />
+    <option name="totallyTimeSpent" value="53267000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -243,6 +259,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.18390192" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -250,6 +267,7 @@
       <window_info id="Capture Tool" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Captures" order="5" />
+      <window_info active="true" anchor="bottom" id="Build" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -356,13 +374,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/PositionLogger.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -374,6 +385,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="864">
           <caret line="143" column="6" selection-start-line="143" selection-start-column="6" selection-end-line="143" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
@@ -391,6 +409,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Plate.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -398,24 +423,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+        <state relative-caret-position="170">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="170">
+          <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
         </state>
       </provider>
     </entry>
@@ -439,10 +457,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/DebugRay.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/InverseKinematic.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="30" column="74" selection-start-line="30" selection-start-column="74" selection-end-line="30" selection-end-column="74" />
+        <state relative-caret-position="422">
+          <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
           <folding>
             <element signature="e#0#81#0" expanded="true" />
           </folding>

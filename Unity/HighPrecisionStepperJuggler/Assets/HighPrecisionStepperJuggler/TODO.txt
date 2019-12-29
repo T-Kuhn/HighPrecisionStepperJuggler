@@ -6,30 +6,10 @@
 [ ] start work on designing the actual parts
 [ ] get new model moving
 
-// 1:
-center x: -80.477 mm
-center y: -5.205 mm
-center z: -55.30 mm
-
-// 2:
-center x: 5.205
-center y: -80.477 mm
-center z: -55.30 mm
-
-// 3:
-center x: 5.205
-center y: 80.477 mm
-center z: -55.30 mm
-
-// 4:
-center x: -5.205
-center y: 80.477 mm
-center z: -55.30 mm
-
 lower link length: 89
 upper link length: 80
-
-
+upper most link length: 35 + 6.5 + 8 = 49.5 (from plate edge to joint) 
+upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 [ ] drill holes in acryl and mount it on machine.
 

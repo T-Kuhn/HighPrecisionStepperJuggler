@@ -11,6 +11,7 @@
               <e p="CameraValidation.cs" t="Include" />
             </e>
             <e p="Constants.cs" t="Include" />
+            <e p="DebugRay.cs" t="Include" />
             <e p="InverseKinematic.cs" t="Include" />
             <e p="MiscMath.cs" t="Include" />
             <e p="Motor.cs" t="Include" />
