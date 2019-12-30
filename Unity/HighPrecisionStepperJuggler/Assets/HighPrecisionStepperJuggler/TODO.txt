@@ -11,8 +11,10 @@
 [X] width correction from tilt.
 [X] refactor
 [ ] endPoint-structure (send movement-information either to the model or the microcontroller)
+[ ] get IK code out of the MotorController and into the MachineController.
 [ ] test sending something to the microcontroller
 [ ] get some test rotations for tilting and run them on the machine.
+[ ] ...
 
 [ ] drill holes in acryl and mount it on machine.
 [ ] Write latex math file
@@ -23,4 +25,17 @@ upper most link length: 35 + 6.5 + 8 = 49.5 (from plate edge to joint)
 upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
+
+
+                           [moveInstructionList generation]
+highlevel Movelist consisting of multiple structs containing: height, x-tilt, y-tilt, movetime
+
+                                          ↓
+               
+                                        [ IK ]
+Get complete information struct with: motor1, motor2, motor3, motor4 rotations, time, and arm1joint2, arm2joint2, arm3Joint2, arm4Joint2 rotations
+            
+                                          ↓
+                       [InstructableMachine.SendInstruction]           
+         
 

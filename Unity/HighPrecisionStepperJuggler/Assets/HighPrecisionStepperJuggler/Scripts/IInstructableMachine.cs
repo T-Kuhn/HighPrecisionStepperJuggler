@@ -1,7 +1,10 @@
-﻿namespace HighPrecisionStepperJuggler
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+namespace HighPrecisionStepperJuggler
 {
-    public interface IInstructableMachine 
+    public abstract class InstructableMachine : MonoBehaviour
     {
-        
+        public abstract void Instruct(List<IKGInstruction> instructions);
     }
 }
