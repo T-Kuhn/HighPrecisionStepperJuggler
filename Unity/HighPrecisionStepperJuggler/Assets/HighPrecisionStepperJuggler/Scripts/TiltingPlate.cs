@@ -22,7 +22,6 @@ namespace HighPrecisionStepperJuggler
             var gamma = MiscMath.TiltFromOpposingPositions(_motor1Joint2Tip.position, _motor2Joint2Tip.position);
             var beta = MiscMath.TiltFromOpposingPositions(_motor3Joint2Tip.position, _motor4Joint2Tip.position);
 
-            // TODO: fix this.
             transform.localRotation = Quaternion.Euler(0f, -gamma * Mathf.Rad2Deg, 0f) * Quaternion.Euler(beta * Mathf.Rad2Deg, 0f, 0f);
 
             _upperMostRotationalJoint1.Rotation = -beta;

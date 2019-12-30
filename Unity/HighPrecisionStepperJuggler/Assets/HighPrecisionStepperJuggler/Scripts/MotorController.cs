@@ -10,9 +10,9 @@ namespace HighPrecisionStepperJuggler
         [Range(0.0f, 0.14f)]
         public float StartStopHeight;
         
-        [Range(-0.4f, 0.4f)]
+        [Range(-0.2f, 0.2f)]
         public float XTiltInRadians;
-        [Range(-0.4f, 0.4f)]
+        [Range(-0.2f, 0.2f)]
         public float YTiltInRadians;
         
         [SerializeField] private Motor _motor1 = null;
@@ -22,22 +22,22 @@ namespace HighPrecisionStepperJuggler
 
         private void Update()
         {
-            (float startRot, float totalRot) RotationsFromHeights(Heights heights)
+            (float startRot, float totalRot) RotationsFromHeights(Heights heights, float offsetQ)
             {
-                var startRotation = ik.CalculateJoint1RotationFromTargetY(heights.Start);
-                var endRotation = ik.CalculateJoint1RotationFromTargetY(heights.End);
+                var startRotation = ik.CalculateJoint1RotationFromTargetY(heights.Start, offsetQ);
+                var endRotation = ik.CalculateJoint1RotationFromTargetY(heights.End, offsetQ);
 
                 var totalRotation = endRotation - startRotation;
 
                 return (startRot: startRotation, totalRot: totalRotation);
             }
 
-            void UpdateMotor(Motor m, (float startRot, float totalRot) r)
+            void UpdateMotor(Motor m, (float startRot, float totalRot) r, float offsetQ)
             {
                 var cosineFromZeroToOne = ((Mathf.Cos(Time.time * 2) + 1) / 2f);
                 
                 m.ShaftRotation = r.startRot + r.totalRot * cosineFromZeroToOne;
-                m.UpdateMotor();
+                m.UpdateMotor(offsetQ);
             }
             
             // Circle tilting
@@ -52,27 +52,42 @@ namespace HighPrecisionStepperJuggler
                 CentreHeigths.Start = StartStopHeight;
                 CentreHeigths.End = StartStopHeight;
             }
-            
-            UpdateMotor(_motor1, RotationsFromHeights(new Heights()
+
             {
-                Start = CentreHeigths.Start + xHeightDiff / 2, 
-                End = CentreHeigths.End + xHeightDiff / 2
-            }));
-            UpdateMotor(_motor2, RotationsFromHeights(new Heights()
+                var q = MiscMath.WidthDifferenceFromTilt(XTiltInRadians);
+                UpdateMotor(_motor1, RotationsFromHeights(new Heights()
+                {
+                    Start = CentreHeigths.Start + xHeightDiff / 2,
+                    End = CentreHeigths.End + xHeightDiff / 2
+                }, q), q);
+            }
+
             {
-                Start = CentreHeigths.Start - xHeightDiff / 2,
-                End = CentreHeigths.End - xHeightDiff / 2
-            }));
-            UpdateMotor(_motor3, RotationsFromHeights(new Heights()
+                var q = MiscMath.WidthDifferenceFromTilt(XTiltInRadians);
+                UpdateMotor(_motor2, RotationsFromHeights(new Heights()
+                {
+                    Start = CentreHeigths.Start - xHeightDiff / 2,
+                    End = CentreHeigths.End - xHeightDiff / 2
+                }, q), q);
+            }
+
             {
-                Start = CentreHeigths.Start + yHeightDiff / 2,
-                End = CentreHeigths.End + yHeightDiff / 2
-            }));
-            UpdateMotor(_motor4, RotationsFromHeights(new Heights()
+                var q = MiscMath.WidthDifferenceFromTilt(YTiltInRadians);
+                UpdateMotor(_motor3, RotationsFromHeights(new Heights()
+                {
+                    Start = CentreHeigths.Start + yHeightDiff / 2,
+                    End = CentreHeigths.End + yHeightDiff / 2
+                }, q), q);
+            }
+
             {
-                Start = CentreHeigths.Start - yHeightDiff / 2,
-                End = CentreHeigths.End - yHeightDiff / 2
-            }));
+                var q = MiscMath.WidthDifferenceFromTilt(YTiltInRadians);
+                UpdateMotor(_motor4, RotationsFromHeights(new Heights()
+                {
+                    Start = CentreHeigths.Start - yHeightDiff / 2,
+                    End = CentreHeigths.End - yHeightDiff / 2
+                }, q), q);
+            }
         }
     }
 

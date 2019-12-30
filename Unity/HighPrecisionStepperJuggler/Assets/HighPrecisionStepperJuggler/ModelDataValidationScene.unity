@@ -204,6 +204,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.001
       objectReference: {fileID: 0}
+    - target: {fileID: 44099407169657003, guid: 93ad51e6f85578a4aa3c4ace4286c613,
+        type: 3}
+      propertyPath: StartStopHeight
+      value: 0.0581
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93ad51e6f85578a4aa3c4ace4286c613, type: 3}
 --- !u!1 &168141638
@@ -269,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168218571}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02000286, y: 1.385, z: -0.01900286}
+  m_LocalPosition: {x: 0.02000301, y: 1.385, z: -0.01900301}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 405591765}

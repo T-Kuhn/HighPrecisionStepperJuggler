@@ -17,16 +17,16 @@ namespace HighPrecisionStepperJuggler
 
         public static float HeightDifferenceFromTilt(float tilt)
         {
-            // TODO: clean up differences in units (IK-unit vs unity-units)
             var h = c.PlateWidth;
             var o = Mathf.Sin(tilt) * h;
             return o;
         }
 
-        /*public static float WidthCorrectionFromTilt(float tilt)
+        public static float WidthDifferenceFromTilt(float tilt)
         {
-            
+            var h = c.PlateWidth / 2f;
+            var a = Mathf.Cos(tilt) * h;
+            return a - h;
         }
-        */
     }
 }
