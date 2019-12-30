@@ -12,13 +12,14 @@ namespace HighPrecisionStepperJuggler
         
         [Range(-0.2f, 0.2f)]
         public float XTiltInRadians;
+        
         [Range(-0.2f, 0.2f)]
         public float YTiltInRadians;
         
-        [SerializeField] private Motor _motor1 = null;
-        [SerializeField] private Motor _motor2 = null;
-        [SerializeField] private Motor _motor3 = null;
-        [SerializeField] private Motor _motor4 = null;
+        [SerializeField] private MotorizedArm _motor1 = null;
+        [SerializeField] private MotorizedArm _motor2 = null;
+        [SerializeField] private MotorizedArm _motor3 = null;
+        [SerializeField] private MotorizedArm _motor4 = null;
 
         private void Update()
         {
@@ -32,12 +33,12 @@ namespace HighPrecisionStepperJuggler
                 return (startRot: startRotation, totalRot: totalRotation);
             }
 
-            void UpdateMotor(Motor m, (float startRot, float totalRot) r, float offsetQ)
+            void UpdateMotor(MotorizedArm m, (float startRot, float totalRot) r, float offsetQ)
             {
                 var cosineFromZeroToOne = ((Mathf.Cos(Time.time * 2) + 1) / 2f);
                 
-                m.ShaftRotation = r.startRot + r.totalRot * cosineFromZeroToOne;
-                m.UpdateMotor(offsetQ);
+                var shaftRotation = r.startRot + r.totalRot * cosineFromZeroToOne;
+                m.UpdateArm(shaftRotation, offsetQ);
             }
             
             // Circle tilting
