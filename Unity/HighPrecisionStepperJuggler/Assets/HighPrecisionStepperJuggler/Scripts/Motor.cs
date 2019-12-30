@@ -17,13 +17,13 @@ namespace HighPrecisionStepperJuggler
         {
             if (InverseEllbow)
             {
-                _joint1.JointRotation = Mathf.PI - ShaftRotation;
-                _joint2.JointRotation = Mathf.PI - ik.CalculateJoint2RotationFromJoint1Rotation(ShaftRotation);
+                _joint1.Rotation = Mathf.PI - ShaftRotation;
+                _joint2.Rotation = Mathf.PI - ik.CalculateJoint2RotationFromJoint1Rotation(ShaftRotation);
             }
             else
             {
-                _joint1.JointRotation = ShaftRotation;
-                _joint2.JointRotation = ik.CalculateJoint2RotationFromJoint1Rotation(ShaftRotation);
+                _joint1.Rotation = ShaftRotation;
+                _joint2.Rotation = ik.CalculateJoint2RotationFromJoint1Rotation(ShaftRotation);
             }
             
             _joint1.UpdatePositionAndRotation();

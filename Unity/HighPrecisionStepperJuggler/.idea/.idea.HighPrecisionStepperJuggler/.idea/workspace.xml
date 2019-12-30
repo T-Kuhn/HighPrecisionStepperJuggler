@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f15dfba-10f7-4f08-9501-b9bfb8f9a2c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.HighPrecisionStepperJuggler/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HighPrecisionStepperJuggler/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.HighPrecisionStepperJuggler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HighPrecisionStepperJuggler/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/ModelDataValidationScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/ModelDataValidationScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Models/Scale Container.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Models/Scale Container.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Motor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Motor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MotorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MotorController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Plate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/TiltingPlate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Plate.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/TiltingPlate.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/TiltingPlate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/TiltingPlate.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,11 +18,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+            <state relative-caret-position="187">
+              <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicRotationalJoint.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -30,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/TiltingPlate.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state>
+              <caret column="17" selection-start-column="17" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -39,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
+            <state relative-caret-position="136">
+              <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -48,17 +66,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+            <state relative-caret-position="85">
+              <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MotorController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+            <state relative-caret-position="238">
+              <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
               <folding>
                 <element signature="e#0#76#0" expanded="true" />
               </folding>
@@ -88,6 +106,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicRotationalJoint.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -103,15 +122,16 @@
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Motor.cs" />
         <option value="$PROJECT_DIR$/../.gitignore" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Camera/CameraValidation.cs" />
-        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/DebugRay.cs" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/InverseKinematic.cs" />
-        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Plate.cs" />
+        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs" />
+        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs" />
+        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt" />
+        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs" />
+        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicRotationalJoint.cs" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/TiltingPlate.cs" />
         <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MotorController.cs" />
-        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt" />
-        <option value="$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs" />
       </list>
     </option>
   </component>
@@ -195,12 +215,12 @@
       <workItem from="1577591313560" duration="3333000" />
       <workItem from="1577606044070" duration="4515000" />
       <workItem from="1577624130697" duration="7112000" />
-      <workItem from="1577666215152" duration="3899000" />
+      <workItem from="1577666215152" duration="8512000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66350000" />
+    <option name="totallyTimeSpent" value="70963000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -349,13 +369,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Camera/CameraValidation.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -387,41 +400,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MotorController.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#76#0" expanded="true" />
-          </folding>
+          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt">
+    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicJoint.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+        <state relative-caret-position="441">
+          <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/BasicRotationalJoint.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
+          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/TiltingPlate.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MiscMath.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/Constants.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+        <state relative-caret-position="136">
+          <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/TODO.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/HighPrecisionStepperJuggler/Scripts/MotorController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#76#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

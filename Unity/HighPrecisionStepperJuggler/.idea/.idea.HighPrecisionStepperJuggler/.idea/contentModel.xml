@@ -7,6 +7,7 @@
         <e p="HighPrecisionStepperJuggler" t="Include">
           <e p="Scripts" t="Include">
             <e p="BasicJoint.cs" t="Include" />
+            <e p="BasicRotationalJoint.cs" t="Include" />
             <e p="Camera" t="Include">
               <e p="CameraValidation.cs" t="Include" />
             </e>

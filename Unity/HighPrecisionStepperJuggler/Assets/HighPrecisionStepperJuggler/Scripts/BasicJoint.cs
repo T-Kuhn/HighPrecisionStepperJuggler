@@ -4,13 +4,19 @@ namespace HighPrecisionStepperJuggler
 {
     public class BasicJoint : MonoBehaviour
     {
-        private enum RotationalAxis {X, Y, Z}
+        private enum RotationalAxis
+        {
+            X,
+            Y,
+            Z
+        }
+
         [SerializeField] private RotationalAxis _rotAxis;
-        
+
         [SerializeField] private Transform _tip = null;
         [SerializeField] private Transform _attachToTip = null;
 
-        public float JointRotation;
+        public float Rotation;
 
         private Quaternion _startRotation;
 
@@ -24,16 +30,16 @@ namespace HighPrecisionStepperJuggler
             switch (_rotAxis)
             {
                 case RotationalAxis.X:
-                    transform.localRotation = Quaternion.Euler(-JointRotation * Mathf.Rad2Deg, 0f, 0f) * _startRotation;
+                    transform.localRotation = Quaternion.Euler(-Rotation * Mathf.Rad2Deg, 0f, 0f) * _startRotation;
                     break;
                 case RotationalAxis.Y:
-                    transform.localRotation = Quaternion.Euler(0f, -JointRotation * Mathf.Rad2Deg, 0f) * _startRotation;
+                    transform.localRotation = Quaternion.Euler(0f, -Rotation * Mathf.Rad2Deg, 0f) * _startRotation;
                     break;
                 case RotationalAxis.Z:
-                    transform.localRotation = Quaternion.Euler( 0f, 0f, -JointRotation * Mathf.Rad2Deg) * _startRotation;
+                    transform.localRotation = Quaternion.Euler(0f, 0f, -Rotation * Mathf.Rad2Deg) * _startRotation;
                     break;
             }
-            
+
             if (_attachToTip != null)
             {
                 _attachToTip.position = _tip.position;

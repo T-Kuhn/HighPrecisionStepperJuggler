@@ -1,10 +1,12 @@
 
 [X] make plate move with arms.
-[ ] make tilt work correctly.
+[X] make tilt work correctly.
+[X] update model data in fusion360 to acryl plate state.
+[X] make upper most link turn corresponding to the tilt.
+    [X] make it turnable
+    [X] turn it the correct amount
 [ ] width correction from tilt.
-[ ] make upper most link turn corresponding to the tilt.
-[ ] add new offset variable to compensate for changing table width on x-axis when tilting around y axis
-    [ ] WidthCompensationFromTilt
+
 [ ] drill holes in acryl and mount it on machine.
 [ ] Write latex math file
 
