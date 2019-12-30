@@ -10,9 +10,9 @@ namespace HighPrecisionStepperJuggler
         [Range(0.0f, 0.14f)]
         public float StartStopHeight;
         
-        [Range(-2f, 2f)]
+        [Range(-0.4f, 0.4f)]
         public float XTiltInRadians;
-        [Range(-2f, 2f)]
+        [Range(-0.4f, 0.4f)]
         public float YTiltInRadians;
         
         [SerializeField] private Motor _motor1 = null;

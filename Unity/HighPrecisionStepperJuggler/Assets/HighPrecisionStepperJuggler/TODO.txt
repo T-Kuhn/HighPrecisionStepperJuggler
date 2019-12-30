@@ -5,6 +5,9 @@
 [X] make upper most link turn corresponding to the tilt.
     [X] make it turnable
     [X] turn it the correct amount
+[X] fix problem where tilt is behaving strange in the range 1 ~ 2
+[X] fix Quaternion multiplication problem. 
+
 [ ] width correction from tilt.
 
 [ ] drill holes in acryl and mount it on machine.
