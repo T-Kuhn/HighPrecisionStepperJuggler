@@ -16,8 +16,8 @@
             <e p="MiscMath.cs" t="Include" />
             <e p="Motor.cs" t="Include" />
             <e p="MotorController.cs" t="Include" />
-            <e p="Plate.cs" t="Include" />
             <e p="PositionLogger.cs" t="Include" />
+            <e p="TiltingPlate.cs" t="Include" />
           </e>
           <e p="SimpleCameraController.cs" t="Include" />
           <e p="TODO.txt" t="Include" />

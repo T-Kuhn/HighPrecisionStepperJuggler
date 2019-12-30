@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using ik = HighPrecisionStepperJuggler.InverseKinematics;
 
 namespace HighPrecisionStepperJuggler
@@ -10,10 +11,10 @@ namespace HighPrecisionStepperJuggler
         [Range(0.0f, 0.14f)]
         public float StartStopHeight;
         
-        [Range(-0.2f, 0.2f)]
-        public float XTilt;
-        [Range(-0.2f, 0.2f)]
-        public float YTilt;
+        [Range(-0.5f, 0.5f)]
+        public float XTiltInRadians;
+        [Range(-0.5f, 0.5f)]
+        public float YTiltInRadians;
         
         [SerializeField] private Motor _motor1 = null;
         [SerializeField] private Motor _motor2 = null;
@@ -41,11 +42,11 @@ namespace HighPrecisionStepperJuggler
             }
             
             // Circle tilting
-            //XTilt = Mathf.Sin(Time.time) * 0.2f;
-            //YTilt = Mathf.Cos(Time.time) * 0.2f;
+            //XTiltInRadians = Mathf.Sin(Time.time) * 0.5f;
+            //YTiltInRadians = Mathf.Cos(Time.time) * 0.5f;
 
-            var xHeightDiff = MiscMath.HeightDifferenceFromTilt(XTilt);
-            var yHeightDiff = MiscMath.HeightDifferenceFromTilt(YTilt);
+            var xHeightDiff = MiscMath.HeightDifferenceFromTilt(XTiltInRadians);
+            var yHeightDiff = MiscMath.HeightDifferenceFromTilt(YTiltInRadians);
 
             if (Mathf.Abs(StartStopHeight) > 0f)
             {

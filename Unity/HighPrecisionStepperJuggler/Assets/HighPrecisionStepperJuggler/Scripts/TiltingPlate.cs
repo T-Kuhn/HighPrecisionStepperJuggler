@@ -2,7 +2,7 @@
 
 namespace HighPrecisionStepperJuggler
 {
-    public class Plate : MonoBehaviour
+    public class TiltingPlate : MonoBehaviour
     {
         [SerializeField] private Transform _motor1Joint2Tip = null;
         [SerializeField] private Transform _motor2Joint2Tip = null;
@@ -11,7 +11,6 @@ namespace HighPrecisionStepperJuggler
 
         void LateUpdate()
         {
-            // set height
             var meanHeight = (_motor1Joint2Tip.position.y + _motor2Joint2Tip.position.y) / 2f;
             transform.position = Vector3.up * meanHeight;
 

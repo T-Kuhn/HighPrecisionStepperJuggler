@@ -6,9 +6,9 @@ namespace HighPrecisionStepperJuggler
     public static class MiscMath
     {
         /// <summary>
-        /// Undo the impact the Scale of the root GameObject has on child object world positions
+        /// Scale according to RootObjectScale
         /// </summary>
-        public static float UnScale(float value)
+        private static float ToObjectScale(this float value)
         {
             return value * c.RootObjectScale;
         }
@@ -19,7 +19,7 @@ namespace HighPrecisionStepperJuggler
         public static float TiltFromOpposingPositions(Vector3 position1, Vector3 position2)
         {
             var h = c.PlateWidth / 2f;
-            var o = (UnScale(position1.y) - UnScale(position2.y)) / 2f;
+            var o = (position1.y.ToObjectScale() - position2.y.ToObjectScale()) / 2f;
             return Mathf.Asin(o / h);
         }
 
