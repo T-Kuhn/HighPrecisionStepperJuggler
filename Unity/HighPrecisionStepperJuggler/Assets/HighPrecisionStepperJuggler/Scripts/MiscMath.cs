@@ -18,7 +18,7 @@ namespace HighPrecisionStepperJuggler
         public static float HeightDifferenceFromTilt(float tilt)
         {
             // TODO: clean up differences in units (IK-unit vs unity-units)
-            var h = c.PlateWidth * 0.1f;
+            var h = c.PlateWidth;
             var o = Mathf.Sin(tilt) * h;
             return o;
         }
