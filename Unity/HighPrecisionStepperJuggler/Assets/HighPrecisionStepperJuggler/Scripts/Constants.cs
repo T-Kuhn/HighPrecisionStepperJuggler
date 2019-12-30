@@ -4,7 +4,7 @@
     {
         // Width of plate from joint to joint
         // TODO: check this. needs to be adjusted for new model.
-        public static readonly float PlateWidth = 0.08f;
+        public static readonly float PlateWidth = 0.0299f;
         
         // Length of Links
         public static readonly float L1 = 0.089f;
@@ -12,6 +12,6 @@
         
         // Scale of parent GameObject
         // TODO: check this. needs to be adjusted for new model.
-        public static float RootObjectScale = 1f;
+        public static float RootObjectScale = 0.01f;
     }
 }

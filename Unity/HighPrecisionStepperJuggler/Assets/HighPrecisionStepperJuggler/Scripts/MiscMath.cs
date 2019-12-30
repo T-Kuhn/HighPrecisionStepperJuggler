@@ -10,7 +10,7 @@ namespace HighPrecisionStepperJuggler
         /// </summary>
         public static float UnScale(float value)
         {
-            return value / c.RootObjectScale;
+            return value * c.RootObjectScale;
         }
 
         /// <summary>

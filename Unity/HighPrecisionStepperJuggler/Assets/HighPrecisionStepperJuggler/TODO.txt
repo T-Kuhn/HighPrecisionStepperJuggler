@@ -1,11 +1,11 @@
-// UNITY
 
-[ ] drill holes in acryl and mount it on machine.
+[X] make plate move with arms.
+[ ] make tilt work correctly.
+[ ] make upper most link turn.
 [ ] add new offset variable to compensate for changing table width on x-axis when tilting around y axis
     [ ] WidthCompensationFromTilt
+[ ] drill holes in acryl and mount it on machine.
 [ ] Write latex math file
-
-
 
 lower link length: 89
 upper link length: 80
