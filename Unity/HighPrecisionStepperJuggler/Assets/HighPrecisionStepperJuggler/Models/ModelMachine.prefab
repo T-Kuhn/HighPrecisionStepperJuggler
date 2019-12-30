@@ -2441,7 +2441,6 @@ MonoBehaviour:
   _rotAxis: 1
   _tip: {fileID: 6070818509635770638}
   _attachToTip: {fileID: 8341402872178948455}
-  Rotation: 0
 --- !u!1 &1104914751654167011
 GameObject:
   m_ObjectHideFlags: 0
@@ -2802,7 +2801,6 @@ MonoBehaviour:
   _rotAxis: 1
   _tip: {fileID: 4581860246974339859}
   _attachToTip: {fileID: 0}
-  Rotation: 0
 --- !u!1 &1287477939056147550
 GameObject:
   m_ObjectHideFlags: 0
@@ -4911,7 +4909,6 @@ MonoBehaviour:
   _rotAxis: 1
   _tip: {fileID: 6302202069015244599}
   _attachToTip: {fileID: 5776121678053616795}
-  Rotation: 0
 --- !u!1 &2083194238662721395
 GameObject:
   m_ObjectHideFlags: 0
@@ -5855,7 +5852,6 @@ MonoBehaviour:
   _rotAxis: 1
   _tip: {fileID: 1215601663068576516}
   _attachToTip: {fileID: 0}
-  Rotation: 0
 --- !u!1 &2488576427507868276
 GameObject:
   m_ObjectHideFlags: 0
@@ -7182,8 +7178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ef371e92fae7f489421f17bec86fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShaftRotation: 0
-  InverseEllbow: 0
   _joint1: {fileID: 4181510823283723688}
   _joint2: {fileID: 4680307485662189406}
 --- !u!1 &3262110975353884312
@@ -7851,7 +7845,6 @@ MonoBehaviour:
   _rotAxis: 1
   _tip: {fileID: 4295001008462869647}
   _attachToTip: {fileID: 0}
-  Rotation: 0
 --- !u!1 &3740176008061045501
 GameObject:
   m_ObjectHideFlags: 0
@@ -9181,8 +9174,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4479322176669253145}
+  - component: {fileID: 6665327210978816474}
   m_Layer: 0
-  m_Name: Scale Container
+  m_Name: ModelMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9197,12 +9191,24 @@ Transform:
   m_GameObject: {fileID: 4479322176669253146}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -5.64, y: -0.28, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_Children:
   - {fileID: 1015135463819164712}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &6665327210978816474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4479322176669253146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa42b7bd3f21e55449fcfba346ba7ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4572777409928783956
 GameObject:
   m_ObjectHideFlags: 0
@@ -9973,8 +9979,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ef371e92fae7f489421f17bec86fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShaftRotation: 0
-  InverseEllbow: 0
   _joint1: {fileID: 3437304773938387212}
   _joint2: {fileID: 2084234448882357634}
 --- !u!1 &5206688899686804530
@@ -10783,7 +10787,6 @@ MonoBehaviour:
   _rotAxis: 1
   _tip: {fileID: 1430762965445614591}
   _attachToTip: {fileID: 7552698741586978110}
-  Rotation: 0
 --- !u!1 &5408200851335016530
 GameObject:
   m_ObjectHideFlags: 0
@@ -11580,7 +11583,6 @@ MonoBehaviour:
   _rotAxis: 1
   _tip: {fileID: 9066904784332893511}
   _attachToTip: {fileID: 0}
-  Rotation: 0
 --- !u!1 &6049855318288497992
 GameObject:
   m_ObjectHideFlags: 0
@@ -13974,7 +13976,6 @@ MonoBehaviour:
   _rotAxis: 1
   _tip: {fileID: 648972803164046812}
   _attachToTip: {fileID: 2988772045250663649}
-  Rotation: 0
 --- !u!1 &7422264109492037271
 GameObject:
   m_ObjectHideFlags: 0
@@ -14997,8 +14998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ef371e92fae7f489421f17bec86fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShaftRotation: 0
-  InverseEllbow: 0
   _joint1: {fileID: 3071961322688357533}
   _joint2: {fileID: 7592983803923374275}
 --- !u!1 &8027926651616927460
@@ -15247,8 +15246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ef371e92fae7f489421f17bec86fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShaftRotation: 0
-  InverseEllbow: 0
   _joint1: {fileID: 2240430350791938411}
   _joint2: {fileID: 4962804485259610346}
 --- !u!1 &8487294217604290426

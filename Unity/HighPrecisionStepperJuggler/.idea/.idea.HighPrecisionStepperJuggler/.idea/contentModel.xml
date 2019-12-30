@@ -13,16 +13,20 @@
             </e>
             <e p="Constants.cs" t="Include" />
             <e p="DebugRay.cs" t="Include" />
+            <e p="IInstructableMachine.cs" t="Include" />
             <e p="InverseKinematic.cs" t="Include" />
             <e p="MiscMath.cs" t="Include" />
             <e p="MotorController.cs" t="Include" />
             <e p="MotorizedArm.cs" t="Include" />
             <e p="PositionLogger.cs" t="Include" />
+            <e p="RealMachine.cs" t="Include" />
             <e p="TiltingPlate.cs" t="Include" />
           </e>
           <e p="SimpleCameraController.cs" t="Include" />
           <e p="TODO.txt" t="Include" />
         </e>
+        <e p="MachineController.cs" t="Include" />
+        <e p="ModelMachine.cs" t="Include" />
       </e>
       <e p="HighPrecisionStepperJuggler.sln" t="IncludeFlat" />
       <e p="Library" t="ExcludeRecursive" />

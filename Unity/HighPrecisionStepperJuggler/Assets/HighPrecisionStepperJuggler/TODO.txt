@@ -9,7 +9,9 @@
 [X] fix Quaternion multiplication problem. 
 [X] fix unit mixup.
 [X] width correction from tilt.
-[ ] refactor
+[X] refactor
+[ ] endPoint-structure (send movement-information either to the model or the microcontroller)
+[ ] test sending something to the microcontroller
 [ ] get some test rotations for tilting and run them on the machine.
 
 [ ] drill holes in acryl and mount it on machine.

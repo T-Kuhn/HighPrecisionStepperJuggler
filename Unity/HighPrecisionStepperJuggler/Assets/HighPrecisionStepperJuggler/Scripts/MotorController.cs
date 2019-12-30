@@ -41,10 +41,6 @@ namespace HighPrecisionStepperJuggler
                 m.UpdateArm(shaftRotation, offsetQ);
             }
             
-            // Circle tilting
-            //XTiltInRadians = Mathf.Sin(Time.time * 3) * 1f;
-            //YTiltInRadians = Mathf.Cos(Time.time * 3) * 1f;
-
             var xHeightDiff = MiscMath.HeightDifferenceFromTilt(XTiltInRadians);
             var yHeightDiff = MiscMath.HeightDifferenceFromTilt(YTiltInRadians);
 

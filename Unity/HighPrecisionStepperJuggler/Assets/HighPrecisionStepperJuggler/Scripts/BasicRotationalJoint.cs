@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
-public class BasicRotationalJoint : MonoBehaviour
+namespace HighPrecisionStepperJuggler
 {
-    public float Rotation
+    public class BasicRotationalJoint : MonoBehaviour
     {
-        set => transform.localRotation = Quaternion.Euler(value * Mathf.Rad2Deg, 0f, 0f);
+        public float Rotation
+        {
+            set => transform.localRotation = Quaternion.Euler(value * Mathf.Rad2Deg, 0f, 0f);
+        }
     }
 }
