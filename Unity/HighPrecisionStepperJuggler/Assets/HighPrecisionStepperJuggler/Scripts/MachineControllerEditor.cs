@@ -10,10 +10,16 @@ namespace HighPrecisionStepperJuggler
         {
             DrawDefaultInspector();
 
-            MachineController script = (MachineController) target;
-            if (GUILayout.Button("Send Test Instructions", GUILayout.Width(200)))
+            var script = (MachineController) target;
+            
+            if (GUILayout.Button("Go to height: 70", GUILayout.Width(200)))
             {
-                script.SendTestInstructions();
+                script.SendSingleInstruction(new HLInstruction(0.08f, 0f, 0f, 1f));
+            }
+
+            if (GUILayout.Button("Go to rest position", GUILayout.Width(200)))
+            {
+                script.SendSingleInstruction(new HLInstruction(0.0575f, 0f, 0f, 1f));
             }
         }
     }

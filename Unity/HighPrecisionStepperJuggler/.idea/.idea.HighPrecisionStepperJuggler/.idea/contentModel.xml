@@ -13,9 +13,12 @@
             </e>
             <e p="Constants.cs" t="Include" />
             <e p="DebugRay.cs" t="Include" />
+            <e p="ExtensionMethods.cs" t="Include" />
             <e p="HLInstruction.cs" t="Include" />
+            <e p="HLMachineState.cs" t="Include" />
             <e p="IInstructableMachine.cs" t="Include" />
             <e p="IKGInstruction.cs" t="Include" />
+            <e p="IKGMachineState.cs" t="Include" />
             <e p="InverseKinematic.cs" t="Include" />
             <e p="MachineController.cs" t="Include" />
             <e p="MachineControllerEditor.cs" t="Include" />

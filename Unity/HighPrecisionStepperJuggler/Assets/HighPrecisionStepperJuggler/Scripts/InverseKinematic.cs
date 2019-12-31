@@ -37,7 +37,6 @@ namespace HighPrecisionStepperJuggler
             //     /(2 l_1^2 (4 q^2 + 4 y^2)))
 
             var q = c.Q + offsetQ;
-
             var a1 = 1f / (2f * c.L1 * c.L1 * (4f * q * q + 4f * targetY * targetY));
             var a2 = -c.L1 * q * (-4f * c.L1 * c.L1 + 4f * c.L2 * c.L2 - 4f * q * q - 4 * targetY * targetY);
             var a3 = -4f * Mathf.Sqrt(

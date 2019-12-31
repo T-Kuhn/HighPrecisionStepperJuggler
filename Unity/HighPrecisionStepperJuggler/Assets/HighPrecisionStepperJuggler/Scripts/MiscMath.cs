@@ -19,7 +19,7 @@ namespace HighPrecisionStepperJuggler
         {
             var h = c.PlateWidth;
             var o = Mathf.Sin(tilt) * h;
-            return o;
+            return o / 2f;
         }
 
         public static float WidthDifferenceFromTilt(float tilt)

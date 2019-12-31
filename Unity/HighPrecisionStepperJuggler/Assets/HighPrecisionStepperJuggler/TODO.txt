@@ -10,8 +10,9 @@
 [X] fix unit mixup.
 [X] width correction from tilt.
 [X] refactor
-[ ] endPoint-structure (send movement-information either to the model or the microcontroller)
-[ ] get IK code out of the MotorController and into the MachineController.
+[X] endPoint-structure (send movement-information either to the model or the microcontroller)
+[X] get IK code out of the MotorController and into the MachineController.
+[ ] add GoToRestPosition button
 [ ] test sending something to the microcontroller
 [ ] get some test rotations for tilting and run them on the machine.
 [ ] ...
@@ -37,5 +38,8 @@ Get complete information struct with: motor1, motor2, motor3, motor4 rotations, 
             
                                           ↓
                        [InstructableMachine.SendInstruction]           
+         
+         
+         IKGInstruction => snapshot of the machine state in the end position.
          
 

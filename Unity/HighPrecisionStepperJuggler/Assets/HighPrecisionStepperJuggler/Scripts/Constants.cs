@@ -6,7 +6,8 @@
         public static readonly float PlateWidth = 0.299f;
         
         // Offset from motor axis to upper Joint
-        public static readonly float Q = 0.069023f;
+        //public static readonly float Q = 0.069023f;
+        public static readonly float Q = 0.070023f;
             
         // Length of Links
         public static readonly float L1 = 0.089f;
