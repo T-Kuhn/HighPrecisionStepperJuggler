@@ -25,6 +25,11 @@ upper link length: 80
 upper most link length: 35 + 6.5 + 8 = 49.5 (from plate edge to joint) 
 upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
+length from motor shaft centre to upper horizontal plate: 40.3
+width of a nut: 2.3
+14
+distance from motor shaft centre to upper joint centre: 42.6 + 14 = 56.6
+
 memo:
 
 

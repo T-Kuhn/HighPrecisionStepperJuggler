@@ -12,5 +12,7 @@
         // Length of Links
         public static readonly float L1 = 0.089f;
         public static readonly float L2 = 0.080f;
+        
+        public static readonly float ZeroHeight = 0.0566f;
     }
 }
