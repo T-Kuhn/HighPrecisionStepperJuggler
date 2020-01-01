@@ -39,11 +39,8 @@
 
 // we want to figure out what setting will allow us to do 1 full rev the fastest.
 
-#define STARTUP_PULSES_TO_MOVE 2000
-#define STARTUP_MOVE_DURATION 0.5f
-
-#define PULSES_TO_MOVE 5000
-#define MOVE_DURATION 0.2f
+#define PULSES_TO_MOVE 2000
+#define MOVE_DURATION 1.0f
 #define PAUSE_DURATION 0.2f
 
 #define FREQUENCY_MULTIPLIER 0.000002f
@@ -53,7 +50,7 @@
 #define MAX_NUM_OF_STEPPERS 10
 #define MAX_NUM_OF_BATCHED_MOVES 100
 
-// Max input size expected for one command
-#define INPUT_SIZE 64
+// Max input size for the list of incoming instructions
+#define INPUT_SIZE 128
 
 #endif

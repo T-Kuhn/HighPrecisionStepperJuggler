@@ -14,10 +14,7 @@
 enum Mode
 {
     idle,
-    moveUpToZeroPosition,
     doingControlledMovements,
-    stop,
-    returnToMechanicalZero,
     error
 };
 
@@ -30,13 +27,7 @@ SineStepper sineStepper2(STEPPER2_STEP_PIN, STEPPER2_DIR_PIN, /*id:*/ 1);
 SineStepper sineStepper3(STEPPER3_STEP_PIN, STEPPER3_DIR_PIN, /*id:*/ 2);
 SineStepper sineStepper4(STEPPER4_STEP_PIN, STEPPER4_DIR_PIN, /*id:*/ 3);
 
-SineStepper startupSineStepper1(STEPPER1_STEP_PIN, STEPPER1_DIR_PIN, /*id:*/ 0);
-SineStepper startupSineStepper2(STEPPER2_STEP_PIN, STEPPER2_DIR_PIN, /*id:*/ 1);
-SineStepper startupSineStepper3(STEPPER3_STEP_PIN, STEPPER3_DIR_PIN, /*id:*/ 2);
-SineStepper startupSineStepper4(STEPPER4_STEP_PIN, STEPPER4_DIR_PIN, /*id:*/ 3);
-
-SineStepperController startUpStepperController(/*endlessRepeat:*/ false);
-SineStepperController sineStepperController(/*endlessRepeat:*/ true);
+SineStepperController sineStepperController(/*endlessRepeat:*/ false);
 IntervalTimer myTimer;
 
 int buttonCoolDownCounter = 0;
@@ -51,15 +42,6 @@ void handleModeChange(Mode newMode)
     {
         buttonCoolDownCounter = 0;
         currentMode = newMode;
-
-        if (newMode == returnToMechanicalZero)
-        {
-            setupMoveToMechanicalZeroMoveBatch();
-        }
-        if (newMode == idle)
-        {
-            setupStartUpMoveBatch();
-        }
     }
 }
 
@@ -70,29 +52,12 @@ void onTimer()
     switch (currentMode)
     {
     case idle:
-        handleModeChange(moveUpToZeroPosition);
-        break;
-    case moveUpToZeroPosition:
-        //portENTER_CRITICAL_ISR(&timerMux);
-        startUpStepperController.update();
-        //portEXIT_CRITICAL_ISR(&timerMux);
-
         handleModeChange(doingControlledMovements);
         break;
     case doingControlledMovements:
         sineStepperController.update();
-
-        handleModeChange(stop);
-        break;
-    case stop:
-        handleModeChange(returnToMechanicalZero);
-        break;
-
-    case returnToMechanicalZero:
-        startUpStepperController.update();
         handleModeChange(idle);
         break;
-
     default:
         break;
     }
@@ -114,58 +79,23 @@ void setupMoveBatch(MoveBatch mb)
     mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 1.0));
     mb.moveDuration = PAUSE_DURATION;
     sineStepperController.addMoveBatch(mb);
+}
 
-    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0));
-    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0));
-    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0));
-    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0));
+void setupMoveBatch2(MoveBatch mb)
+{
+    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
+    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
+    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
+    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
     mb.moveDuration = MOVE_DURATION;
     sineStepperController.addMoveBatch(mb);
 
-    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0));
-    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0));
-    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0));
-    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0));
+    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
+    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
+    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
+    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
     mb.moveDuration = PAUSE_DURATION;
     sineStepperController.addMoveBatch(mb);
-}
-
-void setupStartUpMoveBatch()
-{
-    MoveBatch mb;
-
-    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(STARTUP_PULSES_TO_MOVE));
-    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(STARTUP_PULSES_TO_MOVE));
-    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(STARTUP_PULSES_TO_MOVE));
-    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(STARTUP_PULSES_TO_MOVE));
-    mb.moveDuration = STARTUP_MOVE_DURATION;
-    startUpStepperController.addMoveBatch(mb);
-
-    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(STARTUP_PULSES_TO_MOVE));
-    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(STARTUP_PULSES_TO_MOVE));
-    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(STARTUP_PULSES_TO_MOVE));
-    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(STARTUP_PULSES_TO_MOVE));
-    mb.moveDuration = STARTUP_MOVE_DURATION;
-    startUpStepperController.addMoveBatch(mb);
-}
-
-void setupMoveToMechanicalZeroMoveBatch()
-{
-    MoveBatch mb;
-
-    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)0);
-    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)0);
-    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)0);
-    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)0);
-    mb.moveDuration = STARTUP_MOVE_DURATION;
-    startUpStepperController.addMoveBatch(mb);
-
-    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)0);
-    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)0);
-    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)0);
-    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)0);
-    mb.moveDuration = STARTUP_MOVE_DURATION;
-    startUpStepperController.addMoveBatch(mb);
 }
 
 void setup()
@@ -182,14 +112,7 @@ void setup()
     sineStepperController.attach(&sineStepper3);
     sineStepperController.attach(&sineStepper4);
 
-    startUpStepperController.attach(&startupSineStepper1);
-    startUpStepperController.attach(&startupSineStepper2);
-    startUpStepperController.attach(&startupSineStepper3);
-    startUpStepperController.attach(&startupSineStepper4);
-
     // initialize MoveBatches
-    setupStartUpMoveBatch();
-
     MoveBatch mb;
     setupMoveBatch(mb);
 }
@@ -198,27 +121,62 @@ void loop()
 {
     if (Serial.available() > 0)
     {
+        currentMode = idle;
         // Get next command from Serial (add 1 for final 0)
         char input[INPUT_SIZE + 1];
         byte size = Serial.readBytes(input, INPUT_SIZE);
         // Add the final 0 to end the C string
         input[size] = 0;
+
+        float instructionData[12];
+        for (int i = 0; i++; i < 12)
+        {
+            instructionData[i] = 0;
+        }
+
         char s[2] = ":";
         char *token;
+        int numberOfTokens = 0;
 
         // Read instruction
         char *instruction = strtok(input, "&");
 
         /* get the first token */
         token = strtok(instruction, s);
-        Serial.println(atoi(token));
+        instructionData[numberOfTokens++] = atof(token);
+        Serial.println(atof(token), 5);
 
         /* walk through other tokens */
         while (token != NULL)
         {
             token = strtok(NULL, s);
-            Serial.println(atoi(token));
+            if (token != NULL)
+            {
+                instructionData[numberOfTokens++] = atof(token);
+                Serial.println(atof(token), 5);
+            }
         }
-        //int ver = atoi(instruction);
+
+        MoveBatch mb;
+        if (instructionData[0] > 10.9 && instructionData[0] < 11.1)
+        {
+            mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[1]));
+            mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[2]));
+            mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[3]));
+            mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[4]));
+            mb.moveDuration = instructionData[5];
+            sineStepperController.addMoveBatch(mb);
+        }
+        if (instructionData[6] > 21.9 && instructionData[0] < 22.1)
+        {
+            mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[7]));
+            mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[8]));
+            mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[9]));
+            mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[10]));
+            mb.moveDuration = instructionData[11];
+            sineStepperController.addMoveBatch(mb);
+        }
+
+        currentMode = doingControlledMovements;
     }
 }

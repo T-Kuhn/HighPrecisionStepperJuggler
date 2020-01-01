@@ -9,12 +9,12 @@ namespace HighPrecisionStepperJuggler
         
         protected override void SendInstruction(LLInstruction diffInstruction)
         {
-            _serial.Send(diffInstruction.Serialize());
+            _serial.Send("11:" + diffInstruction.Serialize() + ":22:" + diffInstruction.Serialize() + "&");
         }
 
         public override void GoToOrigin()
         {
-            //_serial.Send(Constants.ZeroState);
+            _serial.Send(new LLInstruction(Constants.ZeroMachineState, 1f).Serialize());;
         }
     }
 }

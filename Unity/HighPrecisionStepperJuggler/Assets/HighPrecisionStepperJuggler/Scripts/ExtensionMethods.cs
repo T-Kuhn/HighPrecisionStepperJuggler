@@ -50,20 +50,18 @@ namespace HighPrecisionStepperJuggler
         public static string Serialize(this LLInstruction llInstruction)
         {
             var builder = new StringBuilder();
-            
-            builder.Append((llInstruction.TargetMachineState.Motor1Rotation * 1000000f).ToString("0."));
+
+            builder.Append((llInstruction.TargetMachineState.Motor1Rotation).ToString("0.00000"));
             builder.Append(":");
-            builder.Append((llInstruction.TargetMachineState.Motor2Rotation * 1000000f).ToString("0."));
+            builder.Append((llInstruction.TargetMachineState.Motor2Rotation).ToString("0.00000"));
             builder.Append(":");
-            builder.Append((llInstruction.TargetMachineState.Motor3Rotation * 1000000f).ToString("0."));
+            builder.Append((llInstruction.TargetMachineState.Motor3Rotation).ToString("0.00000"));
             builder.Append(":");
-            builder.Append((llInstruction.TargetMachineState.Motor4Rotation * 1000000f).ToString("0."));
+            builder.Append((llInstruction.TargetMachineState.Motor4Rotation).ToString("0.00000"));
             builder.Append(":");
-            builder.Append(llInstruction.MoveTime * 1000000f);
-            builder.Append("&");
+            builder.Append(llInstruction.MoveTime.ToString("0.00000"));
             
             Debug.Log(builder.ToString());
-            
             return builder.ToString();
         }
     }

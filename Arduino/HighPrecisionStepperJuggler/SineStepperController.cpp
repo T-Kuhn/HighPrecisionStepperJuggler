@@ -102,6 +102,10 @@ void SineStepperController::update()
         {
             _batchQueue.reset();
         }
+        else
+        {
+            _batchQueue.clear();
+        }
     }
     else
     {
