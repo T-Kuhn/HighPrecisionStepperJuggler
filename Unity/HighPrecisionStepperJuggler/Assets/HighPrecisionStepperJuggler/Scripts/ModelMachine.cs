@@ -13,18 +13,14 @@ namespace HighPrecisionStepperJuggler
             GoToOrigin();
         }
         
-        public override void Instruct(List<LLInstruction> instructions)
+        protected override void SendInstruction(LLMachineState diffMachineState)
         {
-            // TODO: do them one at a time.
-            var instruction = instructions.First();
-
-            var diffMachineState = instruction.TargetMachineState - Constants.OriginMachineState;
             _modelMachineView.AddToOriginState(diffMachineState);
         }
 
         public override void GoToOrigin()
         {
-            _modelMachineView.GoToOriginState();
+            _modelMachineView.AddToOriginState(Constants.ZeroMachineState);
         }
     }
 }

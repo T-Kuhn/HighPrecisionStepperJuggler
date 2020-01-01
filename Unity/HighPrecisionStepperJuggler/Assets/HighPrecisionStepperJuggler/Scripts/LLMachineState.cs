@@ -37,18 +37,18 @@
                 a.Arm3Joint2Rotation + b.Arm3Joint2Rotation,
                 a.Arm4Joint2Rotation + b.Arm4Joint2Rotation);
         }
-        
+
         public static LLMachineState operator -(LLMachineState a, LLMachineState b)
-                {
-                    return new LLMachineState(
-                        a.Motor1Rotation - b.Motor1Rotation,
-                        a.Motor2Rotation - b.Motor2Rotation,
-                        a.Motor3Rotation - b.Motor3Rotation,
-                        a.Motor3Rotation - b.Motor3Rotation,
-                        a.Arm1Joint2Rotation - b.Arm1Joint2Rotation,
-                        a.Arm2Joint2Rotation - b.Arm2Joint2Rotation,
-                        a.Arm3Joint2Rotation - b.Arm3Joint2Rotation,
-                        a.Arm4Joint2Rotation - b.Arm4Joint2Rotation);
-                }
+        {
+            return new LLMachineState(
+                a.Motor1Rotation - b.Motor1Rotation,
+                a.Motor2Rotation - b.Motor2Rotation,
+                a.Motor3Rotation - b.Motor3Rotation,
+                a.Motor3Rotation - b.Motor3Rotation,
+                a.Arm1Joint2Rotation - b.Arm1Joint2Rotation,
+                a.Arm2Joint2Rotation - b.Arm2Joint2Rotation,
+                a.Arm3Joint2Rotation - b.Arm3Joint2Rotation,
+                a.Arm4Joint2Rotation - b.Arm4Joint2Rotation);
+        }
     }
 }

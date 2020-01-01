@@ -20,7 +20,7 @@ namespace HighPrecisionStepperJuggler
         public static LLMachineState Translate(this HLMachineState hlState)
         {
             // NOTE: We are adding the origin height because for all IK calculations we need the height relative to
-            //       motor shaft position.
+            //       motor shaft position and not just the height from origin/rest position of the plate.
             var ikHeight = hlState.Height + Constants.HeightOrigin; 
             
             var xHeightOffset = MiscMath.HeightDifferenceFromTilt(hlState.XTilt);
