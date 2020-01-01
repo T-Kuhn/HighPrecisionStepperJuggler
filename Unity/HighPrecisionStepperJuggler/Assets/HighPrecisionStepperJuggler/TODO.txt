@@ -1,25 +1,10 @@
 
-[X] make plate move with arms.
-[X] make tilt work correctly.
-[X] update model data in fusion360 to acryl plate state.
-[X] make upper most link turn corresponding to the tilt.
-    [X] make it turnable
-    [X] turn it the correct amount
-[X] fix problem where tilt is behaving strange in the range 1 ~ 2
-[X] fix Quaternion multiplication problem. 
-[X] fix unit mixup.
-[X] width correction from tilt.
-[X] refactor
-[X] endPoint-structure (send movement-information either to the model or the microcontroller)
-[X] get IK code out of the MotorController and into the MachineController.
-[X] add GoToRestPosition button
-[X] test sending something to the microcontroller
-[ ] get Serial communication in C# going
 
-[ ] get some test rotations for tilting and run them on the machine.
-[ ] ...
+[X] get Serial communication in C# going
+[ ] make model playback multiple instructions in order
+[ ] make real machine playback single instruction
+[ ] make real machine playback multiple instructions in order
 
-[ ] drill holes in acryl and mount it on machine.
 [ ] Write latex math file
 
 lower link length: 89
@@ -29,18 +14,14 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-                           [moveInstructionList generation]
-highlevel Movelist consisting of multiple structs containing: height, x-tilt, y-tilt, movetime
 
-                                          ↓
-               
-                                        [ IK ]
-Get complete information struct with: motor1, motor2, motor3, motor4 rotations, time, and arm1joint2, arm2joint2, arm3Joint2, arm4Joint2 rotations
-            
-                                          ↓
-                       [InstructableMachine.SendInstruction]           
-         
-         
-         IKGInstruction => snapshot of the machine state in the end position.
-         
+how do we want to send LLInstruction to the machine?
 
+LLInstruction:
+  - MoveTime
+  - LLMachineState(rotations of all motors)
+  
+  
+  
+  diffMachineState = goalMachineState - originMachineState 
+  

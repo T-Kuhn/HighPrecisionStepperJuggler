@@ -13,8 +13,10 @@
         public const float L1 = 0.089f;
         public const float L2 = 0.080f;
         
-        public const float PhysicalZeroHeight = 0.0566f;
+        public const float HeightOrigin = 0.0566f;
 
         public const int BaudRate = 115200;
+        
+        public static readonly LLMachineState OriginMachineState = new HLMachineState(0f, 0f, 0f).Translate();
     }
 }

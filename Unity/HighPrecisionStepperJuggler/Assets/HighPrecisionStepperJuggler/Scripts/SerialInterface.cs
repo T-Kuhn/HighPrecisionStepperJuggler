@@ -6,14 +6,13 @@ namespace HighPrecisionStepperJuggler
 {
     public class SerialInterface : MonoBehaviour
     {
-        public bool IsOpen => _port != null && _port.IsOpen;
-        
         [SerializeField] private string[] _availablePorts;
-        [SerializeField] private string _portName;
+        [SerializeField] private string _portName = "";
         
         private SerialPort _port;
         Thread _receiveDataThread;
         readonly object _lockObject = new object();
+        private bool _isOpen => _port != null && _port.IsOpen;
 
         private void Awake()
         {
@@ -22,8 +21,6 @@ namespace HighPrecisionStepperJuggler
 
         private void Open()
         {
-            Debug.LogFormat("try to connect on port {0} with a baudrate of: {1}.", _portName, Constants.BaudRate);
-            
             _port = new SerialPort(_portName, Constants.BaudRate, Parity.None, 8, StopBits.One);
             _port.Handshake = Handshake.None;
             _port.Open();
@@ -34,7 +31,7 @@ namespace HighPrecisionStepperJuggler
 
         public void Send(string s)
         {
-            if (!IsOpen) Open();
+            if (!_isOpen) Open();
             
             _port.Write(s);
         }
@@ -46,6 +43,8 @@ namespace HighPrecisionStepperJuggler
                 var str = _port.ReadLine();
                 lock (_lockObject)
                 {
+                    // TODO: write code.
+                    
                     Debug.Log(str);
                 }
                 Thread.Sleep(20);
@@ -56,7 +55,6 @@ namespace HighPrecisionStepperJuggler
         {
             if (_port != null && _port.IsOpen)
             {
-                Debug.Log("closing port");
                 _port.Close();
             }
 

@@ -12,14 +12,14 @@ namespace HighPrecisionStepperJuggler
 
             var script = (MachineController) target;
             
-            if (GUILayout.Button("Go to height: 70", GUILayout.Width(200)))
+            if (GUILayout.Button("Go to height: 10", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.08f, 0f, 0f, 1f));
+                script.SendSingleInstruction(new HLInstruction(0.01f, 0f, 0f, 1f));
             }
 
-            if (GUILayout.Button("Go to rest position", GUILayout.Width(200)))
+            if (GUILayout.Button("Go to origin", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(Constants.PhysicalZeroHeight, 0f, 0f, 1f));
+                script.GoToOrigin();
             }
         }
     }

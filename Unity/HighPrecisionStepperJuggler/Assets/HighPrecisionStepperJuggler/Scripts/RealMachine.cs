@@ -9,7 +9,6 @@ namespace HighPrecisionStepperJuggler
         
         public override void Instruct(List<LLInstruction> instructions)
         {
-            Debug.Log("serial.");
             _serial.Send("12:34&");
         }
         

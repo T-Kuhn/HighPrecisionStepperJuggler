@@ -37,5 +37,25 @@ namespace HighPrecisionStepperJuggler
                     break;
             }
         }
+
+        public void GoToOrigin()
+        {
+            switch (_machineEndPoint)
+            {
+                case MachineEndPoint.Model:
+                    _modelMachine.GoToOrigin();
+                    break;
+
+                case MachineEndPoint.Real:
+                    _realMachine.GoToOrigin();
+                    break;
+
+                case MachineEndPoint.ModelAndReal:
+                    _modelMachine.GoToOrigin();
+                    _realMachine.GoToOrigin();
+                    break;
+            }
+
+        }
     }
 }

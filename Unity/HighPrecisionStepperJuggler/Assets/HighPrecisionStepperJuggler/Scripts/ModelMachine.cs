@@ -8,19 +8,23 @@ namespace HighPrecisionStepperJuggler
     {
         [SerializeField] private ModelMachineView _modelMachineView = null;
 
-        private LLMachineState _originMachineState;
+        public void Start()
+        {
+            GoToOrigin();
+        }
         
         public override void Instruct(List<LLInstruction> instructions)
         {
             // TODO: do them one at a time.
             var instruction = instructions.First();
 
-            _modelMachineView.SetMachineState(instruction.TargetMachineState);
+            var diffMachineState = instruction.TargetMachineState - Constants.OriginMachineState;
+            _modelMachineView.AddToOriginState(diffMachineState);
         }
 
         public override void GoToOrigin()
         {
-            
+            _modelMachineView.GoToOriginState();
         }
     }
 }
