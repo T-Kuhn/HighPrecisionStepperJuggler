@@ -12,8 +12,10 @@
 [X] refactor
 [X] endPoint-structure (send movement-information either to the model or the microcontroller)
 [X] get IK code out of the MotorController and into the MachineController.
-[ ] add GoToRestPosition button
-[ ] test sending something to the microcontroller
+[X] add GoToRestPosition button
+[X] test sending something to the microcontroller
+[ ] get Serial communication in C# going
+
 [ ] get some test rotations for tilting and run them on the machine.
 [ ] ...
 

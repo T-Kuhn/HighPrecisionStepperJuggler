@@ -15,7 +15,7 @@ namespace HighPrecisionStepperJuggler
             ModelAndReal
         }
 
-        [SerializeField] private MachineEndPoint _machineEndPoint;
+        [SerializeField] private MachineEndPoint _machineEndPoint = MachineEndPoint.Model;
 
         public void SendSingleInstruction(HLInstruction instruction)
         {

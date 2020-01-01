@@ -6,7 +6,7 @@ namespace HighPrecisionStepperJuggler
 {
     public class ModelMachine : InstructableMachine
     {
-        [SerializeField] private ModelMachineView _modelMachineView;
+        [SerializeField] private ModelMachineView _modelMachineView = null;
 
         private LLMachineState _originMachineState;
         

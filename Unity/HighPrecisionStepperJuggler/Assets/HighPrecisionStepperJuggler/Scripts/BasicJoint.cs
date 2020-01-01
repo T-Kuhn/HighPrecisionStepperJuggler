@@ -11,7 +11,7 @@ namespace HighPrecisionStepperJuggler
             Z
         }
 
-        [SerializeField] private RotationalAxis _rotAxis;
+        [SerializeField] private RotationalAxis _rotAxis = RotationalAxis.Y;
 
         [SerializeField] private Transform _tip = null;
         [SerializeField] private Transform _attachToTip = null;

@@ -9,10 +9,10 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private Transform _motor3Joint2Tip = null;
         [SerializeField] private Transform _motor4Joint2Tip = null;
 
-        [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint1;
-        [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint2;
-        [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint3;
-        [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint4;
+        [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint1 = null;
+        [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint2 = null;
+        [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint3 = null;
+        [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint4 = null;
 
         void LateUpdate()
         {
