@@ -1,5 +1,6 @@
 ﻿namespace HighPrecisionStepperJuggler
 {
+    // High Level Instruction
     public struct HLInstruction
     {
         public HLMachineState TargetHLMachineState { get; }

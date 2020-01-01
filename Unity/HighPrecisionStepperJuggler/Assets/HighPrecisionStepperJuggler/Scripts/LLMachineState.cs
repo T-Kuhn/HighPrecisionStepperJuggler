@@ -1,7 +1,7 @@
 ﻿namespace HighPrecisionStepperJuggler
 {
-    // IK Generated machine state
-    public readonly struct IKGMachineState
+    // Low Level Machine State
+    public readonly struct LLMachineState
     {
         public float Motor1Rotation { get; }
         public float Motor2Rotation { get; }
@@ -12,7 +12,7 @@
         public float Arm3Joint2Rotation { get; }
         public float Arm4Joint2Rotation { get; }
 
-        public IKGMachineState(float m1Rot, float m2Rot, float m3Rot, float m4Rot,
+        public LLMachineState(float m1Rot, float m2Rot, float m3Rot, float m4Rot,
             float arm1J2Rot, float arm2J2Rot, float arm3J2Rot, float arm4J2Rot)
         {
             Motor1Rotation = m1Rot;

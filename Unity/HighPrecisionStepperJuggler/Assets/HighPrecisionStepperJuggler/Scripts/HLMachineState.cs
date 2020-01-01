@@ -1,6 +1,6 @@
 ﻿namespace HighPrecisionStepperJuggler
 {
-    // High Level machine state
+    // High Level Machine State
     public struct HLMachineState
     {
         public float Height { get; }

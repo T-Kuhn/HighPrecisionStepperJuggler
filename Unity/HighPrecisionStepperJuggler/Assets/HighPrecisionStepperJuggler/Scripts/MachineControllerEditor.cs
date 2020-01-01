@@ -19,7 +19,7 @@ namespace HighPrecisionStepperJuggler
 
             if (GUILayout.Button("Go to rest position", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(Constants.ZeroHeight, 0f, 0f, 1f));
+                script.SendSingleInstruction(new HLInstruction(Constants.PhysicalZeroHeight, 0f, 0f, 1f));
             }
         }
     }

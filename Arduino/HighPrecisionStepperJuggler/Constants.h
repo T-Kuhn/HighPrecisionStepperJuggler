@@ -21,7 +21,7 @@
 #define NAN_ALERT_LED 25
 #define BUTTON_COOLDOWN_CYCLES 500000
 
-#define EXECUTING_ISR_CODE 0
+#define EXECUTING_ISR_CODE 13
 #define ROTARY_ENC_1_A 32
 #define ROTARY_ENC_1_B 33
 
@@ -43,7 +43,7 @@
 #define STARTUP_MOVE_DURATION 0.5f
 
 #define PULSES_TO_MOVE 5000
-#define MOVE_DURATION 0.5f
+#define MOVE_DURATION 0.2f
 #define PAUSE_DURATION 0.2f
 
 #define FREQUENCY_MULTIPLIER 0.000002f
@@ -52,5 +52,8 @@
 // NOTE: SineStepper and MoveBatch ids must be lower then MAX_NUM_OF_STEPPERS
 #define MAX_NUM_OF_STEPPERS 10
 #define MAX_NUM_OF_BATCHED_MOVES 100
+
+// Max input size expected for one command
+#define INPUT_SIZE 16
 
 #endif

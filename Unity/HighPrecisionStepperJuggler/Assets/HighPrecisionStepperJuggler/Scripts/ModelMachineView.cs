@@ -3,14 +3,14 @@ using ik = HighPrecisionStepperJuggler.InverseKinematics;
 
 namespace HighPrecisionStepperJuggler
 {
-    public class MotorController : MonoBehaviour
+    public class ModelMachineView : MonoBehaviour
     {
         [SerializeField] private MotorizedArm _motorizedArm1 = null;
         [SerializeField] private MotorizedArm _motorizedArm2 = null;
         [SerializeField] private MotorizedArm _motorizedArm3 = null;
         [SerializeField] private MotorizedArm _motorizedArm4 = null;
 
-        public void SetMachineState(IKGMachineState state)
+        public void SetMachineState(LLMachineState state)
         {
             _motorizedArm1.UpdateState(state.Motor1Rotation, state.Arm1Joint2Rotation);
             _motorizedArm2.UpdateState(state.Motor2Rotation, state.Arm2Joint2Rotation);

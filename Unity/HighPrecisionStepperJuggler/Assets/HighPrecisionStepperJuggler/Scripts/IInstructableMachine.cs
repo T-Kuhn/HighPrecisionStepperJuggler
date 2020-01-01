@@ -5,6 +5,8 @@ namespace HighPrecisionStepperJuggler
 {
     public abstract class InstructableMachine : MonoBehaviour
     {
-        public abstract void Instruct(List<IKGInstruction> instructions);
+        public abstract void Instruct(List<LLInstruction> instructions);
+        
+        public abstract void GoToOrigin();
     }
 }

@@ -8,7 +8,7 @@ namespace HighPrecisionStepperJuggler
         /// Translates a high level instruction into a low level ik generated instruction
         /// </summary>
         /// <param name="hlInstruction"></param>
-        public static IKGInstruction Translate(this HLInstruction hlInstruction)
+        public static LLInstruction Translate(this HLInstruction hlInstruction)
         {
             var hlState = hlInstruction.TargetHLMachineState;
 
@@ -28,9 +28,9 @@ namespace HighPrecisionStepperJuggler
             var m3J2Rot = ik.CalculateJoint2RotationFromJoint1Rotation(m3Rot, yWidthOffset);
             var m4J2Rot = ik.CalculateJoint2RotationFromJoint1Rotation(m4Rot, yWidthOffset);
 
-            var ikGeneratedState = new IKGMachineState(m1Rot, m2Rot, m3Rot, m4Rot, m1J2Rot, m2J2Rot, m3J2Rot, m4J2Rot);
+            var ikGeneratedState = new LLMachineState(m1Rot, m2Rot, m3Rot, m4Rot, m1J2Rot, m2J2Rot, m3J2Rot, m4J2Rot);
             
-            return new IKGInstruction(ikGeneratedState, hlInstruction.MoveTime);
+            return new LLInstruction(ikGeneratedState, hlInstruction.MoveTime);
         }
     }
 }

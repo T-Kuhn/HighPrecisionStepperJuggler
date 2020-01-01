@@ -11,22 +11,30 @@ namespace HighPrecisionStepperJuggler
         private enum MachineEndPoint
         {
             Model,
-            Real
+            Real, 
+            ModelAndReal
         }
 
         [SerializeField] private MachineEndPoint _machineEndPoint;
 
         public void SendSingleInstruction(HLInstruction instruction)
         {
-            var instructions = new List<IKGInstruction>() {instruction.Translate()};
+            var instructions = new List<LLInstruction>() {instruction.Translate()};
 
-            if (_machineEndPoint == MachineEndPoint.Model)
+            switch (_machineEndPoint)
             {
-                _modelMachine.Instruct(instructions);
-            }
-            else
-            {
-                _realMachine.Instruct(instructions);
+                case MachineEndPoint.Model:
+                    _modelMachine.Instruct(instructions);
+                    break;
+                
+                case MachineEndPoint.Real:
+                    _realMachine.Instruct(instructions);
+                    break;
+                
+                case MachineEndPoint.ModelAndReal:
+                    _modelMachine.Instruct(instructions);
+                    _realMachine.Instruct(instructions);
+                    break;
             }
         }
     }

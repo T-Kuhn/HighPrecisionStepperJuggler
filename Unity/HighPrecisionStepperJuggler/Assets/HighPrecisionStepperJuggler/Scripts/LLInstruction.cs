@@ -1,11 +1,12 @@
 ﻿namespace HighPrecisionStepperJuggler
 {
-    public struct IKGInstruction
+    // Low Level Instruction
+    public struct LLInstruction
     {
-        public IKGMachineState TargetMachineState{ get; }
+        public LLMachineState TargetMachineState{ get; }
         public float MoveTime { get; }
 
-        public IKGInstruction(IKGMachineState targetMachineState, float moveTime)
+        public LLInstruction(LLMachineState targetMachineState, float moveTime)
         {
             TargetMachineState = targetMachineState;
             MoveTime = moveTime;

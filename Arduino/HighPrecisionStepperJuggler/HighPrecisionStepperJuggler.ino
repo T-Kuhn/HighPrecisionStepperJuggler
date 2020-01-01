@@ -171,11 +171,11 @@ void setupMoveToMechanicalZeroMoveBatch()
 void setup()
 {
     Serial.begin(115200);
+    Serial.setTimeout(20);
     myTimer.begin(onTimer, TIMER_US);
 
     pinMode(EXECUTING_ISR_CODE, OUTPUT);
     pinMode(BUTTON_PIN, INPUT);
-    pinMode(13, OUTPUT);
 
     sineStepperController.attach(&sineStepper1);
     sineStepperController.attach(&sineStepper2);
@@ -196,8 +196,35 @@ void setup()
 
 void loop()
 {
-    digitalWrite(13, HIGH);
-    delay(500);
-    digitalWrite(13, LOW);
-    delay(500);
+    if (Serial.available() > 0)
+    {
+        // Get next command from Serial (add 1 for final 0)
+        char input[INPUT_SIZE + 1];
+        byte size = Serial.readBytes(input, INPUT_SIZE);
+        // Add the final 0 to end the C string
+        input[size] = 0;
+
+        // Read command pair
+        char *command = strtok(input, "&");
+        // Split the command in two values
+        char *separator = strchr(command, ':');
+        if (separator != 0)
+        {
+            // Actually split the string in 2: replace ':' with 0
+            *separator = 0;
+            int ver = atoi(command);
+            ++separator;
+            int hor = atoi(separator);
+
+            float horizontal = (float)hor;
+            float vertical = (float)ver;
+
+            // DEBUG
+            Serial.print("v: ");
+            Serial.println(ver);
+            Serial.print("h: ");
+            Serial.println(hor);
+            // DEBUG
+        }
+    }
 }

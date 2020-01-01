@@ -6,14 +6,21 @@ namespace HighPrecisionStepperJuggler
 {
     public class ModelMachine : InstructableMachine
     {
-        [SerializeField] private MotorController _motorController;
+        [SerializeField] private ModelMachineView _modelMachineView;
+
+        private LLMachineState _originMachineState;
         
-        public override void Instruct(List<IKGInstruction> instructions)
+        public override void Instruct(List<LLInstruction> instructions)
         {
             // TODO: do them one at a time.
             var instruction = instructions.First();
 
-            _motorController.SetMachineState(instruction.TargetMachineState);
+            _modelMachineView.SetMachineState(instruction.TargetMachineState);
+        }
+
+        public override void GoToOrigin()
+        {
+            
         }
     }
 }
