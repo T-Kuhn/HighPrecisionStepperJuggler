@@ -54,6 +54,6 @@
 #define MAX_NUM_OF_BATCHED_MOVES 100
 
 // Max input size expected for one command
-#define INPUT_SIZE 16
+#define INPUT_SIZE 64
 
 #endif

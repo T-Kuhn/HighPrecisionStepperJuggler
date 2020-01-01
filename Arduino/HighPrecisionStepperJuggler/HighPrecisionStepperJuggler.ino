@@ -203,28 +203,22 @@ void loop()
         byte size = Serial.readBytes(input, INPUT_SIZE);
         // Add the final 0 to end the C string
         input[size] = 0;
+        char s[2] = ":";
+        char *token;
 
-        // Read command pair
-        char *command = strtok(input, "&");
-        // Split the command in two values
-        char *separator = strchr(command, ':');
-        if (separator != 0)
+        // Read instruction
+        char *instruction = strtok(input, "&");
+
+        /* get the first token */
+        token = strtok(instruction, s);
+        Serial.println(atoi(token));
+
+        /* walk through other tokens */
+        while (token != NULL)
         {
-            // Actually split the string in 2: replace ':' with 0
-            *separator = 0;
-            int ver = atoi(command);
-            ++separator;
-            int hor = atoi(separator);
-
-            float horizontal = (float)hor;
-            float vertical = (float)ver;
-
-            // DEBUG
-            Serial.print("v: ");
-            Serial.println(ver);
-            Serial.print("h: ");
-            Serial.println(hor);
-            // DEBUG
+            token = strtok(NULL, s);
+            Serial.println(atoi(token));
         }
+        //int ver = atoi(instruction);
     }
 }

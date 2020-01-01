@@ -12,10 +12,10 @@ namespace HighPrecisionStepperJuggler
             var instruction = instructions.First();
             
             var diffMachineState = instruction.TargetMachineState - Constants.OriginMachineState;
-            SendInstruction(diffMachineState);
+            SendInstruction(new LLInstruction(diffMachineState, instruction.MoveTime));
         }
 
-        protected abstract void SendInstruction(LLMachineState diffMachineState);
+        protected abstract void SendInstruction(LLInstruction diffInstruction);
 
         public abstract void GoToOrigin();
     }

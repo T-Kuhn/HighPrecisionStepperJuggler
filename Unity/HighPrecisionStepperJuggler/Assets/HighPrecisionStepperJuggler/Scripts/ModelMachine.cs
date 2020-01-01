@@ -13,9 +13,9 @@ namespace HighPrecisionStepperJuggler
             GoToOrigin();
         }
         
-        protected override void SendInstruction(LLMachineState diffMachineState)
+        protected override void SendInstruction(LLInstruction diffInstruction)
         {
-            _modelMachineView.AddToOriginState(diffMachineState);
+            _modelMachineView.AddToOriginState(diffInstruction.TargetMachineState);
         }
 
         public override void GoToOrigin()

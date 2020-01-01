@@ -7,12 +7,9 @@ namespace HighPrecisionStepperJuggler
     {
         [SerializeField] private SerialInterface _serial = null;
         
-        protected override void SendInstruction(LLMachineState diffMachineState)
+        protected override void SendInstruction(LLInstruction diffInstruction)
         {
-            var a = diffMachineState.ToString();
-            Debug.Log("a " + a);
-            
-            _serial.Send("12:23&");
+            _serial.Send(diffInstruction.Serialize());
         }
 
         public override void GoToOrigin()

@@ -1,4 +1,6 @@
-﻿using ik = HighPrecisionStepperJuggler.InverseKinematics;
+﻿using System.Text;
+using UnityEngine;
+using ik = HighPrecisionStepperJuggler.InverseKinematics;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -21,8 +23,8 @@ namespace HighPrecisionStepperJuggler
         {
             // NOTE: We are adding the origin height because for all IK calculations we need the height relative to
             //       motor shaft position and not just the height from origin/rest position of the plate.
-            var ikHeight = hlState.Height + Constants.HeightOrigin; 
-            
+            var ikHeight = hlState.Height + Constants.HeightOrigin;
+
             var xHeightOffset = MiscMath.HeightDifferenceFromTilt(hlState.XTilt);
             var yHeightOffset = MiscMath.HeightDifferenceFromTilt(hlState.YTilt);
 
@@ -42,6 +44,27 @@ namespace HighPrecisionStepperJuggler
             return new LLMachineState(m1Rot, m2Rot, m3Rot, m4Rot, m1J2Rot, m2J2Rot, m3J2Rot, m4J2Rot);
         }
 
-        
+        /// <summary>
+        /// Serialization in order to transfer the data via serial interface
+        /// </summary>
+        public static string Serialize(this LLInstruction llInstruction)
+        {
+            var builder = new StringBuilder();
+            
+            builder.Append((llInstruction.TargetMachineState.Motor1Rotation * 1000000f).ToString("0."));
+            builder.Append(":");
+            builder.Append((llInstruction.TargetMachineState.Motor2Rotation * 1000000f).ToString("0."));
+            builder.Append(":");
+            builder.Append((llInstruction.TargetMachineState.Motor3Rotation * 1000000f).ToString("0."));
+            builder.Append(":");
+            builder.Append((llInstruction.TargetMachineState.Motor4Rotation * 1000000f).ToString("0."));
+            builder.Append(":");
+            builder.Append(llInstruction.MoveTime * 1000000f);
+            builder.Append("&");
+            
+            Debug.Log(builder.ToString());
+            
+            return builder.ToString();
+        }
     }
 }
