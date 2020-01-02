@@ -33,6 +33,7 @@ namespace HighPrecisionStepperJuggler
         {
             if (!_isOpen) Open();
             
+            Debug.Log(s);
             _port.Write(s);
         }
         

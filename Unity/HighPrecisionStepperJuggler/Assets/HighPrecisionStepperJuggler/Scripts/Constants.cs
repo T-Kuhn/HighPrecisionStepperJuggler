@@ -6,7 +6,7 @@
         public const float PlateWidth = 0.299f;
 
         // Offset from motor axis to upper Joint
-        //public static readonly float Q = 0.069023f;
+        // public static readonly float Q = 0.069023f;
         public const float Q = 0.070023f;
 
         // Length of Links

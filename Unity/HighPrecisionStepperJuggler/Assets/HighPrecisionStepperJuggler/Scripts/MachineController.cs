@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace HighPrecisionStepperJuggler
@@ -19,21 +20,26 @@ namespace HighPrecisionStepperJuggler
 
         public void SendSingleInstruction(HLInstruction instruction)
         {
-            var instructions = new List<LLInstruction>() {instruction.Translate()};
+            SendInstructions(new List<HLInstruction>() {instruction});
+        }
 
+        public void SendInstructions(List<HLInstruction> instructions)
+        {
+            var llInstructions = instructions.Select(instruction => instruction.Translate()).ToList();
+            
             switch (_machineEndPoint)
             {
                 case MachineEndPoint.Model:
-                    _modelMachine.Instruct(instructions);
+                    _modelMachine.Instruct(llInstructions);
                     break;
-                
+
                 case MachineEndPoint.Real:
-                    _realMachine.Instruct(instructions);
+                    _realMachine.Instruct(llInstructions);
                     break;
-                
+
                 case MachineEndPoint.ModelAndReal:
-                    _modelMachine.Instruct(instructions);
-                    _realMachine.Instruct(instructions);
+                    _modelMachine.Instruct(llInstructions);
+                    _realMachine.Instruct(llInstructions);
                     break;
             }
         }

@@ -6,16 +6,21 @@ namespace HighPrecisionStepperJuggler
 {
     public abstract class InstructableMachine : MonoBehaviour
     {
-        public virtual void Instruct(List<LLInstruction> instructions)
+        public void Instruct(List<LLInstruction> instructions)
         {
-            // TODO: do them one at a time.
-            var instruction = instructions.First();
-            
-            var diffMachineState = instruction.TargetMachineState - Constants.OriginMachineState;
-            SendInstruction(new LLInstruction(diffMachineState, instruction.MoveTime));
+            // NOTE: The current Max amount of instructions which can be sent in one go is two.
+            var diffInstructionList = instructions
+                .Take(2)
+                .Select(instruction =>
+                    new LLInstruction(
+                        instruction.TargetMachineState - Constants.OriginMachineState,
+                        instruction.MoveTime))
+                .ToList();
+
+            SendInstructions(diffInstructionList);
         }
 
-        protected abstract void SendInstruction(LLInstruction diffInstruction);
+        protected abstract void SendInstructions(List<LLInstruction> diffInstructions);
 
         public abstract void GoToOrigin();
     }

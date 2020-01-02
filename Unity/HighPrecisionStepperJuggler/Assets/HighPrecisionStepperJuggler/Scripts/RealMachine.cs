@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace HighPrecisionStepperJuggler
@@ -7,14 +8,27 @@ namespace HighPrecisionStepperJuggler
     {
         [SerializeField] private SerialInterface _serial = null;
         
-        protected override void SendInstruction(LLInstruction diffInstruction)
+        protected override void SendInstructions(List<LLInstruction> diffInstructions)
         {
-            _serial.Send("11:" + diffInstruction.Serialize() + ":22:" + diffInstruction.Serialize() + "&");
+            var builder = new StringBuilder();
+            int i = 1;
+
+            foreach (var diffInstruction in diffInstructions)
+            {
+                if (i >= 2) builder.Append(":");
+
+                builder.Append((11f * i++).ToString("0.00000"));
+                builder.Append(":");
+                builder.Append(diffInstruction.Serialize());
+            }
+            builder.Append("&");
+
+            _serial.Send(builder.ToString());
         }
 
         public override void GoToOrigin()
         {
-            _serial.Send(new LLInstruction(Constants.ZeroMachineState, 1f).Serialize());;
+            SendInstructions(new List<LLInstruction>() {new LLInstruction(Constants.ZeroMachineState, 1f)});
         }
     }
 }

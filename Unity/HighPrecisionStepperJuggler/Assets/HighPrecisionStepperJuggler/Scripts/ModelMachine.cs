@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace HighPrecisionStepperJuggler
@@ -13,9 +12,9 @@ namespace HighPrecisionStepperJuggler
             GoToOrigin();
         }
         
-        protected override void SendInstruction(LLInstruction diffInstruction)
+        protected override void SendInstructions(List<LLInstruction> diffInstructions)
         {
-            _modelMachineView.AddToOriginState(diffInstruction.TargetMachineState);
+            _modelMachineView.AddToOriginStateAnimated(diffInstructions);
         }
 
         public override void GoToOrigin()

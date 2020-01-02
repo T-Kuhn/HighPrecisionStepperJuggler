@@ -36,10 +36,12 @@
 // 21480 steps / rev (1/4 step mode)
 // 42960 steps / rev (1/8 step mode)
 // 85920 steps / rev (1/16 step mode)
+//
 
 // we want to figure out what setting will allow us to do 1 full rev the fastest.
 
-#define PULSES_TO_MOVE 2000
+#define PULSES_TO_MOVE 4000
+#define PULSES_PER_REV 66304 // 12800 * 5.18 (gear ratio 5.18:1)
 #define MOVE_DURATION 1.0f
 #define PAUSE_DURATION 0.2f
 
@@ -51,6 +53,6 @@
 #define MAX_NUM_OF_BATCHED_MOVES 100
 
 // Max input size for the list of incoming instructions
-#define INPUT_SIZE 128
+#define INPUT_SIZE 256
 
 #endif

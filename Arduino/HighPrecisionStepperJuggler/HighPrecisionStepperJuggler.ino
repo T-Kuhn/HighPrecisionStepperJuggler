@@ -81,23 +81,6 @@ void setupMoveBatch(MoveBatch mb)
     sineStepperController.addMoveBatch(mb);
 }
 
-void setupMoveBatch2(MoveBatch mb)
-{
-    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
-    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
-    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
-    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
-    mb.moveDuration = MOVE_DURATION;
-    sineStepperController.addMoveBatch(mb);
-
-    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
-    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
-    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
-    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 0.5));
-    mb.moveDuration = PAUSE_DURATION;
-    sineStepperController.addMoveBatch(mb);
-}
-
 void setup()
 {
     Serial.begin(115200);
@@ -113,8 +96,8 @@ void setup()
     sineStepperController.attach(&sineStepper4);
 
     // initialize MoveBatches
-    MoveBatch mb;
-    setupMoveBatch(mb);
+    // MoveBatch mb;
+    // setupMoveBatch(mb);
 }
 
 void loop()
@@ -128,10 +111,10 @@ void loop()
         // Add the final 0 to end the C string
         input[size] = 0;
 
-        float instructionData[12];
+        double instructionData[12];
         for (int i = 0; i++; i < 12)
         {
-            instructionData[i] = 0;
+            instructionData[i] = 0.0;
         }
 
         char s[2] = ":";
@@ -160,19 +143,19 @@ void loop()
         MoveBatch mb;
         if (instructionData[0] > 10.9 && instructionData[0] < 11.1)
         {
-            mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[1]));
-            mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[2]));
-            mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[3]));
-            mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[4]));
+            mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[1] / (M_PI * 2))));
+            mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[2] / (M_PI * 2))));
+            mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[3] / (M_PI * 2))));
+            mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[4] / (M_PI * 2))));
             mb.moveDuration = instructionData[5];
             sineStepperController.addMoveBatch(mb);
         }
         if (instructionData[6] > 21.9 && instructionData[0] < 22.1)
         {
-            mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[7]));
-            mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[8]));
-            mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[9]));
-            mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * instructionData[10]));
+            mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[7] / (M_PI * 2))));
+            mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[8] / (M_PI * 2))));
+            mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[9] / (M_PI * 2))));
+            mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[10] / (M_PI * 2))));
             mb.moveDuration = instructionData[11];
             sineStepperController.addMoveBatch(mb);
         }

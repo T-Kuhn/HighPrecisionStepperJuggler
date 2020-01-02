@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace HighPrecisionStepperJuggler
@@ -19,12 +20,27 @@ namespace HighPrecisionStepperJuggler
 
             if (GUILayout.Button("Go to height: 10mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.01f, 0f, 0f, 1f));
+                script.SendSingleInstruction(new HLInstruction(0.01f, 0f, 0f, 0.3f));
             }
 
             if (GUILayout.Button("Go to height: 20mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.02f, 0f, 0f, 1f));
+                script.SendSingleInstruction(new HLInstruction(0.02f, 0f, 0f, 0.3f));
+            }
+
+            if (GUILayout.Button("Go to height: 30mm", GUILayout.Width(200)))
+            {
+                script.SendSingleInstruction(new HLInstruction(0.03f, 0f, 0f, 0.3f));
+            }
+            if (GUILayout.Button("Go to height: 40mm", GUILayout.Width(200)))
+            {
+                script.SendSingleInstruction(new HLInstruction(0.04f, 0f, 0f, 0.3f));
+            }
+            
+            if (GUILayout.Button("Go to 10mm then 20mm", GUILayout.Width(200)))
+            {
+                script.SendInstructions(new List<HLInstruction>()
+                    {new HLInstruction(0.01f, 0f, 0f, 1f), new HLInstruction(0.02f, 0f, 0f, 0.3f)});
             }
         }
     }
