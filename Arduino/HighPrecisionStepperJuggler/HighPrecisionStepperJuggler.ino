@@ -64,23 +64,6 @@ void onTimer()
     digitalWrite(EXECUTING_ISR_CODE, LOW);
 }
 
-void setupMoveBatch(MoveBatch mb)
-{
-    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 1.0));
-    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 1.0));
-    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 1.0));
-    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 1.0));
-    mb.moveDuration = MOVE_DURATION;
-    sineStepperController.addMoveBatch(mb);
-
-    mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 1.0));
-    mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 1.0));
-    mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 1.0));
-    mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_TO_MOVE * 1.0));
-    mb.moveDuration = PAUSE_DURATION;
-    sineStepperController.addMoveBatch(mb);
-}
-
 void setup()
 {
     Serial.begin(115200);
@@ -94,10 +77,6 @@ void setup()
     sineStepperController.attach(&sineStepper2);
     sineStepperController.attach(&sineStepper3);
     sineStepperController.attach(&sineStepper4);
-
-    // initialize MoveBatches
-    // MoveBatch mb;
-    // setupMoveBatch(mb);
 }
 
 void loop()
@@ -124,19 +103,19 @@ void loop()
         // Read instruction
         char *instruction = strtok(input, "&");
 
-        /* get the first token */
+        // get the first token
         token = strtok(instruction, s);
         instructionData[numberOfTokens++] = atof(token);
-        Serial.println(atof(token), 5);
+        //Serial.println(atof(token), 5);
 
-        /* walk through other tokens */
+        // walk through other tokens
         while (token != NULL)
         {
             token = strtok(NULL, s);
             if (token != NULL)
             {
                 instructionData[numberOfTokens++] = atof(token);
-                Serial.println(atof(token), 5);
+                //Serial.println(atof(token), 5);
             }
         }
 

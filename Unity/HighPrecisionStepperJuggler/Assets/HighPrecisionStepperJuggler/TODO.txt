@@ -2,8 +2,10 @@
 
 [X] get Serial communication in C# going
 [ ] make model playback multiple instructions in order
-[ ] make real machine playback single instruction
-[ ] make real machine playback multiple instructions in order
+    [X] playback in order
+    [ ] add animation
+[X] make real machine playback single instruction
+[X] make real machine playback multiple instructions in order
 
 [ ] Write latex math file
 
