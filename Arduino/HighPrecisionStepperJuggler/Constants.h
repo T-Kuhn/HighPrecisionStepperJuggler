@@ -17,13 +17,8 @@
 #define STEPPER4_DIR_PIN 7
 #define STEPPER4_STEP_PIN 8
 
-#define BUTTON_PIN 12
 #define NAN_ALERT_LED 25
-#define BUTTON_COOLDOWN_CYCLES 500000
-
 #define EXECUTING_ISR_CODE 13
-#define ROTARY_ENC_1_A 32
-#define ROTARY_ENC_1_B 33
 
 // gear: 26.85:1
 
@@ -50,9 +45,9 @@
 
 // NOTE: SineStepper and MoveBatch ids must be lower then MAX_NUM_OF_STEPPERS
 #define MAX_NUM_OF_STEPPERS 10
-#define MAX_NUM_OF_BATCHED_MOVES 100
+#define MAX_NUM_OF_MOVEBATCHES 10
 
 // Max input size for the list of incoming instructions
-#define INPUT_SIZE 256
+#define INPUT_SIZE 1024
 
 #endif

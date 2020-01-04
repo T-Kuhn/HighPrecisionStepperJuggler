@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using UnityEngine;
 
 namespace HighPrecisionStepperJuggler
@@ -21,8 +22,10 @@ namespace HighPrecisionStepperJuggler
                 builder.Append(":");
                 builder.Append(diffInstruction.Serialize());
             }
-            builder.Append("&");
 
+            builder.Append('\n');
+
+            Debug.Log("sending: " + builder.ToString());
             _serial.Send(builder.ToString());
         }
 

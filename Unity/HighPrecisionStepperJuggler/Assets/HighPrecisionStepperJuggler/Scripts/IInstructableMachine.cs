@@ -8,9 +8,9 @@ namespace HighPrecisionStepperJuggler
     {
         public void Instruct(List<LLInstruction> instructions)
         {
-            // NOTE: The current Max amount of instructions which can be sent in one go is two.
+            // NOTE: The current Max amount of instructions which can be sent in one go is 10.
             var diffInstructionList = instructions
-                .Take(2)
+                .Take(10)
                 .Select(instruction =>
                     new LLInstruction(
                         instruction.TargetMachineState - Constants.OriginMachineState,

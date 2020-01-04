@@ -61,7 +61,6 @@ namespace HighPrecisionStepperJuggler
             builder.Append(":");
             builder.Append(llInstruction.MoveTime.ToString("0.00000"));
             
-            Debug.Log(builder.ToString());
             return builder.ToString();
         }
     }

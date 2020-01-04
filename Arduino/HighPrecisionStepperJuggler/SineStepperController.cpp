@@ -1,14 +1,13 @@
 /*
   SineStepperController library
   Author: T-Kuhn.
-  Sapporo, October, 2018. Released into the public domain.
-  */
+  Sapporo, January, 2020. Released into the public domain.
+*/
 
 #include "Constants.h"
 #include "Arduino.h"
 #include "SineStepper.h"
 #include "SineStepperController.h"
-#include "Queue.h"
 
 // - - - - - - - - - - - - - - -
 // - - - - CONSTRUCTOR - - - - -
@@ -18,6 +17,7 @@ SineStepperController::SineStepperController(bool repeat)
     _endlessRepeat = repeat;
     _counter = 0;
     _numOfAttachedSteppers = 0;
+    _currentMoveBatchIndex = 0;
     _isExecutingBatch = false;
 
     for (uint8_t i = 0; i < MAX_NUM_OF_STEPPERS; i++)
@@ -38,31 +38,12 @@ void SineStepperController::attach(SineStepper *sStepper)
     }
 }
 
-// - - - - - - - - - - - - - - -
-// - - -  ADD MOVE BATCH - - - -
-// - - - - - - - - - - - - - - -
-void SineStepperController::addMoveBatch(MoveBatch mb)
+// - - - - - - - - - - - - - - - -
+// - - RESET MOVEBATCH EXECUTION -
+// - - - - - - - - - - - - - - - -
+void SineStepperController::resetMoveBatchExecution()
 {
-    _batchQueue.push(mb);
-    _batchQueue.setResetPoint();
-}
-
-// - - - - - - - - - - - - - - -
-// - - -  POP MOVE BATCH - - - -
-// - - - - - - - - - - - - - - -
-// NOTE: for debugging purposes.
-MoveBatch SineStepperController::popMoveBatch()
-{
-    return _batchQueue.pop();
-}
-
-// - - - - - - - - - - - - - - -
-// - - -  PEEK MOVE BATCH  - - -
-// - - - - - - - - - - - - - - -
-// NOTE: for debugging purposes.
-MoveBatch SineStepperController::peekMoveBatch()
-{
-    return _batchQueue.peek();
+    _currentMoveBatchIndex = 0;
 }
 
 // - - - - - - - - - - - - - - -
@@ -78,33 +59,30 @@ void SineStepperController::setFrequencyFrom(float moveDuration)
 // - - - - - - - - - - - - - - -
 void SineStepperController::update()
 {
-    if (!_isExecutingBatch)
+    if (_currentMoveBatchIndex >= MAX_NUM_OF_MOVEBATCHES)
     {
-        // LOAD NEW BATCH
-        if (_batchQueue.peek().isActive)
+        return;
+    }
+
+    if (!_isExecutingBatch && _currentMoveBatchIndex < MAX_NUM_OF_MOVEBATCHES)
+    {
+        MoveBatch *mb = &moveBatches[_currentMoveBatchIndex];
+        if (mb->needsExecution)
         {
-            MoveBatch mb = _batchQueue.pop();
-            setFrequencyFrom(mb.moveDuration);
+            setFrequencyFrom(mb->moveDuration);
             for (uint8_t i = 0; i < _numOfAttachedSteppers; i++)
             {
-                if (mb.batch[i].isActive)
+                if (mb->moveCommands[i].isActive)
                 {
-                    _sineSteppers[i]->setGoalPos(mb.batch[i].position);
+                    _sineSteppers[i]->setGoalPos(mb->moveCommands[i].position);
                 }
                 else
                 {
                     _sineSteppers[i]->setStepsToTakeToZero();
                 }
             }
+            mb->needsExecution = false;
             _isExecutingBatch = true;
-        }
-        else if (_endlessRepeat)
-        {
-            _batchQueue.reset();
-        }
-        else
-        {
-            _batchQueue.clear();
         }
     }
     else
@@ -130,6 +108,7 @@ void SineStepperController::update()
         {
             _isExecutingBatch = false;
             _counter = 0;
+            _currentMoveBatchIndex++;
         }
     }
 }

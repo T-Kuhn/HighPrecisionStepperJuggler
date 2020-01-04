@@ -11,7 +11,6 @@ namespace HighPrecisionStepperJuggler
         
         private SerialPort _port;
         Thread _receiveDataThread;
-        readonly object _lockObject = new object();
         private bool _isOpen => _port != null && _port.IsOpen;
 
         private void Awake()
@@ -33,7 +32,7 @@ namespace HighPrecisionStepperJuggler
         {
             if (!_isOpen) Open();
             
-            Debug.Log(s);
+            //Debug.Log(s);
             _port.Write(s);
         }
         
@@ -42,13 +41,7 @@ namespace HighPrecisionStepperJuggler
             while (_port.IsOpen)
             {
                 var str = _port.ReadLine();
-                lock (_lockObject)
-                {
-                    // TODO: write code.
-                    
-                    Debug.Log(str);
-                }
-                Thread.Sleep(20);
+                Debug.Log(str);
             }
         }
 

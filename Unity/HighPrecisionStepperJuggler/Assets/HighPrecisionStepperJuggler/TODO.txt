@@ -6,6 +6,8 @@
     [ ] add animation
 [X] make real machine playback single instruction
 [X] make real machine playback multiple instructions in order
+[X] write a nice demo sequence
+[ ] get rid of queue class in Arduino code
 
 [ ] Write latex math file
 

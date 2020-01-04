@@ -1,7 +1,7 @@
 /*
   SineStepper library
   Author: T-Kuhn.
-  Sapporo, October, 2018. Released into the public domain.
+  Sapporo, January, 2020. Released into the public domain.
   */
 
 #include "Arduino.h"

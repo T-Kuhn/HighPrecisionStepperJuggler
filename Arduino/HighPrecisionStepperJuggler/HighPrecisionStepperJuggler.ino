@@ -1,15 +1,13 @@
 /*
-  ESP-32 StepperMotorSpeedTest
+  HighPrecisionStepperJuggler
   Author: T-Kuhn.
-  Sapporo, October, 2019. Released into the public domain.
+  Sapporo, January, 2020. Released into the public domain.
  */
 
 #include "Constants.h"
 #include "SineStepper.h"
 #include "SineStepperController.h"
-#include "Queue.h"
 #include "MoveBatch.h"
-#include "Encoder.h"
 
 enum Mode
 {
@@ -19,8 +17,7 @@ enum Mode
 };
 
 Mode currentMode = idle;
-
-Encoder Encoder1(ROTARY_ENC_1_A, ROTARY_ENC_1_B);
+char inputBuffer[INPUT_SIZE + 1];
 
 SineStepper sineStepper1(STEPPER1_STEP_PIN, STEPPER1_DIR_PIN, /*id:*/ 0);
 SineStepper sineStepper2(STEPPER2_STEP_PIN, STEPPER2_DIR_PIN, /*id:*/ 1);
@@ -30,21 +27,6 @@ SineStepper sineStepper4(STEPPER4_STEP_PIN, STEPPER4_DIR_PIN, /*id:*/ 3);
 SineStepperController sineStepperController(/*endlessRepeat:*/ false);
 IntervalTimer myTimer;
 
-int buttonCoolDownCounter = 0;
-
-void handleModeChange(Mode newMode)
-{
-    if (buttonCoolDownCounter < BUTTON_COOLDOWN_CYCLES)
-    {
-        buttonCoolDownCounter++;
-    }
-    if (digitalRead(BUTTON_PIN) && buttonCoolDownCounter >= BUTTON_COOLDOWN_CYCLES)
-    {
-        buttonCoolDownCounter = 0;
-        currentMode = newMode;
-    }
-}
-
 void onTimer()
 {
     digitalWrite(EXECUTING_ISR_CODE, HIGH);
@@ -52,11 +34,9 @@ void onTimer()
     switch (currentMode)
     {
     case idle:
-        handleModeChange(doingControlledMovements);
         break;
     case doingControlledMovements:
         sineStepperController.update();
-        handleModeChange(idle);
         break;
     default:
         break;
@@ -66,12 +46,12 @@ void onTimer()
 
 void setup()
 {
+    inputBuffer[0] = '\0';
     Serial.begin(115200);
-    Serial.setTimeout(20);
+    //Serial.setTimeout(20);
     myTimer.begin(onTimer, TIMER_US);
 
     pinMode(EXECUTING_ISR_CODE, OUTPUT);
-    pinMode(BUTTON_PIN, INPUT);
 
     sineStepperController.attach(&sineStepper1);
     sineStepperController.attach(&sineStepper2);
@@ -81,64 +61,67 @@ void setup()
 
 void loop()
 {
+
     if (Serial.available() > 0)
     {
-        currentMode = idle;
-        // Get next command from Serial (add 1 for final 0)
-        char input[INPUT_SIZE + 1];
-        byte size = Serial.readBytes(input, INPUT_SIZE);
-        // Add the final 0 to end the C string
-        input[size] = 0;
-
-        double instructionData[12];
-        for (int i = 0; i++; i < 12)
+        char inputChar = Serial.read();
+        static int s_len;
+        if (s_len >= INPUT_SIZE)
         {
-            instructionData[i] = 0.0;
+            // We have received already the maximum number of characters
+            // Ignore all new input until line termination occurs
         }
-
-        char s[2] = ":";
-        char *token;
-        int numberOfTokens = 0;
-
-        // Read instruction
-        char *instruction = strtok(input, "&");
-
-        // get the first token
-        token = strtok(instruction, s);
-        instructionData[numberOfTokens++] = atof(token);
-        //Serial.println(atof(token), 5);
-
-        // walk through other tokens
-        while (token != NULL)
+        else if (inputChar != '\n' && inputChar != '\r')
         {
-            token = strtok(NULL, s);
-            if (token != NULL)
+            inputBuffer[s_len++] = inputChar;
+        }
+        else
+        {
+            // We have received a LF or CR character
+            //Serial.print("RECEIVED MSG: ");
+            //Serial.println(inputBuffer);
+
+            inputBuffer[s_len] = 0;
+
+            currentMode = idle;
+            int index = 0;
+            double instructionData[MAX_NUM_OF_MOVEBATCHES * 6];
+            for (int i = 0; i < MAX_NUM_OF_MOVEBATCHES * 6; i++)
             {
-                instructionData[numberOfTokens++] = atof(token);
-                //Serial.println(atof(token), 5);
+                instructionData[i] = 0;
             }
-        }
 
-        MoveBatch mb;
-        if (instructionData[0] > 10.9 && instructionData[0] < 11.1)
-        {
-            mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[1] / (M_PI * 2))));
-            mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[2] / (M_PI * 2))));
-            mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[3] / (M_PI * 2))));
-            mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[4] / (M_PI * 2))));
-            mb.moveDuration = instructionData[5];
-            sineStepperController.addMoveBatch(mb);
-        }
-        if (instructionData[6] > 21.9 && instructionData[0] < 22.1)
-        {
-            mb.addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[7] / (M_PI * 2))));
-            mb.addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[8] / (M_PI * 2))));
-            mb.addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[9] / (M_PI * 2))));
-            mb.addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[10] / (M_PI * 2))));
-            mb.moveDuration = instructionData[11];
-            sineStepperController.addMoveBatch(mb);
-        }
+            // Read each command
+            char *command = strtok(inputBuffer, ":");
+            while (command != 0)
+            {
+                instructionData[index] = atof(command);
 
-        currentMode = doingControlledMovements;
+                command = strtok(0, ":");
+                index++;
+            }
+
+            int numOfMoveBatches = index / 6;
+            Serial.println(numOfMoveBatches);
+            for (int i = 0; i < numOfMoveBatches; i++)
+            {
+                int offset = i * 6;
+                MoveBatch *mb = &sineStepperController.moveBatches[i];
+                if (instructionData[offset] > ((i + 1) * 11.0) - 0.1 && instructionData[offset] < ((i + 1) * 11) + 0.1)
+                {
+                    mb->addMove(/*id:*/ 0, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[offset + 1] / (M_PI * 2))));
+                    mb->addMove(/*id:*/ 1, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[offset + 2] / (M_PI * 2))));
+                    mb->addMove(/*id:*/ 2, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[offset + 3] / (M_PI * 2))));
+                    mb->addMove(/*id:*/ 3, /*pos:*/ (int32_t)(PULSES_PER_REV * (instructionData[offset + 4] / (M_PI * 2))));
+                    mb->moveDuration = instructionData[offset + 5];
+                }
+            }
+
+            sineStepperController.resetMoveBatchExecution();
+            currentMode = doingControlledMovements;
+
+            memset(inputBuffer, 0, sizeof(inputBuffer));
+            s_len = 0;
+        }
     }
 }
