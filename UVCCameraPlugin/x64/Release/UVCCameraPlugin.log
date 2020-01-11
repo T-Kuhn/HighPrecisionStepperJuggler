@@ -1,7 +1,8 @@
 ﻿  UVCCameraPlugin.cpp
+C:\opencv\build\include\opencv2\calib3d.hpp(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
      Creating library C:\git\HighPrecisionStepperJuggler\UVCCameraPlugin\x64\Release\UVCCameraPlugin.lib and object C:\git\HighPrecisionStepperJuggler\UVCCameraPlugin\x64\Release\UVCCameraPlugin.exp
   Generating code
-  0 of 1 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  1 of 284 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
