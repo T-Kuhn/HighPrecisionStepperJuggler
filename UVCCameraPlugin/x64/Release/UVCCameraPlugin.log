@@ -1,0 +1,8 @@
+﻿  UVCCameraPlugin.cpp
+     Creating library C:\git\HighPrecisionStepperJuggler\UVCCameraPlugin\x64\Release\UVCCameraPlugin.lib and object C:\git\HighPrecisionStepperJuggler\UVCCameraPlugin\x64\Release\UVCCameraPlugin.exp
+  Generating code
+  0 of 1 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  UVCCameraPlugin.vcxproj -> C:\git\HighPrecisionStepperJuggler\UVCCameraPlugin\x64\Release\UVCCameraPlugin.dll

@@ -26,6 +26,7 @@
             <e p="ModelMachine.cs" t="Include" />
             <e p="ModelMachineView.cs" t="Include" />
             <e p="MotorizedArm.cs" t="Include" />
+            <e p="PluginTestScript.cs" t="Include" />
             <e p="PositionLogger.cs" t="Include" />
             <e p="RealMachine.cs" t="Include" />
             <e p="SerialInterface.cs" t="Include" />
