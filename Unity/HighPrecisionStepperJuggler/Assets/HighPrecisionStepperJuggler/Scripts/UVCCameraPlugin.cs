@@ -6,6 +6,10 @@ public class UVCCameraPlugin : MonoBehaviour
 {
     [DllImport ("UVCCameraPlugin")]
     private static extern IntPtr getCamera(); 
+    
+    [DllImport ("UVCCameraPlugin")]
+    private static extern double getFPS(IntPtr camera); 
+    
     [DllImport ("UVCCameraPlugin")]
     private static extern void releaseCamera(IntPtr camera); 
     [DllImport ("UVCCameraPlugin")]

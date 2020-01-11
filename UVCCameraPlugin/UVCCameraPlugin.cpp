@@ -4,39 +4,55 @@
 
 void* getCamera()
 {
-    //cv::namedWindow("hoge", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_FREERATIO);
-
     auto cap = new cv::VideoCapture(0);
     cap->set(cv::CAP_PROP_FRAME_WIDTH, 640);
     cap->set(cv::CAP_PROP_FRAME_HEIGHT, 480); 
 
     cap->set(cv::CAP_PROP_EXPOSURE, -7);
     cap->set(cv::CAP_PROP_GAIN, 4);
-    //cap->get(cv::CAP_PROP_EXPOSURE);
 
     return static_cast<void*>(cap);
 }
 
+double getExposure(void* camera) 
+{
+    auto cap = static_cast<cv::VideoCapture*>(camera);
+    return cap->get(cv::CAP_PROP_EXPOSURE);
+}
+
+double getFPS(void* camera) 
+{
+    auto cap = static_cast<cv::VideoCapture*>(camera);
+    return cap->get(cv::CAP_PROP_FPS);
+}
+
+double getWidth(void* camera) 
+{
+    auto cap = static_cast<cv::VideoCapture*>(camera);
+    return cap->get(cv::CAP_PROP_FRAME_WIDTH);
+}
+
+double getHeight(void* camera) 
+{
+    auto cap = static_cast<cv::VideoCapture*>(camera);
+    return cap->get(cv::CAP_PROP_FRAME_HEIGHT);
+}
+
 void releaseCamera(void* camera)
 {
-    //cv::destroyWindow("hoge");
-    auto vc = static_cast<cv::VideoCapture*>(camera);
-    delete vc;
+    auto cap = static_cast<cv::VideoCapture*>(camera);
+    delete cap;
 }
 
 void getCameraTexture(void* camera, unsigned char* data, int width, int height)
 {
-    auto vc = static_cast<cv::VideoCapture*>(camera);
+    auto cap = static_cast<cv::VideoCapture*>(camera);
 
-    // カメラ画の取得
     cv::Mat img;
-    *vc >> img;
+    *cap >> img;
 
-    // リサイズ
     cv::Mat resized_img(height, width, img.type());
     cv::resize(img, resized_img, resized_img.size(), cv::INTER_CUBIC);
-
-    //cv::imshow("hoge", resized_img);
 
     // RGB --> ARGB 変換
     cv::Mat argb_img;
