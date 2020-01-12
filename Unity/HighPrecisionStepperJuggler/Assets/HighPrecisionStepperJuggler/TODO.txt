@@ -7,8 +7,11 @@
 [X] make real machine playback single instruction
 [X] make real machine playback multiple instructions in order
 [X] write a nice demo sequence
-[ ] get rid of queue class in Arduino code
-
+[X] get rid of queue class in Arduino code
+[ ] Write UVCCameraPlugin
+    [X] get all the enums into unity to make the interface simpler.
+    [X] make it possible to query data from unity
+    [X] stop resizing.
 [ ] Write latex math file
 
 lower link length: 89

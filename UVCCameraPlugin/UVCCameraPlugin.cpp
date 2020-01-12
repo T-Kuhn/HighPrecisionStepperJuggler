@@ -5,37 +5,24 @@
 void* getCamera()
 {
     auto cap = new cv::VideoCapture(0);
-    cap->set(cv::CAP_PROP_FRAME_WIDTH, 640);
-    cap->set(cv::CAP_PROP_FRAME_HEIGHT, 480); 
-
-    cap->set(cv::CAP_PROP_EXPOSURE, -7);
-    cap->set(cv::CAP_PROP_GAIN, 4);
+    //cap->set(cv::CAP_PROP_FRAME_WIDTH, 640);
+    //cap->set(cv::CAP_PROP_FRAME_HEIGHT, 480); 
+    //cap->set(cv::CAP_PROP_EXPOSURE, -7);
+    //cap->set(cv::CAP_PROP_GAIN, 4);
 
     return static_cast<void*>(cap);
 }
 
-double getExposure(void* camera) 
+double getCameraProperty(void* camera, int propertyID) 
 {
     auto cap = static_cast<cv::VideoCapture*>(camera);
-    return cap->get(cv::CAP_PROP_EXPOSURE);
+    return cap->get(propertyID);
 }
 
-double getFPS(void* camera) 
+double setCameraProperty(void* camera, int propertyID, double value) 
 {
     auto cap = static_cast<cv::VideoCapture*>(camera);
-    return cap->get(cv::CAP_PROP_FPS);
-}
-
-double getWidth(void* camera) 
-{
-    auto cap = static_cast<cv::VideoCapture*>(camera);
-    return cap->get(cv::CAP_PROP_FRAME_WIDTH);
-}
-
-double getHeight(void* camera) 
-{
-    auto cap = static_cast<cv::VideoCapture*>(camera);
-    return cap->get(cv::CAP_PROP_FRAME_HEIGHT);
+    return cap->set(propertyID, value);
 }
 
 void releaseCamera(void* camera)
@@ -44,19 +31,16 @@ void releaseCamera(void* camera)
     delete cap;
 }
 
-void getCameraTexture(void* camera, unsigned char* data, int width, int height)
+void getCameraTexture(void* camera, unsigned char* data)
 {
     auto cap = static_cast<cv::VideoCapture*>(camera);
 
     cv::Mat img;
     *cap >> img;
 
-    cv::Mat resized_img(height, width, img.type());
-    cv::resize(img, resized_img, resized_img.size(), cv::INTER_CUBIC);
-
     // RGB --> ARGB •ÏŠ·
     cv::Mat argb_img;
-    cv::cvtColor(resized_img, argb_img, 2);
+    cv::cvtColor(img, argb_img, 2);
     std::vector<cv::Mat> bgra;
     cv::split(argb_img, bgra);
     std::swap(bgra[0], bgra[3]);

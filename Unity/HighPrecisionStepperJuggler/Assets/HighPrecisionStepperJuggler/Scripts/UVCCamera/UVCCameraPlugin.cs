@@ -1,48 +1,75 @@
 ﻿using UnityEngine;
 using System;
 using System.Runtime.InteropServices;
+using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 
-public class UVCCameraPlugin : MonoBehaviour 
+namespace HighPrecisionStepperJuggler
 {
-    [DllImport ("UVCCameraPlugin")]
-    private static extern IntPtr getCamera(); 
-    
-    [DllImport ("UVCCameraPlugin")]
-    private static extern double getFPS(IntPtr camera); 
-    
-    [DllImport ("UVCCameraPlugin")]
-    private static extern void releaseCamera(IntPtr camera); 
-    [DllImport ("UVCCameraPlugin")]
-    private static extern void getCameraTexture(IntPtr camera, IntPtr data, int width, int height); 
-
-    private IntPtr camera_;
-    private Texture2D texture_;
-    private Color32[] pixels_;
-    private GCHandle pixels_handle_;
-    private IntPtr pixels_ptr_;
-    
-    [SerializeField] private Renderer _renderer = null;
-
-    void Start() 
+    public class UVCCameraPlugin : MonoBehaviour
     {
-        camera_ = getCamera();
-        texture_ = new Texture2D(640, 480, TextureFormat.ARGB32, false);
-        pixels_ = texture_.GetPixels32();
-        pixels_handle_ = GCHandle.Alloc(pixels_, GCHandleType.Pinned);
-        pixels_ptr_ = pixels_handle_.AddrOfPinnedObject();
-        _renderer.material.SetTexture("_UnlitColorMap", texture_);
-    }
+        [DllImport("UVCCameraPlugin")]
+        private static extern IntPtr getCamera();
 
-    void Update() 
-    {
-        getCameraTexture(camera_, pixels_ptr_, texture_.width, texture_.height);
-        texture_.SetPixels32(pixels_);
-        texture_.Apply();
-    }
+        [DllImport("UVCCameraPlugin")]
+        private static extern double getCameraProperty(IntPtr camera, int propertyId);
+        
+        [DllImport("UVCCameraPlugin")]
+        private static extern double setCameraProperty(IntPtr camera, int propertyId, double value);
 
-    void OnApplicationQuit()
-    {
-        pixels_handle_.Free();
-        releaseCamera(camera_);
+        [DllImport("UVCCameraPlugin")]
+        private static extern void releaseCamera(IntPtr camera);
+
+        [DllImport("UVCCameraPlugin")]
+        private static extern void getCameraTexture(IntPtr camera, IntPtr data);
+
+        private readonly int Width = 640;
+        private readonly int Height = 480;
+        private readonly int Exposure = -7;
+        private readonly int Gain = 5;
+
+        private IntPtr _camera;
+        private Texture2D _texture;
+        private Color32[] _pixels;
+        private GCHandle _pixelsHandle;
+        private IntPtr _pixelsPtr;
+
+        [SerializeField] private Renderer _renderer = null;
+
+        void Start()
+        {
+            _camera = getCamera();
+
+            setCameraProperty(_camera, (int) vcp.CAP_PROP_FRAME_WIDTH, Width);
+            setCameraProperty(_camera, (int) vcp.CAP_PROP_FRAME_WIDTH, Height);
+            setCameraProperty(_camera, (int) vcp.CAP_PROP_EXPOSURE, Exposure);
+            setCameraProperty(_camera, (int) vcp.CAP_PROP_GAIN, Gain);
+            
+            _texture = new Texture2D(Width, Height, TextureFormat.ARGB32, false);
+            _pixels = _texture.GetPixels32();
+            _pixelsHandle = GCHandle.Alloc(_pixels, GCHandleType.Pinned);
+            _pixelsPtr = _pixelsHandle.AddrOfPinnedObject();
+            _renderer.material.SetTexture("_UnlitColorMap", _texture);
+        }
+
+        public double GetCameraProperty(vcp property)
+        {
+            return getCameraProperty(_camera, (int)property);
+        }
+
+        void Update()
+        {
+            var fps = getCameraProperty(_camera, (int)vcp.CAP_PROP_FPS);
+            Debug.Log("fps: " + fps);
+            
+            getCameraTexture(_camera, _pixelsPtr);
+            _texture.SetPixels32(_pixels);
+            _texture.Apply();
+        }
+
+        void OnApplicationQuit()
+        {
+            _pixelsHandle.Free();
+            releaseCamera(_camera);
+        }
     }
 }
