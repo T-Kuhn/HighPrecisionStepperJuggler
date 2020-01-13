@@ -25,7 +25,7 @@ namespace HighPrecisionStepperJuggler
         private readonly int Width = 640;
         private readonly int Height = 480;
         private readonly int Exposure = -7;
-        private readonly int Gain = 5;
+        private readonly int Gain = 15;
 
         private IntPtr _camera;
         private Texture2D _texture;
@@ -56,11 +56,13 @@ namespace HighPrecisionStepperJuggler
             return getCameraProperty(_camera, (int)property);
         }
 
+        public void SetCameraProperty(vcp property, double value)
+        {
+            setCameraProperty(_camera, (int) property, value);
+        }
+
         void Update()
         {
-            var fps = getCameraProperty(_camera, (int)vcp.CAP_PROP_FPS);
-            Debug.Log("fps: " + fps);
-            
             getCameraTexture(_camera, _pixelsPtr);
             _texture.SetPixels32(_pixels);
             _texture.Apply();

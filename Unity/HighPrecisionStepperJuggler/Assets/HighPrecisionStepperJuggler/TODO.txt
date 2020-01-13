@@ -1,17 +1,12 @@
 
 
-[X] get Serial communication in C# going
 [ ] make model playback multiple instructions in order
     [X] playback in order
     [ ] add animation
-[X] make real machine playback single instruction
-[X] make real machine playback multiple instructions in order
-[X] write a nice demo sequence
-[X] get rid of queue class in Arduino code
-[ ] Write UVCCameraPlugin
-    [X] get all the enums into unity to make the interface simpler.
-    [X] make it possible to query data from unity
-    [X] stop resizing.
+[ ] image processing
+    [ ] get area of orange ball
+    [ ] get centre position in pixels measured from the middle
+    [ ] find a good way to show the image in unity
 [ ] Write latex math file
 
 lower link length: 89
@@ -22,13 +17,3 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 memo:
 
 
-how do we want to send LLInstruction to the machine?
-
-LLInstruction:
-  - MoveTime
-  - LLMachineState(rotations of all motors)
-  
-  
-  
-  diffMachineState = goalMachineState - originMachineState 
-  

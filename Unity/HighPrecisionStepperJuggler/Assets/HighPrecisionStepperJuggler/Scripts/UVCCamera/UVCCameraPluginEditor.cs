@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 
@@ -15,6 +14,8 @@ namespace HighPrecisionStepperJuggler
             var script = (UVCCameraPlugin) target;
             if (GUILayout.Button("SetProperties", GUILayout.Width(200)))
             {
+                script.SetCameraProperty(vcp.CAP_PROP_EXPOSURE, -7);
+                script.SetCameraProperty(vcp.CAP_PROP_GAIN, 10);
             }
 
             if (GUILayout.Button("GetProperties", GUILayout.Width(200)))

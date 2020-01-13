@@ -148,16 +148,6 @@ namespace HighPrecisionStepperJuggler
                     new HLInstruction(0.01f, 0f, 0f, moveTime)
                 });
             }
-
-            if (GUILayout.Button("jijiji", GUILayout.Width(200)))
-            {
-                var moveTime = 0.1f;
-                script.SendInstructions(new List<HLInstruction>()
-                {
-                    new HLInstruction(0.04f, 0.5f, 0.5f, moveTime),
-                    new HLInstruction(0.01f, -0.5f, -0.5f, moveTime)
-                });
-            }
         }
     }
 }
