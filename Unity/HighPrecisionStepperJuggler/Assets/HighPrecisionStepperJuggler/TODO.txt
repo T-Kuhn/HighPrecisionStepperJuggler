@@ -4,9 +4,9 @@
     [X] playback in order
     [ ] add animation
 [ ] image processing
+    [ ] find a good way to show the image in unity
     [ ] get area of orange ball
     [ ] get centre position in pixels measured from the middle
-    [ ] find a good way to show the image in unity
 [ ] Write latex math file
 
 lower link length: 89

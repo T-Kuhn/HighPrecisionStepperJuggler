@@ -33,7 +33,7 @@ namespace HighPrecisionStepperJuggler
         private GCHandle _pixelsHandle;
         private IntPtr _pixelsPtr;
 
-        [SerializeField] private Renderer _renderer = null;
+        [SerializeField] Material _blitMaterial = null;
 
         void Start()
         {
@@ -48,7 +48,8 @@ namespace HighPrecisionStepperJuggler
             _pixels = _texture.GetPixels32();
             _pixelsHandle = GCHandle.Alloc(_pixels, GCHandleType.Pinned);
             _pixelsPtr = _pixelsHandle.AddrOfPinnedObject();
-            _renderer.material.SetTexture("_UnlitColorMap", _texture);
+            
+            _blitMaterial.SetTexture("_OverlayTex", _texture);
         }
 
         public double GetCameraProperty(vcp property)
@@ -72,6 +73,12 @@ namespace HighPrecisionStepperJuggler
         {
             _pixelsHandle.Free();
             releaseCamera(_camera);
+        }
+        
+        void OnRenderImage(RenderTexture source, RenderTexture destination)
+        {
+            Debug.Log("on image renderj.");
+            Graphics.Blit(source, destination, _blitMaterial);
         }
     }
 }
