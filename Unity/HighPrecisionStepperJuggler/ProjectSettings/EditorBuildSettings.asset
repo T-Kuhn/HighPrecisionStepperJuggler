@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/HighPrecisionStepperJuggler/MainScene.unity
+    guid: 0e5bd1d71117c7944a1e37a55d148977
   m_configObjects: {}

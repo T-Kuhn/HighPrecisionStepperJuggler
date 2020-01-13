@@ -1,6 +1,7 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
+#if UNITY_EDITOR
+using UnityEditor;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -33,3 +34,4 @@ namespace HighPrecisionStepperJuggler
         }
     }
 }
+#endif

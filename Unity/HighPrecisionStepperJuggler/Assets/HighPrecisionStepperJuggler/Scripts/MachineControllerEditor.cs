@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
+#if UNITY_EDITOR
 using UnityEngine;
 
 namespace HighPrecisionStepperJuggler
@@ -151,3 +152,4 @@ namespace HighPrecisionStepperJuggler
         }
     }
 }
+#endif
