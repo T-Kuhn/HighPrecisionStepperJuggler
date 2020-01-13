@@ -10,6 +10,8 @@
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
         #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderVariables.hlsl"
 
+        TEXTURE2D_X(_InputTexture);
+
         struct Attributes
         {
             uint vertexID : SV_VertexID;
@@ -37,10 +39,37 @@
 
         float4 Frag(Varyings input) : SV_Target
         {
-            float4 col = tex2D(_OverlayTex, input.texcoord);
+            UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
-            return col;
-            //return (0.0).xxxx;
+            float2 positionNDC = input.texcoord;
+            uint2 positionSS = input.texcoord * _ScreenSize.xy;
+
+            float4 uvTransform = float4(1.0, 1.0, 0.0, 0.0);
+            // Flip logic
+            positionSS = positionSS * uvTransform.xy + uvTransform.zw * (_ScreenSize.xy - 1.0);
+            positionNDC = positionNDC * uvTransform.xy + uvTransform.zw;
+
+            #if defined(BILINEAR) || defined(CATMULL_ROM_4) || defined(LANCZOS)
+            float3 outColor = UpscaledResult(positionNDC.xy);
+            #else
+            float3 outColor = LOAD_TEXTURE2D_X(_InputTexture, positionSS).xyz;
+            #endif
+
+            float2 uv = input.texcoord;
+            uv.y = 1 - uv.y;
+            uv.x *= 3.0;
+            uv.y *= 2.25;
+
+            float4 col = tex2D(_OverlayTex, uv);
+
+            if(uv.x > 1.0 || uv.y > 1.0)
+            {
+                return float4(outColor, 1);
+            }
+            else
+            {
+                return col;
+            }
         }
     ENDHLSL
 

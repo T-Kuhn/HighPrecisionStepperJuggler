@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using Microsoft.SqlServer.Server;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using UnityEngine;
 
@@ -33,7 +34,7 @@ namespace HighPrecisionStepperJuggler
         private GCHandle _pixelsHandle;
         private IntPtr _pixelsPtr;
 
-        [SerializeField] Material _blitMaterial = null;
+        [SerializeField] private RenderTexture _renderTexture = null;
 
         void Start()
         {
@@ -48,8 +49,6 @@ namespace HighPrecisionStepperJuggler
             _pixels = _texture.GetPixels32();
             _pixelsHandle = GCHandle.Alloc(_pixels, GCHandleType.Pinned);
             _pixelsPtr = _pixelsHandle.AddrOfPinnedObject();
-            
-            _blitMaterial.SetTexture("_OverlayTex", _texture);
         }
 
         public double GetCameraProperty(vcp property)
@@ -65,20 +64,17 @@ namespace HighPrecisionStepperJuggler
         void Update()
         {
             getCameraTexture(_camera, _pixelsPtr);
+            
             _texture.SetPixels32(_pixels);
             _texture.Apply();
+            
+            Graphics.Blit(_texture, _renderTexture);
         }
 
         void OnApplicationQuit()
         {
             _pixelsHandle.Free();
             releaseCamera(_camera);
-        }
-        
-        void OnRenderImage(RenderTexture source, RenderTexture destination)
-        {
-            Debug.Log("on image renderj.");
-            Graphics.Blit(source, destination, _blitMaterial);
         }
     }
 }

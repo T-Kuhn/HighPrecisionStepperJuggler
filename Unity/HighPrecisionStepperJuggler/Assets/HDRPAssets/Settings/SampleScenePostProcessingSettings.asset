@@ -16,10 +16,10 @@ MonoBehaviour:
   m_AdvancedMode: 0
   isActive:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   overlayParameter:
     m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: e790d517b0aac6e49890487c89517117, type: 3}
+    m_Value: {fileID: 8400000, guid: aea317be466d9c645a30a4ee986e9a8d, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
