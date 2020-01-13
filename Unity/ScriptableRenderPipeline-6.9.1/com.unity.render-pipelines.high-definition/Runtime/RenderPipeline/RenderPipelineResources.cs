@@ -14,6 +14,10 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             [Reload("Runtime/Material/Lit/Lit.shader")]
             public Shader defaultPS;
 
+            // Custom Post Processing Shader
+            [Reload("Runtime/PostProcessing/Shaders/TextureOverlayer.shader")]
+            public Shader OverlayShader;
+
             // Debug
             [Reload("Runtime/Debug/DebugDisplayLatlong.Shader")]
             public Shader debugDisplayLatlongPS;
@@ -140,7 +144,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             [Reload("Runtime/Core/CoreResources/ClearUIntTextureArray.compute")]
             public ComputeShader clearUIntTextureCS;
 
-            // Shadow            
+            // Shadow
             [Reload("Runtime/Lighting/Shadow/ShadowClear.shader")]
             public Shader shadowClearPS;
             [Reload("Runtime/Lighting/Shadow/EVSMBlur.compute")]

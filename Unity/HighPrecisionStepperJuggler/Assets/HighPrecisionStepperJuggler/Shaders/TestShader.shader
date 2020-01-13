@@ -1,9 +1,8 @@
-﻿Shader "HighPrecisionStepperJuggler/TextureOverlayer"
+﻿Shader "Hidden/TestShader"
 {
     Properties
     {
-        _MainTex ("Main Texture", 2D) = "white" {}
-        _OverlayTex("Overlay Texture", 2D) = "white" {}
+        _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
     {
@@ -39,7 +38,6 @@
             }
 
             sampler2D _MainTex;
-            sampler2D _OverlayTex;
 
             fixed4 frag (v2f i) : SV_Target
             {

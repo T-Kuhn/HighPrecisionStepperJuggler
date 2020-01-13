@@ -29,6 +29,9 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
         Material m_ClearBlackMaterial;
         Material m_SMAAMaterial;
 
+        // Custom OverlayShader Material
+        Material m_OverlayShaderMaterial;
+
         // Exposure data
         const int k_ExposureCurvePrecision = 128;
         readonly Color[] m_ExposureCurveColorArray = new Color[k_ExposureCurvePrecision];
@@ -76,6 +79,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
         ShadowsMidtonesHighlights m_ShadowsMidtonesHighlights;
         ColorCurves m_Curves;
         FilmGrain m_FilmGrain;
+        OverlayComponent m_Overlay;
 
         // Physical camera ref
         HDPhysicalCamera m_PhysicalCamera;
@@ -105,6 +109,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             m_FinalPassMaterial = CoreUtils.CreateEngineMaterial(m_Resources.shaders.finalPassPS);
             m_ClearBlackMaterial = CoreUtils.CreateEngineMaterial(m_Resources.shaders.clearBlackPS);
             m_SMAAMaterial = CoreUtils.CreateEngineMaterial(m_Resources.shaders.SMAAPS);
+            m_OverlayShaderMaterial = CoreUtils.CreateEngineMaterial(m_Resources.shaders.OverlayShader);
 
             // Some compute shaders fail on specific hardware or vendors so we'll have to use a
             // safer but slower code path for them
@@ -199,6 +204,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             CoreUtils.SafeRelease(m_BokehIndirectCmd);
             CoreUtils.SafeRelease(m_NearBokehTileList);
             CoreUtils.SafeRelease(m_FarBokehTileList);
+            CoreUtils.Destroy(m_OverlayShaderMaterial);
 
             m_EmptyExposureTexture      = null;
             m_TempTexture1024           = null;
@@ -247,6 +253,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             m_ShadowsMidtonesHighlights = stack.GetComponent<ShadowsMidtonesHighlights>();
             m_Curves                    = stack.GetComponent<ColorCurves>();
             m_FilmGrain                 = stack.GetComponent<FilmGrain>();
+            m_Overlay                   = stack.GetComponent<OverlayComponent>();
 
             // Handle fixed exposure & disabled pre-exposure by forcing an exposure multiplier of 1
             if (!camera.frameSettings.IsEnabled(FrameSettingsField.ExposureControl))
@@ -454,6 +461,15 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
                 }
 
                 // TODO: User effects go here
+                if (m_PostProcessEnabled)
+                {
+                    if (m_Overlay.IsActive())
+                    {
+                        var destination = m_Pool.Get(Vector2.one, k_ColorFormat);
+                        DoOverlayPass(cmd, camera, source, destination, depthBuffer);
+                        PoolSource(ref source, destination);
+                    }
+                }
 
                 if (dynResHandler.DynamicResolutionEnabled() &&     // Dynamic resolution is on.
                     camera.antialiasing == AntialiasingMode.FastApproximateAntialiasing)
@@ -2131,6 +2147,13 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             m_Pool.Recycle(SMAABlendTex);
         }
         #endregion
+
+        void DoOverlayPass(CommandBuffer cmd, HDCamera camera, RTHandle source, RTHandle destination, RTHandle depthBuffer)
+        {
+            m_OverlayShaderMaterial.SetTexture("_OverlayTex", m_Overlay.overlayParameter.value);
+            m_OverlayShaderMaterial.SetTexture(HDShaderIDs._InputTexture, source);
+            HDUtils.DrawFullScreen(cmd, m_OverlayShaderMaterial, destination);
+        }
 
         #region Final Pass
 
