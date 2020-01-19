@@ -1,20 +1,16 @@
 
-
 [ ] make model playback multiple instructions in order
     [X] playback in order
     [ ] add animation
-[ ] image processing
+[X] image processing
     [X] find a good way to show the image in unity
-    [ ] get area of orange ball
-    [ ] get centre position in pixels measured from the middle
-    
 [X] find a good way to set camera parameters in runtime mode.
-[ ] get rid of OpenCV hough-transform
-    [ ] make OpenCVs houghTransform on/off settable
-    [ ] also make all other parameters settable
-    
+[X] OpenCV hough-transform optimazations
+    [X] make OpenCVs houghTransform on/off settable
+    [X] also make all other parameters settable
+    [X] custom grayscale image made by subtracting blue from red channel and then using that red chennal as gray image.
+    [ ] add ability to show grayscale + image processing result in Unity
 [ ] play around with image processing in unity
-
 [ ] Write latex math file
 
 lower link length: 89

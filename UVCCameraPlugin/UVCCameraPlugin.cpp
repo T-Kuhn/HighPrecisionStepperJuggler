@@ -1,4 +1,3 @@
-
 #include "UVCCameraPlugin.h"
 #include <opencv2/opencv.hpp>
 #include <cstdio>
@@ -12,10 +11,6 @@ using namespace std;
 void* getCamera()
 {
     auto cap = new cv::VideoCapture(0);
-    //cap->set(cv::CAP_PROP_FRAME_WIDTH, 640);
-    //cap->set(cv::CAP_PROP_FRAME_HEIGHT, 480); 
-    //cap->set(cv::CAP_PROP_EXPOSURE, -7);
-    //cap->set(cv::CAP_PROP_GAIN, 4);
 
     return static_cast<void*>(cap);
 }
@@ -56,10 +51,18 @@ void getCameraTexture(
     *cap >> img;
     Mat src = img;
 
+    Mat bgr[3];
+    split(src, bgr);
+    Mat r = Mat(src.rows, src.cols, CV_8U, bgr[2].data);
+    Mat g = Mat(src.rows, src.cols, CV_8U, bgr[1].data);
+    Mat b = Mat(src.rows, src.cols, CV_8U, bgr[0].data);
+
+    Mat customGray = r - b;
+
+    Mat gray;
     if (executeHT21)
     {
-        Mat gray;
-        cvtColor(src, gray, COLOR_BGR2GRAY);
+        cv::cvtColor(src, gray, COLOR_BGR2GRAY);
 
         if (executeMedianBlur)
         {
@@ -83,21 +86,17 @@ void getCameraTexture(
         {
             Vec3i c = circles[i];
             Point center = Point(c[0], c[1]);
-            // circle center
-            circle(src, center, 1, Scalar(0, 100, 100), 3, LINE_AA);
-            // circle outline
             int radius = c[2];
+
+            circle(src, center, 1, Scalar(0, 100, 100), 3, LINE_AA);
             circle(src, center, radius, Scalar(255, 0, 255), 3, LINE_AA);
         }
     }
 
-    // RGB --> ARGB •ÏŠ·
-    cv::Mat argb_img;
-    cv::cvtColor(src, argb_img, 2);
-    std::vector<cv::Mat> bgra;
-    cv::split(argb_img, bgra);
-    std::swap(bgra[0], bgra[3]);
-    std::swap(bgra[1], bgra[2]);
-    std::memcpy(data, argb_img.data, argb_img.total() * argb_img.elemSize());
+    // BGR --> RGBA
+    cv::Mat rgba;
+    //cv::cvtColor(src, rgba, cv::COLOR_BGR2RGBA);
+    cv::cvtColor(customGray, rgba, cv::COLOR_GRAY2RGBA);
+    std::memcpy(data, rgba.data, rgba.total() * rgba.elemSize());
 }
 

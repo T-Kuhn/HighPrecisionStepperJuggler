@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -37,20 +38,25 @@ namespace HighPrecisionStepperJuggler
         private Color32[] _pixels;
         private GCHandle _pixelsHandle;
         private IntPtr _pixelsPtr;
+        private CameraProperties _defaultCameraProperties;
+        
+        [SerializeField] private HT21Parameters _ht21Parameters;
+        [SerializeField] private CameraProperties _cameraProperties;
+        [SerializeField] private RenderTexture _renderTexture = null;
 
-        private readonly CameraProperties _defaultCameraProperties =
-            new CameraProperties()
+        private void Awake()
+        {
+            _defaultCameraProperties = new CameraProperties()
             {
                 Width = 640,
                 Height = 480,
                 Exposure = -7,
                 Gain = 2,
-                Saturation = 33,
+                Saturation = 55,
                 Contrast = 0
             };
-
-        [SerializeField] private HT21Parameters _ht21Parameters =
-            new HT21Parameters()
+            
+            _ht21Parameters = new HT21Parameters()
             {
                 ExecuteHT21 = true,
                 ExecuteMedianBlue = false,
@@ -61,9 +67,7 @@ namespace HighPrecisionStepperJuggler
                 MinRadius = 20,
                 MaxRadius = 110
             };
-
-        [SerializeField] private CameraProperties _properties;
-        [SerializeField] private RenderTexture _renderTexture = null;
+        }
 
         void Start()
         {
@@ -96,23 +100,23 @@ namespace HighPrecisionStepperJuggler
 
         public void GetCameraProperties()
         {
-            _properties.Width = GetCameraProperty(vcp.CAP_PROP_FRAME_WIDTH);
-            _properties.Height = GetCameraProperty(vcp.CAP_PROP_FRAME_HEIGHT);
-            _properties.FPS = GetCameraProperty(vcp.CAP_PROP_FPS);
-            _properties.Exposure = GetCameraProperty(vcp.CAP_PROP_EXPOSURE);
-            _properties.Gain = GetCameraProperty(vcp.CAP_PROP_GAIN);
-            _properties.Contrast = GetCameraProperty(vcp.CAP_PROP_CONTRAST);
-            _properties.ISO = GetCameraProperty(vcp.CAP_PROP_ISO_SPEED);
-            _properties.Saturation = GetCameraProperty(vcp.CAP_PROP_SATURATION);
+            _cameraProperties.Width = GetCameraProperty(vcp.CAP_PROP_FRAME_WIDTH);
+            _cameraProperties.Height = GetCameraProperty(vcp.CAP_PROP_FRAME_HEIGHT);
+            _cameraProperties.FPS = GetCameraProperty(vcp.CAP_PROP_FPS);
+            _cameraProperties.Exposure = GetCameraProperty(vcp.CAP_PROP_EXPOSURE);
+            _cameraProperties.Gain = GetCameraProperty(vcp.CAP_PROP_GAIN);
+            _cameraProperties.Contrast = GetCameraProperty(vcp.CAP_PROP_CONTRAST);
+            _cameraProperties.ISO = GetCameraProperty(vcp.CAP_PROP_ISO_SPEED);
+            _cameraProperties.Saturation = GetCameraProperty(vcp.CAP_PROP_SATURATION);
         }
 
         public void SetCameraProperties()
         {
-            SetCameraProperty(vcp.CAP_PROP_EXPOSURE, _properties.Exposure);
-            SetCameraProperty(vcp.CAP_PROP_GAIN, _properties.Gain);
-            SetCameraProperty(vcp.CAP_PROP_CONTRAST, _properties.Contrast);
-            SetCameraProperty(vcp.CAP_PROP_ISO_SPEED, _properties.ISO);
-            SetCameraProperty(vcp.CAP_PROP_SATURATION, _properties.Saturation);
+            SetCameraProperty(vcp.CAP_PROP_EXPOSURE, _cameraProperties.Exposure);
+            SetCameraProperty(vcp.CAP_PROP_GAIN, _cameraProperties.Gain);
+            SetCameraProperty(vcp.CAP_PROP_CONTRAST, _cameraProperties.Contrast);
+            SetCameraProperty(vcp.CAP_PROP_ISO_SPEED, _cameraProperties.ISO);
+            SetCameraProperty(vcp.CAP_PROP_SATURATION, _cameraProperties.Saturation);
         }
 
         void Update()
