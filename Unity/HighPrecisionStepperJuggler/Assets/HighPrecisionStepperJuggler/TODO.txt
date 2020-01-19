@@ -8,7 +8,12 @@
     [ ] get area of orange ball
     [ ] get centre position in pixels measured from the middle
     
-[ ] find a good way to set camera parameters in runtime mode.
+[X] find a good way to set camera parameters in runtime mode.
+[ ] get rid of OpenCV hough-transform
+    [ ] make OpenCVs houghTransform on/off settable
+    [ ] also make all other parameters settable
+    
+[ ] play around with image processing in unity
 
 [ ] Write latex math file
 

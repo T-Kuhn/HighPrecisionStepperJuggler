@@ -38,36 +38,54 @@ void releaseCamera(void* camera)
     delete cap;
 }
 
-void getCameraTexture(void* camera, unsigned char* data)
+void getCameraTexture(
+    void* camera,
+    unsigned char* data,
+    bool executeHT21,
+    double dp,
+    double minDist,
+    double param1,
+    double param2,
+    int minRadius,
+    int maxRadius)
 {
     auto cap = static_cast<cv::VideoCapture*>(camera);
 
     cv::Mat img;
     *cap >> img;
-
-    // START
     Mat src = img;
 
-    Mat gray;
-    cvtColor(src, gray, COLOR_BGR2GRAY);
-    medianBlur(gray, gray, 5);
-    vector<Vec3f> circles;
-    HoughCircles(gray, circles, HOUGH_GRADIENT, 1,
-        gray.rows / 4,  // change this value to detect circles with different distances to each other
-        100, 30, 5, 120 // change the last two parameters
-   // (min_radius & max_radius) to detect larger circles
-    );
-    for (size_t i = 0; i < circles.size(); i++)
+    if (executeHT21)
     {
-        Vec3i c = circles[i];
-        Point center = Point(c[0], c[1]);
-        // circle center
-        circle(src, center, 1, Scalar(0, 100, 100), 3, LINE_AA);
-        // circle outline
-        int radius = c[2];
-        circle(src, center, radius, Scalar(255, 0, 255), 3, LINE_AA);
+        Mat gray;
+        cvtColor(src, gray, COLOR_BGR2GRAY);
+
+        medianBlur(gray, gray, 5);
+
+        vector<Vec3f> circles;
+        HoughCircles(
+            gray,             // inputArray
+            circles,          // outputArray
+            HOUGH_GRADIENT,   // method
+            dp,               // dp
+            minDist,          // minDist
+            param1,           // param1
+            param2,           // param2
+            minRadius,        // minRadius
+            maxRadius         // maxRadius
+        );
+
+        for (size_t i = 0; i < circles.size(); i++)
+        {
+            Vec3i c = circles[i];
+            Point center = Point(c[0], c[1]);
+            // circle center
+            circle(src, center, 1, Scalar(0, 100, 100), 3, LINE_AA);
+            // circle outline
+            int radius = c[2];
+            circle(src, center, radius, Scalar(255, 0, 255), 3, LINE_AA);
+        }
     }
-    // END.
 
     // RGB --> ARGB •ÏŠ·
     cv::Mat argb_img;
