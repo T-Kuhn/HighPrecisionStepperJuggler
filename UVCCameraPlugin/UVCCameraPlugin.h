@@ -9,6 +9,7 @@ extern "C" {
         unsigned char* data,
         bool executeHT21,
         bool executeMedianBlur,
+        int imgMode,            // 0: src, 1: red, 2: green, 3: blue, 4: normalgray, 5: customgray 
         double dp,
         double minDist,
         double param1,

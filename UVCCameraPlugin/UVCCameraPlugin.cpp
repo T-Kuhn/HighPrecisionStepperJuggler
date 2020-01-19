@@ -38,6 +38,7 @@ void getCameraTexture(
     unsigned char* data,
     bool executeHT21,
     bool executeMedianBlur,
+    int imgMode,            // 0: src, 1: red, 2: green, 3: blue, 4: normalgray, 5: customgray 
     double dp,
     double minDist,
     double param1,
@@ -57,13 +58,19 @@ void getCameraTexture(
     Mat g = Mat(src.rows, src.cols, CV_8U, bgr[1].data);
     Mat b = Mat(src.rows, src.cols, CV_8U, bgr[0].data);
 
-    Mat customGray = r - b;
-
     Mat gray;
-    if (executeHT21)
+
+    if (imgMode == 4)
     {
         cv::cvtColor(src, gray, COLOR_BGR2GRAY);
+    }
+    else
+    {
+        gray = r - b;
+    }
 
+    if (executeHT21)
+    {
         if (executeMedianBlur)
         {
             medianBlur(gray, gray, 5);
@@ -82,21 +89,42 @@ void getCameraTexture(
             maxRadius         // maxRadius
         );
 
-        for (size_t i = 0; i < circles.size(); i++)
+        if (imgMode == 0)
         {
-            Vec3i c = circles[i];
-            Point center = Point(c[0], c[1]);
-            int radius = c[2];
+            for (size_t i = 0; i < circles.size(); i++)
+            {
+                Vec3i c = circles[i];
+                Point center = Point(c[0], c[1]);
+                int radius = c[2];
 
-            circle(src, center, 1, Scalar(0, 100, 100), 3, LINE_AA);
-            circle(src, center, radius, Scalar(255, 0, 255), 3, LINE_AA);
+                circle(src, center, 1, Scalar(0, 100, 100), 3, LINE_AA);
+                circle(src, center, radius, Scalar(255, 0, 255), 3, LINE_AA);
+            }
         }
     }
 
-    // BGR --> RGBA
+    // 0: src, 1: red, 2: green, 3: blue, 4: normalgray, 5: customgray
     cv::Mat rgba;
-    //cv::cvtColor(src, rgba, cv::COLOR_BGR2RGBA);
-    cv::cvtColor(customGray, rgba, cv::COLOR_GRAY2RGBA);
+    if (imgMode == 0)
+    {
+        cv::cvtColor(src, rgba, cv::COLOR_BGR2RGBA);
+    }
+    else if (imgMode == 1)
+    {
+        cv::cvtColor(r, rgba, cv::COLOR_GRAY2RGBA);
+    }
+    else if (imgMode == 2)
+    {
+        cv::cvtColor(g, rgba, cv::COLOR_GRAY2RGBA);
+    }
+    else if (imgMode == 3)
+    {
+        cv::cvtColor(b, rgba, cv::COLOR_GRAY2RGBA);
+    }
+    else if (imgMode == 4 || imgMode == 5)
+    {
+        cv::cvtColor(gray, rgba, cv::COLOR_GRAY2RGBA);
+    }
     std::memcpy(data, rgba.data, rgba.total() * rgba.elemSize());
 }
 

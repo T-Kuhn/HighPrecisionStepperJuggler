@@ -18,5 +18,10 @@
 
         public static readonly LLMachineState OriginMachineState = new HLMachineState(0f, 0f, 0f).Translate();
         public static readonly LLMachineState ZeroMachineState = new LLMachineState(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
+
+        public enum ImgMode
+        {
+            Src, Red, Green, Blue, Normalgray, Customgray
+        }
     }
 }

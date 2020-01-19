@@ -2,7 +2,6 @@
 using System.Runtime.InteropServices;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -26,6 +25,7 @@ namespace HighPrecisionStepperJuggler
             IntPtr data,
             bool executeHT21,
             bool executeMedianBlur,
+            int imgMode,
             double dp,
             double minDist,
             double param1,
@@ -39,7 +39,8 @@ namespace HighPrecisionStepperJuggler
         private GCHandle _pixelsHandle;
         private IntPtr _pixelsPtr;
         private CameraProperties _defaultCameraProperties;
-        
+
+        [SerializeField] private Constants.ImgMode _imgMode;
         [SerializeField] private HT21Parameters _ht21Parameters;
         [SerializeField] private CameraProperties _cameraProperties;
         [SerializeField] private RenderTexture _renderTexture = null;
@@ -126,6 +127,7 @@ namespace HighPrecisionStepperJuggler
                 _pixelsPtr,
                 _ht21Parameters.ExecuteHT21,
                 _ht21Parameters.ExecuteMedianBlue,
+                (int)_imgMode,
                 _ht21Parameters.Dp,
                 _ht21Parameters.MinDist,
                 _ht21Parameters.Param1,
