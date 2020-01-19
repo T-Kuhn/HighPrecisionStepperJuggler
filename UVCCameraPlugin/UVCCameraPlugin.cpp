@@ -42,6 +42,7 @@ void getCameraTexture(
     void* camera,
     unsigned char* data,
     bool executeHT21,
+    bool executeMedianBlur,
     double dp,
     double minDist,
     double param1,
@@ -60,7 +61,10 @@ void getCameraTexture(
         Mat gray;
         cvtColor(src, gray, COLOR_BGR2GRAY);
 
-        medianBlur(gray, gray, 5);
+        if (executeMedianBlur)
+        {
+            medianBlur(gray, gray, 5);
+        }
 
         vector<Vec3f> circles;
         HoughCircles(

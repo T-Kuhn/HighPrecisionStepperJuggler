@@ -8,6 +8,7 @@ extern "C" {
         void* camera,
         unsigned char* data,
         bool executeHT21,
+        bool executeMedianBlur,
         double dp,
         double minDist,
         double param1,

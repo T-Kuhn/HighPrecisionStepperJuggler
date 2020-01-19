@@ -24,6 +24,7 @@ namespace HighPrecisionStepperJuggler
             IntPtr camera,
             IntPtr data,
             bool executeHT21,
+            bool executeMedianBlur,
             double dp,
             double minDist,
             double param1,
@@ -44,16 +45,18 @@ namespace HighPrecisionStepperJuggler
                 Height = 480,
                 Exposure = -7,
                 Gain = 2,
-                Saturation = 33
+                Saturation = 33,
+                Contrast = 0
             };
 
         [SerializeField] private HT21Parameters _ht21Parameters =
             new HT21Parameters()
             {
                 ExecuteHT21 = true,
+                ExecuteMedianBlue = false,
                 Dp = 1,
                 MinDist = 120,
-                Param1 = 100,
+                Param1 = 60,
                 Param2 = 30,
                 MinRadius = 20,
                 MaxRadius = 110
@@ -118,6 +121,7 @@ namespace HighPrecisionStepperJuggler
                 _camera,
                 _pixelsPtr,
                 _ht21Parameters.ExecuteHT21,
+                _ht21Parameters.ExecuteMedianBlue,
                 _ht21Parameters.Dp,
                 _ht21Parameters.MinDist,
                 _ht21Parameters.Param1,
@@ -156,6 +160,7 @@ namespace HighPrecisionStepperJuggler
     struct HT21Parameters
     {
         public bool ExecuteHT21;
+        public bool ExecuteMedianBlue;
         public double Dp;
         public double MinDist;
         public double Param1;
