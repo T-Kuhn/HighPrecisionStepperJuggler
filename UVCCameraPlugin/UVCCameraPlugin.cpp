@@ -33,6 +33,10 @@ void releaseCamera(void* camera)
     delete cap;
 }
 
+double center_x = 0.0;
+double center_y = 0.0;
+double radius = 0.0;
+
 void getCameraTexture(
     void* camera,
     unsigned char* data,
@@ -60,7 +64,7 @@ void getCameraTexture(
 
     Mat gray;
 
-    if (imgMode == 4)
+	if (imgMode == 4)
     {
         cv::cvtColor(src, gray, COLOR_BGR2GRAY);
     }
@@ -88,6 +92,20 @@ void getCameraTexture(
             minRadius,        // minRadius
             maxRadius         // maxRadius
         );
+
+        if(circles.size() > 0)
+        {
+            Vec3i c = circles[0];
+            center_x = (double)c[0];
+            center_y = (double)c[1];
+            radius = (double)c[2];
+        }
+        else
+        {
+            center_x = 0.0;
+            center_y = 0.0;
+            radius = 0.0;
+        }
 
         if (imgMode == 0)
         {
@@ -128,3 +146,17 @@ void getCameraTexture(
     std::memcpy(data, rgba.data, rgba.total() * rgba.elemSize());
 }
 
+double getCircleCenter_x()
+{
+    return center_x;
+}
+
+double getCircleCenter_y()
+{
+    return center_y;
+}
+
+double getCircleRadius()
+{
+    return radius;
+}

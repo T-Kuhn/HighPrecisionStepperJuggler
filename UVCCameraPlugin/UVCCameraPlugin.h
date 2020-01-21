@@ -17,4 +17,7 @@ extern "C" {
         int minRadius,
         int maxRadius
     );
+    __declspec(dllexport) double getCircleCenter_x();
+    __declspec(dllexport) double getCircleCenter_y();
+    __declspec(dllexport) double getCircleRadius();
 }

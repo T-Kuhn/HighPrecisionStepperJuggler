@@ -33,6 +33,15 @@ namespace HighPrecisionStepperJuggler
             int minRadius,
             int maxRadius);
 
+        [DllImport("UVCCameraPlugin")]
+        private static extern double getCircleCenter_x();
+
+        [DllImport("UVCCameraPlugin")]
+        private static extern double getCircleCenter_y();
+
+        [DllImport("UVCCameraPlugin")]
+        private static extern double getCircleRadius();
+
         private IntPtr _camera;
         private Texture2D _texture;
         private Color32[] _pixels;
@@ -44,6 +53,10 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private HT21Parameters _ht21Parameters;
         [SerializeField] private CameraProperties _cameraProperties;
         [SerializeField] private RenderTexture _renderTexture = null;
+        
+        // DEBUG
+        private String _radius = "";
+        private String _time = "";
 
         private void Awake()
         {
@@ -54,7 +67,7 @@ namespace HighPrecisionStepperJuggler
                 Exposure = -7,
                 Gain = 2,
                 Saturation = 55,
-                Contrast = 0
+                Contrast = 15
             };
             
             _ht21Parameters = new HT21Parameters()
@@ -65,8 +78,8 @@ namespace HighPrecisionStepperJuggler
                 MinDist = 120,
                 Param1 = 60,
                 Param2 = 30,
-                MinRadius = 20,
-                MaxRadius = 110
+                MinRadius = 15,
+                MaxRadius = 160
             };
         }
 
@@ -79,6 +92,7 @@ namespace HighPrecisionStepperJuggler
             setCameraProperty(_camera, (int) vcp.CAP_PROP_EXPOSURE, _defaultCameraProperties.Exposure);
             setCameraProperty(_camera, (int) vcp.CAP_PROP_GAIN, _defaultCameraProperties.Gain);
             setCameraProperty(_camera, (int) vcp.CAP_PROP_SATURATION, _defaultCameraProperties.Saturation);
+            setCameraProperty(_camera, (int) vcp.CAP_PROP_CONTRAST, _defaultCameraProperties.Contrast);
 
             GetCameraProperties();
 
@@ -136,6 +150,13 @@ namespace HighPrecisionStepperJuggler
                 _ht21Parameters.MaxRadius
             );
 
+            var center_x = getCircleCenter_x();
+            var center_y = getCircleCenter_y();
+            var radius = getCircleRadius();
+
+            _radius += radius.ToString("0.0") + "\n";
+            _time += Time.realtimeSinceStartup.ToString("0.000") + "\n";
+
             _texture.SetPixels32(_pixels);
             _texture.Apply();
 
@@ -144,6 +165,9 @@ namespace HighPrecisionStepperJuggler
 
         void OnApplicationQuit()
         {
+            Debug.Log(_radius);
+            Debug.Log(_time);
+            
             _pixelsHandle.Free();
             releaseCamera(_camera);
         }

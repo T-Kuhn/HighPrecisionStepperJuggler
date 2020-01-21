@@ -9,8 +9,12 @@
     [X] make OpenCVs houghTransform on/off settable
     [X] also make all other parameters settable
     [X] custom grayscale image made by subtracting blue from red channel and then using that red chennal as gray image.
-    [ ] add ability to show grayscale + image processing result in Unity
-[ ] play around with image processing in unity
+    [X] add ability to show grayscale + image processing result in Unity
+[X] test with plate on 2cm height
+[ ] get ball position and radius into unity
+[ ] record height from radius data.
+[ ] get real height from radius data.
+[ ] calculate real x and y position from pixel x and y position with height data.
 [ ] Write latex math file
 
 lower link length: 89
