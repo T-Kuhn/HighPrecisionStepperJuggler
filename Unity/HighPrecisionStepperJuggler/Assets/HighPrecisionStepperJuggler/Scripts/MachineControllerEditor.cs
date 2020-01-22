@@ -38,6 +38,21 @@ namespace HighPrecisionStepperJuggler
             {
                 script.SendSingleInstruction(new HLInstruction(0.04f, 0f, 0f, 0.3f));
             }
+            
+            if (GUILayout.Button("Go to height: 60mm", GUILayout.Width(200)))
+            {
+                script.SendSingleInstruction(new HLInstruction(0.06f, 0f, 0f, 0.3f));
+            }
+
+            if (GUILayout.Button("Go to height: 80mm", GUILayout.Width(200)))
+            {
+                script.SendSingleInstruction(new HLInstruction(0.08f, 0f, 0f, 0.3f));
+            }
+
+            if (GUILayout.Button("Go to height: 90mm", GUILayout.Width(200)))
+            {
+                script.SendSingleInstruction(new HLInstruction(0.09f, 0f, 0f, 0.3f));
+            }
 
             if (GUILayout.Button("Go to 10mm then 20mm", GUILayout.Width(200)))
             {

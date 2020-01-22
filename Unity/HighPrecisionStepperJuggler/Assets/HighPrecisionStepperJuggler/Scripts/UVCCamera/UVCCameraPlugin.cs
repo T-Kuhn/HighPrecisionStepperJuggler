@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
+using c = HighPrecisionStepperJuggler.Constants;
 using UnityEngine;
 
 namespace HighPrecisionStepperJuggler
@@ -54,16 +55,12 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private CameraProperties _cameraProperties;
         [SerializeField] private RenderTexture _renderTexture = null;
         
-        // DEBUG
-        private String _radius = "";
-        private String _time = "";
-
         private void Awake()
         {
             _defaultCameraProperties = new CameraProperties()
             {
-                Width = 640,
-                Height = 480,
+                Width = c.CameraResolutionWidth,
+                Height = c.CameraResolutionHeight,
                 Exposure = -7,
                 Gain = 2,
                 Saturation = 55,
@@ -154,8 +151,8 @@ namespace HighPrecisionStepperJuggler
             var center_y = getCircleCenter_y();
             var radius = getCircleRadius();
 
-            _radius += radius.ToString("0.0") + "\n";
-            _time += Time.realtimeSinceStartup.ToString("0.000") + "\n";
+            var distance = FOVCalculations.RadiusToDistance((float)radius);
+            Debug.Log(distance);
 
             _texture.SetPixels32(_pixels);
             _texture.Apply();
@@ -165,9 +162,6 @@ namespace HighPrecisionStepperJuggler
 
         void OnApplicationQuit()
         {
-            Debug.Log(_radius);
-            Debug.Log(_time);
-            
             _pixelsHandle.Free();
             releaseCamera(_camera);
         }

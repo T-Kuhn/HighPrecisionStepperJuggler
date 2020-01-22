@@ -13,9 +13,17 @@
         public const float L1 = 0.089f;
         public const float L2 = 0.080f;
 
+        public static float BallHeightAtOrigin = 78f;
+            
         public const float HeightOrigin = 0.0566f;
         public const int BaudRate = 115200;
 
+        public static float CameraFOVInDegrees = 61.6f;
+        public static float RadiusOfPingPongBall = 20.0f;
+
+        public static int CameraResolutionWidth = 640;
+        public static int CameraResolutionHeight = 480;
+             
         public static readonly LLMachineState OriginMachineState = new HLMachineState(0f, 0f, 0f).Translate();
         public static readonly LLMachineState ZeroMachineState = new LLMachineState(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
 
