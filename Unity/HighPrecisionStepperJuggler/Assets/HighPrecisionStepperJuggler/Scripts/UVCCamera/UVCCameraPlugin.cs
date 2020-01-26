@@ -56,7 +56,6 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private CameraProperties _cameraProperties;
         [SerializeField] private RenderTexture _renderTexture = null;
         [SerializeField] private MachineController _machineController;
-        [SerializeField] private bool _ballBouncing;
         
         private void Awake()
         {
@@ -134,7 +133,7 @@ namespace HighPrecisionStepperJuggler
             SetCameraProperty(vcp.CAP_PROP_SATURATION, _cameraProperties.Saturation);
         }
 
-        void Update()
+        public BallInformation UpdateImageProcessing()
         {
             getCameraTexture(
                 _camera,
@@ -150,26 +149,17 @@ namespace HighPrecisionStepperJuggler
                 _ht21Parameters.MaxRadius
             );
 
-            var center_x = getCircleCenter_x();
-            var center_y = getCircleCenter_y();
-            var radius = getCircleRadius();
-
-            var distance = FOVCalculations.RadiusToDistance((float) radius);
-            if (distance < 180f && _ballBouncing)
-            {
-                Debug.Log(distance);
-                var moveTime = 0.15f;
-                _machineController.SendInstructions(new List<HLInstruction>()
-                {
-                    new HLInstruction(0.04f, 0f, 0f, moveTime),
-                    new HLInstruction(0.01f, 0f, 0f, moveTime),
-                });
-            }
-
             _texture.SetPixels32(_pixels);
             _texture.Apply();
 
             Graphics.Blit(_texture, _renderTexture);
+            
+            return new BallInformation()
+            {
+                Radius = (float)getCircleRadius(), 
+                PositionX = (float)getCircleCenter_x(), 
+                PositionY = (float)getCircleCenter_y()
+            };
         }
 
         void OnApplicationQuit()
@@ -203,5 +193,12 @@ namespace HighPrecisionStepperJuggler
         public double Param2;
         public int MinRadius;
         public int MaxRadius;
+    }
+
+    public struct BallInformation
+    {
+        public float Radius;
+        public float PositionX;
+        public float PositionY;
     }
 }

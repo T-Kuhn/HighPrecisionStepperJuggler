@@ -32,7 +32,6 @@ namespace HighPrecisionStepperJuggler
         {
             if (!_isOpen) Open();
             
-            //Debug.Log(s);
             _port.Write(s);
         }
         
@@ -41,7 +40,6 @@ namespace HighPrecisionStepperJuggler
             while (_port.IsOpen)
             {
                 var str = _port.ReadLine();
-                Debug.Log(str);
             }
         }
 

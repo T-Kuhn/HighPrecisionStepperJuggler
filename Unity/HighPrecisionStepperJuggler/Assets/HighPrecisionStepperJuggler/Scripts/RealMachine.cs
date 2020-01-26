@@ -25,7 +25,6 @@ namespace HighPrecisionStepperJuggler
 
             builder.Append('\n');
 
-            Debug.Log("sending: " + builder.ToString());
             _serial.Send(builder.ToString());
         }
 
