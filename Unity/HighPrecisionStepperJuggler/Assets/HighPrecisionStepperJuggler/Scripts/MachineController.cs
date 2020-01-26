@@ -9,6 +9,9 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private InstructableMachine _realMachine = null;
         [SerializeField] private InstructableMachine _modelMachine = null;
 
+        private float _elapsedTime;
+        private float _totalMoveTime;
+
         private enum MachineEndPoint
         {
             Model,
@@ -23,9 +26,33 @@ namespace HighPrecisionStepperJuggler
             SendInstructions(new List<HLInstruction>() {instruction});
         }
 
+        private void Awake()
+        {
+            _elapsedTime = 0f;
+            _totalMoveTime = 0f;
+        }
+
+        private void Update()
+        {
+            _elapsedTime += Time.deltaTime;
+        }
+
         public void SendInstructions(List<HLInstruction> instructions)
         {
+            if (_elapsedTime < _totalMoveTime)
+            {
+                return;
+            }
+                
             var llInstructions = instructions.Select(instruction => instruction.Translate()).ToList();
+
+            _totalMoveTime = 0f;
+            _elapsedTime = 0f;
+            foreach (var instruction in instructions)
+            {
+                _totalMoveTime += instruction.MoveTime;
+            }
+            _totalMoveTime *= 1.1f;
             
             switch (_machineEndPoint)
             {

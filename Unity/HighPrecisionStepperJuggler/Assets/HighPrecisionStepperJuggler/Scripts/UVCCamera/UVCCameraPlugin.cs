@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using c = HighPrecisionStepperJuggler.Constants;
@@ -54,6 +55,8 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private HT21Parameters _ht21Parameters;
         [SerializeField] private CameraProperties _cameraProperties;
         [SerializeField] private RenderTexture _renderTexture = null;
+        [SerializeField] private MachineController _machineController;
+        [SerializeField] private bool _ballBouncing;
         
         private void Awake()
         {
@@ -138,7 +141,7 @@ namespace HighPrecisionStepperJuggler
                 _pixelsPtr,
                 _ht21Parameters.ExecuteHT21,
                 _ht21Parameters.ExecuteMedianBlue,
-                (int)_imgMode,
+                (int) _imgMode,
                 _ht21Parameters.Dp,
                 _ht21Parameters.MinDist,
                 _ht21Parameters.Param1,
@@ -151,8 +154,17 @@ namespace HighPrecisionStepperJuggler
             var center_y = getCircleCenter_y();
             var radius = getCircleRadius();
 
-            var distance = FOVCalculations.RadiusToDistance((float)radius);
-            Debug.Log(distance);
+            var distance = FOVCalculations.RadiusToDistance((float) radius);
+            if (distance < 180f && _ballBouncing)
+            {
+                Debug.Log(distance);
+                var moveTime = 0.15f;
+                _machineController.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.04f, 0f, 0f, moveTime),
+                    new HLInstruction(0.01f, 0f, 0f, moveTime),
+                });
+            }
 
             _texture.SetPixels32(_pixels);
             _texture.Apply();
