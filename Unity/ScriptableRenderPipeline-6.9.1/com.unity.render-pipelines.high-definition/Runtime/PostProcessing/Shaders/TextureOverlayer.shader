@@ -56,6 +56,7 @@
             #endif
 
             float2 uv = input.texcoord;
+            uv.x = 1 - uv.x;
             uv.y = 1 - uv.y;
             uv.x *= 3.0;
             uv.y *= 2.25;

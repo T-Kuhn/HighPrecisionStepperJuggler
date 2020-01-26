@@ -13,11 +13,12 @@ namespace HighPrecisionStepperJuggler
         private void Update()
         {
             var ballData = _cameraPlugin.UpdateImageProcessing();
-            
             var distance = FOVCalculations.RadiusToDistance(ballData.Radius);
+            var xDistance = FOVCalculations.XPixelPositionToXDistance(ballData.PositionX, distance);
+            Debug.Log(xDistance);
+            
             if (distance < 180f && _ballBouncing)
             {
-                Debug.Log(distance);
                 var moveTime = 0.15f;
                 _machineController.SendInstructions(new List<HLInstruction>()
                 {

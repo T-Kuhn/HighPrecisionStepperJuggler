@@ -157,8 +157,8 @@ namespace HighPrecisionStepperJuggler
             return new BallInformation()
             {
                 Radius = (float)getCircleRadius(), 
-                PositionX = (float)getCircleCenter_x(), 
-                PositionY = (float)getCircleCenter_y()
+                PositionX = -(float)getCircleCenter_x() + c.CameraResolutionWidth / 2f, 
+                PositionY = -(float)getCircleCenter_y() + c.CameraResolutionHeight / 2f
             };
         }
 
