@@ -14,7 +14,7 @@
         public const float L2 = 0.080f;
 
         public static float BallHeightAtOrigin = 78f;
-            
+        
         public const float HeightOrigin = 0.0566f;
         public const int BaudRate = 115200;
 
@@ -26,6 +26,11 @@
              
         public static readonly LLMachineState OriginMachineState = new HLMachineState(0f, 0f, 0f).Translate();
         public static readonly LLMachineState ZeroMachineState = new LLMachineState(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
+
+        public static float MaxTiltAngle = 0.05f;
+        public static float MinTiltAngle = -0.05f;
+        public static float MaxPlateHeight = 90f;
+        public static float MinPlateHeight = 0f;
 
         public enum ImgMode
         {

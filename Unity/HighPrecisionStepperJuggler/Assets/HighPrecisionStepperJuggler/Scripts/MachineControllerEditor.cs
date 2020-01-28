@@ -38,7 +38,7 @@ namespace HighPrecisionStepperJuggler
             {
                 script.SendSingleInstruction(new HLInstruction(0.04f, 0f, 0f, 0.3f));
             }
-            
+
             if (GUILayout.Button("Go to height: 60mm", GUILayout.Width(200)))
             {
                 script.SendSingleInstruction(new HLInstruction(0.06f, 0f, 0f, 0.3f));
@@ -162,6 +162,73 @@ namespace HighPrecisionStepperJuggler
                 {
                     new HLInstruction(0.04f, 0f, 0f, moveTime),
                     new HLInstruction(0.01f, 0f, 0f, moveTime)
+                });
+            }
+
+            if (GUILayout.Button("tilt in 2 dirs, 20mm", GUILayout.Width(200)))
+            {
+                var moveTime = 0.1f;
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, 0f, 0f, moveTime),
+                    new HLInstruction(0.02f, 0.05f, 0.05f, moveTime)
+                });
+            }
+
+            if (GUILayout.Button("tilt in 2 dirs rev., 20mm", GUILayout.Width(200)))
+            {
+                var moveTime = 0.1f;
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, 0f, 0f, moveTime),
+                    new HLInstruction(0.02f, -0.05f, -0.05f, moveTime)
+                });
+            }
+
+            if (GUILayout.Button("tilt and up. from 20mm", GUILayout.Width(200)))
+            {
+                var moveTime = 0.15f;
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, 0.05f, 0.05f, moveTime / 3f),
+                    new HLInstruction(0.05f, 0.05f, 0.05f, moveTime),
+                    new HLInstruction(0.02f, 0f, 0f, moveTime)
+                });
+            }
+
+            if (GUILayout.Button("20mm, 0.05, 0.0", GUILayout.Width(200)))
+            {
+                var moveTime = 0.15f;
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, 0.05f, 0.00f, moveTime),
+                });
+            }
+
+            if (GUILayout.Button("20mm, -0.05, 0.0", GUILayout.Width(200)))
+            {
+                var moveTime = 0.15f;
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, -0.05f, 0.00f, moveTime),
+                });
+            }
+
+            if (GUILayout.Button("20mm, 0.0, 0.05", GUILayout.Width(200)))
+            {
+                var moveTime = 0.15f;
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, 0.0f, 0.05f, moveTime),
+                });
+            }
+
+            if (GUILayout.Button("20mm, 0.0, -0.05", GUILayout.Width(200)))
+            {
+                var moveTime = 0.15f;
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, 0.0f, -0.05f, moveTime),
                 });
             }
         }
