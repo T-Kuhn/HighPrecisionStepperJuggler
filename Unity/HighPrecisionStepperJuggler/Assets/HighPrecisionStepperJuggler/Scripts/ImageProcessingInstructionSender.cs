@@ -14,8 +14,8 @@ namespace HighPrecisionStepperJuggler
         {
             var ballData = _cameraPlugin.UpdateImageProcessing();
             var distance = FOVCalculations.RadiusToDistance(ballData.Radius);
-            var xDistance = FOVCalculations.XPixelPositionToXDistance(ballData.PositionX, distance);
-            Debug.Log(xDistance);
+            var xDistance = FOVCalculations.PixelPositionToDistanceFromCenter(ballData.PositionX, distance);
+            var yDistance = FOVCalculations.PixelPositionToDistanceFromCenter(ballData.PositionY, distance);
             
             if (distance < 180f && _ballBouncing)
             {

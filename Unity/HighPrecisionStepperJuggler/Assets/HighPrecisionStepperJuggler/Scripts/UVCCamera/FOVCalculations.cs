@@ -14,13 +14,13 @@ namespace HighPrecisionStepperJuggler
                    c.BallHeightAtOrigin;
         }
 
-        // Returns distance from center of place in the x direction in [mm]
-        public static float XPixelPositionToXDistance(float xPixelPosition, float distanceFromPlate)
+        // Returns distance from center of plate in either X or Y direction (depending whether the provided)
+        // pixelPosition is in the X or Y direction[mm]
+        public static float PixelPositionToDistanceFromCenter(float pixelPosition, float distanceFromPlate)
         {
-            // NOTE: XDistance is zero at center of plate
+            // NOTE: distance is zero at center of plate
             var distanceFromCamera = distanceFromPlate + c.BallHeightAtOrigin;
-            var phi = c.CameraFOVInDegrees / 2f * xPixelPosition / (c.CameraResolutionWidth / 2f);
-            Debug.Log("phi: " + phi);
+            var phi = c.CameraFOVInDegrees / 2f * pixelPosition / (c.CameraResolutionWidth / 2f);
             return Mathf.Tan(phi * Mathf.Deg2Rad) * distanceFromCamera;
         }
     }
