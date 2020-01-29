@@ -12,6 +12,8 @@ namespace HighPrecisionStepperJuggler
         private float _elapsedTime;
         private float _totalMoveTime;
 
+        public bool IsReadyForNextInstruction => _elapsedTime > _totalMoveTime;
+
         private enum MachineEndPoint
         {
             Model,

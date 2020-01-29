@@ -31,6 +31,10 @@
         public static float MinTiltAngle = -0.05f;
         public static float MaxPlateHeight = 90f;
         public static float MinPlateHeight = 0f;
+        
+        // PD Controller
+        public static float k_p = 0.001f;
+        public static float k_d = 0.0001f;
 
         public enum ImgMode
         {
