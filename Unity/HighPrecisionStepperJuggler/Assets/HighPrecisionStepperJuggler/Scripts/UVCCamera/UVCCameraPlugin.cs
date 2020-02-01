@@ -77,7 +77,7 @@ namespace HighPrecisionStepperJuggler
                 MinDist = 120,
                 Param1 = 60,
                 Param2 = 30,
-                MinRadius = 15,
+                MinRadius = 12,
                 MaxRadius = 160
             };
         }

@@ -33,8 +33,8 @@
         public static float MinPlateHeight = 0f;
         
         // PD Controller
-        public static float k_p = 0.001f;
-        public static float k_d = 0.0001f;
+        public static float k_p = 0.0025f;
+        public static float k_d = 0.00075f;
 
         public enum ImgMode
         {
