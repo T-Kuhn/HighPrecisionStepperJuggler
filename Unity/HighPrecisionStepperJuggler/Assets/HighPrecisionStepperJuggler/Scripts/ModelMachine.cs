@@ -11,7 +11,7 @@ namespace HighPrecisionStepperJuggler
         {
             GoToOrigin();
         }
-        
+
         protected override void SendInstructions(List<LLInstruction> diffInstructions)
         {
             _modelMachineView.AddToOriginStateAnimated(diffInstructions);
@@ -19,7 +19,8 @@ namespace HighPrecisionStepperJuggler
 
         public override void GoToOrigin()
         {
-            _modelMachineView.AddToOriginState(Constants.ZeroMachineState);
+            _modelMachineView.AddToOriginStateAnimated(
+                new List<LLInstruction>() {new LLInstruction(Constants.ZeroMachineState, 1f)});
         }
     }
 }

@@ -12,18 +12,24 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private MotorizedArm _motorizedArm4 = null;
 
         private Stack<LLInstruction> _instructionStack = new Stack<LLInstruction>();
-        
-        private enum MachineState {Idle, DoingControlledMoves}
+
+        private enum MachineState
+        {
+            Idle,
+            DoingControlledMoves
+        }
+
         private MachineState _machineState = MachineState.Idle;
         private float _animationTime;
         private LLInstruction _currentInstruction;
+        private LLMachineState _lastTargetMachineState;
 
         public void AddToOriginState(LLMachineState diffState)
         {
             // NOTE: We are using setting the state via diffState because the real machine will only
             //       work with diffStates and the ModelMachine has to behave exactly the same way as the real machine.
             var state = Constants.OriginMachineState + diffState;
-            
+
             _motorizedArm1.UpdateState(state.Motor1Rotation, state.Arm1Joint2Rotation);
             _motorizedArm2.UpdateState(state.Motor2Rotation, state.Arm2Joint2Rotation);
             _motorizedArm3.UpdateState(state.Motor3Rotation, state.Arm3Joint2Rotation);
@@ -33,7 +39,7 @@ namespace HighPrecisionStepperJuggler
         public void AddToOriginStateAnimated(List<LLInstruction> diffInstructions)
         {
             _instructionStack.Clear();
-            
+
             diffInstructions.Reverse();
             foreach (var diffInstruction in diffInstructions)
             {
@@ -48,20 +54,29 @@ namespace HighPrecisionStepperJuggler
                 case MachineState.Idle:
                     if (_instructionStack.Count > 0)
                     {
+                        _lastTargetMachineState = _currentInstruction.TargetMachineState;
                         _currentInstruction = _instructionStack.Pop();
                         _animationTime = 0f;
                         _machineState = MachineState.DoingControlledMoves;
                     }
+
                     break;
-                
+
                 case MachineState.DoingControlledMoves:
                     _animationTime += Time.deltaTime;
-                    AddToOriginState(_currentInstruction.TargetMachineState);
-                    
+
+                    var normalizedAnimationValue = _animationTime / _currentInstruction.MoveTime;
+                    var animatedMachineState = _lastTargetMachineState.LerpTowards(
+                        _currentInstruction.TargetMachineState,
+                        (1 + Mathf.Cos((1 - normalizedAnimationValue) * Mathf.PI)) / 2f);
+
+                    AddToOriginState(animatedMachineState);
+
                     if (_animationTime > _currentInstruction.MoveTime)
                     {
                         _machineState = MachineState.Idle;
                     }
+
                     break;
             }
         }

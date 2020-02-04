@@ -2,6 +2,7 @@
 [ ] make model playback multiple instructions in order
     [X] playback in order
     [ ] add animation
+    
 [X] image processing
     [X] find a good way to show the image in unity
 [X] find a good way to set camera parameters in runtime mode.
@@ -11,11 +12,18 @@
     [X] custom grayscale image made by subtracting blue from red channel and then using that red chennal as gray image.
     [X] add ability to show grayscale + image processing result in Unity
 [X] test with plate on 2cm height
-[ ] get ball position and radius into unity
-[ ] record height from radius data.
-[ ] get real height from radius data.
-[ ] calculate real x and y position from pixel x and y position with height data.
+[X] get ball position and radius into unity
+[X] record height from radius data.
+[X] get real height from radius data.
+[X] calculate real x and y position from pixel x and y position with height data.
 [ ] Write latex math file
+[ ] play around and figure out some interesting moves
+    [ ] staircase bouncing
+    [ ] hard hit when centering is good
+        [ ] maybe still plate after hard hit
+    [ ] moving PID center with high plate and rolling ball
+[ ] refactor ImageProcessingInstructionSender (add new classes and split responsibility)
+
 
 lower link length: 89
 upper link length: 80
