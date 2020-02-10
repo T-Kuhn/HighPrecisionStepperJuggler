@@ -10,10 +10,96 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private MachineController _machineController;
 
         private BallData _ballData = new BallData();
+        private int _currentStrategyIndex;
+
+        private List<IBallControlStrategy> _ballControlStrategies = new List<IBallControlStrategy>();
 
         private void Start()
         {
-            // TODO: add different IBallControlStrategies.
+            _ballControlStrategies.Add(
+                // First strategy:
+                new BallControlStrategy((ballData, machineController, instructionCount) =>
+                {
+                    if (instructionCount == 0)
+                    {
+                        var moveTime = 0.1f;
+                        _machineController.SendInstructions(new List<HLInstruction>()
+                        {
+                            new HLInstruction(0.05f, 0f, 0f, moveTime),
+                        });
+                        _ballData.ResetVelocityAccumulation();
+                        return true;
+                    }
+
+                    if (_ballData.CurrentPositionVector.z < 150f)
+                    {
+                        // distance away from plate:
+                        var p_x = -_ballData.CurrentPositionVector.x * c.k_p;
+                        var p_y = _ballData.CurrentPositionVector.y * c.k_p;
+
+                        // mean velocity of ball:
+                        var velocityVector = _ballData.GetVelocityVector();
+                        var d_x = -velocityVector.x * c.k_d;
+                        var d_y = velocityVector.y * c.k_d;
+
+                        var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
+                        var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
+
+                        var moveTime = 0.1f;
+                        _machineController.SendInstructions(new List<HLInstruction>()
+                        {
+                            new HLInstruction(0.06f, xCorrection, yCorrection, moveTime),
+                            new HLInstruction(0.05f, 0f, 0f, moveTime),
+                        });
+
+                        _ballData.ResetVelocityAccumulation();
+                        return true;
+                    }
+
+                    return false;
+                }, 3));
+            _ballControlStrategies.Add(
+                // Second strategy:
+                new BallControlStrategy((ballData, machineController, instructionCount) =>
+                {
+                    if (instructionCount == 0)
+                    {
+                        var moveTime = 0.1f;
+                        _machineController.SendInstructions(new List<HLInstruction>()
+                        {
+                            new HLInstruction(0.04f, 0f, 0f, moveTime),
+                        });
+                        _ballData.ResetVelocityAccumulation();
+                        return true;
+                    }
+                    
+                    if(_ballData.CurrentPositionVector.z < 140f)
+                    {
+                        // distance away from plate:
+                        var p_x = -_ballData.CurrentPositionVector.x * c.k_p;
+                        var p_y = _ballData.CurrentPositionVector.y * c.k_p;
+
+                        // mean velocity of ball:
+                        var velocityVector = _ballData.GetVelocityVector();
+                        var d_x = -velocityVector.x * c.k_d;
+                        var d_y = velocityVector.y * c.k_d;
+
+                        var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
+                        var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
+
+                        var moveTime = 0.1f;
+                        _machineController.SendInstructions(new List<HLInstruction>()
+                        {
+                            new HLInstruction(0.05f, xCorrection, yCorrection, moveTime),
+                            new HLInstruction(0.04f, 0f, 0f, moveTime),
+                        });
+
+                        _ballData.ResetVelocityAccumulation();
+                        return true;
+                    }
+
+                    return false;
+                }, 3));
         }
 
         private void Update()
@@ -36,32 +122,19 @@ namespace HighPrecisionStepperJuggler
 
             if (_machineController.IsReadyForNextInstruction)
             {
-                // TODO: put all this into a strategy:
-                // the strategy takes ball data as input
-                // and sends might return a instruction to be sent.
-
-                if (_ballData.CurrentPositionVector.z < 150f)
+                var nextStrategyRequested = 
+                    _ballControlStrategies[_currentStrategyIndex].Execute(_ballData, _machineController);
+                
+                if (nextStrategyRequested)
                 {
-                    // distance away from plate:
-                    var p_x = -_ballData.CurrentPositionVector.x * c.k_p;
-                    var p_y = _ballData.CurrentPositionVector.y * c.k_p;
-                    
-                    // mean velocity of ball:
-                    var velocityVector = _ballData.GetVelocityVector();
-                    var d_x = -velocityVector.x * c.k_d;
-                    var d_y = velocityVector.y * c.k_d;
+                    _ballControlStrategies[_currentStrategyIndex].Reset();
+                    Debug.Log("nextStratRequested.");
 
-                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
-
-                    var moveTime = 0.1f;
-                    _machineController.SendInstructions(new List<HLInstruction>()
+                    _currentStrategyIndex++;
+                    if (_currentStrategyIndex >= _ballControlStrategies.Count)
                     {
-                        new HLInstruction(0.06f, xCorrection, yCorrection, moveTime),
-                        new HLInstruction(0.05f, 0f, 0f, moveTime),
-                    });
-
-                    _ballData.ResetVelocityAccumulation();
+                        _currentStrategyIndex = 0;
+                    }
                 }
             }
         }
