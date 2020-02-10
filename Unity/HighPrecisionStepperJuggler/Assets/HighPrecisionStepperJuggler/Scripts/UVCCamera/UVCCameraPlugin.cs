@@ -133,7 +133,7 @@ namespace HighPrecisionStepperJuggler
             SetCameraProperty(vcp.CAP_PROP_SATURATION, _cameraProperties.Saturation);
         }
 
-        public BallInformation UpdateImageProcessing()
+        public BallRadiusAndPosition UpdateImageProcessing()
         {
             getCameraTexture(
                 _camera,
@@ -154,7 +154,7 @@ namespace HighPrecisionStepperJuggler
 
             Graphics.Blit(_texture, _renderTexture);
             
-            return new BallInformation()
+            return new BallRadiusAndPosition()
             {
                 Radius = (float)getCircleRadius(), 
                 PositionX = -(float)getCircleCenter_x() + c.CameraResolutionWidth / 2f, 
@@ -195,7 +195,7 @@ namespace HighPrecisionStepperJuggler
         public int MaxRadius;
     }
 
-    public struct BallInformation
+    public struct BallRadiusAndPosition
     {
         public float Radius;
         public float PositionX;

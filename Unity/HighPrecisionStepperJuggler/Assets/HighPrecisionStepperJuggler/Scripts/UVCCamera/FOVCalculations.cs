@@ -5,7 +5,7 @@ namespace HighPrecisionStepperJuggler
 {
     public static class FOVCalculations
     {
-        // Returns distance from plate in [mm]
+        // Returns distance from plate in [mm] (at origin position)
         public static float RadiusToDistance(float radius)
         {
             // NOTE: Distance (height) from plate is zero at machines origin position
