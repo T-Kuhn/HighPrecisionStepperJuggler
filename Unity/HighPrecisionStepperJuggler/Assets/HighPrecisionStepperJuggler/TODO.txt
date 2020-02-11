@@ -4,10 +4,10 @@
     [ ] hard hit when centering is good
         [ ] maybe still plate after hard hit
     [ ] moving PID center with high plate and rolling ball
-[ ] refactor ImageProcessingInstructionSender (add new classes and split responsibility)
-    [ ] add PID class.
-    [ ] add BallData class.
-    [ ] add interface to make multiple moveControllingStrategies possible.
+[X] refactor ImageProcessingInstructionSender (add new classes and split responsibility)
+    [X] add BallData class.
+    [X] add interface to make multiple moveControllingStrategies possible.
+[ ] add start button
 [ ] add ping pong ball 3D position data visualization.
 [ ] Write latex math file
 
@@ -17,6 +17,7 @@ lower link length: 89
 upper link length: 80
 upper most link length: 35 + 6.5 + 8 = 49.5 (from plate edge to joint) 
 upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
+
 
 memo:
 

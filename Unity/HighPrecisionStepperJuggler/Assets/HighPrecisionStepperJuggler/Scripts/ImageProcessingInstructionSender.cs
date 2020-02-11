@@ -11,6 +11,7 @@ namespace HighPrecisionStepperJuggler
 
         private BallData _ballData = new BallData();
         private int _currentStrategyIndex;
+        [SerializeField] private bool _executeControlStrategies;
 
         private List<IBallControlStrategy> _ballControlStrategies = new List<IBallControlStrategy>();
 
@@ -113,6 +114,16 @@ namespace HighPrecisionStepperJuggler
             var ballRadiusAndPosition = _cameraPlugin.UpdateImageProcessing();
             var height = FOVCalculations.RadiusToDistance(ballRadiusAndPosition.Radius);
 
+            if (!_executeControlStrategies)
+            {
+                foreach (var strategy in _ballControlStrategies)
+                {
+                    strategy.Reset();
+                }
+
+                _currentStrategyIndex = 0;
+            }
+
             if (height >= float.MaxValue)
             {
                 // couldn't find ball in image
@@ -126,7 +137,7 @@ namespace HighPrecisionStepperJuggler
                     height),
                 _machineController.IsReadyForNextInstruction);
 
-            if (_machineController.IsReadyForNextInstruction)
+            if (_machineController.IsReadyForNextInstruction && _executeControlStrategies)
             {
                 var nextStrategyRequested =
                     _ballControlStrategies[_currentStrategyIndex].Execute(_ballData, _machineController);
