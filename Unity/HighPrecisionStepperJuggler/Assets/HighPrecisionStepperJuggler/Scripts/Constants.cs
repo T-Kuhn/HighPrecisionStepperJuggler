@@ -36,6 +36,8 @@
         public static float k_p = 0.0025f;
         public static float k_d = 0.00075f;
 
+        public static float BallVisualizationFadeOutTime = 0.2f;
+
         public enum ImgMode
         {
             Src, Red, Green, Blue, Normalgray, Customgray

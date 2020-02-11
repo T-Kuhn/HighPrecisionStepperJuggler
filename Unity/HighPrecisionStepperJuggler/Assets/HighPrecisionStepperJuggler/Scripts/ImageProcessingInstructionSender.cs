@@ -8,6 +8,7 @@ namespace HighPrecisionStepperJuggler
     {
         [SerializeField] private UVCCameraPlugin _cameraPlugin;
         [SerializeField] private MachineController _machineController;
+        [SerializeField] private BallPositionVisualizer _ballPositionVisualizer;
 
         private BallData _ballData = new BallData();
         private int _currentStrategyIndex;
@@ -25,6 +26,8 @@ namespace HighPrecisionStepperJuggler
                     {
                         new HLInstruction(0.01f, 0f, 0f, 0.5f),
                         new HLInstruction(0.05f, 0f, 0f, 0.5f),
+                        new HLInstruction(0.02f, 0f, 0f, moveTime),
+                        new HLInstruction(0.05f, 0f, 0f, moveTime),
                         new HLInstruction(0.02f, 0f, 0f, moveTime),
                         new HLInstruction(0.05f, 0f, 0f, moveTime),
                         new HLInstruction(0.02f, 0f, 0f, moveTime),
@@ -136,6 +139,8 @@ namespace HighPrecisionStepperJuggler
                     FOVCalculations.PixelPositionToDistanceFromCenter(ballRadiusAndPosition.PositionY, height),
                     height),
                 _machineController.IsReadyForNextInstruction);
+            
+            _ballPositionVisualizer.SpawnPositionPoint(_ballData.CurrentUnityPositionVector);
 
             if (_machineController.IsReadyForNextInstruction && _executeControlStrategies)
             {

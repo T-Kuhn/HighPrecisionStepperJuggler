@@ -13,6 +13,7 @@ namespace HighPrecisionStepperJuggler
         private List<float> _yVelocities = new List<float>();
 
         public Vector3 CurrentPositionVector => _currentPositionVector;
+        public Vector3 CurrentUnityPositionVector => new Vector3(_currentPositionVector.x, _currentPositionVector.z + Constants.BallHeightAtOrigin, _currentPositionVector.y) / 1000f;
         private Vector3 _currentPositionVector = Vector3.zero;
 
         public BallData()
