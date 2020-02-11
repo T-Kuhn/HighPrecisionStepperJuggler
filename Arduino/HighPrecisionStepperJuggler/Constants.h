@@ -36,7 +36,7 @@
 // we want to figure out what setting will allow us to do 1 full rev the fastest.
 
 #define PULSES_TO_MOVE 4000
-#define PULSES_PER_REV 66304 // 12800 * 5.18 (gear ratio 5.18:1)
+#define PULSES_PER_REV 132608 // 25600 * 5.18 (gear ratio 5.18:1)
 #define MOVE_DURATION 1.0f
 #define PAUSE_DURATION 0.2f
 

@@ -21,47 +21,47 @@ namespace HighPrecisionStepperJuggler
 
             if (GUILayout.Button("Go to height: 10mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.01f, 0f, 0f, 0.3f));
+                script.SendSingleInstruction(new HLInstruction(0.01f, 0f, 0f, 0.15f));
             }
 
             if (GUILayout.Button("Go to height: 20mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.02f, 0f, 0f, 0.3f));
+                script.SendSingleInstruction(new HLInstruction(0.02f, 0f, 0f, 0.15f));
             }
 
             if (GUILayout.Button("Go to height: 30mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.03f, 0f, 0f, 0.3f));
+                script.SendSingleInstruction(new HLInstruction(0.03f, 0f, 0f, 0.15f));
             }
 
             if (GUILayout.Button("Go to height: 40mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.04f, 0f, 0f, 0.3f));
+                script.SendSingleInstruction(new HLInstruction(0.04f, 0f, 0f, 0.15f));
             }
-            
+
             if (GUILayout.Button("Go to height: 50mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.05f, 0f, 0f, 0.3f));
+                script.SendSingleInstruction(new HLInstruction(0.05f, 0f, 0f, 0.15f));
             }
 
             if (GUILayout.Button("Go to height: 60mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.06f, 0f, 0f, 0.3f));
+                script.SendSingleInstruction(new HLInstruction(0.06f, 0f, 0f, 0.15f));
             }
-            
+
             if (GUILayout.Button("Go to height: 70mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.07f, 0f, 0f, 0.3f));
+                script.SendSingleInstruction(new HLInstruction(0.07f, 0f, 0f, 0.15f));
             }
 
             if (GUILayout.Button("Go to height: 80mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.08f, 0f, 0f, 0.3f));
+                script.SendSingleInstruction(new HLInstruction(0.08f, 0f, 0f, 0.15f));
             }
 
             if (GUILayout.Button("Go to height: 90mm", GUILayout.Width(200)))
             {
-                script.SendSingleInstruction(new HLInstruction(0.09f, 0f, 0f, 0.3f));
+                script.SendSingleInstruction(new HLInstruction(0.09f, 0f, 0f, 0.15f));
             }
 
             if (GUILayout.Button("Go to 10mm then 20mm", GUILayout.Width(200)))
@@ -239,6 +239,16 @@ namespace HighPrecisionStepperJuggler
                 script.SendInstructions(new List<HLInstruction>()
                 {
                     new HLInstruction(0.02f, 0.0f, -0.05f, moveTime),
+                });
+            }
+
+            if (GUILayout.Button("startup Test", GUILayout.Width(200)))
+            {
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.03f, 0.0f, 0.0f, 0.5f),
+                    new HLInstruction(0.01f, 0.0f, 0.0f, 0.075f),
+                    new HLInstruction(0.08f, 0.0f, 0.0f, 0.2f),
                 });
             }
         }

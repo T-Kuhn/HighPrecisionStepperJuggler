@@ -17,20 +17,27 @@ namespace HighPrecisionStepperJuggler
         private void Start()
         {
             _ballControlStrategies.Add(
-                // First strategy:
                 new BallControlStrategy((ballData, machineController, instructionCount) =>
                 {
-                    if (instructionCount == 0)
+                    var moveTime = 0.1f;
+                    _machineController.SendInstructions(new List<HLInstruction>()
                     {
-                        var moveTime = 0.1f;
-                        _machineController.SendInstructions(new List<HLInstruction>()
-                        {
-                            new HLInstruction(0.05f, 0f, 0f, moveTime),
-                        });
-                        _ballData.ResetVelocityAccumulation();
-                        return true;
-                    }
+                        new HLInstruction(0.01f, 0f, 0f, 0.5f),
+                        new HLInstruction(0.05f, 0f, 0f, 0.5f),
+                        new HLInstruction(0.02f, 0f, 0f, moveTime),
+                        new HLInstruction(0.05f, 0f, 0f, moveTime),
+                        new HLInstruction(0.02f, 0f, 0f, moveTime),
+                        new HLInstruction(0.05f, 0f, 0f, moveTime),
+                        new HLInstruction(0.02f, 0f, 0f, moveTime),
+                        new HLInstruction(0.05f, 0f, 0f, moveTime),
+                    });
+                    _ballData.ResetVelocityAccumulation();
+                    return true;
+                }, 1));
 
+            _ballControlStrategies.Add(
+                new BallControlStrategy((ballData, machineController, instructionCount) =>
+                {
                     if (_ballData.CurrentPositionVector.z < 150f)
                     {
                         // distance away from plate:
@@ -57,9 +64,8 @@ namespace HighPrecisionStepperJuggler
                     }
 
                     return false;
-                }, 3));
+                }, 100));
             _ballControlStrategies.Add(
-                // Second strategy:
                 new BallControlStrategy((ballData, machineController, instructionCount) =>
                 {
                     if (instructionCount == 0)
@@ -72,8 +78,8 @@ namespace HighPrecisionStepperJuggler
                         _ballData.ResetVelocityAccumulation();
                         return true;
                     }
-                    
-                    if(_ballData.CurrentPositionVector.z < 140f)
+
+                    if (_ballData.CurrentPositionVector.z < 140f)
                     {
                         // distance away from plate:
                         var p_x = -_ballData.CurrentPositionVector.x * c.k_p;
@@ -99,7 +105,7 @@ namespace HighPrecisionStepperJuggler
                     }
 
                     return false;
-                }, 3));
+                }, 100));
         }
 
         private void Update()
@@ -122,18 +128,16 @@ namespace HighPrecisionStepperJuggler
 
             if (_machineController.IsReadyForNextInstruction)
             {
-                var nextStrategyRequested = 
+                var nextStrategyRequested =
                     _ballControlStrategies[_currentStrategyIndex].Execute(_ballData, _machineController);
-                
+
                 if (nextStrategyRequested)
                 {
                     _ballControlStrategies[_currentStrategyIndex].Reset();
-                    Debug.Log("nextStratRequested.");
 
-                    _currentStrategyIndex++;
-                    if (_currentStrategyIndex >= _ballControlStrategies.Count)
+                    if (_currentStrategyIndex < _ballControlStrategies.Count - 1)
                     {
-                        _currentStrategyIndex = 0;
+                        _currentStrategyIndex++;
                     }
                 }
             }
