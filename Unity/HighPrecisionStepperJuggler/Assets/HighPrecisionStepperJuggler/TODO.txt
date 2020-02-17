@@ -4,14 +4,15 @@
     [ ] hard hit when centering is good
         [ ] maybe still plate after hard hit
     [ ] moving PID center with high plate and rolling ball
+    [ ] machine look at ball mode.
 [X] refactor ImageProcessingInstructionSender (add new classes and split responsibility)
     [X] add BallData class.
     [X] add interface to make multiple moveControllingStrategies possible.
 [X] add start button
-[ ] add ping pong ball 3D position data visualization.
-    [ ] make ball visualization fade out and disappear.
-    [ ] make it appear at the correct position.
-        [ ] rotate & offset
+[X] add ping pong ball 3D position data visualization.
+    [X] make ball visualization fade out and disappear.
+    [X] make it appear at the correct position.
+        [X] rotate & offset
 [ ] Write latex math file
 
 lower link length: 89
