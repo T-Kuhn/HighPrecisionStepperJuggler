@@ -18,10 +18,73 @@ namespace HighPrecisionStepperJuggler
 
         private void Start()
         {
-            _ballControlStrategies.Add(BallControlStrategyFactory.GoHighPlate());
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancing(1000));
-            _ballControlStrategies.Add(BallControlStrategyFactory.CreateGetBouncing());
-            _ballControlStrategies.Add(BallControlStrategyFactory.CreateContinuousBouncing(100));
+            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
+            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.05f));
+            for (int i = 0; i < 5; i++)
+            {
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
+                _ballControlStrategies.Add(BallControlStrategyFactory.BalancingAtHeight(0.05f, 10));
+            }
+
+            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
+            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.08f));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(0f, 0f), 15));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateCircleBalancing(40f, 100));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(0f, 0f), 20));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(-40f, 0f), 20));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(40f, 0f), 20));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(0, 40f), 20));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(0, -40f), 20));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(-35, -35f), 20));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(35, 35f), 20));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(35, -35f), 20));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(-35, 35f), 20));
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(0f, 0f), 20));
+            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
+            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.05f));
+
+            for (int i = 0; i < 5; i++)
+            {
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
+            }
+
+            _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(50));
+
+            for (int i = 0; i < 5; i++)
+            {
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
+                _ballControlStrategies.Add(BallControlStrategyFactory.BalancingAtHeight(0.05f, 10));
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
+                _ballControlStrategies.Add(BallControlStrategyFactory.BalancingAtHeight(0.05f, 10));
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
+                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
+            }
+            
+            _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
         }
 
         private void Update()

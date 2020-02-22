@@ -1,8 +1,7 @@
 
 [ ] play around and figure out some interesting moves
-    [ ] hard hit when centering is good
-        [ ] maybe still plate after hard hit
-    [ ] moving PID center with high plate and rolling ball
+    [X] hard hit
+    [ ] moving PID center
     [ ] machine look at ball mode.
     [ ] cool moving around startup thingy.
 [X] refactor ImageProcessingInstructionSender (add new classes and split responsibility)
