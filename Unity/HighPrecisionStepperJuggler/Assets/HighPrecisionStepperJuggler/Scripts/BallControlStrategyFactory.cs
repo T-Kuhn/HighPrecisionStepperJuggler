@@ -6,7 +6,7 @@ namespace HighPrecisionStepperJuggler
 {
     public static class BallControlStrategyFactory
     {
-        public static IBallControlStrategy CreateGetBouncingBCS()
+        public static IBallControlStrategy CreateGetBouncing()
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
@@ -29,7 +29,7 @@ namespace HighPrecisionStepperJuggler
             }, 1);
         }
 
-        public static IBallControlStrategy CreateContinuousBouncingBCS(int duration)
+        public static IBallControlStrategy CreateContinuousBouncing(int duration)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
@@ -52,6 +52,52 @@ namespace HighPrecisionStepperJuggler
                     {
                         new HLInstruction(0.06f, xCorrection, yCorrection, moveTime),
                         new HLInstruction(0.05f, 0f, 0f, moveTime),
+                    });
+
+                    ballData.ResetVelocityAccumulation();
+                    return true;
+                }
+
+                return false;
+            }, duration);
+        }
+
+        public static IBallControlStrategy GoHighPlate()
+        {
+            return new BallControlStrategy((ballData, machineController, instructionCount) =>
+            {
+                var moveTime = 0.1f;
+                machineController.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.08f, 0f, 0f, 0.5f),
+                });
+                ballData.ResetVelocityAccumulation();
+                return true;
+            }, 1);
+        }
+
+        public static IBallControlStrategy HighPlateBalancing(int duration)
+        {
+            return new BallControlStrategy((ballData, machineController, instructionCount) =>
+            {
+                if (ballData.CurrentPositionVector.z < float.MaxValue)
+                {
+                    // distance away from plate:
+                    var p_x = -ballData.CurrentPositionVector.x * c.k_p;
+                    var p_y = ballData.CurrentPositionVector.y * c.k_p;
+
+                    // mean velocity of ball:
+                    var velocityVector = ballData.GetVelocityVector();
+                    var d_x = -velocityVector.x * c.k_d;
+                    var d_y = velocityVector.y * c.k_d;
+
+                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
+                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
+
+                    var moveTime = 0.1f;
+                    machineController.SendInstructions(new List<HLInstruction>()
+                    {
+                        new HLInstruction(0.08f, xCorrection, yCorrection, moveTime),
                     });
 
                     ballData.ResetVelocityAccumulation();

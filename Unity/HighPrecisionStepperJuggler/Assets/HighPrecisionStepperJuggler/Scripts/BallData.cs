@@ -5,12 +5,10 @@ namespace HighPrecisionStepperJuggler
 {
     public sealed class BallData
     {
-        private float _lastFramesXDistance;
-        private float _lastFramesYDistance;
+        private float _xDistanceAtReset;
+        private float _yDistanceAtReset;
+        private float _timeAtReset;
         private Vector3 _lastFramePositionVector;
-
-        private List<float> _xVelocities = new List<float>();
-        private List<float> _yVelocities = new List<float>();
 
         public Vector3 CurrentPositionVector => _currentPositionVector;
         public Vector3 CurrentUnityPositionVector => new Vector3(_currentPositionVector.x, _currentPositionVector.z + Constants.BallHeightAtOrigin, _currentPositionVector.y) / 1000f;
@@ -23,37 +21,20 @@ namespace HighPrecisionStepperJuggler
         public void UpdateData(Vector3 positionVector, bool machineReadyForNextMove)
         {
             _currentPositionVector = positionVector;
-
-            if (machineReadyForNextMove)
-            {
-                var v_x = (positionVector.x - _lastFramesXDistance) / Time.deltaTime;
-                var v_y = (positionVector.y - _lastFramesYDistance) / Time.deltaTime;
-
-                _xVelocities.Add(v_x);
-                _yVelocities.Add(v_y);
-            }
-
-            _lastFramesXDistance = positionVector.x;
-            _lastFramesYDistance = positionVector.y;
         }
 
         public Vector2 GetVelocityVector()
         {
-            var accumulatedV_x = 0f;
-            _xVelocities.ForEach(v => accumulatedV_x += v);
-            var xVelocity = accumulatedV_x / _xVelocities.Count;
-
-            var accumulatedV_y = 0f;
-            _yVelocities.ForEach(v => accumulatedV_y += v);
-            var yVelocity = accumulatedV_y / _yVelocities.Count;
-
-            return new Vector2(xVelocity, yVelocity);
+            return new Vector2(
+                (CurrentPositionVector.x - _xDistanceAtReset) / (Time.realtimeSinceStartup - _timeAtReset),
+                (CurrentPositionVector.y - _yDistanceAtReset) / (Time.realtimeSinceStartup - _timeAtReset));
         }
 
         public void ResetVelocityAccumulation()
         {
-            _xVelocities.Clear();
-            _yVelocities.Clear();
+            _xDistanceAtReset = CurrentPositionVector.x;
+            _yDistanceAtReset = CurrentPositionVector.y;
+            _timeAtReset = Time.realtimeSinceStartup;
         }
     }
 }

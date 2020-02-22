@@ -1,10 +1,10 @@
 
 [ ] play around and figure out some interesting moves
-    [ ] staircase bouncing
     [ ] hard hit when centering is good
         [ ] maybe still plate after hard hit
     [ ] moving PID center with high plate and rolling ball
     [ ] machine look at ball mode.
+    [ ] cool moving around startup thingy.
 [X] refactor ImageProcessingInstructionSender (add new classes and split responsibility)
     [X] add BallData class.
     [X] add interface to make multiple moveControllingStrategies possible.
@@ -13,7 +13,8 @@
     [X] make ball visualization fade out and disappear.
     [X] make it appear at the correct position.
         [X] rotate & offset
-[ ] add level-calibration.
+[X] add level-calibration.
+[ ] fix ball velocity
 [ ] Write latex math file
 
 lower link length: 89

@@ -18,8 +18,10 @@ namespace HighPrecisionStepperJuggler
 
         private void Start()
         {
-            _ballControlStrategies.Add(BallControlStrategyFactory.CreateGetBouncingBCS());
-            _ballControlStrategies.Add(BallControlStrategyFactory.CreateContinuousBouncingBCS(100));
+            _ballControlStrategies.Add(BallControlStrategyFactory.GoHighPlate());
+            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancing(1000));
+            _ballControlStrategies.Add(BallControlStrategyFactory.CreateGetBouncing());
+            _ballControlStrategies.Add(BallControlStrategyFactory.CreateContinuousBouncing(100));
         }
 
         private void Update()
