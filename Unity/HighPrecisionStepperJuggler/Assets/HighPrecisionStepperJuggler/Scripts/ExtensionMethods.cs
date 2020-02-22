@@ -13,7 +13,7 @@ namespace HighPrecisionStepperJuggler
         {
             var hlState = hlInstruction.TargetHLMachineState;
 
-            return new LLInstruction(hlState.Translate(), hlInstruction.MoveTime);
+            return new LLInstruction(hlState.Translate(), hlInstruction.MoveTime, hlInstruction.IsLevelingInstruction);
         }
 
         /// <summary>

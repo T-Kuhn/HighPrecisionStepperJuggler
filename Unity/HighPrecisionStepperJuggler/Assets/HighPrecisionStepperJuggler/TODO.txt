@@ -13,6 +13,7 @@
     [X] make ball visualization fade out and disappear.
     [X] make it appear at the correct position.
         [X] rotate & offset
+[ ] add level-calibration.
 [ ] Write latex math file
 
 lower link length: 89

@@ -90,7 +90,6 @@ namespace HighPrecisionStepperJuggler
                     _realMachine.GoToOrigin();
                     break;
             }
-
         }
     }
 }
