@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Runtime.InteropServices;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using c = HighPrecisionStepperJuggler.Constants;
@@ -12,6 +11,7 @@ namespace HighPrecisionStepperJuggler
     public class UVCCameraPlugin : MonoBehaviour
     {
         [SerializeField] private Volume _volume;
+        [SerializeField] private ImageProcessingCaptionView _captionView;
         
         [DllImport("UVCCameraPlugin")]
         private static extern IntPtr getCamera();
@@ -139,6 +139,11 @@ namespace HighPrecisionStepperJuggler
 
         public BallRadiusAndPosition UpdateImageProcessing()
         {
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                _captionView.SetText(Constants.Captions[(int)_imgMode]);
+            }
+                
             if (Input.GetKeyDown(KeyCode.I))
             {
                 _imgMode++;
@@ -146,6 +151,8 @@ namespace HighPrecisionStepperJuggler
                 {
                     _imgMode = 0;
                 }
+                
+                _captionView.SetText(Constants.Captions[(int)_imgMode]);
             }
             
             foreach (var c in _volume.profile.components)

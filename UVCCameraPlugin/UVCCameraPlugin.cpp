@@ -63,15 +63,13 @@ void getCameraTexture(
     Mat b = Mat(src.rows, src.cols, CV_8U, bgr[0].data);
 
     Mat gray;
+    Mat normalGray;
 
 	if (imgMode == 4)
     {
-        cv::cvtColor(src, gray, COLOR_BGR2GRAY);
+        cv::cvtColor(src, normalGray, COLOR_BGR2GRAY);
     }
-    else
-    {
-        gray = r - b;
-    }
+    gray = r - b;
 
     if (executeHT21)
     {
@@ -139,7 +137,11 @@ void getCameraTexture(
     {
         cv::cvtColor(b, rgba, cv::COLOR_GRAY2RGBA);
     }
-    else if (imgMode == 4 || imgMode == 5 || imgMode == 6)
+    else if (imgMode == 4)
+    {
+        cv::cvtColor(normalGray, rgba, cv::COLOR_GRAY2RGBA);
+    }
+    else if (imgMode == 5 || imgMode == 6)
     {
         cv::cvtColor(gray, rgba, cv::COLOR_GRAY2RGBA);
     }

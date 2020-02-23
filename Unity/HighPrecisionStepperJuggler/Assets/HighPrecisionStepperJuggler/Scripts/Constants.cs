@@ -1,4 +1,6 @@
-﻿namespace HighPrecisionStepperJuggler
+﻿using System.Collections.Generic;
+
+namespace HighPrecisionStepperJuggler
 {
     public static class Constants
     {
@@ -14,7 +16,7 @@
         public const float L2 = 0.080f;
 
         public static float BallHeightAtOrigin = 78f;
-        
+
         public const float HeightOrigin = 0.0566f;
         public const int BaudRate = 115200;
 
@@ -23,7 +25,7 @@
 
         public static int CameraResolutionWidth = 640;
         public static int CameraResolutionHeight = 480;
-             
+
         public static readonly LLMachineState OriginMachineState = new HLMachineState(0f, 0f, 0f).Translate();
         public static readonly LLMachineState ZeroMachineState = new LLMachineState(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
 
@@ -31,7 +33,7 @@
         public static float MinTiltAngle = -0.05f;
         public static float MaxPlateHeight = 90f;
         public static float MinPlateHeight = 0f;
-        
+
         // PD Controller
         public static float k_p = 0.001f;
         public static float k_d = 0.0005f;
@@ -40,7 +42,24 @@
 
         public enum ImgMode
         {
-            Src, Red, Green, Blue, Normalgray, Customgray, CustomgrayWithCirclesOverlayed
+            Src,
+            Red,
+            Green,
+            Blue,
+            Normalgray,
+            Customgray,
+            CustomgrayWithCirclesOverlayed
         }
+
+        public static List<string> Captions = new List<string>()
+        {
+            "RGB",
+            "Red Channel",
+            "Green Channel",
+            "Blue Channel",
+            "Normal Grayscale",
+            "Orange to Grayscale",
+            "Hough Transform Circle Detection"
+        };
     }
 }
