@@ -7,6 +7,7 @@
 [ ] text to explain what kind of image processing we're showing
 [ ] cool moving around startup thingy.
 [ ] add smaller datapoints to see path ball took.
+[ ] camera circling around machine?
 
 [ ] make video
 [ ] Write latex math file
