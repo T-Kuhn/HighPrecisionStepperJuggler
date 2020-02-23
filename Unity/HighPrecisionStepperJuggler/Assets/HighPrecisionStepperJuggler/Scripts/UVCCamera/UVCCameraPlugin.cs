@@ -139,7 +139,7 @@ namespace HighPrecisionStepperJuggler
 
         public BallRadiusAndPosition UpdateImageProcessing()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.I))
             {
                 _imgMode++;
                 if ((int)_imgMode >= Enum.GetNames(typeof(Constants.ImgMode)).Length)

@@ -57,8 +57,48 @@ namespace HighPrecisionStepperJuggler
             {
                 SendSingleInstruction(new HLInstruction(0.01f, -0.001f, 0f, 0.2f, true));
             }
-
             
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                GoToOrigin();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                SendSingleInstruction(new HLInstruction(0.01f, 0f, 0f, 0.25f));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                SendSingleInstruction(new HLInstruction(0.02f, 0f, 0f, 0.25f));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                SendSingleInstruction(new HLInstruction(0.03f, 0f, 0f, 0.25f));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                SendSingleInstruction(new HLInstruction(0.04f, 0f, 0f, 0.25f));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                SendSingleInstruction(new HLInstruction(0.05f, 0f, 0f, 0.25f));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                SendSingleInstruction(new HLInstruction(0.06f, 0f, 0f, 0.25f));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                SendSingleInstruction(new HLInstruction(0.07f, 0f, 0f, 0.25f));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                SendSingleInstruction(new HLInstruction(0.08f, 0f, 0f, 0.25f));
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                SendSingleInstruction(new HLInstruction(0.09f, 0f, 0f, 0.25f));
+            }
         }
 
         public void SendInstructions(List<HLInstruction> instructions)
