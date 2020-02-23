@@ -10,8 +10,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
 
         public TextureParameter overlayParameter = new TextureParameter(null);
 
-        //[Tooltip("Specifies color of the outline")]
-        //public ColorParameter outlineColor = new ColorParameter(new Color(0,0,0,0), false, true, true);
+        public ColorParameter tintColor = new ColorParameter(new Color(1,1,1,1), false, true, true);
 
         public bool IsActive()
         {

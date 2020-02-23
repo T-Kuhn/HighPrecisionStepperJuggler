@@ -40,7 +40,7 @@
 
         public enum ImgMode
         {
-            Src, Red, Green, Blue, Normalgray, Customgray
+            Src, Red, Green, Blue, Normalgray, Customgray, CustomgrayWithCirclesOverlayed
         }
     }
 }

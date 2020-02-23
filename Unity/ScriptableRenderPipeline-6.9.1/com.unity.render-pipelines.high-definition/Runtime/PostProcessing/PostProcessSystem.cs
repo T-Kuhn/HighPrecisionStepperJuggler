@@ -2151,6 +2151,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
         void DoOverlayPass(CommandBuffer cmd, HDCamera camera, RTHandle source, RTHandle destination, RTHandle depthBuffer)
         {
             m_OverlayShaderMaterial.SetTexture("_OverlayTex", m_Overlay.overlayParameter.value);
+            m_OverlayShaderMaterial.SetColor("_TintColor", m_Overlay.tintColor.value);
             m_OverlayShaderMaterial.SetTexture(HDShaderIDs._InputTexture, source);
             HDUtils.DrawFullScreen(cmd, m_OverlayShaderMaterial, destination);
         }

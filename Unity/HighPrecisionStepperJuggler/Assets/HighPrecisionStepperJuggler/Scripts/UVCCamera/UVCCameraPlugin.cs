@@ -1,14 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using c = HighPrecisionStepperJuggler.Constants;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.HDPipeline;
+using UnityEngine.Rendering;
 
 namespace HighPrecisionStepperJuggler
 {
     public class UVCCameraPlugin : MonoBehaviour
     {
+        [SerializeField] private Volume _volume;
+        
         [DllImport("UVCCameraPlugin")]
         private static extern IntPtr getCamera();
 
@@ -135,6 +139,26 @@ namespace HighPrecisionStepperJuggler
 
         public BallRadiusAndPosition UpdateImageProcessing()
         {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                _imgMode++;
+                if ((int)_imgMode >= Enum.GetNames(typeof(Constants.ImgMode)).Length)
+                {
+                    _imgMode = 0;
+                }
+            }
+            
+            foreach (var c in _volume.profile.components)
+            {
+                if (c is OverlayComponent oc)
+                {
+                    if(_imgMode == Constants.ImgMode.Red){oc.tintColor.value = Color.red;}
+                    else if(_imgMode == Constants.ImgMode.Green){oc.tintColor.value = Color.green;}
+                    else if(_imgMode == Constants.ImgMode.Blue){oc.tintColor.value = Color.blue;}
+                    else {oc.tintColor.value = Color.white;}
+                }
+            }
+            
             getCameraTexture(
                 _camera,
                 _pixelsPtr,

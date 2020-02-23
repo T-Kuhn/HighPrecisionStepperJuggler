@@ -3,6 +3,7 @@
     Properties
     {
         _OverlayTex("Texture", 2D) = "white" {}
+        _TintColor("Color", Color) = (1,1,1,1)
     }
     HLSLINCLUDE
         #pragma target 4.5
@@ -36,6 +37,7 @@
         }
 
         sampler2D _OverlayTex;
+        float4 _TintColor;
 
         float4 Frag(Varyings input) : SV_Target
         {
@@ -69,7 +71,7 @@
             }
             else
             {
-                return col;
+                return col * _TintColor;
             }
         }
     ENDHLSL

@@ -42,7 +42,7 @@ void getCameraTexture(
     unsigned char* data,
     bool executeHT21,
     bool executeMedianBlur,
-    int imgMode,            // 0: src, 1: red, 2: green, 3: blue, 4: normalgray, 5: customgray 
+    int imgMode,            // 0: src, 1: red, 2: green, 3: blue, 4: normalgray, 5: customgray 6: customgrayWithCircleOverlay
     double dp,
     double minDist,
     double param1,
@@ -107,7 +107,7 @@ void getCameraTexture(
             radius = 0.0;
         }
 
-        if (imgMode == 0)
+        if (imgMode == 6)
         {
             for (size_t i = 0; i < circles.size(); i++)
             {
@@ -115,8 +115,8 @@ void getCameraTexture(
                 Point center = Point(c[0], c[1]);
                 int radius = c[2];
 
-                circle(src, center, 1, Scalar(0, 100, 100), 3, LINE_AA);
-                circle(src, center, radius, Scalar(255, 0, 255), 3, LINE_AA);
+				circle(gray, center, 1, Scalar(0, 100, 100), 3, LINE_AA);
+				circle(gray, center, radius, Scalar(255, 0, 255), 3, LINE_AA);
             }
         }
     }
@@ -139,7 +139,7 @@ void getCameraTexture(
     {
         cv::cvtColor(b, rgba, cv::COLOR_GRAY2RGBA);
     }
-    else if (imgMode == 4 || imgMode == 5)
+    else if (imgMode == 4 || imgMode == 5 || imgMode == 6)
     {
         cv::cvtColor(gray, rgba, cv::COLOR_GRAY2RGBA);
     }

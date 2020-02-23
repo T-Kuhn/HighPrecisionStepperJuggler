@@ -89,6 +89,11 @@ namespace HighPrecisionStepperJuggler
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _executeControlStrategies = !_executeControlStrategies;
+            }
+            
             var ballRadiusAndPosition = _cameraPlugin.UpdateImageProcessing();
             var height = FOVCalculations.RadiusToDistance(ballRadiusAndPosition.Radius);
 
