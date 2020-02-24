@@ -139,12 +139,23 @@ namespace HighPrecisionStepperJuggler
 
         public BallRadiusAndPosition UpdateImageProcessing()
         {
-            if (Input.GetKeyDown(KeyCode.U))
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                _imgMode--;
+                if ((int) _imgMode < 0)
+                {
+                    _imgMode = (Constants.ImgMode)Enum.GetNames(typeof(Constants.ImgMode)).Length - 1;
+                }
+
+                _captionView.SetText(Constants.Captions[(int) _imgMode]);
+            }
+
+            if (Input.GetKeyDown(KeyCode.N))
             {
                 _captionView.SetText(Constants.Captions[(int)_imgMode]);
             }
                 
-            if (Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(KeyCode.M))
             {
                 _imgMode++;
                 if ((int)_imgMode >= Enum.GetNames(typeof(Constants.ImgMode)).Length)
