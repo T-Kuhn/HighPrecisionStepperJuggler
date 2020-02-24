@@ -53,7 +53,6 @@ namespace HighPrecisionStepperJuggler
             var m2Rot = Mathf.Lerp(a.Motor2Rotation, b.Motor2Rotation, value);
             var m3Rot = Mathf.Lerp(a.Motor3Rotation, b.Motor3Rotation, value);
             var m4Rot = Mathf.Lerp(a.Motor4Rotation, b.Motor4Rotation, value);
-
             var m1J2Rot = Mathf.Lerp(a.Arm1Joint2Rotation, b.Arm1Joint2Rotation, value);
             var m2J2Rot = Mathf.Lerp(a.Arm2Joint2Rotation, b.Arm2Joint2Rotation, value);
             var m3J2Rot = Mathf.Lerp(a.Arm3Joint2Rotation, b.Arm3Joint2Rotation, value);

@@ -48,6 +48,6 @@
 #define MAX_NUM_OF_MOVEBATCHES 100
 
 // Max input size for the list of incoming instructions
-#define INPUT_SIZE 1024
+#define INPUT_SIZE 5120
 
 #endif

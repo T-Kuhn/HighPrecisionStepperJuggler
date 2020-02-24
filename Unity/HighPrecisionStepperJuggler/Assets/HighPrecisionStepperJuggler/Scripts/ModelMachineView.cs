@@ -30,10 +30,10 @@ namespace HighPrecisionStepperJuggler
             //       work with diffStates and the ModelMachine has to behave exactly the same way as the real machine.
             var state = Constants.OriginMachineState + diffState;
 
-            _motorizedArm1.UpdateState(state.Motor1Rotation, state.Arm1Joint2Rotation);
-            _motorizedArm2.UpdateState(state.Motor2Rotation, state.Arm2Joint2Rotation);
-            _motorizedArm3.UpdateState(state.Motor3Rotation, state.Arm3Joint2Rotation);
-            _motorizedArm4.UpdateState(state.Motor4Rotation, state.Arm4Joint2Rotation);
+            _motorizedArm1.UpdateState(state.Motor1Rotation, InverseKinematics.CalculateJoint2RotationFromJoint1Rotation(state.Motor1Rotation, 0f));
+            _motorizedArm2.UpdateState(state.Motor2Rotation, InverseKinematics.CalculateJoint2RotationFromJoint1Rotation(state.Motor2Rotation, 0f));
+            _motorizedArm3.UpdateState(state.Motor3Rotation, InverseKinematics.CalculateJoint2RotationFromJoint1Rotation(state.Motor3Rotation, 0f));
+            _motorizedArm4.UpdateState(state.Motor4Rotation, InverseKinematics.CalculateJoint2RotationFromJoint1Rotation(state.Motor4Rotation, 0f));
         }
 
         public void AddToOriginStateAnimated(List<LLInstruction> diffInstructions)

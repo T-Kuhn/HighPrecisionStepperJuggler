@@ -6,7 +6,8 @@
 [X] image processing image switching with "1"
 [X] text to explain what kind of image processing we're showing
 [X] better key control for image stream switching.
-[ ] cool moving around startup thingy.
+[X] cool moving around startup thingy.
+[X] fix model upper joint animation.
 [ ] add smaller datapoints to see path ball took.
 [ ] camera circling around machine?
 [ ] fix runtime error that occurs when no camera is connected.
