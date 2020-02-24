@@ -18,7 +18,7 @@ namespace HighPrecisionStepperJuggler
             {
                 script.GoToOrigin();
             }
-            
+
             if (GUILayout.Button("leveling at 10mm: right", GUILayout.Width(200)))
             {
                 script.SendSingleInstruction(new HLInstruction(0.01f, 0.001f, 0f, 0.2f, true));
@@ -143,6 +143,34 @@ namespace HighPrecisionStepperJuggler
                 var moveTime = 0.1f;
                 script.SendInstructions(new List<HLInstruction>()
                 {
+                    new HLInstruction(0.02f, 0.0f, 0.1f, moveTime),
+                    new HLInstruction(0.02f, 0.0f, -0.1f, moveTime),
+                    new HLInstruction(0.02f, 0.1f, 0f, moveTime),
+                    new HLInstruction(0.02f, -0.1f, 0f, moveTime),
+                    new HLInstruction(0.02f, 0.0f, 0.1f, moveTime),
+                    new HLInstruction(0.02f, 0.0f, -0.1f, moveTime),
+                    new HLInstruction(0.02f, 0.1f, 0f, moveTime),
+                    new HLInstruction(0.02f, -0.1f, 0f, moveTime),
+                    new HLInstruction(0.03f, 0.0f, 0f, moveTime),
+                    new HLInstruction(0.04f, 0.0f, 0f, moveTime),
+                });
+            }
+
+            if (GUILayout.Button("demo 0.2 2", GUILayout.Width(200)))
+            {
+                var moveTime = 0.2f;
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, 0.0f, 0.1f, moveTime),
+                    new HLInstruction(0.02f, 0.0f, -0.1f, moveTime),
+                    new HLInstruction(0.02f, 0.1f, 0f, moveTime),
+                    new HLInstruction(0.02f, -0.1f, 0f, moveTime),
+                    new HLInstruction(0.02f, 0.0f, 0.1f, moveTime),
+                    new HLInstruction(0.02f, 0.0f, -0.1f, moveTime),
+                    new HLInstruction(0.02f, 0.1f, 0f, moveTime),
+                    new HLInstruction(0.02f, -0.1f, 0f, moveTime),
+                    new HLInstruction(0.03f, 0.0f, 0f, moveTime),
+                    new HLInstruction(0.04f, 0.0f, 0f, moveTime),
                     new HLInstruction(0.02f, 0.0f, 0.1f, moveTime),
                     new HLInstruction(0.02f, 0.0f, -0.1f, moveTime),
                     new HLInstruction(0.02f, 0.1f, 0f, moveTime),

@@ -102,7 +102,6 @@ void loop()
             }
 
             int numOfMoveBatches = index / 6;
-            Serial.println(numOfMoveBatches);
             for (int i = 0; i < numOfMoveBatches; i++)
             {
                 int offset = i * 6;

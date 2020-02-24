@@ -12,9 +12,9 @@ namespace HighPrecisionStepperJuggler
         {
             var levelingInstructions = instructions.Where(instruction => instruction.IsLevelingInstruction);
 
-            // NOTE: The current Max amount of instructions which can be sent in one go is 10.
+            // NOTE: The current Max amount of instructions which can be sent in one go is 100.
             var diffInstructionList = instructions
-                .Take(10)
+                .Take(100)
                 .Select(instruction =>
                     new LLInstruction(
                         instruction.TargetMachineState - Constants.OriginMachineState + _levelingOffset,
