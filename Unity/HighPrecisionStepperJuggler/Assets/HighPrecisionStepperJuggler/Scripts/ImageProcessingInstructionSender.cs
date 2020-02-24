@@ -56,35 +56,16 @@ namespace HighPrecisionStepperJuggler
                 _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
             }
 
-            _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(50));
+            _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(20));
 
             for (int i = 0; i < 5; i++)
             {
                 _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
                 _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
                 _ballControlStrategies.Add(BallControlStrategyFactory.BalancingAtHeight(0.05f, 10));
-            }
-
-            for (int i = 0; i < 5; i++)
-            {
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
-            }
-
-            for (int i = 0; i < 5; i++)
-            {
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
-                _ballControlStrategies.Add(BallControlStrategyFactory.BalancingAtHeight(0.05f, 10));
-            }
-
-            for (int i = 0; i < 5; i++)
-            {
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
             }
             
-            _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
+            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
         }
 
         private void Update()

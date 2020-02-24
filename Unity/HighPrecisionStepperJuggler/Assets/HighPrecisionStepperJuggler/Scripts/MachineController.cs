@@ -17,7 +17,7 @@ namespace HighPrecisionStepperJuggler
         private enum MachineEndPoint
         {
             Model,
-            Real, 
+            Real,
             ModelAndReal
         }
 
@@ -42,62 +42,107 @@ namespace HighPrecisionStepperJuggler
             {
                 SendSingleInstruction(new HLInstruction(0.01f, 0f, 0.001f, 0.2f, true));
             }
-            
+
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 SendSingleInstruction(new HLInstruction(0.01f, 0f, -0.001f, 0.2f, true));
             }
-            
+
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 SendSingleInstruction(new HLInstruction(0.01f, 0.001f, 0f, 0.2f, true));
             }
-            
+
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 SendSingleInstruction(new HLInstruction(0.01f, -0.001f, 0f, 0.2f, true));
             }
-            
+
             if (Input.GetKeyDown(KeyCode.O))
             {
                 GoToOrigin();
             }
-            
+
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 SendSingleInstruction(new HLInstruction(0.01f, 0f, 0f, 0.25f));
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 SendSingleInstruction(new HLInstruction(0.02f, 0f, 0f, 0.25f));
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 SendSingleInstruction(new HLInstruction(0.03f, 0f, 0f, 0.25f));
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 SendSingleInstruction(new HLInstruction(0.04f, 0f, 0f, 0.25f));
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 SendSingleInstruction(new HLInstruction(0.05f, 0f, 0f, 0.25f));
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha6))
             {
                 SendSingleInstruction(new HLInstruction(0.06f, 0f, 0f, 0.25f));
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha7))
             {
                 SendSingleInstruction(new HLInstruction(0.07f, 0f, 0f, 0.25f));
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha8))
             {
                 SendSingleInstruction(new HLInstruction(0.08f, 0f, 0f, 0.25f));
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha9))
             {
                 SendSingleInstruction(new HLInstruction(0.09f, 0f, 0f, 0.25f));
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                var moveTime = 0.3f;
+                var tilt = 0.06694f;
+                SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.09f, 0.0f, 0.0f, 0.5f),
+                    new HLInstruction(0.01f, 0.0f, 0.0f, 0.5f),
+                    new HLInstruction(0.02f, -tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.03f, tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.04f, -tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.05f, tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.06f, -tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.07f, tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.08f, -tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.09f, 0f, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.01f, -tilt, 0.0f, 0.5f, isFlexInstruction: true),
+                    new HLInstruction(0.08f, -tilt, 0.0f, 0.5f, isFlexInstruction: true),
+                    new HLInstruction(0.01f, tilt, 0.0f, 0.5f, isFlexInstruction: true),
+                    new HLInstruction(0.08f, tilt, 0.0f, 0.5f, isFlexInstruction: true),
+                    new HLInstruction(0.01f, -tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.08f, -tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.01f, tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.08f, tilt, 0.0f, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.01f, 0f, -tilt, 0.5f, isFlexInstruction: true),
+                    new HLInstruction(0.08f, 0f, -tilt, 0.5f, isFlexInstruction: true),
+                    new HLInstruction(0.01f, 0f, tilt, 0.5f, isFlexInstruction: true),
+                    new HLInstruction(0.08f, 0f, tilt, 0.5f, isFlexInstruction: true),
+                    new HLInstruction(0.01f, 0f, -tilt, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.08f, 0f, -tilt, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.01f, 0f, tilt, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.08f, 0f, tilt, moveTime, isFlexInstruction: true),
+                    new HLInstruction(0.01f, 0.0f, 0.0f, 0.5f),
+                    new HLInstruction(0.05f, 0.0f, 0.0f, 0.5f),
+                });
             }
         }
 

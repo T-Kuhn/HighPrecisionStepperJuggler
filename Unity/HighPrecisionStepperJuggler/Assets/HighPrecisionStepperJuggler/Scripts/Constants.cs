@@ -39,6 +39,7 @@ namespace HighPrecisionStepperJuggler
         public static float k_d = 0.0005f;
 
         public static float BallVisualizationFadeOutTime = 0.2f;
+        public static float SmallBallVisualizationFadeOutTime = 5f;
 
         public enum ImgMode
         {

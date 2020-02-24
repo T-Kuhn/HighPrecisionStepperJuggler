@@ -14,7 +14,7 @@ namespace HighPrecisionStepperJuggler
         {
             _tmp.text = text;
             _tmp.color = new Color(0.9f, 0.9f, 0.9f, 0.5f);
-            _showTextTime = 2f;
+            _showTextTime = 3f;
             _fadeOutTime = 1f;
         }
 

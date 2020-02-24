@@ -8,7 +8,7 @@
 [X] better key control for image stream switching.
 [X] cool moving around startup thingy.
 [X] fix model upper joint animation.
-[ ] add smaller datapoints to see path ball took.
+[X] add smaller datapoints to see path ball took.
 [ ] camera circling around machine?
 [ ] fix runtime error that occurs when no camera is connected.
 
