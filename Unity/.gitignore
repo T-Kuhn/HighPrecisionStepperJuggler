@@ -6,6 +6,5 @@
 *.sln
 .idea/
 .vs/
-Build/
 Library/
 obj/
