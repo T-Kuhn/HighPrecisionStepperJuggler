@@ -1,6 +1,9 @@
 # HighPrecisionStepperJuggler
 a.k.a Octo-Bouncer. Highly precise stepper motor driving with a Teensy 4.0 and custom pulse generating algorithm and PC based image processing with the goal of getting a machine to juggle a ping pong ball.
 
+Here's a blog post with more infos about this project:
+https://electrondust.com/2020/03/01/the-octo-bouncer/
+
 https://youtu.be/lYyAMDYzJQM
 
 The Arduino folder contains the code for the Teensy 4.0. The Teensy 4.0's job is simple:
