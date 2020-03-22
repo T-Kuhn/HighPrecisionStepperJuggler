@@ -9,8 +9,13 @@
 [X] cool moving around startup thingy.
 [X] fix model upper joint animation.
 [X] add smaller datapoints to see path ball took.
-[ ] camera circling around machine?
+[X] camera circling around machine?
 [ ] fix runtime error that occurs when no camera is connected.
+[ ] add FPS counter
+[ ] run edge-filter on image data.
+[ ] figure out whether or not velocity data is reliable
+[X] change plate to octagon (import new model data).
+[X] update CAD data to reflect new plate design.
 
 [ ] make video
 [ ] Write latex math file
