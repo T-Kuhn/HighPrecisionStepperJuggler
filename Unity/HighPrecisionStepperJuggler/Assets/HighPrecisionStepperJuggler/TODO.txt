@@ -10,14 +10,14 @@
 [X] fix model upper joint animation.
 [X] add smaller datapoints to see path ball took.
 [X] camera circling around machine?
-[ ] fix runtime error that occurs when no camera is connected.
 [ ] add FPS counter
+[ ] image processing in Unity? or try some other OpenCV algorithms.
 [ ] run edge-filter on image data.
-[ ] figure out whether or not velocity data is reliable
+[X] figure out whether or not velocity data is reliable
 [X] change plate to octagon (import new model data).
 [X] update CAD data to reflect new plate design.
 
-[ ] make video
+[ ] fix runtime error that occurs when no camera is connected.
 [ ] Write latex math file
 
 lower link length: 89

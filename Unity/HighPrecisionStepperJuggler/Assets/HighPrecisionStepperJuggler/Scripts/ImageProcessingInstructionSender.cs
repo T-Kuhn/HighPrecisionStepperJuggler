@@ -9,8 +9,9 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private UVCCameraPlugin _cameraPlugin;
         [SerializeField] private MachineController _machineController;
         [SerializeField] private BallPositionVisualizer _ballPositionVisualizer;
+        [SerializeField] private VelocityDebugView _velocityDebugView;
 
-        private BallData _ballData = new BallData();
+        private BallData _ballData;
         private int _currentStrategyIndex;
         [SerializeField] private bool _executeControlStrategies;
 
@@ -18,6 +19,8 @@ namespace HighPrecisionStepperJuggler
 
         private void Start()
         {
+            _ballData = new BallData(_velocityDebugView);
+            
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.05f));
             for (int i = 0; i < 5; i++)
@@ -26,6 +29,8 @@ namespace HighPrecisionStepperJuggler
                 _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
             }
 
+            _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(10000));
+            
             for (int i = 0; i < 5; i++)
             {
                 _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));

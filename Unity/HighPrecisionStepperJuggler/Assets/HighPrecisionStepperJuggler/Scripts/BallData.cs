@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -14,8 +13,11 @@ namespace HighPrecisionStepperJuggler
         public Vector3 CurrentUnityPositionVector => new Vector3(_currentPositionVector.x, _currentPositionVector.z + Constants.BallHeightAtOrigin, _currentPositionVector.y) / 1000f;
         private Vector3 _currentPositionVector = Vector3.zero;
 
-        public BallData()
+        private VelocityDebugView _velocityDebugView;
+
+        public BallData(VelocityDebugView velocityDebugView)
         {
+            _velocityDebugView = velocityDebugView;
         }
 
         public void UpdateData(Vector3 positionVector, bool machineReadyForNextMove)
@@ -25,9 +27,14 @@ namespace HighPrecisionStepperJuggler
 
         public Vector2 GetVelocityVector()
         {
-            return new Vector2(
+            var v = new Vector2(
                 (CurrentPositionVector.x - _xDistanceAtReset) / (Time.realtimeSinceStartup - _timeAtReset),
                 (CurrentPositionVector.y - _yDistanceAtReset) / (Time.realtimeSinceStartup - _timeAtReset));
+
+            _velocityDebugView.Vx = v.x.ToString("0.000");
+            _velocityDebugView.Vy = v.y.ToString("0.000");
+            
+            return v;
         }
 
         public void ResetVelocityAccumulation()
