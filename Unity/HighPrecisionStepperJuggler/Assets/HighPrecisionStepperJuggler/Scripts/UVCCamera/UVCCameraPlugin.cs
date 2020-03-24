@@ -75,7 +75,7 @@ namespace HighPrecisionStepperJuggler
             
             _ht21Parameters = new HT21Parameters()
             {
-                ExecuteHT21 = false,
+                ExecuteHT21 = true,
                 ExecuteMedianBlue = false,
                 Dp = 1,
                 MinDist = 120,

@@ -10,7 +10,8 @@
 [X] fix model upper joint animation.
 [X] add smaller datapoints to see path ball took.
 [X] camera circling around machine?
-[ ] add FPS counter
+[X] add FPS counter
+[ ] fix ball position spawning every frame (bad performance impact)
 [ ] image processing in Unity? or try some other OpenCV algorithms.
 [ ] run edge-filter on image data.
 [X] figure out whether or not velocity data is reliable
