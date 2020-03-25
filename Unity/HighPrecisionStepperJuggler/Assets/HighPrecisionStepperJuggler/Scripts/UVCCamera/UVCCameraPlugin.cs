@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using c = HighPrecisionStepperJuggler.Constants;
 using UnityEngine;
@@ -59,7 +60,6 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private HT21Parameters _ht21Parameters;
         [SerializeField] private CameraProperties _cameraProperties;
         [SerializeField] private RenderTexture _renderTexture = null;
-        [SerializeField] private MachineController _machineController;
         
         private void Awake()
         {
@@ -104,6 +104,14 @@ namespace HighPrecisionStepperJuggler
             _pixels = _texture.GetPixels32();
             _pixelsHandle = GCHandle.Alloc(_pixels, GCHandleType.Pinned);
             _pixelsPtr = _pixelsHandle.AddrOfPinnedObject();
+
+            foreach (var c in _volume.profile.components)
+            {
+                if (c is OverlayComponent oc)
+                {
+                    oc.overlayParameter.value = _texture;
+                }
+            }
         }
 
         private double GetCameraProperty(vcp property)
@@ -194,8 +202,6 @@ namespace HighPrecisionStepperJuggler
             _texture.SetPixels32(_pixels);
             _texture.Apply();
 
-            Graphics.Blit(_texture, _renderTexture);
-            
             return new BallRadiusAndPosition()
             {
                 Radius = (float)getCircleRadius(), 

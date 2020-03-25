@@ -13,7 +13,7 @@ public class FPSDisplayer : MonoBehaviour
         _frameCounter++;
         _deltaTimeCounter += Time.deltaTime;
 
-        if (_frameCounter % 5 == 0 && _frameCounter >= 10)
+        if (_frameCounter % 5 == 0 && _frameCounter >= 5)
         {
             // we're in here when the _frameCounter is at 5, 10, 15, 20, 25, ...
 
