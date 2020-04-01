@@ -1558,7 +1558,7 @@ MonoBehaviour:
   _captionView: {fileID: 420128149}
   _imgMode: 0
   _ht21Parameters:
-    ExecuteHT21: 1
+    ExecuteHT21: 0
     ExecuteMedianBlue: 0
     Dp: 1
     MinDist: 120
@@ -1576,7 +1576,6 @@ MonoBehaviour:
     ISO: 0
     Saturation: 0
   _renderTexture: {fileID: 8400000, guid: aea317be466d9c645a30a4ee986e9a8d, type: 2}
-  _machineController: {fileID: 1395260052}
 --- !u!4 &807047507
 Transform:
   m_ObjectHideFlags: 0

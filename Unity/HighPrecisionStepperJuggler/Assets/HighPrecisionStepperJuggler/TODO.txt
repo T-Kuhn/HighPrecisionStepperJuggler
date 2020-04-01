@@ -1,23 +1,6 @@
 
 
-[X] execute controlstrategies start/stop with space
-[X] overlay image processing image onto custom grayscale image.
-[X] display red channel red, green channel green ect.
-[X] image processing image switching with "1"
-[X] text to explain what kind of image processing we're showing
-[X] better key control for image stream switching.
-[X] cool moving around startup thingy.
-[X] fix model upper joint animation.
-[X] add smaller datapoints to see path ball took.
-[X] camera circling around machine?
-[X] add FPS counter
-
-[ ] run niBlackThreshold
-
 [ ] fix ball position spawning every frame (bad performance impact)
-[ ] image processing in Unity? or try some other OpenCV algorithms.
-[ ] run edge-filter on image data.
-
 [X] figure out whether or not velocity data is reliable
 [X] change plate to octagon (import new model data).
 [X] update CAD data to reflect new plate design.
@@ -32,5 +15,8 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-
+[ ] improve velocity calculation
+   [ ] least squares regression
+[ ] improve FPS counter
+[ ] image processing in Unity?
 

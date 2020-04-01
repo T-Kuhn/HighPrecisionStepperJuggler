@@ -8,9 +8,15 @@ namespace HighPrecisionStepperJuggler
         private float _yDistanceAtReset;
         private float _timeAtReset;
         private Vector3 _lastFramePositionVector;
+        private GradientDescent _gradientDescent = new GradientDescent(5, 0.02f);
 
         public Vector3 CurrentPositionVector => _currentPositionVector;
-        public Vector3 CurrentUnityPositionVector => new Vector3(_currentPositionVector.x, _currentPositionVector.z + Constants.BallHeightAtOrigin, _currentPositionVector.y) / 1000f;
+
+        public Vector3 CurrentUnityPositionVector => new Vector3(
+                                                         _currentPositionVector.x,
+                                                         _currentPositionVector.z + Constants.BallHeightAtOrigin,
+                                                         _currentPositionVector.y) / 1000f;
+
         private Vector3 _currentPositionVector = Vector3.zero;
 
         private VelocityDebugView _velocityDebugView;
@@ -33,7 +39,7 @@ namespace HighPrecisionStepperJuggler
 
             _velocityDebugView.Vx = v.x.ToString("0.000");
             _velocityDebugView.Vy = v.y.ToString("0.000");
-            
+
             return v;
         }
 

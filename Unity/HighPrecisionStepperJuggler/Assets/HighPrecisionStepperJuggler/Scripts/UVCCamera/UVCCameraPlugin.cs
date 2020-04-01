@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using JetBrains.Annotations;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using c = HighPrecisionStepperJuggler.Constants;
 using UnityEngine;
@@ -102,6 +101,7 @@ namespace HighPrecisionStepperJuggler
             _texture = new Texture2D((int) _defaultCameraProperties.Width, (int) _defaultCameraProperties.Height,
                 TextureFormat.ARGB32, false);
             _pixels = _texture.GetPixels32();
+            
             _pixelsHandle = GCHandle.Alloc(_pixels, GCHandleType.Pinned);
             _pixelsPtr = _pixelsHandle.AddrOfPinnedObject();
 
@@ -199,6 +199,18 @@ namespace HighPrecisionStepperJuggler
                 _ht21Parameters.MaxRadius
             );
 
+            /*
+            for (int i = 0; i < _pixels.Length; i++)
+            {
+                if (_pixels[i].r > 80)
+                {
+                    _pixels[i].r = Byte.MaxValue;
+                    _pixels[i].g = Byte.MaxValue;
+                    _pixels[i].b = Byte.MaxValue;
+                }
+            }
+            */
+            
             _texture.SetPixels32(_pixels);
             _texture.Apply();
 

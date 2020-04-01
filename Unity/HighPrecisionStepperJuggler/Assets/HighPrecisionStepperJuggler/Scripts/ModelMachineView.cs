@@ -26,7 +26,7 @@ namespace HighPrecisionStepperJuggler
 
         public void AddToOriginState(LLMachineState diffState)
         {
-            // NOTE: We are using setting the state via diffState because the real machine will only
+            // NOTE: We are setting the state via diffState because the real machine will only
             //       work with diffStates and the ModelMachine has to behave exactly the same way as the real machine.
             var state = Constants.OriginMachineState + diffState;
 
