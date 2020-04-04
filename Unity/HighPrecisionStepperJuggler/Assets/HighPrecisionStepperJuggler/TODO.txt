@@ -16,7 +16,8 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 memo:
 
 [ ] improve velocity calculation
-   [ ] least squares regression
+   [ ] gradient descent
+   [ ] make view for gradient descent
 [ ] improve FPS counter
 [ ] image processing in Unity?
 
