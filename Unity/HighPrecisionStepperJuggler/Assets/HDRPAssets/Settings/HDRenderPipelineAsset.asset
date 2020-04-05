@@ -17,7 +17,7 @@ MonoBehaviour:
   m_RenderPipelineRayTracingResources: {fileID: 0}
   m_RenderingPathDefaultCameraFrameSettings:
     bitDatas:
-      data1: 69284264410909
+      data1: 69284130189085
       data2: 4539628424389459968
     lodBias: 1
     lodBiasMode: 0
