@@ -58,7 +58,6 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private Constants.ImgMode _imgMode;
         [SerializeField] private HT21Parameters _ht21Parameters;
         [SerializeField] private CameraProperties _cameraProperties;
-        [SerializeField] private RenderTexture _renderTexture = null;
         
         private void Awake()
         {

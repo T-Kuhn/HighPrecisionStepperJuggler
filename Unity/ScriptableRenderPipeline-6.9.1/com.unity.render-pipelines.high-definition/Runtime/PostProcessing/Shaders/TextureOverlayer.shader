@@ -3,6 +3,7 @@
     Properties
     {
         _OverlayTex("Texture", 2D) = "white" {}
+        _SecondOverlayTex("Texture", 2D) = "white" {}
         _TintColor("Color", Color) = (1,1,1,1)
     }
     HLSLINCLUDE
@@ -37,6 +38,7 @@
         }
 
         sampler2D _OverlayTex;
+        sampler2D _SecondOverlayTex;
         float4 _TintColor;
 
         float4 Frag(Varyings input) : SV_Target
@@ -63,16 +65,30 @@
             uv.x *= 3.0;
             uv.y *= 2.25;
 
-            float4 col = tex2D(_OverlayTex, uv);
+            float2 uv2 = input.texcoord;
+            uv2.x = 1 - uv2.x;
+            uv2.y = uv2.y;
+            uv2.x *= 3.0;
+            uv2.y *= 2.25;
 
-            if(uv.x > 1.0 || uv.y > 1.0)
+            float4 col = tex2D(_OverlayTex, uv);
+            float4 secondCol = tex2D(_SecondOverlayTex, uv2);
+
+            float4 resultCol;
+            if(uv.x < 1.0 && uv.y < 1.0)
             {
-                return float4(outColor, 1);
+                resultCol = col * _TintColor;
+            }
+            else if(uv2.x < 1.0 && uv2.y < 1.0)
+            {
+                resultCol = secondCol;
             }
             else
             {
-                return col * _TintColor;
+                resultCol = float4(outColor, 1);
             }
+
+            return resultCol;
         }
     ENDHLSL
 

@@ -28,7 +28,7 @@ namespace HighPrecisionStepperJuggler.MachineLearning
             AddTrainingSet(new TrainingSet(-10f, 3f));
             AddTrainingSet(new TrainingSet(-10f, 4f));
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
                 UpdateHypothesis();
             }
