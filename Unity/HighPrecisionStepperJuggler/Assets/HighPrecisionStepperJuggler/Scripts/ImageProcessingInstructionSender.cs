@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HighPrecisionStepperJuggler.MachineLearning;
 using UnityEngine;
 using c = HighPrecisionStepperJuggler.Constants;
 
@@ -10,12 +11,20 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private MachineController _machineController;
         [SerializeField] private BallPositionVisualizer _ballPositionVisualizer;
         [SerializeField] private VelocityDebugView _velocityDebugView;
+        [SerializeField] private GradientDescentView _gradientDescentView;
+        
+        private GradientDescent _gradientDescent = new GradientDescent();
 
         private BallData _ballData;
         private int _currentStrategyIndex;
         [SerializeField] private bool _executeControlStrategies;
 
         private List<IBallControlStrategy> _ballControlStrategies = new List<IBallControlStrategy>();
+
+        private void Awake()
+        {
+            _gradientDescentView.GradientDescent = _gradientDescent;
+        }
 
         private void Start()
         {
@@ -108,6 +117,8 @@ namespace HighPrecisionStepperJuggler
             
             _ballPositionVisualizer.SpawnPositionPoint(_ballData.CurrentUnityPositionVector);
 
+            _gradientDescent.AddTrainingSet(new TrainingSet(-Time.deltaTime * 1000f, _ballData.CurrentPositionVector.y / 2f));
+            
             if (_machineController.IsReadyForNextInstruction && _executeControlStrategies)
             {
                 var nextStrategyRequested =

@@ -66,8 +66,9 @@
             uv.y *= 2.25;
 
             float2 uv2 = input.texcoord;
-            uv2.x = 1 - uv2.x;
+            uv2.x = uv2.x;
             uv2.y = uv2.y;
+            uv2.x = uv2.x - 0.666666666666;
             uv2.x *= 3.0;
             uv2.y *= 2.25;
 
@@ -79,7 +80,7 @@
             {
                 resultCol = col * _TintColor;
             }
-            else if(uv2.x < 1.0 && uv2.y < 1.0)
+            else if(uv2.x < 1.0 && uv2.y < 1.0 && uv2.x > 0.0)
             {
                 resultCol = secondCol;
             }

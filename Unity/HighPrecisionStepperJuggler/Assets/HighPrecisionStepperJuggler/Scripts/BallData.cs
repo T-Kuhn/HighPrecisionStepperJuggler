@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using HighPrecisionStepperJuggler.MachineLearning;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -9,7 +8,6 @@ namespace HighPrecisionStepperJuggler
         private float _yDistanceAtReset;
         private float _timeAtReset;
         private Vector3 _lastFramePositionVector;
-        //private GradientDescent _gradientDescent = new GradientDescent();
 
         // current ball position in [mm]
         public Vector3 CurrentPositionVector => _currentPositionVector;
