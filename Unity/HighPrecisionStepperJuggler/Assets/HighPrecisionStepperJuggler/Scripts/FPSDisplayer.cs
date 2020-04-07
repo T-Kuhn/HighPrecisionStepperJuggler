@@ -1,30 +1,24 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class FPSDisplayer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _fps;
+    private Queue<float> _fpsQueue = new Queue<float>();
+    private const int MaxValuesInQueue = 40;
 
-    private int _frameCounter;
-    private float _deltaTimeCounter;
-    
     void Update()
     {
-        _frameCounter++;
-        _deltaTimeCounter += Time.deltaTime;
-
-        if (_frameCounter % 5 == 0 && _frameCounter >= 5)
+        _fpsQueue.Enqueue(1f / Time.deltaTime);
+        
+        if (_fpsQueue.Count > MaxValuesInQueue)
         {
-            // we're in here when the _frameCounter is at 5, 10, 15, 20, 25, ...
-
-            var fps = _frameCounter / _deltaTimeCounter;
-            _fps.text = "FPS: " + fps.ToString("0.");
+            _fpsQueue.Dequeue();
         }
 
-        if (_frameCounter >= 60)
-        {
-            _frameCounter = 0;
-            _deltaTimeCounter = 0f;
-        }
+        var fps = _fpsQueue.Sum() / _fpsQueue.Count;
+        _fps.text = "FPS: " + Mathf.Round(fps).ToString("0.");
     }
 }
