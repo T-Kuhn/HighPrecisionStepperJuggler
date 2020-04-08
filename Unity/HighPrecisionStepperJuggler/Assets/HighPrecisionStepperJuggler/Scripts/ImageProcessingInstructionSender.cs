@@ -117,7 +117,8 @@ namespace HighPrecisionStepperJuggler
             
             _ballPositionVisualizer.SpawnPositionPoint(_ballData.CurrentUnityPositionVector);
 
-            _gradientDescent.AddTrainingSet(new TrainingSet(-Time.deltaTime * 1000f, _ballData.CurrentPositionVector.y / 2f));
+            _gradientDescent.AddTrainingSet(new TrainingSet(-Time.deltaTime, _ballData.CurrentPositionVector.y / 2f));
+            _gradientDescent.UpdateHypothesis();
             
             if (_machineController.IsReadyForNextInstruction && _executeControlStrategies)
             {

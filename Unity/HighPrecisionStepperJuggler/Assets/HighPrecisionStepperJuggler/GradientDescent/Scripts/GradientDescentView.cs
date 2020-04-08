@@ -10,6 +10,7 @@ public class GradientDescentView : MonoBehaviour
     [SerializeField] private RenderTexture _renderTexture;
     [SerializeField] private GameObject _dataPointPrefab;
     [SerializeField] private GameObject _coordinateSystem;
+    [SerializeField] private GameObject _gradientDescentLine;
 
     public GradientDescent GradientDescent
     {
@@ -42,8 +43,13 @@ public class GradientDescentView : MonoBehaviour
         
         for (int i = 0; i < sets.Length; i++)
         {
-            _dataPointList[i].transform.localPosition = new Vector3(sets[i].t_1 / 10f, sets[i].y, 0f);
+            _dataPointList[i].transform.localPosition = new Vector3(sets[i].t_1 * 100f, sets[i].y, 0f);
         }
+
+        _gradientDescentLine.transform.localPosition = Vector3.up * _gradientDescent.Hypothesis.Parameters.Theta_0;
+        var slope = _gradientDescent.Hypothesis.Parameters.Theta_1;
+        _gradientDescentLine.transform.localRotation =
+            Quaternion.Euler(0f, 0f, Mathf.Atan2(slope, 100f) * Mathf.Rad2Deg);
 
     }
 }

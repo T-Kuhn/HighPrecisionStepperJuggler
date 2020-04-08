@@ -5,37 +5,22 @@ namespace HighPrecisionStepperJuggler.MachineLearning
     // https://www.youtube.com/watch?v=5u4G23_OohI
     public class GradientDescent
     {
-        public float SlopeOfHypothesis => _hypothesis.SlopeOfHypothesis;
-
         public TrainingSet[] TrainingSets => _trainingSets;
         private TrainingSet[] _trainingSets;
+
+        public Hypothesis Hypothesis => _hypothesis;
         private Hypothesis _hypothesis;
 
-        public GradientDescent(int maxNumberOfTrainingSets = 30, float alpha = 0.01f)
+        public GradientDescent(int maxNumberOfTrainingSets = 50, int numberOfTrainingSetsUsedForGD = 10, float alpha = 0.1f)
         {
             // NOTE: Newest training set at index 0
             _trainingSets = new TrainingSet[maxNumberOfTrainingSets];
-            _hypothesis = new Hypothesis(new Parameters(0f, 0f), alpha);
+            _hypothesis = new Hypothesis(new Parameters(0f, 0f), alpha, numberOfTrainingSetsUsedForGD);
 
             for (int i = 0; i < maxNumberOfTrainingSets; i++)
             {
                 _trainingSets[i] = new TrainingSet(0f, 0f);
             }
-
-            // DEBUG START
-            /*
-            AddTrainingSet(new TrainingSet(-10f, 0f));
-            AddTrainingSet(new TrainingSet(-10f, 1f));
-            AddTrainingSet(new TrainingSet(-10f, 2f));
-            AddTrainingSet(new TrainingSet(-10f, 3f));
-            AddTrainingSet(new TrainingSet(-10f, 4f));
-
-            for (int i = 0; i < 10; i++)
-            {
-                UpdateHypothesis();
-            }
-            */
-            // DEBUG END
         }
 
         public void AddTrainingSet(TrainingSet set)
@@ -51,7 +36,10 @@ namespace HighPrecisionStepperJuggler.MachineLearning
 
         public void UpdateHypothesis()
         {
-            _hypothesis.Update(_trainingSets);
+            for (int i = 0; i < 100; i++)
+            {
+                _hypothesis.Update(_trainingSets);
+            }
         }
 
         // public GetEstimateForXEquals(float x);
