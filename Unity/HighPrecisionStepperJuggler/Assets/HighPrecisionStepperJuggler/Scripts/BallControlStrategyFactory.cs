@@ -22,7 +22,6 @@ namespace HighPrecisionStepperJuggler
                     new HLInstruction(0.02f, 0f, 0f, moveTime),
                     new HLInstruction(0.05f, 0f, 0f, moveTime),
                 });
-                ballData.ResetVelocityAccumulation();
                 return true;
             }, 1);
         }
@@ -38,7 +37,7 @@ namespace HighPrecisionStepperJuggler
                     var p_y = ballData.CurrentPositionVector.y * c.k_p;
 
                     // mean velocity of ball:
-                    var velocityVector = ballData.GetVelocityVector();
+                    var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.k_d;
                     var d_y = velocityVector.y * c.k_d;
 
@@ -52,7 +51,6 @@ namespace HighPrecisionStepperJuggler
                         new HLInstruction(0.05f, 0f, 0f, moveTime),
                     });
 
-                    ballData.ResetVelocityAccumulation();
                     return true;
                 }
 
@@ -71,7 +69,7 @@ namespace HighPrecisionStepperJuggler
                     var p_y = ballData.CurrentPositionVector.y * c.k_p;
 
                     // mean velocity of ball:
-                    var velocityVector = ballData.GetVelocityVector();
+                    var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.k_d * 0.5f;
                     var d_y = velocityVector.y * c.k_d * 0.5f;
 
@@ -84,7 +82,6 @@ namespace HighPrecisionStepperJuggler
                         new HLInstruction(height, xCorrection, yCorrection, moveTime),
                     });
 
-                    ballData.ResetVelocityAccumulation();
                     return true;
                 }
 
@@ -103,7 +100,7 @@ namespace HighPrecisionStepperJuggler
                     var p_y = ballData.CurrentPositionVector.y * c.k_p;
 
                     // mean velocity of ball:
-                    var velocityVector = ballData.GetVelocityVector();
+                    var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.k_d;
                     var d_y = velocityVector.y * c.k_d;
 
@@ -117,7 +114,6 @@ namespace HighPrecisionStepperJuggler
                         new HLInstruction(0.05f, 0f, 0f, moveTime),
                     });
 
-                    ballData.ResetVelocityAccumulation();
                     return true;
                 }
 
@@ -133,7 +129,6 @@ namespace HighPrecisionStepperJuggler
                 {
                     new HLInstruction(height, 0f, 0f, time),
                 });
-                ballData.ResetVelocityAccumulation();
                 return true;
             }, 1);
         }
@@ -149,7 +144,7 @@ namespace HighPrecisionStepperJuggler
                     var p_y = (position.y + ballData.CurrentPositionVector.y) * c.k_p;
 
                     // mean velocity of ball:
-                    var velocityVector = ballData.GetVelocityVector();
+                    var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.k_d;
                     var d_y = velocityVector.y * c.k_d;
 
@@ -162,7 +157,6 @@ namespace HighPrecisionStepperJuggler
                         new HLInstruction(0.08f, xCorrection, yCorrection, moveTime),
                     });
 
-                    ballData.ResetVelocityAccumulation();
                     return true;
                 }
 
@@ -184,7 +178,7 @@ namespace HighPrecisionStepperJuggler
                     var p_y = (position.y + ballData.CurrentPositionVector.y) * c.k_p;
 
                     // mean velocity of ball:
-                    var velocityVector = ballData.GetVelocityVector();
+                    var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.k_d;
                     var d_y = velocityVector.y * c.k_d;
 
@@ -197,7 +191,6 @@ namespace HighPrecisionStepperJuggler
                         new HLInstruction(0.08f, xCorrection, yCorrection, moveTime),
                     });
 
-                    ballData.ResetVelocityAccumulation();
                     return true;
                 }
 

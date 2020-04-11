@@ -16,8 +16,11 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 memo:
 
 [ ] improve velocity calculation
-   [ ] gradient descent
-   [ ] make view for gradient descent
-[ ] improve FPS counter
+   [X] gradient descent
+   [X] make view for gradient descent
+       [x] show both x and y data in the view
+       [X] make data points start at 0, not -deltaTime
+       [ ] rotate the x data-stream by 90 degrees to make the thing a bit easier to look at.
+       [ ] freeze datapoint-stream on data used by PID.
 [ ] image processing in Unity?
 

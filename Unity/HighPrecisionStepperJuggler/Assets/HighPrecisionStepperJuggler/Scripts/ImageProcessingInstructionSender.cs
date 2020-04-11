@@ -11,9 +11,11 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private MachineController _machineController;
         [SerializeField] private BallPositionVisualizer _ballPositionVisualizer;
         [SerializeField] private VelocityDebugView _velocityDebugView;
-        [SerializeField] private GradientDescentView _gradientDescentView;
-        
-        private GradientDescent _gradientDescent = new GradientDescent();
+        [SerializeField] private GradientDescentView _gradientDescentViewY;
+        [SerializeField] private GradientDescentView _gradientDescentViewX;
+
+        private readonly GradientDescent _gradientDescentY = new GradientDescent();
+        private readonly GradientDescent _gradientDescentX = new GradientDescent();
 
         private BallData _ballData;
         private int _currentStrategyIndex;
@@ -23,13 +25,14 @@ namespace HighPrecisionStepperJuggler
 
         private void Awake()
         {
-            _gradientDescentView.GradientDescent = _gradientDescent;
+            _gradientDescentViewY.GradientDescent = _gradientDescentY;
+            _gradientDescentViewX.GradientDescent = _gradientDescentX;
         }
 
         private void Start()
         {
             _ballData = new BallData(_velocityDebugView);
-            
+
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.05f));
             for (int i = 0; i < 5; i++)
@@ -39,7 +42,7 @@ namespace HighPrecisionStepperJuggler
             }
 
             _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(10000));
-            
+
             for (int i = 0; i < 5; i++)
             {
                 _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
@@ -78,7 +81,7 @@ namespace HighPrecisionStepperJuggler
                 _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
                 _ballControlStrategies.Add(BallControlStrategyFactory.BalancingAtHeight(0.05f, 10));
             }
-            
+
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
         }
 
@@ -88,7 +91,7 @@ namespace HighPrecisionStepperJuggler
             {
                 _executeControlStrategies = !_executeControlStrategies;
             }
-            
+
             var ballRadiusAndPosition = _cameraPlugin.UpdateImageProcessing();
             var height = FOVCalculations.RadiusToDistance(ballRadiusAndPosition.Radius);
 
@@ -108,18 +111,30 @@ namespace HighPrecisionStepperJuggler
                 return;
             }
 
+            var ballPosY = FOVCalculations.PixelPositionToDistanceFromCenter(ballRadiusAndPosition.PositionY, height);
+            _gradientDescentY.Hypothesis.SetTheta_0To(ballPosY);
+            _gradientDescentY.AddTrainingSet(new TrainingSet(0f, ballPosY));
+            _gradientDescentY.UpdateHypothesis();
+
+            var ballPosX = FOVCalculations.PixelPositionToDistanceFromCenter(ballRadiusAndPosition.PositionX, height);
+            _gradientDescentX.Hypothesis.SetTheta_0To(ballPosX);
+            _gradientDescentX.AddTrainingSet(new TrainingSet(0f, ballPosX));
+            _gradientDescentX.UpdateHypothesis();
+
             _ballData.UpdateData(
                 new Vector3(
-                    FOVCalculations.PixelPositionToDistanceFromCenter(ballRadiusAndPosition.PositionX, height),
-                    FOVCalculations.PixelPositionToDistanceFromCenter(ballRadiusAndPosition.PositionY, height),
-                    height),
-                _machineController.IsReadyForNextInstruction);
-            
+                    _gradientDescentX.Hypothesis.Parameters.Theta_0,
+                    _gradientDescentY.Hypothesis.Parameters.Theta_0,
+                    height), 
+                new Vector2(
+                    _gradientDescentX.Hypothesis.Parameters.Theta_1,
+                    _gradientDescentY.Hypothesis.Parameters.Theta_1
+                    ));
+
             _ballPositionVisualizer.SpawnPositionPoint(_ballData.CurrentUnityPositionVector);
 
-            _gradientDescent.AddTrainingSet(new TrainingSet(-Time.deltaTime, _ballData.CurrentPositionVector.y / 2f));
-            _gradientDescent.UpdateHypothesis();
-            
+
+
             if (_machineController.IsReadyForNextInstruction && _executeControlStrategies)
             {
                 var nextStrategyRequested =

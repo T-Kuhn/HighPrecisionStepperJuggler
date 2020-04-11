@@ -1,4 +1,6 @@
 ﻿
+using UnityEngine;
+
 namespace HighPrecisionStepperJuggler.MachineLearning
 {
     // This class implements Gradient Descent as explained by Andrew Ng in this video:
@@ -11,13 +13,13 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         public Hypothesis Hypothesis => _hypothesis;
         private Hypothesis _hypothesis;
 
-        public GradientDescent(int maxNumberOfTrainingSets = 50, int numberOfTrainingSetsUsedForGD = 10, float alpha = 0.1f)
+        public GradientDescent()
         {
             // NOTE: Newest training set at index 0
-            _trainingSets = new TrainingSet[maxNumberOfTrainingSets];
-            _hypothesis = new Hypothesis(new Parameters(0f, 0f), alpha, numberOfTrainingSetsUsedForGD);
+            _trainingSets = new TrainingSet[Constants.MaxNumberOfTrainingSets];
+            _hypothesis = new Hypothesis(new Parameters(0f, 0f));
 
-            for (int i = 0; i < maxNumberOfTrainingSets; i++)
+            for (int i = 0; i < Constants.MaxNumberOfTrainingSets; i++)
             {
                 _trainingSets[i] = new TrainingSet(0f, 0f);
             }
@@ -27,7 +29,7 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         {
             for (int i = _trainingSets.Length - 1; i > 0; i--)
             {
-                _trainingSets[i - 1].t_1 += set.t_1;
+                _trainingSets[i - 1].t_1 -= Time.deltaTime;
                 _trainingSets[i] = _trainingSets[i - 1];
             }
 

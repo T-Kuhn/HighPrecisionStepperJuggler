@@ -36,10 +36,16 @@ namespace HighPrecisionStepperJuggler
 
         // PD Controller
         public static float k_p = 0.001f;
-        public static float k_d = 0.0005f;
+        public static float k_d = 0.001f;
 
         public static float BallVisualizationFadeOutTime = 0.2f;
         public static float SmallBallVisualizationFadeOutTime = 5f;
+        
+        // GradientDescent
+        public static int MaxNumberOfTrainingSets = 50;
+        public static int NumberOfTrainingSetsUsedForGD = 10;
+        // alpha is what is often referred to as the "learning rate"
+        public static float Alpha = 0.1f;
 
         public enum ImgMode
         {

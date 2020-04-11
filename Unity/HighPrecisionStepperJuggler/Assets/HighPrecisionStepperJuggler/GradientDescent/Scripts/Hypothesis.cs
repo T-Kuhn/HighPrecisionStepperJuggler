@@ -1,6 +1,4 @@
 ﻿
-using UnityEngine;
-
 namespace HighPrecisionStepperJuggler.MachineLearning
 {
     public class Hypothesis
@@ -8,15 +6,9 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         public Parameters Parameters => _parameters;
         private Parameters _parameters;
 
-        // alpha is what is often referred to as the "learning rate"
-        private float _alpha;
-        private int _numberOfTrainingSetsUsed;
-
-        public Hypothesis(Parameters initialParameters, float alpha, int numberOfTrainingSetsUsedForGD)
+        public Hypothesis(Parameters initialParameters)
         {
             _parameters = initialParameters;
-            _alpha = alpha;
-            _numberOfTrainingSetsUsed = numberOfTrainingSetsUsedForGD;
         }
 
         public float Execute(TrainingSet set)
@@ -24,24 +16,29 @@ namespace HighPrecisionStepperJuggler.MachineLearning
             return _parameters.Theta_0 * set.t_0 + _parameters.Theta_1 * set.t_1;
         }
 
+        public void SetTheta_0To(float theta_0)
+        {
+            _parameters.Theta_0 = theta_0;
+        }
+
         public void Update(TrainingSet[] trainingSets)
         {
             var total = 0f;
 
-            for (int i = 0; i < _numberOfTrainingSetsUsed; i++)
+            for (int i = 0; i < Constants.NumberOfTrainingSetsUsedForGD; i++)
             {
                 total += (Execute(trainingSets[i]) - trainingSets[i].y) * trainingSets[i].t_0;
             }
 
-            _parameters.Theta_0 -= _alpha * total;
+            _parameters.Theta_0 -= Constants.Alpha * total;
 
             total = 0f;
-            for (int i = 0; i < _numberOfTrainingSetsUsed; i++)
+            for (int i = 0; i < Constants.NumberOfTrainingSetsUsedForGD; i++)
             {
                 total += (Execute(trainingSets[i]) - trainingSets[i].y) * trainingSets[i].t_1;
             }
 
-            _parameters.Theta_1 -= _alpha * total;
+            _parameters.Theta_1 -= Constants.Alpha * total;
 
             //Debug.Log("updated Theta_0 is: " + _parameters.Theta_0);
             //Debug.Log("updated Theta_1 is: " + _parameters.Theta_1);
