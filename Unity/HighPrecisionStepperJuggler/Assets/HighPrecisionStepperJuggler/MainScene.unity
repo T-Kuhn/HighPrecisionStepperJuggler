@@ -2972,6 +2972,7 @@ MonoBehaviour:
   _volume: {fileID: 581876910}
   _captionView: {fileID: 420128149}
   _imgMode: 0
+  _useInternImageProcessing: 0
   _ht21Parameters:
     ExecuteHT21: 0
     ExecuteMedianBlue: 0

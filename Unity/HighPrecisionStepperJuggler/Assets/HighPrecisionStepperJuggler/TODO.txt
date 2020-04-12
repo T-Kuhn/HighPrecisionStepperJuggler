@@ -15,12 +15,14 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
+[X] improve ball detection image processing 
 [ ] improve velocity calculation
    [X] gradient descent
    [X] make view for gradient descent
        [x] show both x and y data in the view
        [X] make data points start at 0, not -deltaTime
-       [ ] rotate the x data-stream by 90 degrees to make the thing a bit easier to look at.
+       [X] rotate the x data-stream by 90 degrees to make the thing a bit easier to look at.
        [ ] freeze datapoint-stream on data used by PID.
-[ ] image processing in Unity?
+[ ] implement on-collision-with-plate-ball-position-estimation in gradient descent (using moving up time)
+[ ] maybe implement some sort of self-learning PID supported algorithm (given speed and position before impact)
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using c = HighPrecisionStepperJuggler.Constants;
@@ -56,11 +57,15 @@ namespace HighPrecisionStepperJuggler
         private CameraProperties _defaultCameraProperties;
 
         [SerializeField] private Constants.ImgMode _imgMode;
+        [SerializeField] private bool _useInternImageProcessing;
         [SerializeField] private HT21Parameters _ht21Parameters;
         [SerializeField] private CameraProperties _cameraProperties;
         
         private void Awake()
         {
+            _imgMode = Constants.ImgMode.CustomgrayWithCirclesOverlayed;
+            _useInternImageProcessing = true;
+            
             _defaultCameraProperties = new CameraProperties()
             {
                 Width = c.CameraResolutionWidth,
@@ -73,7 +78,7 @@ namespace HighPrecisionStepperJuggler
             
             _ht21Parameters = new HT21Parameters()
             {
-                ExecuteHT21 = true,
+                ExecuteHT21 = false,
                 ExecuteMedianBlue = false,
                 Dp = 1,
                 MinDist = 120,
@@ -198,20 +203,42 @@ namespace HighPrecisionStepperJuggler
                 _ht21Parameters.MaxRadius
             );
 
-            /*
-            for (int i = 0; i < _pixels.Length; i++)
+            if (_useInternImageProcessing)
             {
-                if (_pixels[i].r > 80)
+                int numberOfWhitePixels = 0;
+                var pixelWidth = c.CameraResolutionWidth;
+                var accumulatedPixelX = 0;
+                var accumulatedPixelY = 0;
+                for (int i = 0; i < _pixels.Length; i++)
                 {
-                    _pixels[i].r = Byte.MaxValue;
-                    _pixels[i].g = Byte.MaxValue;
-                    _pixels[i].b = Byte.MaxValue;
+                    if (_pixels[i].r > 80)
+                    {
+                        accumulatedPixelX += i % pixelWidth;
+                        accumulatedPixelY += i / pixelWidth;
+                        numberOfWhitePixels++;
+                        _pixels[i].r = Byte.MaxValue;
+                        _pixels[i].g = Byte.MaxValue;
+                        _pixels[i].b = 0;
+                    }
                 }
+
+                var meanPixelX = (float)accumulatedPixelX / numberOfWhitePixels + 1;
+                var meanPixelY = (float)accumulatedPixelY / numberOfWhitePixels + 1;
+                
+                // 1. use number of pixels and A_c = r^2 * PI
+                //    radius.
+                var pixelRadius = Mathf.Sqrt(numberOfWhitePixels / Mathf.PI);
+
+                _texture.SetPixels32(_pixels);
+                _texture.Apply();
+
+                return new BallRadiusAndPosition()
+                {
+                    Radius = pixelRadius,
+                    PositionX = - meanPixelX + c.CameraResolutionWidth / 2f,
+                    PositionY = - meanPixelY + c.CameraResolutionHeight / 2f
+                    };
             }
-            */
-            
-            _texture.SetPixels32(_pixels);
-            _texture.Apply();
 
             return new BallRadiusAndPosition()
             {
