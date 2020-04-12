@@ -8,6 +8,8 @@ public class GradientDescentView : MonoBehaviour
     [SerializeField] private GameObject _coordinateSystem;
     [SerializeField] private GameObject _gradientDescentLine;
 
+    public bool _isY;
+
     public GradientDescent GradientDescent
     {
         set => _gradientDescent = value;
@@ -28,16 +30,33 @@ public class GradientDescentView : MonoBehaviour
     private void Update()
     {
         var sets = _gradientDescent.TrainingSets;
-        
-        for (int i = 0; i < sets.Length; i++)
+
+        if (_isY)
         {
-            _dataPointList[i].transform.localPosition = new Vector3(sets[i].t_1 * 100f, sets[i].y / 2f, 0f);
+            for (int i = 0; i < sets.Length; i++)
+            {
+                _dataPointList[i].transform.localPosition = new Vector3(sets[i].t_1 * 100f, sets[i].y / 2f, 0f);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < sets.Length; i++)
+            {
+                _dataPointList[i].transform.localPosition = new Vector3(sets[i].y / 2f, sets[i].t_1 * 100f, 0f);
+            }
         }
 
-        _gradientDescentLine.transform.localPosition = Vector3.up * _gradientDescent.Hypothesis.Parameters.Theta_0 / 2f;
+
+        var dir = _isY ? Vector3.up : Vector3.right;
+        _gradientDescentLine.transform.localPosition = dir * _gradientDescent.Hypothesis.Parameters.Theta_0 / 2f;
+        
         var slope = _gradientDescent.Hypothesis.Parameters.Theta_1 / 2f;
-        _gradientDescentLine.transform.localRotation =
-            Quaternion.Euler(0f, 0f, Mathf.Atan2(slope, 100f) * Mathf.Rad2Deg);
+        var rotation = _isY 
+            ? Quaternion.Euler(0f, 0f, Mathf.Atan2(slope, 100f) * Mathf.Rad2Deg)
+            : Quaternion.Euler(0f, 0f, (Mathf.PI / 2f - Mathf.Atan2(slope, 100f)) * Mathf.Rad2Deg);
+
+        _gradientDescentLine.transform.localRotation = rotation;
+
 
     }
 }
