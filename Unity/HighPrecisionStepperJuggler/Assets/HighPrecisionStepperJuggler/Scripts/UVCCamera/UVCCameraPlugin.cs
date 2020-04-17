@@ -211,7 +211,7 @@ namespace HighPrecisionStepperJuggler
                 var accumulatedPixelY = 0;
                 for (int i = 0; i < _pixels.Length; i++)
                 {
-                    if (_pixels[i].r > 80)
+                    if (_pixels[i].r > 70)
                     {
                         accumulatedPixelX += i % pixelWidth;
                         accumulatedPixelY += i / pixelWidth;
@@ -222,10 +222,18 @@ namespace HighPrecisionStepperJuggler
                     }
                 }
 
-                var meanPixelX = (float)accumulatedPixelX / numberOfWhitePixels + 1;
-                var meanPixelY = (float)accumulatedPixelY / numberOfWhitePixels + 1;
-                
-                // 1. use number of pixels and A_c = r^2 * PI
+                var meanPixelX = (float)accumulatedPixelX / numberOfWhitePixels;
+                var meanPixelY = (float)accumulatedPixelY / numberOfWhitePixels;
+
+                /*
+                // color pixel at ball centre white
+                var meanPixelIndex = (int) meanPixelY * c.CameraResolutionWidth + (int) meanPixelX;
+                _pixels[meanPixelIndex].r = 1;
+                _pixels[meanPixelIndex].g = 1;
+                _pixels[meanPixelIndex].b = 1;
+                */
+
+                // NOTE: use number of pixels and A_c = r^2 * PI
                 //    radius.
                 var pixelRadius = Mathf.Sqrt(numberOfWhitePixels / Mathf.PI);
 

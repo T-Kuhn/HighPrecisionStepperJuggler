@@ -39,9 +39,6 @@ namespace HighPrecisionStepperJuggler.MachineLearning
             }
 
             _parameters.Theta_1 -= Constants.Alpha * total;
-
-            //Debug.Log("updated Theta_0 is: " + _parameters.Theta_0);
-            //Debug.Log("updated Theta_1 is: " + _parameters.Theta_1);
         }
     }
 }

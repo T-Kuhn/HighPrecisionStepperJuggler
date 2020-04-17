@@ -16,13 +16,28 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 memo:
 
 [X] improve ball detection image processing 
-[ ] improve velocity calculation
+[X] improve velocity calculation
    [X] gradient descent
    [X] make view for gradient descent
        [x] show both x and y data in the view
        [X] make data points start at 0, not -deltaTime
        [X] rotate the x data-stream by 90 degrees to make the thing a bit easier to look at.
-       [ ] freeze datapoint-stream on data used by PID.
+[ ] freeze datapoint-stream on data used by PID?
 [ ] implement on-collision-with-plate-ball-position-estimation in gradient descent (using moving up time)
 [ ] maybe implement some sort of self-learning PID supported algorithm (given speed and position before impact)
+[ ] add cross drawing at ball position
+[ ] alternating x and y correction
+[ ] add visualization for plate tilt to gradient descent view graph.
+[ ] bring ball to halt by catching it softly.
+[ ] calculate airborne-time from time between sent moveCommands (might be useful?)
+[ ] implement shallow bouncing
+[ ] implement pixel cluster detection for multiple ball position extraction
+[ ] implement erosion and delation to get rid of text on ball?
+[ ] lower threshold?
+
+
+
+// vid:
+[ ] front view, change to unity graphics, look around, ent up in top view, change to realtime video again (top view)
+[ ] start with short flex, then throwing ball onto machine
 
