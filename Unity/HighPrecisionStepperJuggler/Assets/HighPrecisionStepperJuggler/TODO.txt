@@ -22,18 +22,22 @@ memo:
        [x] show both x and y data in the view
        [X] make data points start at 0, not -deltaTime
        [X] rotate the x data-stream by 90 degrees to make the thing a bit easier to look at.
+[X] move all the image processing into a new class
+[ ] implement pixel cluster detection for multiple ball position extraction
+[ ] better ball radius calculation in order to get rid of the influence of black text on orange ball.
+[ ] circle bouncing with moving PID center
+[ ] 2 ball bouncing
+[ ] add visualization for plate tilt to gradient descent view graph.
+
 [ ] freeze datapoint-stream on data used by PID?
 [ ] implement on-collision-with-plate-ball-position-estimation in gradient descent (using moving up time)
 [ ] maybe implement some sort of self-learning PID supported algorithm (given speed and position before impact)
 [ ] add cross drawing at ball position
 [ ] alternating x and y correction
-[ ] add visualization for plate tilt to gradient descent view graph.
 [ ] bring ball to halt by catching it softly.
 [ ] calculate airborne-time from time between sent moveCommands (might be useful?)
 [ ] implement shallow bouncing
-[ ] implement pixel cluster detection for multiple ball position extraction
 [ ] implement erosion and delation to get rid of text on ball?
-[ ] lower threshold?
 
 
 

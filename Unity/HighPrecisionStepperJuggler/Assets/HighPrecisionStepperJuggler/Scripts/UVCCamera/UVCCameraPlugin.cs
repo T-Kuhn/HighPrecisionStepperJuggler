@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using c = HighPrecisionStepperJuggler.Constants;
@@ -55,6 +54,7 @@ namespace HighPrecisionStepperJuggler
         private GCHandle _pixelsHandle;
         private IntPtr _pixelsPtr;
         private CameraProperties _defaultCameraProperties;
+        private ImageProcessing _imageProcessing = new ImageProcessing();
 
         [SerializeField] private Constants.ImgMode _imgMode;
         [SerializeField] private bool _useInternImageProcessing;
@@ -205,47 +205,12 @@ namespace HighPrecisionStepperJuggler
 
             if (_useInternImageProcessing)
             {
-                int numberOfWhitePixels = 0;
-                var pixelWidth = c.CameraResolutionWidth;
-                var accumulatedPixelX = 0;
-                var accumulatedPixelY = 0;
-                for (int i = 0; i < _pixels.Length; i++)
-                {
-                    if (_pixels[i].r > 70)
-                    {
-                        accumulatedPixelX += i % pixelWidth;
-                        accumulatedPixelY += i / pixelWidth;
-                        numberOfWhitePixels++;
-                        _pixels[i].r = Byte.MaxValue;
-                        _pixels[i].g = Byte.MaxValue;
-                        _pixels[i].b = 0;
-                    }
-                }
-
-                var meanPixelX = (float)accumulatedPixelX / numberOfWhitePixels;
-                var meanPixelY = (float)accumulatedPixelY / numberOfWhitePixels;
-
-                /*
-                // color pixel at ball centre white
-                var meanPixelIndex = (int) meanPixelY * c.CameraResolutionWidth + (int) meanPixelX;
-                _pixels[meanPixelIndex].r = 1;
-                _pixels[meanPixelIndex].g = 1;
-                _pixels[meanPixelIndex].b = 1;
-                */
-
-                // NOTE: use number of pixels and A_c = r^2 * PI
-                //    radius.
-                var pixelRadius = Mathf.Sqrt(numberOfWhitePixels / Mathf.PI);
-
+                var ballPosAndRadius = _imageProcessing.Execute(_pixels);
+                
                 _texture.SetPixels32(_pixels);
                 _texture.Apply();
 
-                return new BallRadiusAndPosition()
-                {
-                    Radius = pixelRadius,
-                    PositionX = - meanPixelX + c.CameraResolutionWidth / 2f,
-                    PositionY = - meanPixelY + c.CameraResolutionHeight / 2f
-                    };
+                return ballPosAndRadius;
             }
 
             return new BallRadiusAndPosition()
