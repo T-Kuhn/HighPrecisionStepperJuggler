@@ -38,6 +38,14 @@ memo:
 [ ] calculate airborne-time from time between sent moveCommands (might be useful?)
 [ ] implement shallow bouncing
 [ ] implement erosion and delation to get rid of text on ball?
+[ ] boarder image processing
+    [X] add more test points when determining the objects center and radius
+    [X] fix problem where, depending on the order, small objects inside bigger ones might prevail because the bigger
+        one wasn't present to prevent the small one from being probed.
+    [X] draw a line from center to ball circumference
+    [ ] maybe add a circleness check and discard detected object with a low circleness 
+        Not really needed since there's normally not much noise in the video stream. But it'd be a nice to have.
+        Just in case. Or for demos where there's a hand showing.
 
 
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using vcp = HighPrecisionStepperJuggler.OpenCVConstants.VideoCaptureProperties;
 using c = HighPrecisionStepperJuggler.Constants;
@@ -205,12 +206,13 @@ namespace HighPrecisionStepperJuggler
 
             if (_useInternImageProcessing)
             {
-                var ballPosAndRadius = _imageProcessing.Execute(_pixels);
+                var ballPosAndRadius = _imageProcessing.BallDataFromPixelBoarders(_pixels);
                 
                 _texture.SetPixels32(_pixels);
                 _texture.Apply();
 
-                return ballPosAndRadius;
+                // TODO: return both ball positions, not only the first one.
+                return ballPosAndRadius.FirstOrDefault();
             }
 
             return new BallRadiusAndPosition()

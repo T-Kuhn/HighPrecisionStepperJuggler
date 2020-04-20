@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -44,8 +45,13 @@ namespace HighPrecisionStepperJuggler
         // GradientDescent
         public static int MaxNumberOfTrainingSets = 70;
         public static int NumberOfTrainingSetsUsedForGD = 10;
+        
         // alpha is what is often referred to as the "learning rate"
         public static float Alpha = 0.1f;
+
+        public static Byte Threshold = 70;
+
+        public static int PixelSpacing = 30;
 
         public enum ImgMode
         {
