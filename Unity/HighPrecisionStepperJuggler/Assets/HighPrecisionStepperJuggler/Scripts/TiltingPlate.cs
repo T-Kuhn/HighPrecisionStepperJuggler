@@ -14,6 +14,9 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint3 = null;
         [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint4 = null;
 
+        public delegate void TiltUpdate(float xTilt, float yTilt);
+        public event TiltUpdate OnTiltUpdate;
+
         void LateUpdate()
         {
             var meanHeight = (_motor1Joint2Tip.position.y + _motor2Joint2Tip.position.y) / 2f;
@@ -28,6 +31,8 @@ namespace HighPrecisionStepperJuggler
             _upperMostRotationalJoint2.Rotation = beta;
             _upperMostRotationalJoint3.Rotation = gamma;
             _upperMostRotationalJoint4.Rotation = -gamma;
+
+            OnTiltUpdate?.Invoke(gamma, -beta);
         }
     }
 }

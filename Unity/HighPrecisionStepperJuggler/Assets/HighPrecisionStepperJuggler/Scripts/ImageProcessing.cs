@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
 using c = HighPrecisionStepperJuggler.Constants;
-using Debug = UnityEngine.Debug;
 
 namespace HighPrecisionStepperJuggler
 {
