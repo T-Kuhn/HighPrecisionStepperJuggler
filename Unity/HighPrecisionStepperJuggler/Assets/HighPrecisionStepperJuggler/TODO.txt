@@ -25,7 +25,8 @@ memo:
 [X] move all the image processing into a new class
 [X] better ball radius calculation in order to get rid of the influence of black text on orange ball.
 
-[ ] add visualization for plate tilt to gradient descent view graph.
+[X] add visualization for plate tilt to gradient descent view graph.
+[X] correct the tilt visualization in such a way that the calibration value is ignored
 
 [ ] circle bouncing with moving PID center
 
@@ -43,8 +44,10 @@ memo:
 [ ] heatmap of plate hit positions
 [ ] look at ball velocity right after ball hit and use past airborne-time to predict where the ball will be coming down
     Use all this information to get the tilt right on down-movement
+    [ ] smaller up/down movement possible with this approach?
 [ ] try to hit the ball a bit faster now that the plate has become lighter  
 [ ] maybe hit ball without upwards motion when the ball moves very fast to get it under control faster.
+[ ] smaller serial bus timeout for better responsiveness?
 
 [ ] maybe add a circleness check and discard detected object with a low circleness 
     Not really needed since there's normally not much noise in the video stream. But it'd be a nice to have.
