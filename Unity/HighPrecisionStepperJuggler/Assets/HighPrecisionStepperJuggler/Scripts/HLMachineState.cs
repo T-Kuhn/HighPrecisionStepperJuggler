@@ -13,5 +13,21 @@
             XTilt = xTilt;
             YTilt = yTilt;
         }
+
+        public static HLMachineState operator +(HLMachineState a, HLMachineState b)
+        {
+            return new HLMachineState(
+                a.Height + b.Height,
+                a.XTilt + b.XTilt,
+                a.YTilt + b.YTilt);
+        }
+
+        public static HLMachineState operator -(HLMachineState a, HLMachineState b)
+        {
+            return new HLMachineState(
+                a.Height - b.Height,
+                a.XTilt - b.XTilt,
+                a.YTilt - b.YTilt);
+        }
     }
 }

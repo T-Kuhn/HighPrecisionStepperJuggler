@@ -27,27 +27,29 @@ memo:
 
 [X] add visualization for plate tilt to gradient descent view graph.
 [X] correct the tilt visualization in such a way that the calibration value is ignored
+[X] smaller serial bus timeout for better responsiveness?
 
+[ ] there might be a problem with how we apply the tilt-offset
+
+[ ] calculate airborne-time from time between sent moveCommands (might be useful?)
+[ ] look at ball velocity right after ball hit and use past airborne-time to predict where the ball will be coming down
+    Use all this information to get the tilt right on down-movement
+    [ ] smaller up/down movement possible with this approach?
+    
 [ ] circle bouncing with moving PID center
 
 [ ] 2 ball bouncing
     [ ] implemented code needed for this
     
 [ ] freeze datapoint-stream on ball data used by PID?
-[ ] maybe implement some sort of self-learning PID supported algorithm (given speed and position before impact)
-    I'm not sure about this anymore.
+[ ] maybe implement some sort of self-learning PID supported algorithm (given speed and distance from center before impact)
 [ ] alternating x and y correction
 [ ] velocity correction every bounce but p-correction alternating between x and y
 [ ] bring ball to halt by catching it softly.
-[ ] calculate airborne-time from time between sent moveCommands (might be useful?)
 [ ] implement shallow bouncing
 [ ] heatmap of plate hit positions
-[ ] look at ball velocity right after ball hit and use past airborne-time to predict where the ball will be coming down
-    Use all this information to get the tilt right on down-movement
-    [ ] smaller up/down movement possible with this approach?
 [ ] try to hit the ball a bit faster now that the plate has become lighter  
 [ ] maybe hit ball without upwards motion when the ball moves very fast to get it under control faster.
-[ ] smaller serial bus timeout for better responsiveness?
 
 [ ] maybe add a circleness check and discard detected object with a low circleness 
     Not really needed since there's normally not much noise in the video stream. But it'd be a nice to have.
