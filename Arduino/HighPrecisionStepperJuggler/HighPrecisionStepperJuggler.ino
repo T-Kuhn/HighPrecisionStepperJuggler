@@ -48,7 +48,7 @@ void setup()
 {
     inputBuffer[0] = '\0';
     Serial.begin(115200);
-    //Serial.setTimeout(20);
+    Serial.setTimeout(1);
     myTimer.begin(onTimer, TIMER_US);
 
     pinMode(EXECUTING_ISR_CODE, OUTPUT);
