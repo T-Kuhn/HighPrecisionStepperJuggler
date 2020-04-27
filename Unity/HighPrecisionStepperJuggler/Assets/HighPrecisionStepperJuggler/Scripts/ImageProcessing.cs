@@ -205,36 +205,24 @@ namespace HighPrecisionStepperJuggler
                         // the boarder is complete
 
 
-                        var dataPoints = new List<(Vector2Int center, float radius)>()
+                        var dataPoints = new List<(Vector2Int center, float radius)>();
+                        var numberOfIterations = 50;
+                        for (int i = 0; i < numberOfIterations; i++)
                         {
-                            CalculateCenterAndRadius(0,
-                                _boarderPixelPositions),
-                            CalculateCenterAndRadius((int) (_boarderPixelPositions.Count * 0.6),
-                                _boarderPixelPositions),
-                            CalculateCenterAndRadius((int) (_boarderPixelPositions.Count * 0.12),
-                                _boarderPixelPositions),
-                            CalculateCenterAndRadius((int) (_boarderPixelPositions.Count * 0.18),
-                                _boarderPixelPositions),
-                            CalculateCenterAndRadius((int) (_boarderPixelPositions.Count * 0.24),
-                                _boarderPixelPositions),
-                            CalculateCenterAndRadius((int) (_boarderPixelPositions.Count * 0.30),
-                                _boarderPixelPositions),
-                            CalculateCenterAndRadius((int) (_boarderPixelPositions.Count * 0.36),
-                                _boarderPixelPositions),
-                            CalculateCenterAndRadius((int) (_boarderPixelPositions.Count * 0.42),
-                                _boarderPixelPositions),
-                            CalculateCenterAndRadius((int) (_boarderPixelPositions.Count * 0.48),
-                                _boarderPixelPositions),
-                        };
+                            dataPoints.Add(CalculateCenterAndRadius(
+                                (int) ((_boarderPixelPositions.Count * i) / (float) numberOfIterations),
+                                _boarderPixelPositions));
+                        }
 
-                        var biggestSix = dataPoints
+
+                        var biggestHalf = dataPoints
                             .OrderByDescending(dataPoint => dataPoint.radius)
-                            .Take(6)
+                            .Take(numberOfIterations / 2)
                             .ToList();
 
                         Vector2Int accumulatedCenter = new Vector2Int(0, 0);
                         float accumulatedRadius = 0f;
-                        foreach (var dataPoint in biggestSix)
+                        foreach (var dataPoint in biggestHalf)
                         {
                             accumulatedCenter += dataPoint.center;
                             accumulatedRadius += dataPoint.radius;
@@ -242,9 +230,9 @@ namespace HighPrecisionStepperJuggler
 
                         _detectedObjects.Add(
                             (new Vector2Int(
-                                    Mathf.RoundToInt(accumulatedCenter.x / (float) biggestSix.Count),
-                                    Mathf.RoundToInt(accumulatedCenter.y / (float) biggestSix.Count)),
-                                accumulatedRadius / biggestSix.Count));
+                                    Mathf.RoundToInt(accumulatedCenter.x / (float) biggestHalf.Count),
+                                    Mathf.RoundToInt(accumulatedCenter.y / (float) biggestHalf.Count)),
+                                accumulatedRadius / biggestHalf.Count));
 
                         break;
                     }
