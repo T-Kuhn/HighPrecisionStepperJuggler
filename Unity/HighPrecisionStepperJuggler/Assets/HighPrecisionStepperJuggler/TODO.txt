@@ -17,9 +17,11 @@ memo:
 
 [X] add height gradient descent
 [X] add height gradient descent view to coordinate system
+[X] make height datapoints appear in the background
+
 [ ] add debug buttons to set the time axis scale (maybe make the transition smooth)
-[ ] add debug button to switch between height and 
-[ ] add some sort of switching mechanism to switch between the height graph and the xy-graph
+    [ ] we need 4 buttons to the left of that visualization
+[ ] make gradientDescent-Line actually as long as it should be (10 data points, with the current setting)
 
 [ ] look at height gradient descent slope changing from + to - to determine airborne time
 
@@ -27,6 +29,8 @@ memo:
 [ ] look at ball velocity right after ball hit and use past airborne-time to predict where the ball will be coming down
     Use all this information to get the tilt right on down-movement
     [ ] smaller up/down movement possible with this approach?
+    
+[ ] add radar style turning radius with fade to ball position visualization
     
 [ ] circle bouncing with moving PID center
 
