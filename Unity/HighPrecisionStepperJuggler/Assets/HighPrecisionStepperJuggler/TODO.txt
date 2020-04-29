@@ -20,7 +20,14 @@ memo:
 [X] make height datapoints appear in the background
 
 [ ] add debug buttons to set the time axis scale (maybe make the transition smooth)
-    [ ] we need 4 buttons to the left of that visualization
+    [X] we need 4 buttons above the visualization
+    [X] change timeScale with buttons 
+    [ ] change timeScale with tween
+    
+[X] add labeled area to buttons
+[X] add beginGroup for better moveabillity of the GUI
+[ ] toggle debug buttons on/off with F2
+
 [ ] make gradientDescent-Line actually as long as it should be (10 data points, with the current setting)
 
 [ ] look at height gradient descent slope changing from + to - to determine airborne time

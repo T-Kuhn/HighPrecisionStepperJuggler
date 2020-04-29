@@ -11,6 +11,13 @@ public class GradientDescentView : MonoBehaviour
     public bool DisplayDataOnYAxis;
     public bool IsDisplayingHeightData;
 
+    public float TimeScaler
+    {
+        set { _timeScaler = value; }
+    }
+
+    private float _timeScaler = 100f;
+
     public GradientDescent GradientDescent
     {
         set => _gradientDescent = value;
@@ -33,24 +40,21 @@ public class GradientDescentView : MonoBehaviour
         var sets = _gradientDescent.TrainingSets;
 
         var divisor = IsDisplayingHeightData ? 20f : 2f;
-        var timeScaler = IsDisplayingHeightData ? 10f : 100f;
         if (DisplayDataOnYAxis)
         {
             for (int i = 0; i < sets.Length; i++)
             {
-                _dataPointList[i].transform.localPosition = new Vector3(sets[i].t_1 * timeScaler, sets[i].y / divisor, 0f);
+                _dataPointList[i].transform.localPosition = new Vector3(sets[i].t_1 * _timeScaler, sets[i].y / divisor, 0f);
             }
         }
         else
         {
             for (int i = 0; i < sets.Length; i++)
             {
-                _dataPointList[i].transform.localPosition = new Vector3(sets[i].y / divisor, sets[i].t_1 * timeScaler, 0f);
+                _dataPointList[i].transform.localPosition = new Vector3(sets[i].y / divisor, sets[i].t_1 * _timeScaler, 0f);
             }
         }
 
-
-        
         var dir = DisplayDataOnYAxis ? Vector3.up : Vector3.right;
         _gradientDescentLine.transform.localPosition = dir * _gradientDescent.Hypothesis.Parameters.Theta_0 / divisor;
         
