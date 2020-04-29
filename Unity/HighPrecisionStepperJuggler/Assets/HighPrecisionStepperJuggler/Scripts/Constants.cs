@@ -43,7 +43,7 @@ namespace HighPrecisionStepperJuggler
         public static float SmallBallVisualizationFadeOutTime = 5f;
         
         // GradientDescent
-        public static int MaxNumberOfTrainingSets = 70;
+        public static int MaxNumberOfTrainingSets = 700;
         public static int NumberOfTrainingSetsUsedForGD = 10;
         
         // alpha is what is often referred to as the "learning rate"

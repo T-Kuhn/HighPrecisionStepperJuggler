@@ -49,47 +49,28 @@ namespace HighPrecisionStepperJuggler
                 script.SendSingleInstruction(new HLInstruction(0.02f, 0f, 0f, 0.15f));
             }
 
-            if (GUILayout.Button("Go to height: 30mm", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.03f, 0f, 0f, 0.15f));
-            }
-
-            if (GUILayout.Button("Go to height: 40mm", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.04f, 0f, 0f, 0.15f));
-            }
-
-            if (GUILayout.Button("Go to height: 50mm", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.05f, 0f, 0f, 0.15f));
-            }
-
-            if (GUILayout.Button("Go to height: 60mm", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.06f, 0f, 0f, 0.15f));
-            }
-
-            if (GUILayout.Button("Go to height: 70mm", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.07f, 0f, 0f, 0.15f));
-            }
-
-            if (GUILayout.Button("Go to height: 80mm", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.08f, 0f, 0f, 0.15f));
-            }
-
-            if (GUILayout.Button("Go to height: 90mm", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.09f, 0f, 0f, 0.15f));
-            }
-
             if (GUILayout.Button("20mm tilt right left", GUILayout.Width(200)))
             {
                 script.SendInstructions(new List<HLInstruction>()
                 {
                     new HLInstruction(0.02f, 0.1f, 0f, 0.3f),
                     new HLInstruction(0.02f, -0.1f, 0f, 0.3f)
+                });
+            }
+
+            if (GUILayout.Button("20mm tilt right", GUILayout.Width(200)))
+            {
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, 0.1f, 0f, 5.0f),
+                });
+            }
+
+            if (GUILayout.Button("80mm tilt right", GUILayout.Width(200)))
+            {
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.08f, 0.1f, 0f, 5.0f),
                 });
             }
 

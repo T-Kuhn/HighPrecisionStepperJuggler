@@ -58,6 +58,42 @@ namespace HighPrecisionStepperJuggler
             }, duration);
         }
 
+        public static IBallControlStrategy Continuous2StepBouncing(int duration)
+        {
+            bool currentPositionIsUp = false;
+            return new BallControlStrategy((ballData, machineController, instructionCount) =>
+            {
+                // upwards move!
+                if (ballData.CurrentPositionVector.z < 150f)
+                {
+                    // distance away from plate:
+                    var p_x = -ballData.CurrentPositionVector.x * c.k_p;
+                    var p_y = ballData.CurrentPositionVector.y * c.k_p;
+
+                    // mean velocity of ball:
+                    var velocityVector = ballData.CurrentVelocityVector;
+                    var d_x = -velocityVector.x * c.k_d;
+                    var d_y = velocityVector.y * c.k_d;
+
+                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
+                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
+
+                    var moveTime = 0.1f;
+                    machineController.SendInstructions(new List<HLInstruction>()
+                    {
+                        new HLInstruction(0.06f, xCorrection, yCorrection, moveTime),
+                        new HLInstruction(0.05f, 0f, 0f, moveTime),
+                    });
+
+                    // instructionSent: true
+                    return true;
+                }
+
+                // instructionSent: false
+                return false;
+            }, duration);
+        }
+
         public static IBallControlStrategy BalancingAtHeight(float height, int duration)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>

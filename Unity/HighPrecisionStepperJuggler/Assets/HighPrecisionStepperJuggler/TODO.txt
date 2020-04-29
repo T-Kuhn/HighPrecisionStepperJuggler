@@ -15,21 +15,13 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-[X] improve ball detection image processing 
-[X] improve velocity calculation
-   [X] gradient descent
-   [X] make view for gradient descent
-       [x] show both x and y data in the view
-       [X] make data points start at 0, not -deltaTime
-       [X] rotate the x data-stream by 90 degrees to make the thing a bit easier to look at.
-[X] move all the image processing into a new class
-[X] better ball radius calculation in order to get rid of the influence of black text on orange ball.
+[X] add height gradient descent
+[X] add height gradient descent view to coordinate system
+[ ] add debug buttons to set the time axis scale (maybe make the transition smooth)
+[ ] add debug button to switch between height and 
+[ ] add some sort of switching mechanism to switch between the height graph and the xy-graph
 
-[X] add visualization for plate tilt to gradient descent view graph.
-[X] correct the tilt visualization in such a way that the calibration value is ignored
-[X] smaller serial bus timeout for better responsiveness?
-
-[ ] there might be a problem with how we apply the tilt-offset
+[ ] look at height gradient descent slope changing from + to - to determine airborne time
 
 [ ] calculate airborne-time from time between sent moveCommands (might be useful?)
 [ ] look at ball velocity right after ball hit and use past airborne-time to predict where the ball will be coming down
@@ -37,6 +29,7 @@ memo:
     [ ] smaller up/down movement possible with this approach?
     
 [ ] circle bouncing with moving PID center
+
 
 [ ] 2 ball bouncing
     [ ] implemented code needed for this
@@ -57,6 +50,12 @@ memo:
 
 [ ] implement on-collision-with-plate-ball-position-estimation in gradient descent (using moving up time)
     Seems like a nice to have at this moment in time
+    
+[ ] display the current BallControlStrategy
+[ ] make radius result of image processing more precise (results differ from center to edge)
+
+[X] check whether or not the tilt is constant when moving up with tilted plate
+    [ ] turns out we DO have a problem with the tilt shifting ever so slightly while moving upwards with a tilted plate
 
 
 // vid:

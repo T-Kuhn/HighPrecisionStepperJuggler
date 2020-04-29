@@ -8,7 +8,8 @@ public class GradientDescentView : MonoBehaviour
     [SerializeField] private GameObject _coordinateSystem;
     [SerializeField] private GameObject _gradientDescentLine;
 
-    public bool _isY;
+    public bool DisplayDataOnYAxis;
+    public bool IsDisplayingHeightData;
 
     public GradientDescent GradientDescent
     {
@@ -31,32 +32,33 @@ public class GradientDescentView : MonoBehaviour
     {
         var sets = _gradientDescent.TrainingSets;
 
-        if (_isY)
+        var divisor = IsDisplayingHeightData ? 20f : 2f;
+        var timeScaler = IsDisplayingHeightData ? 10f : 100f;
+        if (DisplayDataOnYAxis)
         {
             for (int i = 0; i < sets.Length; i++)
             {
-                _dataPointList[i].transform.localPosition = new Vector3(sets[i].t_1 * 100f, sets[i].y / 2f, 0f);
+                _dataPointList[i].transform.localPosition = new Vector3(sets[i].t_1 * timeScaler, sets[i].y / divisor, 0f);
             }
         }
         else
         {
             for (int i = 0; i < sets.Length; i++)
             {
-                _dataPointList[i].transform.localPosition = new Vector3(sets[i].y / 2f, sets[i].t_1 * 100f, 0f);
+                _dataPointList[i].transform.localPosition = new Vector3(sets[i].y / divisor, sets[i].t_1 * timeScaler, 0f);
             }
         }
 
 
-        var dir = _isY ? Vector3.up : Vector3.right;
-        _gradientDescentLine.transform.localPosition = dir * _gradientDescent.Hypothesis.Parameters.Theta_0 / 2f;
         
-        var slope = _gradientDescent.Hypothesis.Parameters.Theta_1 / 2f;
-        var rotation = _isY 
+        var dir = DisplayDataOnYAxis ? Vector3.up : Vector3.right;
+        _gradientDescentLine.transform.localPosition = dir * _gradientDescent.Hypothesis.Parameters.Theta_0 / divisor;
+        
+        var slope = _gradientDescent.Hypothesis.Parameters.Theta_1 / divisor;
+        var rotation = DisplayDataOnYAxis 
             ? Quaternion.Euler(0f, 0f, Mathf.Atan2(slope, 100f) * Mathf.Rad2Deg)
             : Quaternion.Euler(0f, 0f, (Mathf.PI / 2f - Mathf.Atan2(slope, 100f)) * Mathf.Rad2Deg);
 
         _gradientDescentLine.transform.localRotation = rotation;
-
-
     }
 }
