@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 public class DebugGUI : MonoBehaviour
 {
@@ -36,31 +37,48 @@ public class DebugGUI : MonoBehaviour
         GUI.BeginGroup(new Rect(1280, 500, 500, 100));
         GUI.Box(new Rect(0, 0, 500, 100), "");
         GUI.Label(new Rect(65, 5, 100, 40), "XY", labelStyle);
-        // xy axis data x100
+        
         if (GUI.Button(new Rect(10, 50, 100, 40), "×10", buttonStyle))
         {
-            _gradientDescentViewX.TimeScaler = 10f;
-            _gradientDescentViewY.TimeScaler = 10f;
+            var currentTimeScaler = 100f;
+            DOTween.To(() => currentTimeScaler, x =>
+            {
+                currentTimeScaler = x;
+                _gradientDescentViewX.TimeScaler = currentTimeScaler;
+                _gradientDescentViewY.TimeScaler = currentTimeScaler;
+            }, 10f, 1f);
         }
 
-        // xy axis data x10
         if (GUI.Button(new Rect(120, 50, 100, 40), "×100", buttonStyle))
         {
-            _gradientDescentViewX.TimeScaler = 100f;
-            _gradientDescentViewY.TimeScaler = 100f;
+            var currentTimeScaler = 10f;
+            DOTween.To(() => currentTimeScaler, x =>
+            {
+                currentTimeScaler = x;
+                _gradientDescentViewX.TimeScaler = currentTimeScaler;
+                _gradientDescentViewY.TimeScaler = currentTimeScaler;
+            }, 100f, 1f);
         }
 
         GUI.Label(new Rect(335, 5, 100, 40), "Z", labelStyle);
-        // height data x100
         if (GUI.Button(new Rect(280, 50, 100, 40), "×10", buttonStyle))
         {
-            _gradientDescentViewZ.TimeScaler = 10f;
+            var currentTimeScaler = 100f;
+            DOTween.To(() => currentTimeScaler, x =>
+            {
+                currentTimeScaler = x;
+                _gradientDescentViewZ.TimeScaler = currentTimeScaler;
+            }, 10f, 1f);
         }
 
-        // height data x10
         if (GUI.Button(new Rect(390, 50, 100, 40), "×100", buttonStyle))
         {
-            _gradientDescentViewZ.TimeScaler = 100f;
+            var currentTimeScaler = 10f;
+            DOTween.To(() => currentTimeScaler, x =>
+            {
+                currentTimeScaler = x;
+                _gradientDescentViewZ.TimeScaler = currentTimeScaler;
+            }, 100f, 1f);
         }
 
         GUI.EndGroup();

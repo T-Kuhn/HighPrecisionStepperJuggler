@@ -19,10 +19,10 @@ memo:
 [X] add height gradient descent view to coordinate system
 [X] make height datapoints appear in the background
 
-[ ] add debug buttons to set the time axis scale (maybe make the transition smooth)
+[X] add debug buttons to set the time axis scale (maybe make the transition smooth)
     [X] we need 4 buttons above the visualization
     [X] change timeScale with buttons 
-    [ ] change timeScale with tween
+    [X] change timeScale with tween
     
 [X] add labeled area to buttons
 [X] add beginGroup for better moveabillity of the GUI
@@ -37,10 +37,12 @@ memo:
     Use all this information to get the tilt right on down-movement
     [ ] smaller up/down movement possible with this approach?
     
+[ ] add some sort of index of all the things that will be featured in the video.
+    show it in full first, than show the current thing only (e.g. "0: flexing")
+    
 [ ] add radar style turning radius with fade to ball position visualization
     
 [ ] circle bouncing with moving PID center
-
 
 [ ] 2 ball bouncing
     [ ] implemented code needed for this
