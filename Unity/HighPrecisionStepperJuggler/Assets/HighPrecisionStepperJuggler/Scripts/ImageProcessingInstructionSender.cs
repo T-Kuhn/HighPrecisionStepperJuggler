@@ -34,7 +34,7 @@ namespace HighPrecisionStepperJuggler
 
         private void Start()
         {
-            _ballData = new BallData(_velocityDebugView, _gradientDescentX, _gradientDescentY);
+            _ballData = new BallData(_velocityDebugView, _gradientDescentX, _gradientDescentY, _gradientDescentZ);
 
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.05f));

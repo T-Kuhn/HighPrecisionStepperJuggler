@@ -28,21 +28,31 @@ memo:
 [X] add beginGroup for better moveabillity of the GUI
 [X] toggle debug buttons on/off with F2
 
+[ ] change velocity debug view and use it for airborneTime maybe?
+
 [X] make gradientDescent-Line actually as long as it should be (10 data points, with the current setting)
 [X] make gradientDescent-Line have the correct slope for the current timeScale value
-[ ] create view class for gradientDescent-Line
 
-[ ] look at height gradient descent slope changing from + to - to determine airborne time
+[X] look at height gradient descent slope changing from + to - to determine airborne time
+    [X] add timeSinceStartedMovingUp to BallData
+    [X] lastBounceAirborneTime to BallData
 
-[ ] calculate airborne-time from time between sent moveCommands (might be useful?)
+[ ] add ballIsMovingUp property to BallData
+
+[ ] maybe make gradient descent lines stand out a little bit more
+
+[ ] add radar style turning radius with fade to ball position visualization
+
+[ ] heatmap of plate hit positions
+    -> maybe combined with fast forward?
+
+[ ] add some sort of index of all the things that will be featured in the video.
+    show it in full first, than show the current thing only (e.g. "0: flexing")
+    -> display current ball control strategy
+
 [ ] look at ball velocity right after ball hit and use past airborne-time to predict where the ball will be coming down
     Use all this information to get the tilt right on down-movement
     [ ] smaller up/down movement possible with this approach?
-    
-[ ] add some sort of index of all the things that will be featured in the video.
-    show it in full first, than show the current thing only (e.g. "0: flexing")
-    
-[ ] add radar style turning radius with fade to ball position visualization
     
 [ ] circle bouncing with moving PID center
 
@@ -55,7 +65,6 @@ memo:
 [ ] velocity correction every bounce but p-correction alternating between x and y
 [ ] bring ball to halt by catching it softly.
 [ ] implement shallow bouncing
-[ ] heatmap of plate hit positions
 [ ] try to hit the ball a bit faster now that the plate has become lighter  
 [ ] maybe hit ball without upwards motion when the ball moves very fast to get it under control faster.
 
@@ -63,10 +72,6 @@ memo:
     Not really needed since there's normally not much noise in the video stream. But it'd be a nice to have.
     Just in case. Or for demos where there's a hand showing.
 
-[ ] implement on-collision-with-plate-ball-position-estimation in gradient descent (using moving up time)
-    Seems like a nice to have at this moment in time
-    
-[ ] display the current BallControlStrategy
 [ ] make radius result of image processing more precise (results differ from center to edge)
 
 [X] check whether or not the tilt is constant when moving up with tilted plate

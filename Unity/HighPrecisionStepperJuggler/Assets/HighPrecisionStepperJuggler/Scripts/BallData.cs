@@ -10,8 +10,20 @@ namespace HighPrecisionStepperJuggler
         private float _timeAtReset;
         private Vector3 _lastFramePositionVector;
 
+        public bool BallIsMovingUp => _ballIsMovingUp;
+        private bool _ballIsMovingUp;
+        
+        public float AirborneTime => _airborneTime;
+        private float _airborneTime;
+
+        public float TimeSinceLastBounce => (Time.realtimeSinceStartup - _collisionTime);
+        public float PredictedTimeTillNextBounce => _airborneTime - TimeSinceLastBounce;
+        
+        private float _collisionTime;
+
         private GradientDescent _gradientDescentX;
         private GradientDescent _gradientDescentY;
+        private GradientDescent _gradientDescentZ;
 
         // current ball position in [mm]
         public Vector3 CurrentPositionVector => _currentPositionVector;
@@ -30,12 +42,15 @@ namespace HighPrecisionStepperJuggler
         private VelocityDebugView _velocityDebugView;
 
         public BallData(VelocityDebugView velocityDebugView, 
-            GradientDescent gradientDescentX, GradientDescent gradientDescentY)
+            GradientDescent gradientDescentX, 
+            GradientDescent gradientDescentY, 
+            GradientDescent gradientDescentZ)
         {
             _velocityDebugView = velocityDebugView;
             
             _gradientDescentX = gradientDescentX;
             _gradientDescentY = gradientDescentY;
+            _gradientDescentZ = gradientDescentZ;
         }
 
         public void UpdateData(Vector3 positionVector, Vector3 velocityVector)
@@ -43,8 +58,19 @@ namespace HighPrecisionStepperJuggler
             _currentPositionVector = positionVector;
             _currentVelocityVector = velocityVector;
 
-            _velocityDebugView.Vx = velocityVector.x.ToString("0.000");
-            _velocityDebugView.Vy = velocityVector.y.ToString("0.000");
+            _velocityDebugView.Vx = AirborneTime.ToString("0.000");
+            _velocityDebugView.Vy = PredictedTimeTillNextBounce.ToString("0.000");
+
+            var ballWasMovingUpLastFrame = _ballIsMovingUp;
+            _ballIsMovingUp = _gradientDescentZ.Hypothesis.Parameters.Theta_1 > 0.0f;
+
+            if (!ballWasMovingUpLastFrame && _ballIsMovingUp)
+            {
+                // ball has hit the plate and is now moving up again
+                _airborneTime = Time.realtimeSinceStartup - _collisionTime;
+                
+                _collisionTime = Time.realtimeSinceStartup;
+            }
         }
     }
 }
