@@ -28,7 +28,9 @@ memo:
 [X] add beginGroup for better moveabillity of the GUI
 [X] toggle debug buttons on/off with F2
 
-[ ] make gradientDescent-Line actually as long as it should be (10 data points, with the current setting)
+[X] make gradientDescent-Line actually as long as it should be (10 data points, with the current setting)
+[X] make gradientDescent-Line have the correct slope for the current timeScale value
+[ ] create view class for gradientDescent-Line
 
 [ ] look at height gradient descent slope changing from + to - to determine airborne time
 
