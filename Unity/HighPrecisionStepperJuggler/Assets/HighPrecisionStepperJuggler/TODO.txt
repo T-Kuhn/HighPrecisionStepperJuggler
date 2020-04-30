@@ -26,7 +26,7 @@ memo:
     
 [X] add labeled area to buttons
 [X] add beginGroup for better moveabillity of the GUI
-[ ] toggle debug buttons on/off with F2
+[X] toggle debug buttons on/off with F2
 
 [ ] make gradientDescent-Line actually as long as it should be (10 data points, with the current setting)
 

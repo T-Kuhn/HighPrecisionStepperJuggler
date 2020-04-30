@@ -8155,6 +8155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _font: {fileID: 12800000, guid: fca2c7d9a6230534bb186a1f4663e4be, type: 3}
+  _gradientDescentViewX: {fileID: 209730450}
+  _gradientDescentViewY: {fileID: 1328164682}
+  _gradientDescentViewZ: {fileID: 1075240418}
 --- !u!4 &1782564079
 Transform:
   m_ObjectHideFlags: 0
