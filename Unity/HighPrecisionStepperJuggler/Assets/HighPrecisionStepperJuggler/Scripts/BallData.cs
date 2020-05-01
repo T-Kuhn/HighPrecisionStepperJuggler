@@ -39,14 +39,14 @@ namespace HighPrecisionStepperJuggler
         private Vector3 _currentPositionVector = Vector3.zero;
         private Vector3 _currentVelocityVector = Vector3.zero;
 
-        private VelocityDebugView _velocityDebugView;
+        private BallDataDebugView _ballDataDebugView;
 
-        public BallData(VelocityDebugView velocityDebugView, 
+        public BallData(BallDataDebugView ballDataDebugView, 
             GradientDescent gradientDescentX, 
             GradientDescent gradientDescentY, 
             GradientDescent gradientDescentZ)
         {
-            _velocityDebugView = velocityDebugView;
+            _ballDataDebugView = ballDataDebugView;
             
             _gradientDescentX = gradientDescentX;
             _gradientDescentY = gradientDescentY;
@@ -58,9 +58,6 @@ namespace HighPrecisionStepperJuggler
             _currentPositionVector = positionVector;
             _currentVelocityVector = velocityVector;
 
-            _velocityDebugView.Vx = AirborneTime.ToString("0.000");
-            _velocityDebugView.Vy = PredictedTimeTillNextBounce.ToString("0.000");
-
             var ballWasMovingUpLastFrame = _ballIsMovingUp;
             _ballIsMovingUp = _gradientDescentZ.Hypothesis.Parameters.Theta_1 > 0.0f;
 
@@ -71,6 +68,9 @@ namespace HighPrecisionStepperJuggler
                 
                 _collisionTime = Time.realtimeSinceStartup;
             }
+            
+            _ballDataDebugView.AirborneTime = AirborneTime.ToString("0.00");
+            _ballDataDebugView.TimeTillNextHit = PredictedTimeTillNextBounce.ToString("0.00");
         }
     }
 }

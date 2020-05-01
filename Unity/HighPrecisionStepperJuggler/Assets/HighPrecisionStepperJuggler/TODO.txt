@@ -28,7 +28,7 @@ memo:
 [X] add beginGroup for better moveabillity of the GUI
 [X] toggle debug buttons on/off with F2
 
-[ ] change velocity debug view and use it for airborneTime maybe?
+[ ] repurpose the velocity debug view and use it for PredictTimeTillNextBounce and AirborneTime
 
 [X] make gradientDescent-Line actually as long as it should be (10 data points, with the current setting)
 [X] make gradientDescent-Line have the correct slope for the current timeScale value
@@ -37,7 +37,7 @@ memo:
     [X] add timeSinceStartedMovingUp to BallData
     [X] lastBounceAirborneTime to BallData
 
-[ ] add ballIsMovingUp property to BallData
+[X] add ballIsMovingUp property to BallData
 
 [ ] maybe make gradient descent lines stand out a little bit more
 

@@ -3008,7 +3008,7 @@ GameObject:
   - component: {fileID: 515650615}
   - component: {fileID: 515650614}
   m_Layer: 5
-  m_Name: velocity x
+  m_Name: Airborne Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3051,7 +3051,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'velocity x: '
+  m_text: 'Airborne Time: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1dad86d0376ac3c4a845f8b65f3fb011, type: 2}
   m_sharedMaterial: {fileID: -2027958310236546919, guid: 1dad86d0376ac3c4a845f8b65f3fb011,
@@ -3121,7 +3121,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 515650614}
-    characterCount: 12
+    characterCount: 15
     spriteCount: 0
     spaceCount: 2
     wordCount: 2
@@ -5503,7 +5503,7 @@ GameObject:
   - component: {fileID: 1157850148}
   - component: {fileID: 1157850147}
   m_Layer: 5
-  m_Name: velocity y
+  m_Name: Predicted Time Till Next Bounce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5546,7 +5546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'velocity y: '
+  m_text: 'Time Till Next Bounce: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1dad86d0376ac3c4a845f8b65f3fb011, type: 2}
   m_sharedMaterial: {fileID: -2027958310236546919, guid: 1dad86d0376ac3c4a845f8b65f3fb011,
@@ -5616,10 +5616,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1157850147}
-    characterCount: 12
+    characterCount: 23
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 2
+    spaceCount: 4
+    wordCount: 4
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -7521,7 +7521,7 @@ GameObject:
   - component: {fileID: 1550650621}
   - component: {fileID: 1550650620}
   m_Layer: 5
-  m_Name: Ball Velocity Debug
+  m_Name: BallData Debug View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7539,8 +7539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3112f729dd6dc9c4dad3edec8b682f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _vx: {fileID: 515650614}
-  _vy: {fileID: 1157850147}
+  _upperTMP: {fileID: 515650614}
+  _lowerTMP: {fileID: 1157850147}
 --- !u!114 &1550650621
 MonoBehaviour:
   m_ObjectHideFlags: 0

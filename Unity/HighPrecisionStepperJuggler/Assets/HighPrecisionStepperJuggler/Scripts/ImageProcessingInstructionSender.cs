@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using HighPrecisionStepperJuggler.MachineLearning;
 using UnityEngine;
+using UnityEngine.Serialization;
 using c = HighPrecisionStepperJuggler.Constants;
 
 namespace HighPrecisionStepperJuggler
@@ -10,7 +11,7 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private UVCCameraPlugin _cameraPlugin;
         [SerializeField] private MachineController _machineController;
         [SerializeField] private BallPositionVisualizer _ballPositionVisualizer;
-        [SerializeField] private VelocityDebugView _velocityDebugView;
+        [FormerlySerializedAs("_velocityDebugView")] [SerializeField] private BallDataDebugView _ballDataDebugView;
         [SerializeField] private GradientDescentView _gradientDescentViewX;
         [SerializeField] private GradientDescentView _gradientDescentViewY;
         [SerializeField] private GradientDescentView _gradientDescentViewZ;
@@ -34,7 +35,7 @@ namespace HighPrecisionStepperJuggler
 
         private void Start()
         {
-            _ballData = new BallData(_velocityDebugView, _gradientDescentX, _gradientDescentY, _gradientDescentZ);
+            _ballData = new BallData(_ballDataDebugView, _gradientDescentX, _gradientDescentY, _gradientDescentZ);
 
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.05f));
