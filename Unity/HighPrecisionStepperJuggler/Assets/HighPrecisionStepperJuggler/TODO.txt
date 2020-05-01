@@ -15,36 +15,10 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-[X] add height gradient descent
-[X] add height gradient descent view to coordinate system
-[X] make height datapoints appear in the background
-
-[X] add debug buttons to set the time axis scale (maybe make the transition smooth)
-    [X] we need 4 buttons above the visualization
-    [X] change timeScale with buttons 
-    [X] change timeScale with tween
-    
-[X] add labeled area to buttons
-[X] add beginGroup for better moveabillity of the GUI
-[X] toggle debug buttons on/off with F2
-
-[ ] repurpose the velocity debug view and use it for PredictTimeTillNextBounce and AirborneTime
-
-[X] make gradientDescent-Line actually as long as it should be (10 data points, with the current setting)
-[X] make gradientDescent-Line have the correct slope for the current timeScale value
-
-[X] look at height gradient descent slope changing from + to - to determine airborne time
-    [X] add timeSinceStartedMovingUp to BallData
-    [X] lastBounceAirborneTime to BallData
-
-[X] add ballIsMovingUp property to BallData
-
-[ ] maybe make gradient descent lines stand out a little bit more
+[ ] add "predictedHitPosition vs. actual hit position heatmap"-view
+    [ ] maybe make the predicted position toggle-able
 
 [ ] add radar style turning radius with fade to ball position visualization
-
-[ ] heatmap of plate hit positions
-    -> maybe combined with fast forward?
 
 [ ] add some sort of index of all the things that will be featured in the video.
     show it in full first, than show the current thing only (e.g. "0: flexing")
@@ -55,6 +29,7 @@ memo:
     [ ] smaller up/down movement possible with this approach?
     
 [ ] circle bouncing with moving PID center
+[ ] maybe make gradient descent lines stand out a little bit more
 
 [ ] 2 ball bouncing
     [ ] implemented code needed for this

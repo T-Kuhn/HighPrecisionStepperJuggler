@@ -3443,7 +3443,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629492548}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6579,7 +6579,7 @@ MonoBehaviour:
   _cameraPlugin: {fileID: 807047506}
   _machineController: {fileID: 1395260052}
   _ballPositionVisualizer: {fileID: 602902452}
-  _velocityDebugView: {fileID: 1550650620}
+  _ballDataDebugView: {fileID: 1550650620}
   _gradientDescentViewX: {fileID: 209730450}
   _gradientDescentViewY: {fileID: 1328164682}
   _gradientDescentViewZ: {fileID: 1075240418}
@@ -7539,8 +7539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3112f729dd6dc9c4dad3edec8b682f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _upperTMP: {fileID: 515650614}
-  _lowerTMP: {fileID: 1157850147}
+  _upperTmp: {fileID: 515650614}
+  _lowerTmp: {fileID: 1157850147}
 --- !u!114 &1550650621
 MonoBehaviour:
   m_ObjectHideFlags: 0
