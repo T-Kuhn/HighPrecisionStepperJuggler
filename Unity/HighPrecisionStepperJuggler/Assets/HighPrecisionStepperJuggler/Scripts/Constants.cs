@@ -38,6 +38,10 @@ namespace HighPrecisionStepperJuggler
         // PD Controller
         public static float k_p = 0.001f;
         public static float k_d = 0.0001f;
+        
+        // 2 step bouncing PD Controller parameters
+        public static float twoStep_k_p = 0.0005f;
+        public static float twoStep_k_d = 0.00005f;
 
         public static float BallVisualizationFadeOutTime = 0.2f;
         public static float SmallBallVisualizationFadeOutTime = 5f;

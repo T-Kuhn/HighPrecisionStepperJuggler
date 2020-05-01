@@ -17,7 +17,7 @@ namespace HighPrecisionStepperJuggler
         private float _airborneTime;
 
         public float TimeSinceLastBounce => (Time.realtimeSinceStartup - _collisionTime);
-        public float PredictedTimeTillNextBounce => _airborneTime - TimeSinceLastBounce;
+        public float PredictedTimeTillNextHit => _airborneTime - TimeSinceLastBounce;
         
         private float _collisionTime;
 
@@ -30,6 +30,13 @@ namespace HighPrecisionStepperJuggler
 
         // current ball velocity in [mm/s]
         public Vector3 CurrentVelocityVector => _currentVelocityVector;
+
+
+        private Vector2 _predictedPositionVectorOnHit = Vector3.zero;
+        public Vector2 PredictedPositionVectorOnHit => _predictedPositionVectorOnHit;
+        
+        private Vector2 _predictedVelocityVectorOnHit = Vector2.zero;
+        public Vector2 PredictedVelocityVectorOnHit => _predictedVelocityVectorOnHit;
 
         public Vector3 CurrentUnityPositionVector => new Vector3(
                                                          _currentPositionVector.x,
@@ -65,12 +72,22 @@ namespace HighPrecisionStepperJuggler
             {
                 // ball has hit the plate and is now moving up again
                 _airborneTime = Time.realtimeSinceStartup - _collisionTime;
-                
+
                 _collisionTime = Time.realtimeSinceStartup;
             }
-            
+
             _ballDataDebugView.AirborneTime = AirborneTime.ToString("0.00");
-            _ballDataDebugView.TimeTillNextHit = PredictedTimeTillNextBounce.ToString("0.00");
+            _ballDataDebugView.TimeTillNextHit = PredictedTimeTillNextHit.ToString("0.00");
+
+            _predictedPositionVectorOnHit = new Vector2(
+                _gradientDescentX.Hypothesis.Parameters.Theta_1 * PredictedTimeTillNextHit,
+                _gradientDescentY.Hypothesis.Parameters.Theta_1 * PredictedTimeTillNextHit
+            );
+
+            _predictedVelocityVectorOnHit = new Vector2(
+                velocityVector.x,
+                velocityVector.y
+            );
         }
     }
 }
