@@ -19,26 +19,6 @@ namespace HighPrecisionStepperJuggler
                 script.GoToOrigin();
             }
 
-            if (GUILayout.Button("leveling at 10mm: right", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.01f, 0.001f, 0f, 0.2f, true));
-            }
-
-            if (GUILayout.Button("leveling at 10mm: left", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.01f, -0.001f, 0f, 0.2f, true));
-            }
-
-            if (GUILayout.Button("leveling at 10mm: front", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.01f, 0f, 0.001f, 0.2f, true));
-            }
-
-            if (GUILayout.Button("leveling at 10mm: back", GUILayout.Width(200)))
-            {
-                script.SendSingleInstruction(new HLInstruction(0.01f, 0f, -0.001f, 0.2f, true));
-            }
-
             if (GUILayout.Button("Go to height: 10mm", GUILayout.Width(200)))
             {
                 script.SendSingleInstruction(new HLInstruction(0.01f, 0f, 0f, 0.15f));
@@ -62,7 +42,7 @@ namespace HighPrecisionStepperJuggler
             {
                 script.SendInstructions(new List<HLInstruction>()
                 {
-                    new HLInstruction(0.02f, 1f, 0f, 5.0f),
+                    new HLInstruction(0.02f, 1f, 0f, 0.2f),
                 });
             }
 
@@ -70,7 +50,7 @@ namespace HighPrecisionStepperJuggler
             {
                 script.SendInstructions(new List<HLInstruction>()
                 {
-                    new HLInstruction(0.02f, 2f, 0f, 5.0f),
+                    new HLInstruction(0.02f, 2f, 0f, 0.2f),
                 });
             }
             
@@ -78,15 +58,15 @@ namespace HighPrecisionStepperJuggler
             {
                 script.SendInstructions(new List<HLInstruction>()
                 {
-                    new HLInstruction(0.02f, 3f, 0f, 5.0f),
+                    new HLInstruction(0.02f, 3f, 0f, 0.2f),
                 });
             }
-            
-            if (GUILayout.Button("20mm tilt right 5 degrees", GUILayout.Width(200)))
+
+            if (GUILayout.Button("20mm tilt right 3 deg, front 3 deg", GUILayout.Width(200)))
             {
                 script.SendInstructions(new List<HLInstruction>()
                 {
-                    new HLInstruction(0.02f, 5f, 0f, 5.0f),
+                    new HLInstruction(0.02f, 3f, 3f, 0.2f),
                 });
             }
 
