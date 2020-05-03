@@ -58,19 +58,35 @@ namespace HighPrecisionStepperJuggler
                 });
             }
 
-            if (GUILayout.Button("20mm tilt right", GUILayout.Width(200)))
+            if (GUILayout.Button("20mm tilt right 1 degree", GUILayout.Width(200)))
             {
                 script.SendInstructions(new List<HLInstruction>()
                 {
-                    new HLInstruction(0.02f, 0.1f, 0f, 5.0f),
+                    new HLInstruction(0.02f, 1f, 0f, 5.0f),
                 });
             }
 
-            if (GUILayout.Button("80mm tilt right", GUILayout.Width(200)))
+            if (GUILayout.Button("20mm tilt right 2 degree", GUILayout.Width(200)))
             {
                 script.SendInstructions(new List<HLInstruction>()
                 {
-                    new HLInstruction(0.08f, 0.1f, 0f, 5.0f),
+                    new HLInstruction(0.02f, 2f, 0f, 5.0f),
+                });
+            }
+            
+            if (GUILayout.Button("20mm tilt right 3 degree", GUILayout.Width(200)))
+            {
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, 3f, 0f, 5.0f),
+                });
+            }
+            
+            if (GUILayout.Button("20mm tilt right 5 degrees", GUILayout.Width(200)))
+            {
+                script.SendInstructions(new List<HLInstruction>()
+                {
+                    new HLInstruction(0.02f, 5f, 0f, 5.0f),
                 });
             }
 

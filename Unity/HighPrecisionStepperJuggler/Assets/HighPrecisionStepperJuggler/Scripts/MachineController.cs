@@ -42,22 +42,22 @@ namespace HighPrecisionStepperJuggler
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                SendSingleInstruction(new HLInstruction(0.01f, 0f, 0.001f, 0.2f, true));
+                SendSingleInstruction(new HLInstruction(0.01f, 0f, 0.1f, 0.2f, true));
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                SendSingleInstruction(new HLInstruction(0.01f, 0f, -0.001f, 0.2f, true));
+                SendSingleInstruction(new HLInstruction(0.01f, 0f, -0.1f, 0.2f, true));
             }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                SendSingleInstruction(new HLInstruction(0.01f, 0.001f, 0f, 0.2f, true));
+                SendSingleInstruction(new HLInstruction(0.01f, 0.1f, 0f, 0.2f, true));
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                SendSingleInstruction(new HLInstruction(0.01f, -0.001f, 0f, 0.2f, true));
+                SendSingleInstruction(new HLInstruction(0.01f, -0.1f, 0f, 0.2f, true));
             }
 
             if (Input.GetKeyDown(KeyCode.O))

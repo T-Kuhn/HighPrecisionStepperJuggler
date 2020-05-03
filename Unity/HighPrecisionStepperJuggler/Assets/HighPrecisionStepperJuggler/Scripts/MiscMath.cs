@@ -18,14 +18,14 @@ namespace HighPrecisionStepperJuggler
         public static float HeightDifferenceFromTilt(float tilt)
         {
             var h = c.PlateWidth;
-            var o = Mathf.Sin(tilt) * h;
+            var o = Mathf.Sin(tilt * Mathf.Deg2Rad) * h;
             return o / 2f;
         }
 
         public static float WidthDifferenceFromTilt(float tilt)
         {
             var h = c.PlateWidth / 2f;
-            var a = Mathf.Cos(tilt) * h;
+            var a = Mathf.Cos(tilt * Mathf.Deg2Rad) * h;
             return a - h;
         }
     }

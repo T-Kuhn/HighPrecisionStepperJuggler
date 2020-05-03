@@ -30,18 +30,18 @@ namespace HighPrecisionStepperJuggler
         public static readonly LLMachineState OriginMachineState = new HLMachineState(0f, 0f, 0f).Translate();
         public static readonly LLMachineState ZeroMachineState = new LLMachineState(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
 
-        public static float MaxTiltAngle = 0.05f;
-        public static float MinTiltAngle = -0.05f;
+        public static float MaxTiltAngle = 5f;
+        public static float MinTiltAngle = -5f;
         public static float MaxPlateHeight = 90f;
         public static float MinPlateHeight = 0f;
 
         // PD Controller
-        public static float k_p = 0.001f;
-        public static float k_d = 0.0001f;
+        public static float k_p = 0.05f;
+        public static float k_d = 0.005f;
         
         // 2 step bouncing PD Controller parameters
-        public static float twoStep_k_p = 0.0005f;
-        public static float twoStep_k_d = 0.00005f;
+        public static float twoStep_k_p = 0.025f;
+        public static float twoStep_k_d = 0.0025f;
 
         public static float BallVisualizationFadeOutTime = 0.2f;
         public static float SmallBallVisualizationFadeOutTime = 5f;

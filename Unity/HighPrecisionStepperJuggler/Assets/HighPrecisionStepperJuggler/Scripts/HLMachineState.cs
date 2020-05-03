@@ -1,4 +1,6 @@
-﻿namespace HighPrecisionStepperJuggler
+﻿using UnityEngine;
+
+namespace HighPrecisionStepperJuggler
 {
     // High Level Machine State
     public struct HLMachineState
