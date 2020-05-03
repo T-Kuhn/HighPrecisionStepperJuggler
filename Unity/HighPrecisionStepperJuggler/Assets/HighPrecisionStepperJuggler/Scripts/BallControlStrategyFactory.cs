@@ -84,6 +84,7 @@ namespace HighPrecisionStepperJuggler
                     {
                         new HLInstruction(0.058f, xCorrection, yCorrection, moveTime),
                     });
+                    Debug.Log("current ball position vector: " + ballData.CurrentPositionVector);
 
                     currentPositionIsUp = true;
                     // instructionSent: true
@@ -96,6 +97,8 @@ namespace HighPrecisionStepperJuggler
                     // so if the ball IS moving up, and the last thing we did was hitting the ball, then we should move down again
                     var p_x = -ballData.PredictedPositionVectorOnHit.x * c.twoStep_k_p;
                     var p_y = ballData.PredictedPositionVectorOnHit.y * c.twoStep_k_p;
+                    
+                    Debug.Log("predicted ball position vector: " + ballData.PredictedPositionVectorOnHit);
 
                     // mean velocity of ball:
                     var velocityVector = ballData.PredictedVelocityVectorOnHit;

@@ -43,8 +43,6 @@ namespace HighPrecisionStepperJuggler.MachineLearning
                 _hypothesis.Update(_trainingSets);
             }
         }
-
-        // public GetEstimateForXEquals(float x);
     }
 }
 

@@ -80,8 +80,8 @@ namespace HighPrecisionStepperJuggler
             _ballDataDebugView.TimeTillNextHit = PredictedTimeTillNextHit.ToString("0.00");
 
             _predictedPositionVectorOnHit = new Vector2(
-                _gradientDescentX.Hypothesis.Parameters.Theta_1 * PredictedTimeTillNextHit,
-                _gradientDescentY.Hypothesis.Parameters.Theta_1 * PredictedTimeTillNextHit
+                _currentPositionVector.x + _gradientDescentX.Hypothesis.Parameters.Theta_1 * PredictedTimeTillNextHit,
+                _currentPositionVector.y + _gradientDescentY.Hypothesis.Parameters.Theta_1 * PredictedTimeTillNextHit
             );
 
             _predictedVelocityVectorOnHit = new Vector2(
