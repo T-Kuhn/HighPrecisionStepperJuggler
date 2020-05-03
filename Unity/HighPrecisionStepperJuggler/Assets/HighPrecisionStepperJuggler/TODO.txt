@@ -15,25 +15,14 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-[X] PredictedHitPosition visualization
-
-[X] look at ball velocity right after ball hit and use past airborne-time to predict where the ball will be coming down
-    Use all this information to get the tilt right on down-movement
-    [X] smaller up/down movement possible with this approach? -> tested.
-
-[X] change the tilt-input from radians to degrees
-[X] check if the x and y tilts are still correct when applied together
-[ ] check whether it is save to use higher tilt cap min/max values
-[ ] add Debug.Log message when the tilt is getting capped
-[ ] test whether or not we're able to get the thing working with a higher baud rate for better responsability 
+[X] test whether or not we're able to get the thing working with a higher baud rate for better responsability 
 
 [ ] implement analytical tilt controller
     [ ] work out math on paper
 [X] test whether the downwards ball velocity before hit (whith a 0.6s period) is 2.9 m/s as expected -> was OK.
-
-
     
 [ ] show PID target positions in gradient descent view
+
 [ ] add radar style turning radius with fade to ball position visualization
 
 [ ] add some sort of index of all the things that will be featured in the video.
@@ -43,6 +32,7 @@ memo:
 [ ] circle bouncing with moving PID center
 [ ] maybe make gradient descent lines stand out a little bit more
 
+[ ] add Debug.Log message when the tilt is getting capped
 [ ] 2 ball bouncing
     [ ] implemented code needed for this
     [ ] might be possible with Continuous2StepBouncingLow
