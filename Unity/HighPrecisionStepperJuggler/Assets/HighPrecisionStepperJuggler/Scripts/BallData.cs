@@ -33,8 +33,15 @@ namespace HighPrecisionStepperJuggler
 
 
         private Vector2 _predictedPositionVectorOnHit = Vector3.zero;
-        public Vector2 PredictedPositionVectorOnHit => _predictedPositionVectorOnHit;
-        
+        public Vector2 PredictedPositionVectorOnHit
+        {
+            get
+            {
+                _predictedPositionVisualizer.Visualize(_predictedPositionVectorOnHit);
+                return _predictedPositionVectorOnHit;
+            }
+        }
+
         private Vector2 _predictedVelocityVectorOnHit = Vector2.zero;
         public Vector2 PredictedVelocityVectorOnHit => _predictedVelocityVectorOnHit;
 
@@ -47,13 +54,17 @@ namespace HighPrecisionStepperJuggler
         private Vector3 _currentVelocityVector = Vector3.zero;
 
         private BallDataDebugView _ballDataDebugView;
+        private PredictedPositionVisualizer _predictedPositionVisualizer;
 
-        public BallData(BallDataDebugView ballDataDebugView, 
+        public BallData(
+            BallDataDebugView ballDataDebugView, 
+            PredictedPositionVisualizer predictedPositionVisualizer,
             GradientDescent gradientDescentX, 
             GradientDescent gradientDescentY, 
             GradientDescent gradientDescentZ)
         {
             _ballDataDebugView = ballDataDebugView;
+            _predictedPositionVisualizer = predictedPositionVisualizer;
             
             _gradientDescentX = gradientDescentX;
             _gradientDescentY = gradientDescentY;

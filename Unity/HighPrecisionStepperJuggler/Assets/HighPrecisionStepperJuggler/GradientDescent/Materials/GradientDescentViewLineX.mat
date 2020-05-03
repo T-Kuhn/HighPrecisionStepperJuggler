@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: GradientDescentViewLineX
   m_Shader: {fileID: 4800000, guid: c4edd00ff2db5b24391a4fcb1762e459, type: 3}
-  m_ShaderKeywords: _BLENDMODE_ADD _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _BLENDMODE_ADD _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -160,7 +160,7 @@ Material:
     - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
-    - _EnableFogOnTransparent: 1
+    - _EnableFogOnTransparent: 0
     - _EnableGeometricSpecularAA: 0
     - _EnableSpecularOcclusion: 0
     - _EnergyConservingSpecularColor: 1

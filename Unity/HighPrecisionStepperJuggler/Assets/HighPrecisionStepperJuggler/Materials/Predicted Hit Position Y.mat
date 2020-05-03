@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GradientDescentDataPointZ
+  m_Name: Predicted Hit Position Y
   m_Shader: {fileID: 4800000, guid: c4edd00ff2db5b24391a4fcb1762e459, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _BLENDMODE_ADD _SURFACE_TYPE_TRANSPARENT _TERRAIN_INSTANCED_PERPIXEL_NORMAL
+  m_ShaderKeywords: _BLENDMODE_ADD _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -17,15 +17,11 @@ Material:
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
-  - MOTIONVECTORS
   - DistortionVectors
+  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -111,16 +107,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UnlitColorMap:
-        m_Texture: {fileID: 2800000, guid: 2eca061b7eabe1940b7930815473b610, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9cc1cb262a87e904097e45323b53bad5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - PixelSnap: 0
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
     - _AlbedoAffectEmissive: 0
-    - _AlphaCutoff: 0.5
+    - _AlphaCutoff: 0.42
     - _AlphaCutoffEnable: 0
     - _AlphaCutoffPostpass: 0.5
     - _AlphaCutoffPrepass: 0.5
@@ -132,7 +127,7 @@ Material:
     - _CoatMask: 0
     - _CullMode: 2
     - _CullModeForward: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 0.42
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
@@ -165,11 +160,8 @@ Material:
     - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
-    - _EnableExternalAlpha: 0
     - _EnableFogOnTransparent: 0
     - _EnableGeometricSpecularAA: 0
-    - _EnableHeightBlend: 0
-    - _EnableInstancedPerPixelNormal: 1
     - _EnableSpecularOcclusion: 0
     - _EnergyConservingSpecularColor: 1
     - _HdrpVersion: 2
@@ -182,7 +174,6 @@ Material:
     - _HeightPoMAmplitude: 2
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
-    - _HeightTransition: 0
     - _IncludeIndirectLighting: 1
     - _InvTilingScale: 1
     - _Ior: 1
@@ -215,7 +206,7 @@ Material:
     - _StencilWriteMask: 3
     - _StencilWriteMaskDepth: 48
     - _StencilWriteMaskDistortionVec: 64
-    - _StencilWriteMaskGBuffer: 51
+    - _StencilWriteMaskGBuffer: 3
     - _StencilWriteMaskMV: 176
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
@@ -250,14 +241,12 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _UnlitColor: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
+    - _UnlitColor: {r: 1, g: 0.5654607, b: 0, a: 1}

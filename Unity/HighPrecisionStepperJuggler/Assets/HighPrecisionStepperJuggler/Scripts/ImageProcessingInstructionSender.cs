@@ -11,7 +11,8 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private UVCCameraPlugin _cameraPlugin;
         [SerializeField] private MachineController _machineController;
         [SerializeField] private BallPositionVisualizer _ballPositionVisualizer;
-        [FormerlySerializedAs("_velocityDebugView")] [SerializeField] private BallDataDebugView _ballDataDebugView;
+        [SerializeField] private BallDataDebugView _ballDataDebugView;
+        [SerializeField] private PredictedPositionVisualizer _predictedPositionVisualizer;
         [SerializeField] private GradientDescentView _gradientDescentViewX;
         [SerializeField] private GradientDescentView _gradientDescentViewY;
         [SerializeField] private GradientDescentView _gradientDescentViewZ;
@@ -35,8 +36,12 @@ namespace HighPrecisionStepperJuggler
 
         private void Start()
         {
-            _ballData = new BallData(_ballDataDebugView, _gradientDescentX, _gradientDescentY, _gradientDescentZ);
-            
+            _ballData = new BallData(
+                _ballDataDebugView,
+                _predictedPositionVisualizer,
+                _gradientDescentX, 
+                _gradientDescentY, 
+                _gradientDescentZ);
 
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.05f));
