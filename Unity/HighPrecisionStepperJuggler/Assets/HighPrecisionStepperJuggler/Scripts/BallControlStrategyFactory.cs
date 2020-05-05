@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HighPrecisionStepperJuggler.MachineLearning;
 using UnityEngine;
 using c = HighPrecisionStepperJuggler.Constants;
 
@@ -61,42 +62,19 @@ namespace HighPrecisionStepperJuggler
         public static IBallControlStrategy Continuous2StepBouncingWithAnalyticalController(int duration)
         {
             var currentPositionIsUp = false;
-            
-            // return value is in radians
-            float AngleBetween(Vector2 vector1, Vector2 vector2)
-            {
-                var sin = vector1.x * vector2.y - vector2.x * vector1.y;  
-                var cos = vector1.x * vector2.x + vector1.y * vector2.y;
-
-                return Mathf.Atan2(sin, cos);
-            }
 
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
                 if (!ballData.BallIsMovingUp && ballData.CurrentPositionVector.z < 140f && !currentPositionIsUp)
                 {
                     // if we're in here, the ball is coming downwards
-                    var velocity = ballData.CurrentVelocityVector;
-                    var v_i = new Vector3(
-                        velocity.x,
-                        velocity.y,
-                        -ballData.CalculatedOnBounceDownwardsVelocity);
-
-                    // FIXME: we assume that the control target is in the center of the plate,
-                    //        change this code in such a way that the target can be anywhere on the plate.
-                    var position = ballData.CurrentPositionVector;
-                    var v_o = new Vector3(
-                        -position.x / ballData.AirborneTime,
-                        -position.y / ballData.AirborneTime,
-                        ballData.CalculatedOnBounceDownwardsVelocity);
-
-                    var v_c = -v_i.normalized + v_o.normalized;
-
-                    var tiltX = -AngleBetween(Vector2.up, new Vector2(v_c.x, v_c.z).normalized) * Mathf.Rad2Deg;
-                    var tiltY = AngleBetween(Vector2.up, new Vector2(v_c.y, v_c.z).normalized) * Mathf.Rad2Deg;
-
-                    var xCorrection = instructionCount % 2 == 1 ? Mathf.Clamp(tiltX, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
-                    var yCorrection = instructionCount % 2 == 0 ? Mathf.Clamp(tiltY, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
+                    
+                    var position = new Vector2(ballData.CurrentPositionVector.x, ballData.CurrentPositionVector.y);
+                    var velocity = new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y);
+                    var tilt = TiltControlling.AnalyticallyDeterminedTilt(position, velocity, Vector2.zero, ballData);
+                    
+                    var xCorrection = instructionCount % 2 == 1 ? Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
+                    var yCorrection = instructionCount % 2 == 0 ? Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
 
                     var moveTime = 0.1f;
                     machineController.SendInstructions(new List<HLInstruction>()
@@ -113,27 +91,12 @@ namespace HighPrecisionStepperJuggler
                 {
                     // if we're in here, the ball is moving upwards
                     // so if the ball IS moving up, and the last thing we did was hitting the ball, then we should move down again
-                    var velocity = ballData.CurrentVelocityVector;
-                    var v_i = new Vector3(
-                        velocity.x,
-                        velocity.y,
-                        -ballData.CalculatedOnBounceDownwardsVelocity);
-
-                    // FIXME: we assume that the control target is in the center of the plate,
-                    //        change this code in such a way that the target can be anywhere on the plate.
                     var position = ballData.PredictedPositionVectorOnHit;
-                    var v_o = new Vector3(
-                        -position.x / ballData.AirborneTime,
-                        -position.y / ballData.AirborneTime,
-                        ballData.CalculatedOnBounceDownwardsVelocity);
+                    var velocity = new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y);
+                    var tilt = TiltControlling.AnalyticallyDeterminedTilt(position, velocity, Vector2.zero, ballData);
 
-                    var v_c = -v_i.normalized + v_o.normalized;
-
-                    var tiltX = -AngleBetween(Vector2.up, new Vector2(v_c.x, v_c.z).normalized) * Mathf.Rad2Deg;
-                    var tiltY = AngleBetween(Vector2.up, new Vector2(v_c.y, v_c.z).normalized) * Mathf.Rad2Deg;
-
-                    var xCorrection = instructionCount % 2 == 1 ? Mathf.Clamp(tiltX, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
-                    var yCorrection = instructionCount % 2 == 0 ? Mathf.Clamp(tiltY, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
+                    var xCorrection = instructionCount % 2 == 1 ? Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
+                    var yCorrection = instructionCount % 2 == 0 ? Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
                     
                     var moveTime = 0.1f;
                     machineController.SendInstructions(new List<HLInstruction>()

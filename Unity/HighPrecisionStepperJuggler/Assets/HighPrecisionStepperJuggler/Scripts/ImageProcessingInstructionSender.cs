@@ -59,14 +59,14 @@ namespace HighPrecisionStepperJuggler
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
             _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.05f));
             
-            // DEBUG
-            _ballControlStrategies.Add(BallControlStrategyFactory.Continuous2StepBouncingWithAnalyticalController(10000));
-            
             for (int i = 0; i < 5; i++)
             {
                 _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
                 _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
             }
+            
+            // DEBUG
+            _ballControlStrategies.Add(BallControlStrategyFactory.Continuous2StepBouncingWithAnalyticalController(10000));
 
             _ballControlStrategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(10000));
 

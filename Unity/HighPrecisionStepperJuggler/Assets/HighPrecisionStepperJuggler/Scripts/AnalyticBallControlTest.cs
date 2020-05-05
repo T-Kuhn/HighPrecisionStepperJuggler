@@ -33,7 +33,7 @@ public class AnalyticBallControlTest : MonoBehaviour
         var tiltX = -AngleBetween(Vector2.up, new Vector2(v_c.x, v_c.z));
         var tiltY = AngleBetween(Vector2.up, new Vector2(v_c.y, v_c.z));
         
-        Debug.Log("tiltX: " + tiltX);
-        Debug.Log("tiltY: " + tiltY);
+        //Debug.Log("tiltX: " + tiltX);
+        //Debug.Log("tiltY: " + tiltY);
     }
 }

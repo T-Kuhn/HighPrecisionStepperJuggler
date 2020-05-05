@@ -15,16 +15,20 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-[ ] test if we can get an improved "get ball bouncing" thing going
+[ ] refactor
+    [ ] put all the control stuff into a static class
+    [ ] refactor BallControlStrategyFactory with this
+    
 
-[ ] off-center bouncing
 [ ] show PID target positions in gradient descent view
+[ ] off-center bouncing
+
+[ ] "every bounce will be a bit higher"-bouncing
 
 [ ] circle bouncing with moving PID target
 
 [ ] color tilt visualization red whenever tilt was clamped
 
-[ ] "every bounce will be a bit higher"-bouncing
 
 [ ] add radar style turning radius with fade to ball position visualization
 [ ] add some sort of index of all the things that will be featured in the video.
@@ -36,7 +40,6 @@ memo:
     
 [ ] make it possible to show data of second ball
 
-
 [X] add Debug.Log message when the tilt is getting capped
 [ ] 2 ball bouncing
     [ ] implemented code needed for this
@@ -47,11 +50,7 @@ memo:
     
 [ ] add hit position heatmap
 [ ] freeze datapoint-stream on ball data used by PID?
-[ ] maybe implement some sort of self-learning PID supported algorithm (given speed and distance from center before impact)
-[ ] velocity correction every bounce but p-correction alternating between x and y
 [ ] bring ball to halt by catching it softly.
-[ ] implement shallow bouncing
-[ ] try to hit the ball a bit faster now that the plate has become lighter  
 [ ] maybe hit ball without upwards motion when the ball moves very fast to get it under control faster.
 
 [ ] maybe add a circleness check and discard detected object with a low circleness 
@@ -67,4 +66,5 @@ memo:
 // vid:
 [ ] front view, change to unity graphics, look around, ent up in top view, change to realtime video again (top view)
 [ ] start with short flex, then throwing ball onto machine
+[ ] get rid of 1 ball by tossing it to the side after doing 2-ball-bouncing for a while
 
