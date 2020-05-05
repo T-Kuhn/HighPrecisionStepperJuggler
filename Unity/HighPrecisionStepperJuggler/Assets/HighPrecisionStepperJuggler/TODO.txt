@@ -15,35 +15,26 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
+[ ] test if we can get an improved "get ball bouncing" thing going
 
-[X] 2-step bouncing might use before-bounce data to determine current speed and predicted hit position. fix this.
-   [X] 6 datapoint gradientDescent
-   [ ] +15ms till machineReady
-[X] 3-datapoint gradientDescent for height data to make it more responsive (more accurate hit timing).
+[ ] off-center bouncing
+[ ] show PID target positions in gradient descent view
 
-[ ] alternating x and y correction
-
-[ ] implement analytical tilt controller
-    [X] work out math on paper
-    [X] test -> needs refinement
-    [ ] refine
-        
-[X] test whether the downwards ball velocity before hit (whith a 0.6s period) is 2.9 m/s as expected -> was OK.
+[ ] circle bouncing with moving PID target
 
 [ ] color tilt visualization red whenever tilt was clamped
-    
-[ ] show PID target positions in gradient descent view
+
+[ ] "every bounce will be a bit higher"-bouncing
+
 [ ] add radar style turning radius with fade to ball position visualization
 [ ] add some sort of index of all the things that will be featured in the video.
     show it in full first, than show the current thing only (e.g. "0: flexing")
     -> display current ball control strategy
     
 [ ] make the ball position datapoint on bounce a different color for better debugging
-    [ ] need to first get a better ball bounce detection. The one we got currently is several frames delayed
+    [X] need to first get a better ball bounce detection. The one we got currently is several frames delayed
     
 [ ] make it possible to show data of second ball
-
-[ ] circle bouncing with moving PID target
 
 
 [X] add Debug.Log message when the tilt is getting capped

@@ -73,7 +73,7 @@ namespace HighPrecisionStepperJuggler
 
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
-                if (!ballData.BallIsMovingUp && ballData.CurrentPositionVector.z < 150f && !currentPositionIsUp)
+                if (!ballData.BallIsMovingUp && ballData.CurrentPositionVector.z < 140f && !currentPositionIsUp)
                 {
                     // if we're in here, the ball is coming downwards
                     var velocity = ballData.CurrentVelocityVector;
@@ -95,8 +95,8 @@ namespace HighPrecisionStepperJuggler
                     var tiltX = -AngleBetween(Vector2.up, new Vector2(v_c.x, v_c.z).normalized) * Mathf.Rad2Deg;
                     var tiltY = AngleBetween(Vector2.up, new Vector2(v_c.y, v_c.z).normalized) * Mathf.Rad2Deg;
 
-                    var xCorrection = Mathf.Clamp(tiltX, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(tiltY, c.MinTiltAngle, c.MaxTiltAngle);
+                    var xCorrection = instructionCount % 2 == 1 ? Mathf.Clamp(tiltX, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
+                    var yCorrection = instructionCount % 2 == 0 ? Mathf.Clamp(tiltY, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
 
                     var moveTime = 0.1f;
                     machineController.SendInstructions(new List<HLInstruction>()
@@ -132,9 +132,9 @@ namespace HighPrecisionStepperJuggler
                     var tiltX = -AngleBetween(Vector2.up, new Vector2(v_c.x, v_c.z).normalized) * Mathf.Rad2Deg;
                     var tiltY = AngleBetween(Vector2.up, new Vector2(v_c.y, v_c.z).normalized) * Mathf.Rad2Deg;
 
-                    var xCorrection = Mathf.Clamp(tiltX, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(tiltY, c.MinTiltAngle, c.MaxTiltAngle);
-
+                    var xCorrection = instructionCount % 2 == 1 ? Mathf.Clamp(tiltX, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
+                    var yCorrection = instructionCount % 2 == 0 ? Mathf.Clamp(tiltY, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
+                    
                     var moveTime = 0.1f;
                     machineController.SendInstructions(new List<HLInstruction>()
                     {
