@@ -21,7 +21,16 @@ namespace HighPrecisionStepperJuggler
             bool isFlexInstruction = false)
         {
             var tiltMaxMultiplier = isFlexInstruction ? 2f : 1f;
-            //Debug.Log("timestamp: " + Time.realtimeSinceStartup + ", xTilt: " + xTilt.ToString("0.00"));
+
+            if (xTilt > c.MaxTiltAngle || xTilt < c.MinTiltAngle)
+            {
+                Debug.Log("xTilt: " + xTilt + " was capped");
+            }
+
+            if (yTilt > c.MaxTiltAngle || yTilt < c.MinTiltAngle)
+            {
+                Debug.Log("yTilt: " + yTilt + " was capped");
+            }
 
             TargetHLMachineState = new HLMachineState(
                 Mathf.Clamp(height, c.MinPlateHeight, c.MaxPlateHeight),

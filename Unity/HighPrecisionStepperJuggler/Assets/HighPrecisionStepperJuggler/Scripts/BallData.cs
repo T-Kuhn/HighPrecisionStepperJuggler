@@ -13,7 +13,7 @@ namespace HighPrecisionStepperJuggler
         public bool BallIsMovingUp => _ballIsMovingUp;
         private bool _ballIsMovingUp;
         
-        public float AirborneTime => _airborneTime;
+        public float AirborneTime => Mathf.Clamp(_airborneTime, 0.1f, 2f);
         private float _airborneTime;
 
         public float TimeSinceLastBounce => (Time.realtimeSinceStartup - _collisionTime);
@@ -41,6 +41,9 @@ namespace HighPrecisionStepperJuggler
                 return _predictedPositionVectorOnHit;
             }
         }
+
+        // NOTE: the units are [mm/s] 
+        public float CalculatedOnBounceDownwardsVelocity => (AirborneTime * 9.81f) / 2f * 1000f;
 
         private Vector2 _predictedVelocityVectorOnHit = Vector2.zero;
         public Vector2 PredictedVelocityVectorOnHit => _predictedVelocityVectorOnHit;

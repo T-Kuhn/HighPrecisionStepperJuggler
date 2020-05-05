@@ -58,6 +58,100 @@ namespace HighPrecisionStepperJuggler
             }, duration);
         }
 
+        public static IBallControlStrategy Continuous2StepBouncingWithAnalyticalController(int duration)
+        {
+            var currentPositionIsUp = false;
+            
+            // return value is in radians
+            float AngleBetween(Vector2 vector1, Vector2 vector2)
+            {
+                var sin = vector1.x * vector2.y - vector2.x * vector1.y;  
+                var cos = vector1.x * vector2.x + vector1.y * vector2.y;
+
+                return Mathf.Atan2(sin, cos);
+            }
+
+            return new BallControlStrategy((ballData, machineController, instructionCount) =>
+            {
+                if (!ballData.BallIsMovingUp && ballData.CurrentPositionVector.z < 150f && !currentPositionIsUp)
+                {
+                    // if we're in here, the ball is coming downwards
+                    var velocity = ballData.CurrentVelocityVector;
+                    var v_i = new Vector3(
+                        velocity.x,
+                        velocity.y,
+                        -ballData.CalculatedOnBounceDownwardsVelocity);
+
+                    // FIXME: we assume that the control target is in the center of the plate,
+                    //        change this code in such a way that the target can be anywhere on the plate.
+                    var position = ballData.CurrentPositionVector;
+                    var v_o = new Vector3(
+                        -position.x / ballData.AirborneTime,
+                        -position.y / ballData.AirborneTime,
+                        ballData.CalculatedOnBounceDownwardsVelocity);
+
+                    var v_c = -v_i.normalized + v_o.normalized;
+
+                    var tiltX = -AngleBetween(Vector2.up, new Vector2(v_c.x, v_c.z).normalized) * Mathf.Rad2Deg;
+                    var tiltY = AngleBetween(Vector2.up, new Vector2(v_c.y, v_c.z).normalized) * Mathf.Rad2Deg;
+
+                    var xCorrection = Mathf.Clamp(tiltX, c.MinTiltAngle, c.MaxTiltAngle);
+                    var yCorrection = Mathf.Clamp(tiltY, c.MinTiltAngle, c.MaxTiltAngle);
+
+                    var moveTime = 0.1f;
+                    machineController.SendInstructions(new List<HLInstruction>()
+                    {
+                        new HLInstruction(0.058f, xCorrection, yCorrection, moveTime),
+                    });
+
+                    currentPositionIsUp = true;
+                    // instructionSent: true
+                    return true;
+                }
+
+                if (ballData.BallIsMovingUp && currentPositionIsUp)
+                {
+                    // if we're in here, the ball is moving upwards
+                    // so if the ball IS moving up, and the last thing we did was hitting the ball, then we should move down again
+                    var velocity = ballData.CurrentVelocityVector;
+                    var v_i = new Vector3(
+                        velocity.x,
+                        velocity.y,
+                        -ballData.CalculatedOnBounceDownwardsVelocity);
+
+                    // FIXME: we assume that the control target is in the center of the plate,
+                    //        change this code in such a way that the target can be anywhere on the plate.
+                    var position = ballData.PredictedPositionVectorOnHit;
+                    var v_o = new Vector3(
+                        -position.x / ballData.AirborneTime,
+                        -position.y / ballData.AirborneTime,
+                        ballData.CalculatedOnBounceDownwardsVelocity);
+
+                    var v_c = -v_i.normalized + v_o.normalized;
+
+                    var tiltX = -AngleBetween(Vector2.up, new Vector2(v_c.x, v_c.z).normalized) * Mathf.Rad2Deg;
+                    var tiltY = AngleBetween(Vector2.up, new Vector2(v_c.y, v_c.z).normalized) * Mathf.Rad2Deg;
+
+                    var xCorrection = Mathf.Clamp(tiltX, c.MinTiltAngle, c.MaxTiltAngle);
+                    var yCorrection = Mathf.Clamp(tiltY, c.MinTiltAngle, c.MaxTiltAngle);
+
+                    var moveTime = 0.1f;
+                    machineController.SendInstructions(new List<HLInstruction>()
+                    {
+                        new HLInstruction(0.05f, xCorrection, yCorrection, moveTime),
+                    });
+
+                    currentPositionIsUp = false;
+                    // instructionSent: false (even though we DID send a instruction.
+                    // This is because we don't want to count this instruction as a bounce instruction) 
+                    return false;
+                }
+
+                // instructionSent: false
+                return false;
+            }, duration);
+        }
+
         public static IBallControlStrategy Continuous2StepBouncing(int duration)
         {
             var currentPositionIsUp = false;
@@ -71,7 +165,7 @@ namespace HighPrecisionStepperJuggler
                     var p_x = -ballData.CurrentPositionVector.x * c.twoStep_k_p;
                     var p_y = ballData.CurrentPositionVector.y * c.twoStep_k_p;
 
-                    // mean velocity of ball:
+                    // velocity of ball:
                     var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.twoStep_k_d;
                     var d_y = velocityVector.y * c.twoStep_k_d;
@@ -84,7 +178,6 @@ namespace HighPrecisionStepperJuggler
                     {
                         new HLInstruction(0.058f, xCorrection, yCorrection, moveTime),
                     });
-                    Debug.Log("current ball position vector: " + ballData.CurrentPositionVector);
 
                     currentPositionIsUp = true;
                     // instructionSent: true
@@ -98,9 +191,7 @@ namespace HighPrecisionStepperJuggler
                     var p_x = -ballData.PredictedPositionVectorOnHit.x * c.twoStep_k_p;
                     var p_y = ballData.PredictedPositionVectorOnHit.y * c.twoStep_k_p;
                     
-                    Debug.Log("predicted ball position vector: " + ballData.PredictedPositionVectorOnHit);
-
-                    // mean velocity of ball:
+                    // velocity of ball:
                     var velocityVector = ballData.PredictedVelocityVectorOnHit;
                     var d_x = -velocityVector.x * c.twoStep_k_d;
                     var d_y = velocityVector.y * c.twoStep_k_d;
@@ -139,7 +230,7 @@ namespace HighPrecisionStepperJuggler
                     var p_x = -ballData.CurrentPositionVector.x * c.twoStep_k_p;
                     var p_y = ballData.CurrentPositionVector.y * c.twoStep_k_p;
 
-                    // mean velocity of ball:
+                    // velocity of ball:
                     var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.twoStep_k_d;
                     var d_y = velocityVector.y * c.twoStep_k_d;
@@ -165,7 +256,7 @@ namespace HighPrecisionStepperJuggler
                     var p_x = -ballData.PredictedPositionVectorOnHit.x * c.twoStep_k_p;
                     var p_y = ballData.PredictedPositionVectorOnHit.y * c.twoStep_k_p;
 
-                    // mean velocity of ball:
+                    // velocity of ball:
                     var velocityVector = ballData.PredictedVelocityVectorOnHit;
                     var d_x = -velocityVector.x * c.twoStep_k_d;
                     var d_y = velocityVector.y * c.twoStep_k_d;
@@ -201,7 +292,7 @@ namespace HighPrecisionStepperJuggler
                     var p_x = -ballData.CurrentPositionVector.x * c.k_p;
                     var p_y = ballData.CurrentPositionVector.y * c.k_p;
 
-                    // mean velocity of ball:
+                    // velocity of ball:
                     var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.k_d * 0.5f;
                     var d_y = velocityVector.y * c.k_d * 0.5f;
@@ -232,7 +323,7 @@ namespace HighPrecisionStepperJuggler
                     var p_x = -ballData.CurrentPositionVector.x * c.k_p;
                     var p_y = ballData.CurrentPositionVector.y * c.k_p;
 
-                    // mean velocity of ball:
+                    // velocity of ball:
                     var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.k_d;
                     var d_y = velocityVector.y * c.k_d;
@@ -276,7 +367,7 @@ namespace HighPrecisionStepperJuggler
                     var p_x = (position.x - ballData.CurrentPositionVector.x) * c.k_p;
                     var p_y = (position.y + ballData.CurrentPositionVector.y) * c.k_p;
 
-                    // mean velocity of ball:
+                    // velocity of ball:
                     var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.k_d;
                     var d_y = velocityVector.y * c.k_d;
@@ -310,7 +401,7 @@ namespace HighPrecisionStepperJuggler
                     var p_x = (position.x - ballData.CurrentPositionVector.x) * c.k_p;
                     var p_y = (position.y + ballData.CurrentPositionVector.y) * c.k_p;
 
-                    // mean velocity of ball:
+                    // velocity of ball:
                     var velocityVector = ballData.CurrentVelocityVector;
                     var d_x = -velocityVector.x * c.k_d;
                     var d_y = velocityVector.y * c.k_d;
