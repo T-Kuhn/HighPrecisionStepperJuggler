@@ -182,7 +182,8 @@ namespace HighPrecisionStepperJuggler
             {
                 _totalMoveTime += instruction.MoveTime;
             }
-            _totalMoveTime *= 1.1f;
+            //NOTE: we're adding 15ms to make sure that the microcontroller is done before new data gets sent.
+            _totalMoveTime += 0.015f;
             
             switch (_machineEndPoint)
             {

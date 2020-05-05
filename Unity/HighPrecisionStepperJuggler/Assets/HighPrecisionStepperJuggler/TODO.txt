@@ -15,12 +15,19 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
+
+[X] 2-step bouncing might use before-bounce data to determine current speed and predicted hit position. fix this.
+   [X] 6 datapoint gradientDescent
+   [ ] +15ms till machineReady
+[X] 3-datapoint gradientDescent for height data to make it more responsive (more accurate hit timing).
+
+[ ] alternating x and y correction
+
 [ ] implement analytical tilt controller
     [X] work out math on paper
     [X] test -> needs refinement
     [ ] refine
         
-    
 [X] test whether the downwards ball velocity before hit (whith a 0.6s period) is 2.9 m/s as expected -> was OK.
 
 [ ] color tilt visualization red whenever tilt was clamped
@@ -34,12 +41,10 @@ memo:
 [ ] make the ball position datapoint on bounce a different color for better debugging
     [ ] need to first get a better ball bounce detection. The one we got currently is several frames delayed
     
-[ ] 2-step bouncing might use before-bounce data to determine current speed and predicted hit position. fix this.
 [ ] make it possible to show data of second ball
 
 [ ] circle bouncing with moving PID target
 
-[ ] alternating x and y correction
 
 [X] add Debug.Log message when the tilt is getting capped
 [ ] 2 ball bouncing

@@ -48,10 +48,14 @@ namespace HighPrecisionStepperJuggler
         
         // GradientDescent
         public static int MaxNumberOfTrainingSets = 700;
-        public static int NumberOfTrainingSetsUsedForGD = 10;
+        public static int NumberOfTrainingSetsUsedForXYGD = 6;
+        public static int NumberOfTrainingSetsUsedForHeightGD = 3;
+        public static int NumberOfGDUpdateCyclesHeight = 2000;
+        public static int NumberOfGDUpdateCyclesXY = 1000;
         
         // alpha is what is often referred to as the "learning rate"
-        public static float Alpha = 0.1f;
+        public static float AlphaXY = 0.2f;
+        public static float AlphaHeight = 0.6f;
 
         public static Byte Threshold = 70;
 

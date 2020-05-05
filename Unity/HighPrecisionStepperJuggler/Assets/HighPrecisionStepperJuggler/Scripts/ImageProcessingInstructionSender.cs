@@ -17,9 +17,22 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private GradientDescentView _gradientDescentViewY;
         [SerializeField] private GradientDescentView _gradientDescentViewZ;
 
-        private readonly GradientDescent _gradientDescentX = new GradientDescent();
-        private readonly GradientDescent _gradientDescentY = new GradientDescent();
-        private readonly GradientDescent _gradientDescentZ = new GradientDescent();
+        private readonly GradientDescent _gradientDescentX = new GradientDescent(
+            Constants.NumberOfTrainingSetsUsedForXYGD,
+            Constants.NumberOfGDUpdateCyclesXY,
+            Constants.AlphaXY
+            );
+        private readonly GradientDescent _gradientDescentY = new GradientDescent(
+            Constants.NumberOfTrainingSetsUsedForXYGD,
+            Constants.NumberOfGDUpdateCyclesXY,
+            Constants.AlphaXY
+            );
+        
+        private readonly GradientDescent _gradientDescentZ = new GradientDescent(
+            Constants.NumberOfTrainingSetsUsedForHeightGD,
+            Constants.NumberOfGDUpdateCyclesHeight,
+            Constants.AlphaHeight
+            );
 
         private BallData _ballData;
         private int _currentStrategyIndex;

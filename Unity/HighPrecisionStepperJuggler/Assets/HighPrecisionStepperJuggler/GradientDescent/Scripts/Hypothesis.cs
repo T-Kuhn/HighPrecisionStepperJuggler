@@ -5,10 +5,17 @@ namespace HighPrecisionStepperJuggler.MachineLearning
     {
         public Parameters Parameters => _parameters;
         private Parameters _parameters;
+        private int _numberOfTrainingSetsUsedForGD;
+        private float _alpha;
 
-        public Hypothesis(Parameters initialParameters)
+        public Hypothesis(
+            Parameters initialParameters,
+            int numberOfTrainingSetsUsedForGD,
+            float alpha)
         {
             _parameters = initialParameters;
+            _numberOfTrainingSetsUsedForGD = numberOfTrainingSetsUsedForGD;
+            _alpha = alpha;
         }
 
         public float Execute(TrainingSet set)
@@ -25,20 +32,20 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         {
             var total = 0f;
 
-            for (int i = 0; i < Constants.NumberOfTrainingSetsUsedForGD; i++)
+            for (int i = 0; i < _numberOfTrainingSetsUsedForGD; i++)
             {
                 total += (Execute(trainingSets[i]) - trainingSets[i].y) * trainingSets[i].t_0;
             }
 
-            _parameters.Theta_0 -= Constants.Alpha * total;
+            _parameters.Theta_0 -= _alpha * total;
 
             total = 0f;
-            for (int i = 0; i < Constants.NumberOfTrainingSetsUsedForGD; i++)
+            for (int i = 0; i < _numberOfTrainingSetsUsedForGD; i++)
             {
                 total += (Execute(trainingSets[i]) - trainingSets[i].y) * trainingSets[i].t_1;
             }
 
-            _parameters.Theta_1 -= Constants.Alpha * total;
+            _parameters.Theta_1 -= _alpha * total;
         }
     }
 }

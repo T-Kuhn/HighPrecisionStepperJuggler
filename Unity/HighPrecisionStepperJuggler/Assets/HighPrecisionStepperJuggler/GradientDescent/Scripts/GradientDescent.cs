@@ -10,14 +10,19 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         public TrainingSet[] TrainingSets => _trainingSets;
         private TrainingSet[] _trainingSets;
 
+        public int NumberOfTrainingSetsUsedForGD => _numberOfTrainingSetsUsedForGD;
+        private int _numberOfTrainingSetsUsedForGD;
         public Hypothesis Hypothesis => _hypothesis;
         private Hypothesis _hypothesis;
+        private int _numberOfUpdateCycles;
 
-        public GradientDescent()
+        public GradientDescent(int numberOfTrainingSetsUsedForGD, int numberOfUpdateCycles, float alpha)
         {
             // NOTE: Newest training set at index 0
             _trainingSets = new TrainingSet[Constants.MaxNumberOfTrainingSets];
-            _hypothesis = new Hypothesis(new Parameters(0f, 0f));
+            _hypothesis = new Hypothesis(new Parameters(0f, 0f), numberOfTrainingSetsUsedForGD, alpha);
+            _numberOfTrainingSetsUsedForGD = numberOfTrainingSetsUsedForGD;
+            _numberOfUpdateCycles = numberOfUpdateCycles;
 
             for (int i = 0; i < Constants.MaxNumberOfTrainingSets; i++)
             {
@@ -38,7 +43,7 @@ namespace HighPrecisionStepperJuggler.MachineLearning
 
         public void UpdateHypothesis()
         {
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < _numberOfUpdateCycles; i++)
             {
                 _hypothesis.Update(_trainingSets);
             }

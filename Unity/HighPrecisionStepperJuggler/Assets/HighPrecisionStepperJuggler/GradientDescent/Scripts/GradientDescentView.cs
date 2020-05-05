@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using HighPrecisionStepperJuggler;
 using HighPrecisionStepperJuggler.MachineLearning;
 using UnityEngine;
 
@@ -58,7 +57,7 @@ public class GradientDescentView : MonoBehaviour
             }
         }
 
-        var timeOfLastDataPoint = sets[Constants.NumberOfTrainingSetsUsedForGD - 1].t_1 * _timeScaler;
+        var timeOfLastDataPoint = sets[_gradientDescent.NumberOfTrainingSetsUsedForGD - 1].t_1 * _timeScaler;
         _gradientDescentLine.transform.localScale = new Vector3(-timeOfLastDataPoint, 1f, 1f);
 
         var dir = DisplayDataOnYAxis ? Vector3.up : Vector3.right;
