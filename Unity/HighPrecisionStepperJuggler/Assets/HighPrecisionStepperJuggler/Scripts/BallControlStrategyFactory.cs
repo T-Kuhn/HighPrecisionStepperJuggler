@@ -7,45 +7,24 @@ namespace HighPrecisionStepperJuggler
 {
     public static class BallControlStrategyFactory
     {
-        public static IBallControlStrategy GetBouncing()
-        {
-            return new BallControlStrategy((ballData, machineController, instructionCount) =>
-            {
-                var moveTime = 0.1f;
-                machineController.SendInstructions(new List<HLInstruction>()
-                {
-                    new HLInstruction(0.02f, 0f, 0f, moveTime),
-                    new HLInstruction(0.05f, 0f, 0f, moveTime),
-                    new HLInstruction(0.02f, 0f, 0f, moveTime),
-                    new HLInstruction(0.05f, 0f, 0f, moveTime),
-                    new HLInstruction(0.02f, 0f, 0f, moveTime),
-                    new HLInstruction(0.05f, 0f, 0f, moveTime),
-                    new HLInstruction(0.02f, 0f, 0f, moveTime),
-                    new HLInstruction(0.05f, 0f, 0f, moveTime),
-                });
-                return true;
-            }, 1);
-        }
-
-        public static IBallControlStrategy ContinuousBouncing(int duration)
+        public static IBallControlStrategy ContinuousBouncing(int duration, ITiltController tiltController,
+            float lowPos = 0.5f, float highPos = 0.6f, float moveTime = 0.1f)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
                 if (ballData.CurrentPositionVector.z < 150f)
                 {
-                    // distance away from plate:
-                    var p_x = -ballData.CurrentPositionVector.x * c.k_p;
-                    var p_y = ballData.CurrentPositionVector.y * c.k_p;
+                    var tilt = tiltController.CalculateTilt(
+                        ballData.CurrentPositionVector,
+                        ballData.CurrentVelocityVector,
+                        Vector2.zero,
+                        ballData.CalculatedOnBounceDownwardsVelocity,
+                        ballData.AirborneTime
+                    );
 
-                    // mean velocity of ball:
-                    var velocityVector = ballData.CurrentVelocityVector;
-                    var d_x = -velocityVector.x * c.k_d;
-                    var d_y = velocityVector.y * c.k_d;
+                    var xCorrection = Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle);
+                    var yCorrection = Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle);
 
-                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
-
-                    var moveTime = 0.1f;
                     machineController.SendInstructions(new List<HLInstruction>()
                     {
                         new HLInstruction(0.06f, xCorrection, yCorrection, moveTime),
@@ -59,7 +38,39 @@ namespace HighPrecisionStepperJuggler
             }, duration);
         }
 
-        public static IBallControlStrategy Continuous2StepBouncingWithAnalyticalController(int duration)
+        public static IBallControlStrategy ContinuousBouncingStrong(int duration, ITiltController tiltController,
+            float lowPos = 0.05f, float highPos = 0.08f, float moveTime = 0.1f)
+        {
+            return new BallControlStrategy((ballData, machineController, instructionCount) =>
+            {
+                if (ballData.CurrentPositionVector.z < 190f)
+                {
+                    var tilt = tiltController.CalculateTilt(
+                        ballData.CurrentPositionVector,
+                        ballData.CurrentVelocityVector,
+                        Vector2.zero,
+                        ballData.CalculatedOnBounceDownwardsVelocity,
+                        ballData.AirborneTime
+                    );
+
+                    var xCorrection = Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle);
+                    var yCorrection = Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle);
+
+                    machineController.SendInstructions(new List<HLInstruction>()
+                    {
+                        new HLInstruction(highPos, xCorrection, yCorrection, moveTime),
+                        new HLInstruction(lowPos, 0f, 0f, moveTime),
+                    });
+
+                    return true;
+                }
+
+                return false;
+            }, duration);
+        }
+
+        public static IBallControlStrategy Continuous2StepBouncing(int duration, ITiltController tiltController,
+            float lowPos = 0.05f, float highPos = 0.058f, float moveTime = 0.1f)
         {
             var currentPositionIsUp = false;
 
@@ -68,18 +79,24 @@ namespace HighPrecisionStepperJuggler
                 if (!ballData.BallIsMovingUp && ballData.CurrentPositionVector.z < 140f && !currentPositionIsUp)
                 {
                     // if we're in here, the ball is coming downwards
-                    
-                    var position = new Vector2(ballData.CurrentPositionVector.x, ballData.CurrentPositionVector.y);
-                    var velocity = new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y);
-                    var tilt = TiltControlling.AnalyticallyDeterminedTilt(position, velocity, Vector2.zero, ballData);
-                    
-                    var xCorrection = instructionCount % 2 == 1 ? Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
-                    var yCorrection = instructionCount % 2 == 0 ? Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
 
-                    var moveTime = 0.1f;
+                    var tilt = tiltController.CalculateTilt(
+                        new Vector2(ballData.CurrentPositionVector.x, ballData.CurrentPositionVector.y),
+                        new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y),
+                        Vector2.zero,
+                        ballData.CalculatedOnBounceDownwardsVelocity,
+                        ballData.AirborneTime);
+
+                    var xCorrection = instructionCount % 2 == 1
+                        ? Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle)
+                        : 0f;
+                    var yCorrection = instructionCount % 2 == 0
+                        ? Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle)
+                        : 0f;
+
                     machineController.SendInstructions(new List<HLInstruction>()
                     {
-                        new HLInstruction(0.058f, xCorrection, yCorrection, moveTime),
+                        new HLInstruction(highPos, xCorrection, yCorrection, moveTime),
                     });
 
                     currentPositionIsUp = true;
@@ -91,81 +108,24 @@ namespace HighPrecisionStepperJuggler
                 {
                     // if we're in here, the ball is moving upwards
                     // so if the ball IS moving up, and the last thing we did was hitting the ball, then we should move down again
-                    var position = ballData.PredictedPositionVectorOnHit;
-                    var velocity = new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y);
-                    var tilt = TiltControlling.AnalyticallyDeterminedTilt(position, velocity, Vector2.zero, ballData);
 
-                    var xCorrection = instructionCount % 2 == 1 ? Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
-                    var yCorrection = instructionCount % 2 == 0 ? Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle) : 0f;
-                    
-                    var moveTime = 0.1f;
+                    var tilt = tiltController.CalculateTilt(
+                        ballData.PredictedPositionVectorOnHit,
+                        new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y),
+                        Vector2.zero,
+                        ballData.CalculatedOnBounceDownwardsVelocity,
+                        ballData.AirborneTime);
+
+                    var xCorrection = instructionCount % 2 == 1
+                        ? Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle)
+                        : 0f;
+                    var yCorrection = instructionCount % 2 == 0
+                        ? Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle)
+                        : 0f;
+
                     machineController.SendInstructions(new List<HLInstruction>()
                     {
-                        new HLInstruction(0.05f, xCorrection, yCorrection, moveTime),
-                    });
-
-                    currentPositionIsUp = false;
-                    // instructionSent: false (even though we DID send a instruction.
-                    // This is because we don't want to count this instruction as a bounce instruction) 
-                    return false;
-                }
-
-                // instructionSent: false
-                return false;
-            }, duration);
-        }
-
-        public static IBallControlStrategy Continuous2StepBouncing(int duration)
-        {
-            var currentPositionIsUp = false;
-
-            return new BallControlStrategy((ballData, machineController, instructionCount) =>
-            {
-                if (!ballData.BallIsMovingUp && ballData.CurrentPositionVector.z < 150f && !currentPositionIsUp)
-                {
-                    // if we're in here, the ball is coming downwards
-                    // distance away from plate:
-                    var p_x = -ballData.CurrentPositionVector.x * c.twoStep_k_p;
-                    var p_y = ballData.CurrentPositionVector.y * c.twoStep_k_p;
-
-                    // velocity of ball:
-                    var velocityVector = ballData.CurrentVelocityVector;
-                    var d_x = -velocityVector.x * c.twoStep_k_d;
-                    var d_y = velocityVector.y * c.twoStep_k_d;
-
-                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
-
-                    var moveTime = 0.1f;
-                    machineController.SendInstructions(new List<HLInstruction>()
-                    {
-                        new HLInstruction(0.058f, xCorrection, yCorrection, moveTime),
-                    });
-
-                    currentPositionIsUp = true;
-                    // instructionSent: true
-                    return true;
-                }
-
-                if (ballData.BallIsMovingUp && currentPositionIsUp)
-                {
-                    // if we're in here, the ball is moving upwards
-                    // so if the ball IS moving up, and the last thing we did was hitting the ball, then we should move down again
-                    var p_x = -ballData.PredictedPositionVectorOnHit.x * c.twoStep_k_p;
-                    var p_y = ballData.PredictedPositionVectorOnHit.y * c.twoStep_k_p;
-                    
-                    // velocity of ball:
-                    var velocityVector = ballData.PredictedVelocityVectorOnHit;
-                    var d_x = -velocityVector.x * c.twoStep_k_d;
-                    var d_y = velocityVector.y * c.twoStep_k_d;
-
-                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
-
-                    var moveTime = 0.1f;
-                    machineController.SendInstructions(new List<HLInstruction>()
-                    {
-                        new HLInstruction(0.05f, xCorrection, yCorrection, moveTime),
+                        new HLInstruction(lowPos, xCorrection, yCorrection, moveTime),
                     });
 
                     currentPositionIsUp = false;
@@ -180,88 +140,26 @@ namespace HighPrecisionStepperJuggler
         }
 
         // stable bouncing with low height
-        public static IBallControlStrategy Continuous2StepBouncingLow(int duration)
+        public static IBallControlStrategy Continuous2StepBouncingLow(int duration, ITiltController tiltController)
         {
-            var currentPositionIsUp = false;
-            
-            return new BallControlStrategy((ballData, machineController, instructionCount) =>
-            {
-                if (!ballData.BallIsMovingUp && ballData.CurrentPositionVector.z < 150f && !currentPositionIsUp)
-                {
-                    // if we're in here, the ball is coming downwards
-                    // distance away from plate:
-                    var p_x = -ballData.CurrentPositionVector.x * c.twoStep_k_p;
-                    var p_y = ballData.CurrentPositionVector.y * c.twoStep_k_p;
-
-                    // velocity of ball:
-                    var velocityVector = ballData.CurrentVelocityVector;
-                    var d_x = -velocityVector.x * c.twoStep_k_d;
-                    var d_y = velocityVector.y * c.twoStep_k_d;
-
-                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
-
-                    var moveTime = 0.06f;
-                    machineController.SendInstructions(new List<HLInstruction>()
-                    {
-                        new HLInstruction(0.055f, xCorrection, yCorrection, moveTime),
-                    });
-
-                    currentPositionIsUp = true;
-                    // instructionSent: true
-                    return true;
-                }
-
-                if (ballData.BallIsMovingUp && currentPositionIsUp)
-                {
-                    // if we're in here, the ball is moving upwards
-                    // so if the ball IS moving up, and the last thing we did was hitting the ball, then we should move down again
-                    var p_x = -ballData.PredictedPositionVectorOnHit.x * c.twoStep_k_p;
-                    var p_y = ballData.PredictedPositionVectorOnHit.y * c.twoStep_k_p;
-
-                    // velocity of ball:
-                    var velocityVector = ballData.PredictedVelocityVectorOnHit;
-                    var d_x = -velocityVector.x * c.twoStep_k_d;
-                    var d_y = velocityVector.y * c.twoStep_k_d;
-
-                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
-
-                    var moveTime = 0.06f;
-                    machineController.SendInstructions(new List<HLInstruction>()
-                    {
-                        new HLInstruction(0.05f, xCorrection, yCorrection, moveTime),
-                    });
-
-                    currentPositionIsUp = false;
-                    // instructionSent: false (even though we DID send a instruction.
-                    // This is because we don't want to count this instruction as a bounce instruction) 
-                    return false;
-
-                }
-
-                // instructionSent: false
-                return false;
-            }, duration);
+            return Continuous2StepBouncing(duration, tiltController, 0.05f, 0.055f, 0.06f);
         }
 
-        public static IBallControlStrategy BalancingAtHeight(float height, int duration)
+        public static IBallControlStrategy Balancing(float height, int duration, Vector2 target)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
                 if (ballData.CurrentPositionVector.z < float.MaxValue)
                 {
-                    // distance away from plate:
-                    var p_x = -ballData.CurrentPositionVector.x * c.k_p;
-                    var p_y = ballData.CurrentPositionVector.y * c.k_p;
+                    var tilt = PIDTiltController.Instance.CalculateTilt(
+                        ballData.PredictedPositionVectorOnHit,
+                        new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y),
+                        target,
+                        ballData.CalculatedOnBounceDownwardsVelocity,
+                        ballData.AirborneTime);
 
-                    // velocity of ball:
-                    var velocityVector = ballData.CurrentVelocityVector;
-                    var d_x = -velocityVector.x * c.k_d * 0.5f;
-                    var d_y = velocityVector.y * c.k_d * 0.5f;
-
-                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
+                    var xCorrection = Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle);
+                    var yCorrection = Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle);
 
                     var moveTime = 0.1f;
                     machineController.SendInstructions(new List<HLInstruction>()
@@ -276,29 +174,30 @@ namespace HighPrecisionStepperJuggler
             }, duration);
         }
 
-        public static IBallControlStrategy ContinuousBouncingStrong(int duration)
+        public static IBallControlStrategy HighPlateCircleBalancing(float radius, int duration)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
-                if (ballData.CurrentPositionVector.z < 190f)
+                if (ballData.CurrentPositionVector.z < float.MaxValue)
                 {
-                    // distance away from plate:
-                    var p_x = -ballData.CurrentPositionVector.x * c.k_p;
-                    var p_y = ballData.CurrentPositionVector.y * c.k_p;
+                    var target = new Vector2(
+                        Mathf.Cos(Time.realtimeSinceStartup * 2f * Mathf.PI * 0.5f) * radius,
+                        Mathf.Sin(Time.realtimeSinceStartup * 2f * Mathf.PI * 0.5f) * radius);
 
-                    // velocity of ball:
-                    var velocityVector = ballData.CurrentVelocityVector;
-                    var d_x = -velocityVector.x * c.k_d;
-                    var d_y = velocityVector.y * c.k_d;
+                    var tilt = PIDTiltController.Instance.CalculateTilt(
+                        ballData.PredictedPositionVectorOnHit,
+                        new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y),
+                        target,
+                        ballData.CalculatedOnBounceDownwardsVelocity,
+                        ballData.AirborneTime);
 
-                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle / 2f, c.MaxTiltAngle / 2f);
-                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle / 2f, c.MaxTiltAngle / 2f);
+                    var xCorrection = Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle);
+                    var yCorrection = Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle);
 
                     var moveTime = 0.1f;
                     machineController.SendInstructions(new List<HLInstruction>()
                     {
                         new HLInstruction(0.08f, xCorrection, yCorrection, moveTime),
-                        new HLInstruction(0.05f, 0f, 0f, moveTime),
                     });
 
                     return true;
@@ -318,71 +217,6 @@ namespace HighPrecisionStepperJuggler
                 });
                 return true;
             }, 1);
-        }
-
-        public static IBallControlStrategy HighPlateBalancingAt(Vector2 position, int duration)
-        {
-            return new BallControlStrategy((ballData, machineController, instructionCount) =>
-            {
-                if (ballData.CurrentPositionVector.z < float.MaxValue)
-                {
-                    // distance away from plate:
-                    var p_x = (position.x - ballData.CurrentPositionVector.x) * c.k_p;
-                    var p_y = (position.y + ballData.CurrentPositionVector.y) * c.k_p;
-
-                    // velocity of ball:
-                    var velocityVector = ballData.CurrentVelocityVector;
-                    var d_x = -velocityVector.x * c.k_d;
-                    var d_y = velocityVector.y * c.k_d;
-
-                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
-
-                    var moveTime = 0.1f;
-                    machineController.SendInstructions(new List<HLInstruction>()
-                    {
-                        new HLInstruction(0.08f, xCorrection, yCorrection, moveTime),
-                    });
-
-                    return true;
-                }
-
-                return false;
-            }, duration);
-        }
-
-        public static IBallControlStrategy HighPlateCircleBalancing(float radius, int duration)
-        {
-            return new BallControlStrategy((ballData, machineController, instructionCount) =>
-            {
-                if (ballData.CurrentPositionVector.z < float.MaxValue)
-                {
-                    var position = new Vector2(
-                        Mathf.Cos(Time.realtimeSinceStartup * 2f * Mathf.PI * 0.5f) * radius,
-                        Mathf.Sin(Time.realtimeSinceStartup * 2f * Mathf.PI * 0.5f) * radius);
-                    // distance away from plate:
-                    var p_x = (position.x - ballData.CurrentPositionVector.x) * c.k_p;
-                    var p_y = (position.y + ballData.CurrentPositionVector.y) * c.k_p;
-
-                    // velocity of ball:
-                    var velocityVector = ballData.CurrentVelocityVector;
-                    var d_x = -velocityVector.x * c.k_d;
-                    var d_y = velocityVector.y * c.k_d;
-
-                    var xCorrection = Mathf.Clamp(p_x + d_x, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(p_y + d_y, c.MinTiltAngle, c.MaxTiltAngle);
-
-                    var moveTime = 0.1f;
-                    machineController.SendInstructions(new List<HLInstruction>()
-                    {
-                        new HLInstruction(0.08f, xCorrection, yCorrection, moveTime),
-                    });
-
-                    return true;
-                }
-
-                return false;
-            }, duration);
         }
     }
 }

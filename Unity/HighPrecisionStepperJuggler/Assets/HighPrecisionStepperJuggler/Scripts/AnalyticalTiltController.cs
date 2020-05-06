@@ -3,13 +3,18 @@ using UnityEngine;
 
 namespace HighPrecisionStepperJuggler.MachineLearning
 {
-    public static class TiltControlling
+    public sealed class AnalyticalTiltController : ITiltController
     {
-        public static (float xTilt, float yTilt) AnalyticallyDeterminedTilt(
+        private static readonly AnalyticalTiltController INSTANCE = new AnalyticalTiltController();
+
+        public static AnalyticalTiltController Instance => INSTANCE;
+
+        public (float xTilt, float yTilt) CalculateTilt(
             Vector2 position,
             Vector2 velocity,
-            Vector2 target,
-            BallData ballData)
+            Vector2 targetPosition,
+            float calculatedOnBounceDownwardsVelocity,
+            float airborneTime)
         {
             float AngleBetween(Vector2 vector1, Vector2 vector2)
             {
@@ -22,14 +27,14 @@ namespace HighPrecisionStepperJuggler.MachineLearning
             var v_i = new Vector3(
                 velocity.x,
                 velocity.y,
-                -ballData.CalculatedOnBounceDownwardsVelocity);
+                -calculatedOnBounceDownwardsVelocity);
 
             // FIXME: we assume that the control target is in the center of the plate,
             //        change this code in such a way that the target can be anywhere on the plate.
             var v_o = new Vector3(
-                (target.x - position.x) / ballData.AirborneTime,
-                (target.y - position.y) / ballData.AirborneTime,
-                ballData.CalculatedOnBounceDownwardsVelocity);
+                (targetPosition.x - position.x) / airborneTime,
+                (targetPosition.y - position.y) / airborneTime,
+                calculatedOnBounceDownwardsVelocity);
 
             var v_c = -v_i.normalized + v_o.normalized;
 

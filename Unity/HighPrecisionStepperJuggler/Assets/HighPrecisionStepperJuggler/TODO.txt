@@ -19,7 +19,6 @@ memo:
     [ ] put all the control stuff into a static class
     [ ] refactor BallControlStrategyFactory with this
     
-
 [ ] show PID target positions in gradient descent view
 [ ] off-center bouncing
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using HighPrecisionStepperJuggler.MachineLearning;
 using UnityEngine;
-using UnityEngine.Serialization;
 using c = HighPrecisionStepperJuggler.Constants;
 
 namespace HighPrecisionStepperJuggler
@@ -38,7 +37,7 @@ namespace HighPrecisionStepperJuggler
         private int _currentStrategyIndex;
         [SerializeField] private bool _executeControlStrategies;
 
-        private List<IBallControlStrategy> _ballControlStrategies = new List<IBallControlStrategy>();
+        private List<IBallControlStrategy> _strategies = new List<IBallControlStrategy>();
 
         private void Awake()
         {
@@ -52,64 +51,54 @@ namespace HighPrecisionStepperJuggler
             _ballData = new BallData(
                 _ballDataDebugView,
                 _predictedPositionVisualizer,
-                _gradientDescentX, 
-                _gradientDescentY, 
+                _gradientDescentX,
+                _gradientDescentY,
                 _gradientDescentZ);
 
-            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
-            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.05f));
-            
-            for (int i = 0; i < 5; i++)
-            {
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
-            }
-            
-            // DEBUG
-            _ballControlStrategies.Add(BallControlStrategyFactory.Continuous2StepBouncingWithAnalyticalController(10000));
-
-            _ballControlStrategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(10000));
+            _strategies.Add(BallControlStrategyFactory.GoTo(0.01f));
+            _strategies.Add(BallControlStrategyFactory.GoTo(0.05f));
 
             for (int i = 0; i < 5; i++)
             {
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
-                _ballControlStrategies.Add(BallControlStrategyFactory.BalancingAtHeight(0.05f, 10));
+                _strategies.Add(BallControlStrategyFactory.ContinuousBouncing(5, PIDTiltController.Instance));
+                _strategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1, PIDTiltController.Instance));
             }
 
-            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
-            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.08f));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(0f, 0f), 15));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateCircleBalancing(40f, 100));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(0f, 0f), 20));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(-40f, 0f), 20));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(40f, 0f), 20));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(0, 40f), 20));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(0, -40f), 20));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(-35, -35f), 20));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(35, 35f), 20));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(35, -35f), 20));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(-35, 35f), 20));
-            _ballControlStrategies.Add(BallControlStrategyFactory.HighPlateBalancingAt(new Vector2(0f, 0f), 20));
-            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
-            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.05f));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance));
 
             for (int i = 0; i < 5; i++)
             {
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
+                _strategies.Add(BallControlStrategyFactory.ContinuousBouncing(5, AnalyticalTiltController.Instance));
+                _strategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1, AnalyticalTiltController.Instance));
+                _strategies.Add(BallControlStrategyFactory.Balancing(0.05f, 10, Vector2.zero));
             }
 
-            _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(20));
+            _strategies.Add(BallControlStrategyFactory.GoTo(0.01f));
+            _strategies.Add(BallControlStrategyFactory.GoTo(0.08f));
+            _strategies.Add(BallControlStrategyFactory.Balancing(0.08f, 15, new Vector2(0f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.HighPlateCircleBalancing(40f, 100));
+            _strategies.Add(BallControlStrategyFactory.Balancing(0.08f, 20, new Vector2(0f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Balancing(0.08f, 20, new Vector2(-40f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.GoTo(0.01f));
+            _strategies.Add(BallControlStrategyFactory.GoTo(0.05f));
 
             for (int i = 0; i < 5; i++)
             {
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncing(5));
-                _ballControlStrategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1));
-                _ballControlStrategies.Add(BallControlStrategyFactory.BalancingAtHeight(0.05f, 10));
+                _strategies.Add(BallControlStrategyFactory.ContinuousBouncing(5, PIDTiltController.Instance));
+                _strategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1, PIDTiltController.Instance));
             }
 
-            _ballControlStrategies.Add(BallControlStrategyFactory.GoTo(0.01f));
+            _strategies.Add(BallControlStrategyFactory.ContinuousBouncing(20, AnalyticalTiltController.Instance));
+
+            for (int i = 0; i < 5; i++)
+            {
+                _strategies.Add(BallControlStrategyFactory.ContinuousBouncing(5, AnalyticalTiltController.Instance));
+                _strategies.Add(
+                    BallControlStrategyFactory.ContinuousBouncingStrong(1, AnalyticalTiltController.Instance));
+                _strategies.Add(BallControlStrategyFactory.Balancing(0.05f, 10, Vector2.zero));
+            }
+
+            _strategies.Add(BallControlStrategyFactory.GoTo(0.01f));
         }
 
         private void Update()
@@ -124,7 +113,7 @@ namespace HighPrecisionStepperJuggler
 
             if (!_executeControlStrategies)
             {
-                foreach (var strategy in _ballControlStrategies)
+                foreach (var strategy in _strategies)
                 {
                     strategy.Reset();
                 }
@@ -168,13 +157,13 @@ namespace HighPrecisionStepperJuggler
             if (_machineController.IsReadyForNextInstruction && _executeControlStrategies)
             {
                 var nextStrategyRequested =
-                    _ballControlStrategies[_currentStrategyIndex].Execute(_ballData, _machineController);
+                    _strategies[_currentStrategyIndex].Execute(_ballData, _machineController);
 
                 if (nextStrategyRequested)
                 {
-                    _ballControlStrategies[_currentStrategyIndex].Reset();
+                    _strategies[_currentStrategyIndex].Reset();
 
-                    if (_currentStrategyIndex < _ballControlStrategies.Count - 1)
+                    if (_currentStrategyIndex < _strategies.Count - 1)
                     {
                         _currentStrategyIndex++;
                     }

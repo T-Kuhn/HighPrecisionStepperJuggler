@@ -45,9 +45,6 @@ namespace HighPrecisionStepperJuggler
         // NOTE: the units are [mm/s] 
         public float CalculatedOnBounceDownwardsVelocity => (AirborneTime * 9.81f) / 2f * 1000f;
 
-        private Vector2 _predictedVelocityVectorOnHit = Vector2.zero;
-        public Vector2 PredictedVelocityVectorOnHit => _predictedVelocityVectorOnHit;
-
         public Vector3 CurrentUnityPositionVector => new Vector3(
                                                          _currentPositionVector.x,
                                                          _currentPositionVector.z + Constants.BallHeightAtOrigin,
@@ -96,11 +93,6 @@ namespace HighPrecisionStepperJuggler
             _predictedPositionVectorOnHit = new Vector2(
                 _currentPositionVector.x + _gradientDescentX.Hypothesis.Parameters.Theta_1 * PredictedTimeTillNextHit,
                 _currentPositionVector.y + _gradientDescentY.Hypothesis.Parameters.Theta_1 * PredictedTimeTillNextHit
-            );
-
-            _predictedVelocityVectorOnHit = new Vector2(
-                velocityVector.x,
-                velocityVector.y
             );
         }
     }
