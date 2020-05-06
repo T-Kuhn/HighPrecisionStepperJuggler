@@ -15,12 +15,13 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-[ ] refactor
-    [ ] put all the control stuff into a static class
-    [ ] refactor BallControlStrategyFactory with this
+[X] refactor
+    [X] put all the control stuff into a static class
+    [X] refactor BallControlStrategyFactory with this
     
-[ ] show PID target positions in gradient descent view
 [ ] off-center bouncing
+[ ] show PID target positions in gradient descent view
+[ ] fallback to PID whenever the ball isn't bouncing to prevent bad analytical controls
 
 [ ] "every bounce will be a bit higher"-bouncing
 

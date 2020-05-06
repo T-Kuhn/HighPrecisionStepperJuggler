@@ -145,14 +145,14 @@ namespace HighPrecisionStepperJuggler
             return Continuous2StepBouncing(duration, tiltController, 0.05f, 0.055f, 0.06f);
         }
 
-        public static IBallControlStrategy Balancing(float height, int duration, Vector2 target)
+        public static IBallControlStrategy Balancing(float height, int duration, Vector2 target, ITiltController tiltController)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
                 if (ballData.CurrentPositionVector.z < float.MaxValue)
                 {
-                    var tilt = PIDTiltController.Instance.CalculateTilt(
-                        ballData.PredictedPositionVectorOnHit,
+                    var tilt = tiltController.CalculateTilt(
+                        ballData.CurrentPositionVector,
                         new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y),
                         target,
                         ballData.CalculatedOnBounceDownwardsVelocity,
@@ -165,39 +165,6 @@ namespace HighPrecisionStepperJuggler
                     machineController.SendInstructions(new List<HLInstruction>()
                     {
                         new HLInstruction(height, xCorrection, yCorrection, moveTime),
-                    });
-
-                    return true;
-                }
-
-                return false;
-            }, duration);
-        }
-
-        public static IBallControlStrategy HighPlateCircleBalancing(float radius, int duration)
-        {
-            return new BallControlStrategy((ballData, machineController, instructionCount) =>
-            {
-                if (ballData.CurrentPositionVector.z < float.MaxValue)
-                {
-                    var target = new Vector2(
-                        Mathf.Cos(Time.realtimeSinceStartup * 2f * Mathf.PI * 0.5f) * radius,
-                        Mathf.Sin(Time.realtimeSinceStartup * 2f * Mathf.PI * 0.5f) * radius);
-
-                    var tilt = PIDTiltController.Instance.CalculateTilt(
-                        ballData.PredictedPositionVectorOnHit,
-                        new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y),
-                        target,
-                        ballData.CalculatedOnBounceDownwardsVelocity,
-                        ballData.AirborneTime);
-
-                    var xCorrection = Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle);
-                    var yCorrection = Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle);
-
-                    var moveTime = 0.1f;
-                    machineController.SendInstructions(new List<HLInstruction>()
-                    {
-                        new HLInstruction(0.08f, xCorrection, yCorrection, moveTime),
                     });
 
                     return true;

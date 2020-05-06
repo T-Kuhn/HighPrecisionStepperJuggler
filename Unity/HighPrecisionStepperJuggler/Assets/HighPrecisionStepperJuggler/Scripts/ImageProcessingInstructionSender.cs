@@ -70,17 +70,11 @@ namespace HighPrecisionStepperJuggler
             {
                 _strategies.Add(BallControlStrategyFactory.ContinuousBouncing(5, AnalyticalTiltController.Instance));
                 _strategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1, AnalyticalTiltController.Instance));
-                _strategies.Add(BallControlStrategyFactory.Balancing(0.05f, 10, Vector2.zero));
+                _strategies.Add(BallControlStrategyFactory.Balancing(0.05f, 8, Vector2.zero, AnalyticalTiltController.Instance));
             }
 
             _strategies.Add(BallControlStrategyFactory.GoTo(0.01f));
             _strategies.Add(BallControlStrategyFactory.GoTo(0.08f));
-            _strategies.Add(BallControlStrategyFactory.Balancing(0.08f, 15, new Vector2(0f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.HighPlateCircleBalancing(40f, 100));
-            _strategies.Add(BallControlStrategyFactory.Balancing(0.08f, 20, new Vector2(0f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Balancing(0.08f, 20, new Vector2(-40f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.GoTo(0.01f));
-            _strategies.Add(BallControlStrategyFactory.GoTo(0.05f));
 
             for (int i = 0; i < 5; i++)
             {
@@ -95,7 +89,8 @@ namespace HighPrecisionStepperJuggler
                 _strategies.Add(BallControlStrategyFactory.ContinuousBouncing(5, AnalyticalTiltController.Instance));
                 _strategies.Add(
                     BallControlStrategyFactory.ContinuousBouncingStrong(1, AnalyticalTiltController.Instance));
-                _strategies.Add(BallControlStrategyFactory.Balancing(0.05f, 10, Vector2.zero));
+                _strategies.Add(
+                    BallControlStrategyFactory.Balancing(0.05f, 8, Vector2.zero, AnalyticalTiltController.Instance));
             }
 
             _strategies.Add(BallControlStrategyFactory.GoTo(0.01f));
