@@ -9,6 +9,13 @@ namespace HighPrecisionStepperJuggler.MachineLearning
 
         public static AnalyticalTiltController Instance => INSTANCE;
 
+        public TargetVisualizer TargetVisualizer
+        {
+            set { _targetVisualizer = value; }
+        }
+
+        private TargetVisualizer _targetVisualizer;
+
         public (float xTilt, float yTilt) CalculateTilt(
             Vector2 position,
             Vector2 velocity,
@@ -16,6 +23,8 @@ namespace HighPrecisionStepperJuggler.MachineLearning
             float calculatedOnBounceDownwardsVelocity,
             float airborneTime)
         {
+            _targetVisualizer.UpdateTargetPosition(targetPosition);
+            
             float AngleBetween(Vector2 vector1, Vector2 vector2)
             {
                 var sin = vector1.x * vector2.y - vector2.x * vector1.y;

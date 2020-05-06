@@ -8,6 +8,13 @@ namespace HighPrecisionStepperJuggler.MachineLearning
 
         public static PIDTiltController Instance => INSTANCE;
 
+        public TargetVisualizer TargetVisualizer
+        {
+            set { _targetVisualizer = value; }
+        }
+
+        private TargetVisualizer _targetVisualizer;
+
         public (float xTilt, float yTilt) CalculateTilt(
             Vector2 position,
             Vector2 velocity,
@@ -15,6 +22,8 @@ namespace HighPrecisionStepperJuggler.MachineLearning
             float calculatedOnBounceDownwardsVelocity,
             float airborneTime)
         {
+            _targetVisualizer.UpdateTargetPosition(targetPosition);
+            
             var p_x = -position.x * Constants.k_p;
             var p_y = -position.y * Constants.k_p;
 

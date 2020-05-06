@@ -15,6 +15,7 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private GradientDescentView _gradientDescentViewX;
         [SerializeField] private GradientDescentView _gradientDescentViewY;
         [SerializeField] private GradientDescentView _gradientDescentViewZ;
+        [SerializeField] private TargetVisualizer _targetVisualizer;
 
         private readonly GradientDescent _gradientDescentX = new GradientDescent(
             Constants.NumberOfTrainingSetsUsedForXYGD,
@@ -44,6 +45,9 @@ namespace HighPrecisionStepperJuggler
             _gradientDescentViewX.GradientDescent = _gradientDescentX;
             _gradientDescentViewY.GradientDescent = _gradientDescentY;
             _gradientDescentViewZ.GradientDescent = _gradientDescentZ;
+
+            AnalyticalTiltController.Instance.TargetVisualizer = _targetVisualizer;
+            PIDTiltController.Instance.TargetVisualizer = _targetVisualizer;
         }
 
         private void Start()
@@ -60,11 +64,15 @@ namespace HighPrecisionStepperJuggler
 
             GetBallBouncing();
             
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(10, AnalyticalTiltController.Instance));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(10, AnalyticalTiltController.Instance, new Vector2(40f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(10, AnalyticalTiltController.Instance, new Vector2(0f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(10, AnalyticalTiltController.Instance, new Vector2(-40f, 0f)));
-
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(40f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(0f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(-40f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(0f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(40f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(0f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(-40f, 0f)));
+            
             for (int i = 0; i < 5; i++)
             {
                 _strategies.Add(

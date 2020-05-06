@@ -16,15 +16,15 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 memo:
 
 [X] off-center bouncing
-[ ] show TiltController input target position in gradient descent view
-[ ] fallback to PID whenever the ball isn't bouncing to prevent bad analytical controls
+[X] show TiltController input target position in gradient descent view
+[ ] make sure predictedBallPositionOnHit markers are deactivated when AnalyticalTiltController isn't used anymore
+[ ] circle bouncing with moving PID target
+
+[ ] fallback to PID whenever the ball isn't bouncing to prevent bad analytical controls?
 
 [ ] "every bounce will be a bit higher"-bouncing
 
-[ ] circle bouncing with moving PID target
-
 [ ] color tilt visualization red whenever tilt was clamped
-
 
 [ ] add radar style turning radius with fade to ball position visualization
 [ ] add some sort of index of all the things that will be featured in the video.
