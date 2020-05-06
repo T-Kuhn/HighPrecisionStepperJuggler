@@ -15,7 +15,7 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-[ ] off-center bouncing
+[X] off-center bouncing
 [ ] show TiltController input target position in gradient descent view
 [ ] fallback to PID whenever the ball isn't bouncing to prevent bad analytical controls
 

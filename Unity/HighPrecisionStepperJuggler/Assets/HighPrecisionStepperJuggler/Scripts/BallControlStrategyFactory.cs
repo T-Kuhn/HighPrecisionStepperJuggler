@@ -70,7 +70,7 @@ namespace HighPrecisionStepperJuggler
         }
 
         public static IBallControlStrategy Continuous2StepBouncing(int duration, ITiltController tiltController,
-            float lowPos = 0.05f, float highPos = 0.058f, float moveTime = 0.1f)
+            Vector2? target = null, float lowPos = 0.05f, float highPos = 0.058f, float moveTime = 0.1f)
         {
             var currentPositionIsUp = false;
 
@@ -83,7 +83,7 @@ namespace HighPrecisionStepperJuggler
                     var tilt = tiltController.CalculateTilt(
                         new Vector2(ballData.CurrentPositionVector.x, ballData.CurrentPositionVector.y),
                         new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y),
-                        Vector2.zero,
+                        target ?? Vector2.zero,
                         ballData.CalculatedOnBounceDownwardsVelocity,
                         ballData.AirborneTime);
 
@@ -112,7 +112,7 @@ namespace HighPrecisionStepperJuggler
                     var tilt = tiltController.CalculateTilt(
                         ballData.PredictedPositionVectorOnHit,
                         new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y),
-                        Vector2.zero,
+                        target ?? Vector2.zero,
                         ballData.CalculatedOnBounceDownwardsVelocity,
                         ballData.AirborneTime);
 
@@ -142,7 +142,7 @@ namespace HighPrecisionStepperJuggler
         // stable bouncing with low height
         public static IBallControlStrategy Continuous2StepBouncingLow(int duration, ITiltController tiltController)
         {
-            return Continuous2StepBouncing(duration, tiltController, 0.05f, 0.055f, 0.06f);
+            return Continuous2StepBouncing(duration, tiltController, null, 0.05f, 0.055f, 0.06f);
         }
 
         public static IBallControlStrategy Balancing(float height, int duration, Vector2 target, ITiltController tiltController)
