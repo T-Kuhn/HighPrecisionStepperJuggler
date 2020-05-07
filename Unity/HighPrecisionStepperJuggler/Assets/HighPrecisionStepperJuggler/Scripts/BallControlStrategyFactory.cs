@@ -135,7 +135,7 @@ namespace HighPrecisionStepperJuggler
 
                 // instructionSent: false
                 return false;
-            }, duration);
+            }, duration, true);
         }
 
         // stable bouncing with low height

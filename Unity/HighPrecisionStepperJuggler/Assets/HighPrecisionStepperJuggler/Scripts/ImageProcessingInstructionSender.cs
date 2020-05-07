@@ -168,16 +168,19 @@ namespace HighPrecisionStepperJuggler
 
             if (_machineController.IsReadyForNextInstruction && _executeControlStrategies)
             {
-                var nextStrategyRequested =
+                var isRequestingNextStrategy =
                     _strategies[_currentStrategyIndex].Execute(_ballData, _machineController);
 
-                if (nextStrategyRequested)
+                if (isRequestingNextStrategy)
                 {
                     _strategies[_currentStrategyIndex].Reset();
 
                     if (_currentStrategyIndex < _strategies.Count - 1)
                     {
                         _currentStrategyIndex++;
+                        
+                        _predictedPositionVisualizer
+                            .SetActive(_strategies[_currentStrategyIndex].UsesBallPositionPrediction);
                     }
                 }
             }

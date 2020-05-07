@@ -17,8 +17,12 @@ memo:
 
 [X] off-center bouncing
 [X] show TiltController input target position in gradient descent view
+
 [ ] make sure predictedBallPositionOnHit markers are deactivated when AnalyticalTiltController isn't used anymore
+
 [ ] circle bouncing with moving PID target
+
+[ ] fix 2-step bouncing stuck in up position on controlStrategySwitch
 
 [ ] fallback to PID whenever the ball isn't bouncing to prevent bad analytical controls?
 

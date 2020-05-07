@@ -7,11 +7,16 @@ namespace HighPrecisionStepperJuggler
         private readonly Func<BallData, MachineController, int, bool> _executeFunc;
         private readonly int _duration;
         private int _instructionsSentCount;
+        private bool _usesBallPositionPrediction;
 
-        public BallControlStrategy(Func<BallData, MachineController, int, bool> executeFunc, int duration)
+        public bool UsesBallPositionPrediction => _usesBallPositionPrediction;
+        
+        public BallControlStrategy(Func<BallData, MachineController, int, bool> executeFunc,
+            int duration, bool usesBallPositionPrediction = false)
         {
             _duration = duration;
             _executeFunc = executeFunc;
+            _usesBallPositionPrediction = usesBallPositionPrediction;
         }
 
         public bool Execute(BallData ballData, MachineController machineController)
@@ -34,6 +39,7 @@ namespace HighPrecisionStepperJuggler
     public interface IBallControlStrategy
     {
         bool Execute(BallData ballData, MachineController machineController);
+        bool UsesBallPositionPrediction { get; }
         void Reset();
     }
 }
