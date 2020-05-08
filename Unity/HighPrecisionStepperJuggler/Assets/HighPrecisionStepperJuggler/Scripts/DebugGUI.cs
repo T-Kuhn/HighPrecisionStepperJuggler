@@ -8,7 +8,7 @@ public class DebugGUI : MonoBehaviour
     [SerializeField] private GradientDescentView _gradientDescentViewY;
     [SerializeField] private GradientDescentView _gradientDescentViewZ;
 
-    private bool _showDebugGUI = true;
+    private bool _showDebugGUI;
 
     private void Update()
     {
