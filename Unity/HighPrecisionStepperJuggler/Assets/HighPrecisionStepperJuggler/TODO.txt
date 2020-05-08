@@ -17,9 +17,6 @@ memo:
 
 [X] deactivate predictedBallPosition indicators on startup
 
-[X] move debug gui to make room for the thing below
-[X] hide debug gui per default
-
 [ ] add some sort of index of all the things that will be featured in the video.
     show it in full first, than show the current thing only (e.g. "0: flexing")
     -> display current ball control strategy
