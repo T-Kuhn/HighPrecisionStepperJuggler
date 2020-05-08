@@ -6,7 +6,12 @@ namespace HighPrecisionStepperJuggler
     {
         [SerializeField] private GameObject _predictedPositionX;
         [SerializeField] private GameObject _predictedPositionY;
-        
+
+        private void Awake()
+        {
+            SetActive(false);
+        }
+
         public void Visualize(Vector2 predictedBallPositionOnHit)
         {
             _predictedPositionX.transform.localPosition = Vector3.right * (predictedBallPositionOnHit.x / 2f);
