@@ -8,7 +8,7 @@ public class DebugGUI : MonoBehaviour
     [SerializeField] private GradientDescentView _gradientDescentViewY;
     [SerializeField] private GradientDescentView _gradientDescentViewZ;
 
-    private bool _showDebugGUI = true;
+    private bool _showDebugGUI = false;
 
     private void Update()
     {
@@ -34,11 +34,12 @@ public class DebugGUI : MonoBehaviour
         buttonStyle.hover.textColor = Color.white;
         buttonStyle.normal.textColor = Color.white;
 
-        GUI.BeginGroup(new Rect(1280, 500, 500, 100));
-        GUI.Box(new Rect(0, 0, 500, 100), "");
-        GUI.Label(new Rect(65, 5, 100, 40), "XY", labelStyle);
+        GUI.BeginGroup(new Rect(1020, 600, 250, 800));
         
-        if (GUI.Button(new Rect(10, 50, 100, 40), "×10", buttonStyle))
+        GUI.Box(new Rect(0, 0, 250, 210), "");
+        
+        GUI.Label(new Rect(75, 5, 100, 40), "XY", labelStyle);
+        if (GUI.Button(new Rect(20, 50, 100, 40), "×10", buttonStyle))
         {
             var currentTimeScaler = 100f;
             DOTween.To(() => currentTimeScaler, x =>
@@ -49,7 +50,7 @@ public class DebugGUI : MonoBehaviour
             }, 10f, 1f);
         }
 
-        if (GUI.Button(new Rect(120, 50, 100, 40), "×100", buttonStyle))
+        if (GUI.Button(new Rect(130, 50, 100, 40), "×100", buttonStyle))
         {
             var currentTimeScaler = 10f;
             DOTween.To(() => currentTimeScaler, x =>
@@ -60,8 +61,8 @@ public class DebugGUI : MonoBehaviour
             }, 100f, 1f);
         }
 
-        GUI.Label(new Rect(335, 5, 100, 40), "Z", labelStyle);
-        if (GUI.Button(new Rect(280, 50, 100, 40), "×10", buttonStyle))
+        GUI.Label(new Rect(75, 105, 100, 40), "Z", labelStyle);
+        if (GUI.Button(new Rect(20, 150, 100, 40), "×10", buttonStyle))
         {
             var currentTimeScaler = 100f;
             DOTween.To(() => currentTimeScaler, x =>
@@ -71,7 +72,7 @@ public class DebugGUI : MonoBehaviour
             }, 10f, 1f);
         }
 
-        if (GUI.Button(new Rect(390, 50, 100, 40), "×100", buttonStyle))
+        if (GUI.Button(new Rect(130, 150, 100, 40), "×100", buttonStyle))
         {
             var currentTimeScaler = 10f;
             DOTween.To(() => currentTimeScaler, x =>
