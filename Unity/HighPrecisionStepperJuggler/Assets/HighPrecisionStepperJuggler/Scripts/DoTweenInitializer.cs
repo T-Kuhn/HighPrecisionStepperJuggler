@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
-public class DoTweenInitializer : MonoBehaviour
+namespace HighPrecisionStepperJuggler.MachineLearning
 {
-    private void Awake()
+    public class DoTweenInitializer : MonoBehaviour
     {
-        DOTween.Init();
+        private void Awake()
+        {
+            DOTween.Init();
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private GradientDescentView _gradientDescentViewY;
         [SerializeField] private GradientDescentView _gradientDescentViewZ;
         [SerializeField] private TargetVisualizer _targetVisualizer;
+        [SerializeField] private TimeLineAnimator _timeLineAnimator;
 
         private readonly GradientDescent _gradientDescentX = new GradientDescent(
             Constants.NumberOfTrainingSetsUsedForXYGD,
@@ -36,7 +37,7 @@ namespace HighPrecisionStepperJuggler
 
         private BallData _ballData;
         private int _currentStrategyIndex;
-        [SerializeField] private bool _executeControlStrategies;
+        private bool _executeControlStrategies;
 
         private List<IBallControlStrategy> _strategies = new List<IBallControlStrategy>();
 
@@ -121,6 +122,7 @@ namespace HighPrecisionStepperJuggler
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 _executeControlStrategies = !_executeControlStrategies;
+                _timeLineAnimator.ExecuteTimeLineAnimation = _executeControlStrategies;
             }
 
             var ballRadiusAndPosition = _cameraPlugin.UpdateImageProcessing();

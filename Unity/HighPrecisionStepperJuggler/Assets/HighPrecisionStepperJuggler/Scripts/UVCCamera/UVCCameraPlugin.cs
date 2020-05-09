@@ -152,13 +152,7 @@ namespace HighPrecisionStepperJuggler
         {
             if (Input.GetKeyDown(KeyCode.B))
             {
-                _imgMode--;
-                if ((int) _imgMode < 0)
-                {
-                    _imgMode = (Constants.ImgMode) Enum.GetNames(typeof(Constants.ImgMode)).Length - 1;
-                }
-
-                _captionView.SetText(Constants.Captions[(int) _imgMode]);
+                DecrementImgMode();
             }
 
             if (Input.GetKeyDown(KeyCode.N))
@@ -168,13 +162,7 @@ namespace HighPrecisionStepperJuggler
 
             if (Input.GetKeyDown(KeyCode.M))
             {
-                _imgMode++;
-                if ((int) _imgMode >= Enum.GetNames(typeof(Constants.ImgMode)).Length)
-                {
-                    _imgMode = 0;
-                }
-
-                _captionView.SetText(Constants.Captions[(int) _imgMode]);
+                IncrementImgMode();
             }
 
             foreach (var c in _volume.profile.components)
@@ -249,7 +237,29 @@ namespace HighPrecisionStepperJuggler
 
         }
 
-        void OnApplicationQuit()
+        public void IncrementImgMode()
+        {
+            _imgMode++;
+            if ((int) _imgMode >= Enum.GetNames(typeof(Constants.ImgMode)).Length)
+            {
+                _imgMode = 0;
+            }
+
+            _captionView.SetText(Constants.Captions[(int) _imgMode]);
+        }
+
+        public void DecrementImgMode()
+        {
+            _imgMode--;
+            if ((int) _imgMode < 0)
+            {
+                _imgMode = (Constants.ImgMode) Enum.GetNames(typeof(Constants.ImgMode)).Length - 1;
+            }
+
+            _captionView.SetText(Constants.Captions[(int) _imgMode]);
+        }
+
+        private void OnApplicationQuit()
         {
             _pixelsHandle.Free();
             releaseCamera(_camera);
