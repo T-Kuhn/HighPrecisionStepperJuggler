@@ -63,7 +63,7 @@ namespace HighPrecisionStepperJuggler
         
         private void Awake()
         {
-            _imgMode = Constants.ImgMode.CustomgrayWithCirclesOverlayed;
+            _imgMode = Constants.ImgMode.Src;
             
             _defaultCameraProperties = new CameraProperties()
             {

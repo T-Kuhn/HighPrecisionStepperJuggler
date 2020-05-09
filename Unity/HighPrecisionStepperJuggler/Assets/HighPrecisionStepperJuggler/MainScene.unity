@@ -4522,7 +4522,6 @@ MonoBehaviour:
   _volume: {fileID: 581876910}
   _captionView: {fileID: 420128149}
   _imgMode: 0
-  _useInternImageProcessing: 0
   _ht21Parameters:
     ExecuteHT21: 0
     ExecuteMedianBlue: 0
@@ -7015,7 +7014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _realMachine: {fileID: 165232599}
   _modelMachine: {fileID: 333164413}
-  _machineEndPoint: 2
+  _machineEndPoint: 0
 --- !u!4 &1395260053
 Transform:
   m_ObjectHideFlags: 0

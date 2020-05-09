@@ -144,7 +144,8 @@ namespace HighPrecisionStepperJuggler
             return Continuous2StepBouncing(duration, tiltController, null, 0.05f, 0.055f, 0.06f);
         }
 
-        public static IBallControlStrategy Balancing(float height, int duration, Vector2 target, ITiltController tiltController)
+        public static IBallControlStrategy Balancing(float height, int duration, Vector2 target,
+            ITiltController tiltController)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
@@ -182,6 +183,23 @@ namespace HighPrecisionStepperJuggler
                     new HLInstruction(height, 0f, 0f, time),
                 });
                 return true;
+            }, 1);
+        }
+
+        public static IBallControlStrategy GoToWhenBallOnPlate(float height, float time = 0.5f)
+        {
+            return new BallControlStrategy((ballData, machineController, instructionCount) =>
+            {
+                if (ballData.CurrentPositionVector.z < 200f)
+                {
+                    machineController.SendInstructions(new List<HLInstruction>()
+                    {
+                        new HLInstruction(height, 0f, 0f, time),
+                    });
+                    return true;
+                }
+
+                return false;
             }, 1);
         }
     }

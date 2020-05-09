@@ -15,9 +15,10 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-[X] deactivate predictedBallPosition indicators on startup
-[ ] add the new image processing algorithm as a new thing that can be selected with the "b" and "n" keys
-[ ] automatic switching through the streams on startup? (on space key pressed)
+[X] add the new image processing algorithm as a new thing that can be selected with the "b" and "n" keys
+
+[ ] automatic switching through the streams on startup? (on space key pressed?)
+
 [ ] get a good routine going
 
 [ ] Maybe start with z data only and fade in other things later

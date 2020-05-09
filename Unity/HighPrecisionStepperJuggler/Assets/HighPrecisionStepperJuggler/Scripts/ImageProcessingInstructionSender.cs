@@ -61,6 +61,9 @@ namespace HighPrecisionStepperJuggler
 
             _strategies.Add(BallControlStrategyFactory.GoTo(0.01f));
             _strategies.Add(BallControlStrategyFactory.GoTo(0.05f));
+            
+            _strategies.Add(BallControlStrategyFactory.GoToWhenBallOnPlate(0.01f));
+            _strategies.Add(BallControlStrategyFactory.GoToWhenBallOnPlate(0.05f));
 
             GetBallBouncing();
             
