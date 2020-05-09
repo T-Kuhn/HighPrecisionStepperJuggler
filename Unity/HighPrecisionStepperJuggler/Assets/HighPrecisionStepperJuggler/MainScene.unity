@@ -6925,6 +6925,7 @@ GameObject:
   - component: {fileID: 1381415486}
   - component: {fileID: 1381415489}
   - component: {fileID: 1381415487}
+  - component: {fileID: 1381415488}
   m_Layer: 0
   m_Name: GraphView
   m_TagString: Untagged
@@ -6968,6 +6969,19 @@ MonoBehaviour:
   _tiltingPlate: {fileID: 1238422836}
   _xTiltMeter: {fileID: 301073802}
   _yTiltMeter: {fileID: 47133196}
+--- !u!114 &1381415488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381415485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cff11ed9a591714bbe06bb8bbc8a426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gridSharedMaterial: {fileID: 2100000, guid: d1a0b453b8370f248a8a4c8305fee127, type: 2}
 --- !u!114 &1381415489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7052,7 +7066,6 @@ MonoBehaviour:
   _gradientDescentViewY: {fileID: 1328164682}
   _gradientDescentViewZ: {fileID: 1075240418}
   _targetVisualizer: {fileID: 1117639990}
-  _executeControlStrategies: 0
 --- !u!1 &1399602468
 GameObject:
   m_ObjectHideFlags: 0
@@ -7899,6 +7912,52 @@ Transform:
   - {fileID: 1829643263}
   m_Father: {fileID: 917757128}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1527472043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1527472045}
+  - component: {fileID: 1527472044}
+  m_Layer: 0
+  m_Name: TimeLineAnimator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1527472044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527472043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6dfab60bc877f4cb4a5eb92a7a3c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraPlugin: {fileID: 807047506}
+  _imageProcessingInstructionSender: {fileID: 1395260054}
+  _graphAnimator: {fileID: 1381415488}
+--- !u!4 &1527472045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527472043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1549238979
 GameObject:

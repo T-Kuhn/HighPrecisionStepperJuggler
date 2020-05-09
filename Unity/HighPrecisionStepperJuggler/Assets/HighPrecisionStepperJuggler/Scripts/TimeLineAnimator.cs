@@ -8,10 +8,39 @@ namespace HighPrecisionStepperJuggler.MachineLearning
     {
         [SerializeField] private UVCCameraPlugin _cameraPlugin;
         [SerializeField] private ImageProcessingInstructionSender _imageProcessingInstructionSender;
+        [SerializeField] private GraphAnimator _graphAnimator;
 
         private void Start()
         {
             SetupImageSourceSwitchThroughAnimation();
+
+            CompositeDisposable compositeDisposable = new CompositeDisposable();
+            _imageProcessingInstructionSender.ExecutingControlStrategies
+                .Subscribe(isExecuting =>
+                {
+                    if (isExecuting)
+                    {
+                        Observable.Timer(TimeSpan.FromSeconds(3f))
+                            //.DoOnCancel(() => _graphAnimator.Reset())
+                            .Subscribe(_ =>
+                            {
+                                _graphAnimator.BeginFadeInGrid();
+                            })
+                            .AddTo(compositeDisposable);
+                        
+                        Observable.Timer(TimeSpan.FromSeconds(5f))
+                            .Subscribe(_ =>
+                            {
+                                // TODO: Do next fade in here
+                            })
+                            .AddTo(compositeDisposable);
+                    }
+                    else
+                    {
+                        compositeDisposable.Clear();
+                        _graphAnimator.Reset();
+                    }
+                }).AddTo(this);
         }
 
         private void SetupImageSourceSwitchThroughAnimation()

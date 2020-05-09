@@ -15,18 +15,18 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-[ ] automatic switching through the streams on startup? (on space key pressed?)
+[X] automatic switching through the streams on startup?
     [X] create the TimeLineCoordinator class
-    [ ] UniRx might help to make things cleaner?
+    [X] UniRx might help to make things cleaner?
     
-[ ] get a good routine going
-
 [ ] Maybe start with z data only and fade in other things later
     [ ] make the grid...
     [ ] ...xy position data stream...
     [ ] ...z position data stream...
     [ ] ...and target seperately fadable by sharedMaterial
 [ ] animate coordinate system with a new timeAnimator class (also animate data time axis scale (x10/x100))
+    
+[ ] get a good routine going
 
 [ ] animate camera
     [ ] implement smooth camera moves with set positions
