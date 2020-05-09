@@ -204,7 +204,6 @@ namespace HighPrecisionStepperJuggler
                     {
                         // the boarder is complete
 
-
                         var dataPoints = new List<(Vector2Int center, float radius)>();
                         var numberOfIterations = 50;
                         for (int i = 0; i < numberOfIterations; i++)

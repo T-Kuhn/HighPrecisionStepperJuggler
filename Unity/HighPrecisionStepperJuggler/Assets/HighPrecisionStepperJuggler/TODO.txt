@@ -16,30 +16,36 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 memo:
 
 [X] deactivate predictedBallPosition indicators on startup
+[ ] add the new image processing algorithm as a new thing that can be selected with the "b" and "n" keys
+[ ] automatic switching through the streams on startup? (on space key pressed)
+[ ] get a good routine going
 
-[ ] add some sort of index of all the things that will be featured in the video.
-    show it in full first, than show the current thing only (e.g. "0: flexing")
-    -> display current ball control strategy
-    [ ] add name to controlStrategy in order to display it so that we know what the machine is doing
-    
-[ ] implement smooth camera moves with set positions
+[ ] Maybe start with z data only and fade in other things later
+    [ ] make the grid...
+    [ ] ...xy position data stream...
+    [ ] ...z position data stream...
+    [ ] ...and target seperately fadable by sharedMaterial
+[ ] animate coordinate system with a new timeAnimator class (also animate data time axis scale (x10/x100))
+
+[ ] animate camera
+    [ ] implement smooth camera moves with set positions
 
 [ ] fix 2-step bouncing stuck in up position on controlStrategySwitch
      [ ] end position should be down. But it ends up being stuck up      
      
 [ ] circle bouncing with moving PID target
     
-[ ] add radar style turning radius with fade to ball position visualization
-
 [ ] "every bounce will be a bit higher"-bouncing
 [ ] back forth bouncing
 [ ] left right bouncing
-[ ] bring ball to halt by catching it softly.
+[ ] bring ball to halt by catching it softly.   
 
-[ ] fallback to PID whenever the ball isn't bouncing to prevent bad analytical controls?
-[ ] color tilt visualization red whenever tilt was clamped
 
-[ ] make the ball position datapoint on bounce a different color for better debugging
+
+
+
+[ ] add radar style turning radius with fade to ball position visualization
+
 [ ] make it possible to show data of second ball
 
 [ ] 2 ball bouncing
@@ -67,4 +73,6 @@ memo:
 [ ] front view, change to unity graphics, look around, ent up in top view, change to realtime video again (top view)
 [ ] start with short flex, then throwing ball onto machine
 [ ] get rid of 1 ball by tossing it to the side after doing 2-ball-bouncing for a while
+[ ] first half: bouncing patterns and data visualization
+[ ] second half: bouncing patterns (again) with close up footage and in game camera changes (top view, motor close up view, + maybe one more view)
 

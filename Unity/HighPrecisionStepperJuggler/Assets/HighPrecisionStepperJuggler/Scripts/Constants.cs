@@ -65,7 +65,8 @@ namespace HighPrecisionStepperJuggler
             Blue,
             Normalgray,
             Customgray,
-            CustomgrayWithCirclesOverlayed
+            CustomgrayWithCirclesOverlayed,
+            CustomgrayWithInternalImageProcessing
         }
 
         public static List<string> Captions = new List<string>()
@@ -76,7 +77,8 @@ namespace HighPrecisionStepperJuggler
             "Blue Channel",
             "Normal Grayscale",
             "Orange to Grayscale",
-            "Hough Transform Circle Detection"
+            "Hough Transform Circle Detection",
+            "Custom Circle Detection Algorithm"
         };
     }
 }
