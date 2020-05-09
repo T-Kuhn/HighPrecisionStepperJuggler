@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HighPrecisionStepperJuggler.MachineLearning;
+using UniRx;
 using UnityEngine;
 using c = HighPrecisionStepperJuggler.Constants;
 
@@ -16,7 +18,6 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private GradientDescentView _gradientDescentViewY;
         [SerializeField] private GradientDescentView _gradientDescentViewZ;
         [SerializeField] private TargetVisualizer _targetVisualizer;
-        [SerializeField] private TimeLineAnimator _timeLineAnimator;
 
         private readonly GradientDescent _gradientDescentX = new GradientDescent(
             Constants.NumberOfTrainingSetsUsedForXYGD,
@@ -37,7 +38,8 @@ namespace HighPrecisionStepperJuggler
 
         private BallData _ballData;
         private int _currentStrategyIndex;
-        private bool _executeControlStrategies;
+        private ReactiveProperty<bool> _executeControlStrategies = new ReactiveProperty<bool>();
+        public IObservable<bool> ExecutingControlStrategies => _executeControlStrategies;
 
         private List<IBallControlStrategy> _strategies = new List<IBallControlStrategy>();
 
@@ -121,14 +123,13 @@ namespace HighPrecisionStepperJuggler
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _executeControlStrategies = !_executeControlStrategies;
-                _timeLineAnimator.ExecuteTimeLineAnimation = _executeControlStrategies;
+                _executeControlStrategies.Value = !_executeControlStrategies.Value;
             }
 
             var ballRadiusAndPosition = _cameraPlugin.UpdateImageProcessing();
             var height = FOVCalculations.RadiusToDistance(ballRadiusAndPosition.Radius);
 
-            if (!_executeControlStrategies)
+            if (!_executeControlStrategies.Value)
             {
                 foreach (var strategy in _strategies)
                 {
@@ -171,7 +172,7 @@ namespace HighPrecisionStepperJuggler
 
             _ballPositionVisualizer.SpawnPositionPoint(_ballData.CurrentUnityPositionVector);
 
-            if (_machineController.IsReadyForNextInstruction && _executeControlStrategies)
+            if (_machineController.IsReadyForNextInstruction && _executeControlStrategies.Value)
             {
                 var isRequestingNextStrategy =
                     _strategies[_currentStrategyIndex].Execute(_ballData, _machineController);
