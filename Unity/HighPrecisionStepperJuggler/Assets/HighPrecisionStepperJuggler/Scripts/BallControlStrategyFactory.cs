@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using c = HighPrecisionStepperJuggler.Constants;
 
@@ -7,7 +8,7 @@ namespace HighPrecisionStepperJuggler
     public static class BallControlStrategyFactory
     {
         public static IBallControlStrategy ContinuousBouncing(int duration, ITiltController tiltController,
-            float lowPos = 0.5f, float highPos = 0.6f, float moveTime = 0.1f)
+            float lowPos = 0.5f, float highPos = 0.6f, float moveTime = 0.1f, Action action = null)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
@@ -34,7 +35,7 @@ namespace HighPrecisionStepperJuggler
                 }
 
                 return false;
-            }, duration);
+            }, duration, onStrategyExecutionStart: action);
         }
 
         public static IBallControlStrategy ContinuousBouncingStrong(int duration, ITiltController tiltController,

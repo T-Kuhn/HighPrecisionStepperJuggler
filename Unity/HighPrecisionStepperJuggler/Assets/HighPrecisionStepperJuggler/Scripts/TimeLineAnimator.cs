@@ -6,6 +6,9 @@ namespace HighPrecisionStepperJuggler.MachineLearning
 {
     public class TimeLineAnimator : MonoBehaviour
     {
+        private static readonly float StartVerticalLineFadeInTime = 1f;
+        private static readonly float StartDottedHorizontalBottomLineFadeInTime = 2f;
+        
         [SerializeField] private UVCCameraPlugin _cameraPlugin;
         [SerializeField] private ImageProcessingInstructionSender _imageProcessingInstructionSender;
         [SerializeField] private GraphAnimator _graphAnimator;
@@ -14,30 +17,19 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         {
             SetupImageSourceSwitchThroughAnimation();
 
-            CompositeDisposable compositeDisposable = new CompositeDisposable();
+            CompositeDisposable cd = new CompositeDisposable();
             _imageProcessingInstructionSender.ExecutingControlStrategies
-                .Subscribe(isExecuting =>
+                .CombineLatest(_imageProcessingInstructionSender.GetBallBouncingStarted, 
+                    (isExecuting, GetBouncingStarted) => (isExecuting, GetBouncingStarted))
+                .Subscribe(tuple =>
                 {
-                    if (isExecuting)
+                    if (tuple.isExecuting && tuple.GetBouncingStarted)
                     {
-                        Observable.Timer(TimeSpan.FromSeconds(3f))
-                            //.DoOnCancel(() => _graphAnimator.Reset())
-                            .Subscribe(_ =>
-                            {
-                                _graphAnimator.BeginFadeInGrid();
-                            })
-                            .AddTo(compositeDisposable);
-                        
-                        Observable.Timer(TimeSpan.FromSeconds(5f))
-                            .Subscribe(_ =>
-                            {
-                                // TODO: Do next fade in here
-                            })
-                            .AddTo(compositeDisposable);
+                        SetupGridLineTimers(cd);
                     }
                     else
                     {
-                        compositeDisposable.Clear();
+                        cd.Clear();
                         _graphAnimator.Reset();
                     }
                 }).AddTo(this);
@@ -66,6 +58,17 @@ namespace HighPrecisionStepperJuggler.MachineLearning
                     counter = 0;
                     _cameraPlugin.ImgMode = Constants.ImgMode.Src;
                 }).AddTo(this);
+        }
+
+        private void SetupGridLineTimers(CompositeDisposable cd)
+        {
+            Observable.Timer(TimeSpan.FromSeconds(StartVerticalLineFadeInTime))
+                .Subscribe(_ => _graphAnimator.BeginFadeInVerticalLine())
+                .AddTo(cd);
+
+            Observable.Timer(TimeSpan.FromSeconds(StartDottedHorizontalBottomLineFadeInTime))
+                .Subscribe(_ => _graphAnimator.BeginFadeInDottedHorizontalBottomLine())
+                .AddTo(cd);
         }
     }
 }

@@ -23,23 +23,28 @@ namespace HighPrecisionStepperJuggler
             Constants.NumberOfTrainingSetsUsedForXYGD,
             Constants.NumberOfGDUpdateCyclesXY,
             Constants.AlphaXY
-            );
+        );
+
         private readonly GradientDescent _gradientDescentY = new GradientDescent(
             Constants.NumberOfTrainingSetsUsedForXYGD,
             Constants.NumberOfGDUpdateCyclesXY,
             Constants.AlphaXY
-            );
-        
+        );
+
         private readonly GradientDescent _gradientDescentZ = new GradientDescent(
             Constants.NumberOfTrainingSetsUsedForHeightGD,
             Constants.NumberOfGDUpdateCyclesHeight,
             Constants.AlphaHeight
-            );
+        );
 
         private BallData _ballData;
         private int _currentStrategyIndex;
+
         private ReactiveProperty<bool> _executeControlStrategies = new ReactiveProperty<bool>();
         public IObservable<bool> ExecutingControlStrategies => _executeControlStrategies;
+
+        private ReplaySubject<bool> _getBallBouncingStartedSubject = new ReplaySubject<bool>();
+        public IObservable<bool> GetBallBouncingStarted => _getBallBouncingStartedSubject;
 
         private List<IBallControlStrategy> _strategies = new List<IBallControlStrategy>();
 
@@ -51,6 +56,13 @@ namespace HighPrecisionStepperJuggler
 
             AnalyticalTiltController.Instance.TargetVisualizer = _targetVisualizer;
             PIDTiltController.Instance.TargetVisualizer = _targetVisualizer;
+
+            _getBallBouncingStartedSubject.OnNext(false);
+
+            _executeControlStrategies
+                .Where(isExecuting => !isExecuting)
+                .Subscribe(_ => _getBallBouncingStartedSubject.OnNext(false))
+                .AddTo(this);
         }
 
         private void Start()
@@ -64,21 +76,28 @@ namespace HighPrecisionStepperJuggler
 
             _strategies.Add(BallControlStrategyFactory.GoTo(0.01f));
             _strategies.Add(BallControlStrategyFactory.GoTo(0.05f));
-            
+
             _strategies.Add(BallControlStrategyFactory.GoToWhenBallOnPlate(0.01f));
             _strategies.Add(BallControlStrategyFactory.GoToWhenBallOnPlate(0.05f));
 
-            GetBallBouncing();
-            
+            GetBallBouncing(() => _getBallBouncingStartedSubject.OnNext(true));
+
             _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(40f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(0f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(-40f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(0f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(40f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(0f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance, new Vector2(-40f, 0f)));
-            
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+                new Vector2(40f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+                new Vector2(0f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+                new Vector2(-40f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+                new Vector2(0f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+                new Vector2(40f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+                new Vector2(0f, 0f)));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+                new Vector2(-40f, 0f)));
+
             for (int i = 0; i < 5; i++)
             {
                 _strategies.Add(
@@ -110,9 +129,14 @@ namespace HighPrecisionStepperJuggler
             _strategies.Add(BallControlStrategyFactory.GoTo(0.01f));
         }
 
-        private void GetBallBouncing()
+        private void GetBallBouncing(Action action = null)
         {
-            for (int i = 0; i < 5; i++)
+            _strategies.Add(
+                BallControlStrategyFactory.ContinuousBouncing(5, PIDTiltController.Instance, action: action));
+            _strategies.Add(
+                BallControlStrategyFactory.ContinuousBouncingStrong(1, PIDTiltController.Instance));
+
+            for (int i = 0; i < 4; i++)
             {
                 _strategies.Add(BallControlStrategyFactory.ContinuousBouncing(5, PIDTiltController.Instance));
                 _strategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1, PIDTiltController.Instance));
@@ -144,17 +168,17 @@ namespace HighPrecisionStepperJuggler
                 // couldn't find ball in image
                 return;
             }
-            
+
             var ballPosX = FOVCalculations.PixelPositionToDistanceFromCenter(ballRadiusAndPosition.PositionX, height);
             _gradientDescentX.Hypothesis.SetTheta_0To(ballPosX);
             _gradientDescentX.AddTrainingSet(new TrainingSet(0f, ballPosX));
             _gradientDescentX.UpdateHypothesis();
-            
+
             var ballPosY = FOVCalculations.PixelPositionToDistanceFromCenter(ballRadiusAndPosition.PositionY, height);
             _gradientDescentY.Hypothesis.SetTheta_0To(ballPosY);
             _gradientDescentY.AddTrainingSet(new TrainingSet(0f, ballPosY));
             _gradientDescentY.UpdateHypothesis();
-            
+
             _gradientDescentZ.Hypothesis.SetTheta_0To(height);
             _gradientDescentZ.AddTrainingSet(new TrainingSet(0f, height));
             _gradientDescentZ.UpdateHypothesis();
@@ -163,12 +187,12 @@ namespace HighPrecisionStepperJuggler
                 new Vector3(
                     _gradientDescentX.Hypothesis.Parameters.Theta_0,
                     _gradientDescentY.Hypothesis.Parameters.Theta_0,
-                    height), 
+                    height),
                 new Vector3(
                     _gradientDescentX.Hypothesis.Parameters.Theta_1,
                     _gradientDescentY.Hypothesis.Parameters.Theta_1,
                     _gradientDescentZ.Hypothesis.Parameters.Theta_1
-                    ));
+                ));
 
             _ballPositionVisualizer.SpawnPositionPoint(_ballData.CurrentUnityPositionVector);
 
@@ -184,9 +208,11 @@ namespace HighPrecisionStepperJuggler
                     if (_currentStrategyIndex < _strategies.Count - 1)
                     {
                         _currentStrategyIndex++;
-                        
+
                         _predictedPositionVisualizer
                             .SetActive(_strategies[_currentStrategyIndex].UsesBallPositionPrediction);
+
+                        _strategies[_currentStrategyIndex].OnStrategyExecutionStart?.Invoke();
                     }
                 }
             }
