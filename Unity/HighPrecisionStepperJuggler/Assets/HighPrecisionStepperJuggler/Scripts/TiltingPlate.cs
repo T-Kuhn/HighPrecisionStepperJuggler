@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UniRx;
+using UnityEngine;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -13,9 +15,9 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint2 = null;
         [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint3 = null;
         [SerializeField] private BasicRotationalJoint _upperMostRotationalJoint4 = null;
-
-        public delegate void TiltUpdate(float xTilt, float yTilt);
-        public event TiltUpdate OnTiltUpdate;
+        
+        public IObservable<(float xTilt, float yTilt)> OnTiltUpdated => _onTiltUpdated;
+        private Subject<(float, float)> _onTiltUpdated = new Subject<(float, float)>();
 
         void LateUpdate()
         {
@@ -32,7 +34,7 @@ namespace HighPrecisionStepperJuggler
             _upperMostRotationalJoint3.Rotation = gamma;
             _upperMostRotationalJoint4.Rotation = -gamma;
 
-            OnTiltUpdate?.Invoke(gamma, -beta);
+            _onTiltUpdated.OnNext((gamma, -beta));
         }
     }
 }

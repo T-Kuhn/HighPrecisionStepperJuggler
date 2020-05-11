@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UniRx;
 
 namespace HighPrecisionStepperJuggler
 {
@@ -16,14 +17,15 @@ namespace HighPrecisionStepperJuggler
 
         private void Start()
         {
-            _tiltingPlate.OnTiltUpdate += (xTilt, yTilt) =>
-            {
-                _xLineLength = xTilt * 20f;
-                _xTiltMeter.LineLength = _xLineLength - _offset.x;
+            _tiltingPlate.OnTiltUpdated
+                .Subscribe(tuple =>
+                {
+                    _xLineLength = tuple.xTilt * 20f;
+                    _xTiltMeter.LineLength = _xLineLength - _offset.x;
 
-                _yLineLength = yTilt * 20f;
-                _yTiltMeter.LineLength = _yLineLength - _offset.y;
-            };
+                    _yLineLength = tuple.yTilt * 20f;
+                    _yTiltMeter.LineLength = _yLineLength - _offset.y;
+                });
         }
 
         private void Update()
