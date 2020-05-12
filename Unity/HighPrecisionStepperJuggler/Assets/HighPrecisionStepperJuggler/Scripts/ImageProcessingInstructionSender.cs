@@ -40,8 +40,8 @@ namespace HighPrecisionStepperJuggler
         private BallData _ballData;
         private int _currentStrategyIndex;
 
-        private ReactiveProperty<bool> _executeControlStrategies = new ReactiveProperty<bool>();
-        public IObservable<bool> ExecutingControlStrategies => _executeControlStrategies;
+        private ReactiveProperty<bool> _isExecuteControlStrategies = new ReactiveProperty<bool>();
+        public IObservable<bool> OnExecutingControlStrategies => _isExecuteControlStrategies;
 
         private ReplaySubject<bool> _getBallBouncingStartedSubject = new ReplaySubject<bool>();
         public IObservable<bool> GetBallBouncingStarted => _getBallBouncingStartedSubject;
@@ -59,7 +59,7 @@ namespace HighPrecisionStepperJuggler
 
             _getBallBouncingStartedSubject.OnNext(false);
 
-            _executeControlStrategies
+            _isExecuteControlStrategies
                 .Where(isExecuting => !isExecuting)
                 .Subscribe(_ => _getBallBouncingStartedSubject.OnNext(false))
                 .AddTo(this);
@@ -147,13 +147,13 @@ namespace HighPrecisionStepperJuggler
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _executeControlStrategies.Value = !_executeControlStrategies.Value;
+                _isExecuteControlStrategies.Value = !_isExecuteControlStrategies.Value;
             }
 
             var ballRadiusAndPosition = _cameraPlugin.UpdateImageProcessing();
             var height = FOVCalculations.RadiusToDistance(ballRadiusAndPosition.Radius);
 
-            if (!_executeControlStrategies.Value)
+            if (!_isExecuteControlStrategies.Value)
             {
                 foreach (var strategy in _strategies)
                 {
@@ -196,7 +196,7 @@ namespace HighPrecisionStepperJuggler
 
             _ballPositionVisualizer.SpawnPositionPoint(_ballData.CurrentUnityPositionVector);
 
-            if (_machineController.IsReadyForNextInstruction && _executeControlStrategies.Value)
+            if (_machineController.IsReadyForNextInstruction && _isExecuteControlStrategies.Value)
             {
                 var isRequestingNextStrategy =
                     _strategies[_currentStrategyIndex].Execute(_ballData, _machineController);

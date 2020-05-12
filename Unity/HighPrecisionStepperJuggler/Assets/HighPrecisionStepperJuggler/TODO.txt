@@ -19,13 +19,14 @@ memo:
     [X] create the TimeLineCoordinator class
     [X] UniRx might help to make things cleaner?
     
-[ ] refactor the TiltMeterPresenter
+[X] refactor the TiltMeterPresenter
 
 [ ] Maybe start with z data only and fade in other things later
     [ ] make the grid...
     [ ] ...xy position data stream...
     [ ] ...z position data stream...
     [ ] ...and target seperately fadable by sharedMaterial
+    [ ] seperate remaining color materials in preparation for
     
 [ ] animate coordinate system with a new timeAnimator class (also animate data time axis scale (x10/x100))
     

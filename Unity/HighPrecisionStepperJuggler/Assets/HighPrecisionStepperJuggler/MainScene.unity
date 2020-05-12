@@ -6926,6 +6926,7 @@ GameObject:
   - component: {fileID: 1381415489}
   - component: {fileID: 1381415487}
   - component: {fileID: 1381415488}
+  - component: {fileID: 1381415490}
   m_Layer: 0
   m_Name: GraphView
   m_TagString: Untagged
@@ -6988,19 +6989,23 @@ MonoBehaviour:
   _dottedHorizontalBottomLine: {fileID: 2100000, guid: 716a4b61260d1be40892f8e6f71bc28e,
     type: 2}
   _dottedVerticalLine: {fileID: 2100000, guid: 0f0be003017d2004499699575172baae, type: 2}
-  _GradientDescentLineX: {fileID: 2100000, guid: 5e88753175217cd4aab78ebe9a043313,
+  _gradientDescentDataPointX: {fileID: 2100000, guid: 2f0110b9902dfe7408579eede0ece7e7,
     type: 2}
-  _GradientDescentLineY: {fileID: 2100000, guid: 5e025214f88fc95438b34d14e5cbd818,
+  _gradientDescentDataPointY: {fileID: 2100000, guid: c973f01ba4871bc4091aedb70bc00b29,
     type: 2}
-  _GradientDescentDataPointX: {fileID: 2100000, guid: 2f0110b9902dfe7408579eede0ece7e7,
+  _gradientDescentDataPointZ: {fileID: 2100000, guid: 5a34bcc9fa5475d4e9448797075f005d,
     type: 2}
-  _GradientDescentDataPointY: {fileID: 2100000, guid: c973f01ba4871bc4091aedb70bc00b29,
+  _gradientDescentLineX: {fileID: 2100000, guid: 5e88753175217cd4aab78ebe9a043313,
     type: 2}
-  _GradientDescentDataPointZ: {fileID: 2100000, guid: 5a34bcc9fa5475d4e9448797075f005d,
+  _gradientDescentLineY: {fileID: 2100000, guid: 5e025214f88fc95438b34d14e5cbd818,
     type: 2}
-  _PredictedHitPositionX: {fileID: 2100000, guid: caef03a443ff686478579bbb4228c3eb,
+  _gradientDescentLineZ: {fileID: 2100000, guid: 3e735176b39bbcd4e90d01127e2ef18d,
     type: 2}
-  _PredictedHitPositionY: {fileID: 2100000, guid: 8429bdd25d8d7dd47b5c7e4596c3eff2,
+  _tiltX: {fileID: 2100000, guid: 99bbe0eaae88bc24b84ffb97775747a1, type: 2}
+  _tiltY: {fileID: 2100000, guid: ee06fd0fecac78447afe3eeea262a4e9, type: 2}
+  _predictedHitPositionX: {fileID: 2100000, guid: caef03a443ff686478579bbb4228c3eb,
+    type: 2}
+  _predictedHitPositionY: {fileID: 2100000, guid: 8429bdd25d8d7dd47b5c7e4596c3eff2,
     type: 2}
 --- !u!114 &1381415489
 MonoBehaviour:
@@ -7016,6 +7021,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _volume: {fileID: 581876910}
   _renderTexture: {fileID: 8400000, guid: 37ee6cd89d678ae4fbeb0b360e7a87f3, type: 2}
+--- !u!114 &1381415490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381415485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae43fbe62a1f254e9f4c925ff9e5b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gradientDescentViewX: {fileID: 209730450}
+  _gradientDescentViewY: {fileID: 1328164682}
+  _gradientDescentViewZ: {fileID: 1075240418}
 --- !u!1 &1395260051
 GameObject:
   m_ObjectHideFlags: 0
@@ -7965,6 +7985,7 @@ MonoBehaviour:
   _cameraPlugin: {fileID: 807047506}
   _imageProcessingInstructionSender: {fileID: 1395260054}
   _graphAnimator: {fileID: 1381415488}
+  _graphTimeScaleAnimator: {fileID: 1381415490}
 --- !u!4 &1527472045
 Transform:
   m_ObjectHideFlags: 0
@@ -8780,9 +8801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _font: {fileID: 12800000, guid: fca2c7d9a6230534bb186a1f4663e4be, type: 3}
-  _gradientDescentViewX: {fileID: 209730450}
-  _gradientDescentViewY: {fileID: 1328164682}
-  _gradientDescentViewZ: {fileID: 1075240418}
+  _graphTimeScaleAnimator: {fileID: 1381415490}
 --- !u!4 &1782564079
 Transform:
   m_ObjectHideFlags: 0

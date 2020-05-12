@@ -6,9 +6,7 @@ namespace HighPrecisionStepperJuggler.MachineLearning
     public class DebugGUI : MonoBehaviour
     {
         [SerializeField] private Font _font;
-        [SerializeField] private GradientDescentView _gradientDescentViewX;
-        [SerializeField] private GradientDescentView _gradientDescentViewY;
-        [SerializeField] private GradientDescentView _gradientDescentViewZ;
+        [SerializeField] private GraphTimeScaleAnimator _graphTimeScaleAnimator;
 
         private bool _showDebugGUI;
 
@@ -45,45 +43,23 @@ namespace HighPrecisionStepperJuggler.MachineLearning
 
             if (GUI.Button(new Rect(10, 50, 100, 40), "×10", buttonStyle))
             {
-                var currentTimeScaler = 100f;
-                DOTween.To(() => currentTimeScaler, x =>
-                {
-                    currentTimeScaler = x;
-                    _gradientDescentViewX.TimeScaler = currentTimeScaler;
-                    _gradientDescentViewY.TimeScaler = currentTimeScaler;
-                }, 10f, 1f);
+                _graphTimeScaleAnimator.SetXYTimeScale(100f, 10f);
             }
 
             if (GUI.Button(new Rect(120, 50, 100, 40), "×100", buttonStyle))
             {
-                var currentTimeScaler = 10f;
-                DOTween.To(() => currentTimeScaler, x =>
-                {
-                    currentTimeScaler = x;
-                    _gradientDescentViewX.TimeScaler = currentTimeScaler;
-                    _gradientDescentViewY.TimeScaler = currentTimeScaler;
-                }, 100f, 1f);
+                _graphTimeScaleAnimator.SetXYTimeScale(10f, 100f);
             }
 
             GUI.Label(new Rect(335, 5, 100, 40), "Z", labelStyle);
             if (GUI.Button(new Rect(280, 50, 100, 40), "×10", buttonStyle))
             {
-                var currentTimeScaler = 100f;
-                DOTween.To(() => currentTimeScaler, x =>
-                {
-                    currentTimeScaler = x;
-                    _gradientDescentViewZ.TimeScaler = currentTimeScaler;
-                }, 10f, 1f);
+                _graphTimeScaleAnimator.SetZTimeScale(100f, 10f);
             }
 
             if (GUI.Button(new Rect(390, 50, 100, 40), "×100", buttonStyle))
             {
-                var currentTimeScaler = 10f;
-                DOTween.To(() => currentTimeScaler, x =>
-                {
-                    currentTimeScaler = x;
-                    _gradientDescentViewZ.TimeScaler = currentTimeScaler;
-                }, 100f, 1f);
+                _graphTimeScaleAnimator.SetZTimeScale(10f, 100f);
             }
 
             GUI.EndGroup();
