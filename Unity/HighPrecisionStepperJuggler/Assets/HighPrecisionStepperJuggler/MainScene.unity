@@ -6988,6 +6988,20 @@ MonoBehaviour:
   _dottedHorizontalBottomLine: {fileID: 2100000, guid: 716a4b61260d1be40892f8e6f71bc28e,
     type: 2}
   _dottedVerticalLine: {fileID: 2100000, guid: 0f0be003017d2004499699575172baae, type: 2}
+  _GradientDescentLineX: {fileID: 2100000, guid: 5e88753175217cd4aab78ebe9a043313,
+    type: 2}
+  _GradientDescentLineY: {fileID: 2100000, guid: 5e025214f88fc95438b34d14e5cbd818,
+    type: 2}
+  _GradientDescentDataPointX: {fileID: 2100000, guid: 2f0110b9902dfe7408579eede0ece7e7,
+    type: 2}
+  _GradientDescentDataPointY: {fileID: 2100000, guid: c973f01ba4871bc4091aedb70bc00b29,
+    type: 2}
+  _GradientDescentDataPointZ: {fileID: 2100000, guid: 5a34bcc9fa5475d4e9448797075f005d,
+    type: 2}
+  _PredictedHitPositionX: {fileID: 2100000, guid: caef03a443ff686478579bbb4228c3eb,
+    type: 2}
+  _PredictedHitPositionY: {fileID: 2100000, guid: 8429bdd25d8d7dd47b5c7e4596c3eff2,
+    type: 2}
 --- !u!114 &1381415489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7511,7 +7525,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5e88753175217cd4aab78ebe9a043313, type: 2}
+  - {fileID: 2100000, guid: 99bbe0eaae88bc24b84ffb97775747a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10122,7 +10136,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5e025214f88fc95438b34d14e5cbd818, type: 2}
+  - {fileID: 2100000, guid: ee06fd0fecac78447afe3eeea262a4e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
