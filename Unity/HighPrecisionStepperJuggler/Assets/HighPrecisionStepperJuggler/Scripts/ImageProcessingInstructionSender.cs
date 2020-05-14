@@ -78,19 +78,18 @@ namespace HighPrecisionStepperJuggler
             GetBallBouncing(() => _onCheckPointPassedSubject.OnNext(1));
             
 
-            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(10, AnalyticalTiltController.Instance));
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance));
 
-            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(40, AnalyticalTiltController.Instance,
                 action: () => _onCheckPointPassedSubject.OnNext(2)));
             
-            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(10, AnalyticalTiltController.Instance,
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 action: () => _onCheckPointPassedSubject.OnNext(3)));
             
             CircleBouncing(5);
 
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(40f, 0f)));
-            
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(0f, 0f)));
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
@@ -164,7 +163,7 @@ namespace HighPrecisionStepperJuggler
                     target.x = Mathf.Cos(angle) * radius;
                     target.y = Mathf.Sin(angle) * radius;
                     _strategies.Add(
-                        BallControlStrategyFactory.TwoStepBouncing(1, AnalyticalTiltController.Instance, target));
+                        BallControlStrategyFactory.TwoStepBouncing(2, AnalyticalTiltController.Instance, target));
                 }
             }
         }

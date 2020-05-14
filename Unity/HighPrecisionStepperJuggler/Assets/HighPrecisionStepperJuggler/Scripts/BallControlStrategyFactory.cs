@@ -69,6 +69,8 @@ namespace HighPrecisionStepperJuggler
             }, duration);
         }
 
+        // NOTE: Duration needs to be a multiple of 2 since both the upwards motion and the downwards motion
+        //       count as 1 instructionSent
         public static IBallControlStrategy TwoStepBouncing(int duration, ITiltController tiltController,
             Vector2? target = null, float lowPos = 0.05f, float highPos = 0.058f, float moveTime = 0.1f,
             Action action = null)
@@ -130,9 +132,7 @@ namespace HighPrecisionStepperJuggler
                     });
 
                     currentPositionIsUp = false;
-                    // instructionSent: false (even though we DID send a instruction.
-                    // This is because we don't want to count this instruction as a bounce instruction) 
-                    return false;
+                    return true;
                 }
 
                 // instructionSent: false
