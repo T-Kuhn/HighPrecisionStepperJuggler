@@ -43,9 +43,9 @@ namespace HighPrecisionStepperJuggler
         private ReactiveProperty<bool> _isExecuteControlStrategies = new ReactiveProperty<bool>();
         public IObservable<bool> OnExecutingControlStrategies => _isExecuteControlStrategies;
 
-        private ReplaySubject<bool> _getBallBouncingStartedSubject = new ReplaySubject<bool>();
-        public IObservable<bool> GetBallBouncingStarted => _getBallBouncingStartedSubject;
-
+        private ReplaySubject<int> _onCheckPointPassedSubject = new ReplaySubject<int>();
+        public IObservable<int> OnCheckPointPassed => _onCheckPointPassedSubject;
+        
         private List<IBallControlStrategy> _strategies = new List<IBallControlStrategy>();
 
         private void Awake()
@@ -57,12 +57,7 @@ namespace HighPrecisionStepperJuggler
             AnalyticalTiltController.Instance.TargetVisualizer = _targetVisualizer;
             PIDTiltController.Instance.TargetVisualizer = _targetVisualizer;
 
-            _getBallBouncingStartedSubject.OnNext(false);
-
-            _isExecuteControlStrategies
-                .Where(isExecuting => !isExecuting)
-                .Subscribe(_ => _getBallBouncingStartedSubject.OnNext(false))
-                .AddTo(this);
+            _onCheckPointPassedSubject.OnNext(0);
         }
 
         private void Start()
@@ -80,9 +75,11 @@ namespace HighPrecisionStepperJuggler
             _strategies.Add(BallControlStrategyFactory.GoToWhenBallOnPlate(0.01f));
             _strategies.Add(BallControlStrategyFactory.GoToWhenBallOnPlate(0.05f));
 
-            GetBallBouncing(() => _getBallBouncingStartedSubject.OnNext(true));
+            GetBallBouncing(() => _onCheckPointPassedSubject.OnNext(1));
 
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance));
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+                action: () => _onCheckPointPassedSubject.OnNext(2)));
+            
             _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(40f, 0f)));
             _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,

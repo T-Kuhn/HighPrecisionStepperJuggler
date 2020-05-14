@@ -70,7 +70,8 @@ namespace HighPrecisionStepperJuggler
         }
 
         public static IBallControlStrategy Continuous2StepBouncing(int duration, ITiltController tiltController,
-            Vector2? target = null, float lowPos = 0.05f, float highPos = 0.058f, float moveTime = 0.1f)
+            Vector2? target = null, float lowPos = 0.05f, float highPos = 0.058f, float moveTime = 0.1f,
+            Action action = null)
         {
             var currentPositionIsUp = false;
 
@@ -136,7 +137,7 @@ namespace HighPrecisionStepperJuggler
 
                 // instructionSent: false
                 return false;
-            }, duration, true);
+            }, duration, true, onStrategyExecutionStart: action);
         }
 
         // stable bouncing with low height
