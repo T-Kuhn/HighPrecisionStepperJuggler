@@ -31,6 +31,8 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         [SerializeField] private Material _tiltX;
         [SerializeField] private Material _tiltY;
         
+        [SerializeField] private Material _target;
+        
         [SerializeField] private Material _predictedHitPositionX;
         [SerializeField] private Material _predictedHitPositionY;
 
@@ -53,6 +55,7 @@ namespace HighPrecisionStepperJuggler.MachineLearning
                 _gradientDescentLineZ,
                 _tiltX,
                 _tiltY,
+                _target,
                 _predictedHitPositionX,
                 _predictedHitPositionY
             };
@@ -101,6 +104,9 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         public void FadeInTiltY() => FadeInMaterial(_tiltY);
         public void FadeOutTiltX() => FadeOutMaterial(_tiltX);
         public void FadeOutTiltY() => FadeOutMaterial(_tiltY);
+        
+        public void FadeInTarget() => FadeInMaterial(_target);
+        public void FadeOutTarget() => FadeOutMaterial(_target);
         
         public void FadeInPredictedHitPositionX() => FadeInMaterial(_predictedHitPositionX);
         public void FadeInPredictedHitPositionY() => FadeInMaterial(_predictedHitPositionY);

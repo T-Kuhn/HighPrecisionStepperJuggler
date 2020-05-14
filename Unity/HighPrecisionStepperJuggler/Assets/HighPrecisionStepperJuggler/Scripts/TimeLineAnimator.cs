@@ -27,6 +27,11 @@ namespace HighPrecisionStepperJuggler.MachineLearning
                 .Subscribe(_ => ShowXYData(cd))
                 .AddTo(this);
 
+            _imageProcessingInstructionSender.OnCheckPointPassed
+                .Where(checkPoint => checkPoint == 3)
+                .Subscribe(_ => ShowTarget(cd))
+                .AddTo(this);
+
             _imageProcessingInstructionSender.OnExecutingControlStrategies
                 .Where(isExecuting => !isExecuting)
                 .Subscribe(_ =>
@@ -72,19 +77,39 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         {
             InvokeActionAtTime(() => _graphAnimator.FadeInVerticalLine(), 1f, cd);
             InvokeActionAtTime(() => _graphAnimator.FadeInDottedHorizontalBottomLine(), 1.5f, cd);
-            
+
             InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentDataPointZ(), 2f, cd);
-            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentLineZ(), 2.5f, cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentLineZ(), 2.0f, cd);
         }
 
         private void ShowXYData(CompositeDisposable cd)
         {
-            InvokeActionAtTime(() => _graphAnimator.FadeInHorizontalLine(), 1f, cd);
-            InvokeActionAtTime(() => _graphAnimator.FadeInDottedHorizontalTopLine(), 1.5f, cd);
+            var time = 0.5f;
+            float GetTime(bool increment = true) => time += increment ? 0.5f : 0f;
+
+            InvokeActionAtTime(() => _graphAnimator.FadeOutGradientDescentDataPointZ(), GetTime(), cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeOutGradientDescentLineZ(), GetTime(false), cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeOutDottedHorizontalBottomLine(), GetTime(), cd);
+
+            InvokeActionAtTime(() => _graphAnimator.FadeInHorizontalLine(), GetTime(), cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInDottedHorizontalTopLine(), GetTime(), cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInDottedVerticalLine(), GetTime(), cd);
+
+            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentDataPointX(), GetTime(), cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentLineX(), GetTime(false), cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInPredictedHitPositionX(), GetTime(false), cd);
+
+            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentDataPointY(), GetTime(), cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentLineY(), GetTime(false), cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInPredictedHitPositionY(), GetTime(false), cd);
             
-            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentDataPointX(), 2.0f, cd);
-            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentDataPointY(), 2.5f, cd);
-            
+            InvokeActionAtTime(() => _graphAnimator.FadeInTiltX(), GetTime(), cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInTiltY(), GetTime(false), cd);
+        }
+
+        private void ShowTarget(CompositeDisposable cd)
+        {
+            InvokeActionAtTime(() => _graphAnimator.FadeInTarget(), 1f, cd);
         }
     }
 }

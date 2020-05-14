@@ -45,7 +45,7 @@ namespace HighPrecisionStepperJuggler
 
         private ReplaySubject<int> _onCheckPointPassedSubject = new ReplaySubject<int>();
         public IObservable<int> OnCheckPointPassed => _onCheckPointPassedSubject;
-        
+
         private List<IBallControlStrategy> _strategies = new List<IBallControlStrategy>();
 
         private void Awake()
@@ -77,9 +77,14 @@ namespace HighPrecisionStepperJuggler
 
             GetBallBouncing(() => _onCheckPointPassedSubject.OnNext(1));
 
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(10, AnalyticalTiltController.Instance));
+
             _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
                 action: () => _onCheckPointPassedSubject.OnNext(2)));
             
+            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(10, AnalyticalTiltController.Instance,
+                action: () => _onCheckPointPassedSubject.OnNext(3)));
+
             _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(40f, 0f)));
             _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,

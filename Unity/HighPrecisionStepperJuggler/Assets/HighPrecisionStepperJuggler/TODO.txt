@@ -28,6 +28,8 @@ memo:
     [ ] ...and target seperately fadable by sharedMaterial
     [ ] seperate remaining color materials in preparation for
     
+[ ] show current control algorithm
+    
 [ ] animate coordinate system with a new timeAnimator class (also animate data time axis scale (x10/x100))
     
 [ ] get a good routine going
