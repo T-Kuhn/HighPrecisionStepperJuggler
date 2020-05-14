@@ -15,23 +15,12 @@ upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 
 memo:
 
-[X] automatic switching through the streams on startup?
-    [X] create the TimeLineCoordinator class
-    [X] UniRx might help to make things cleaner?
-    
-[X] refactor the TiltMeterPresenter
+[ ] circle bouncing with moving control target
 
-[ ] Maybe start with z data only and fade in other things later
-    [ ] make the grid...
-    [ ] ...xy position data stream...
-    [ ] ...z position data stream...
-    [ ] ...and target seperately fadable by sharedMaterial
-    [ ] seperate remaining color materials in preparation for
+[ ] show current control algorithm (maybe)
+[X] animate coordinate system with a new timeAnimator class (also animate data time axis scale (x10/x100))
     
-[ ] show current control algorithm
-    
-[ ] animate coordinate system with a new timeAnimator class (also animate data time axis scale (x10/x100))
-    
+[ ] come up with new flex
 [ ] get a good routine going
 
 [ ] animate camera
@@ -39,16 +28,11 @@ memo:
 
 [ ] fix 2-step bouncing stuck in up position on controlStrategySwitch
      [ ] end position should be down. But it ends up being stuck up      
-     
-[ ] circle bouncing with moving PID target
     
 [ ] "every bounce will be a bit higher"-bouncing
 [ ] back forth bouncing
 [ ] left right bouncing
 [ ] bring ball to halt by catching it softly.   
-
-
-
 
 
 [ ] add radar style turning radius with fade to ball position visualization
@@ -78,8 +62,7 @@ memo:
 
 // vid:
 [ ] front view, change to unity graphics, look around, ent up in top view, change to realtime video again (top view)
-[ ] start with short flex, then throwing ball onto machine
-[ ] get rid of 1 ball by tossing it to the side after doing 2-ball-bouncing for a while
 [ ] first half: bouncing patterns and data visualization
 [ ] second half: bouncing patterns (again) with close up footage and in game camera changes (top view, motor close up view, + maybe one more view)
+[ ] give me ball back dance? while close up view and change to top view to get good sync of video streams between switches
 
