@@ -29,11 +29,8 @@ memo:
 [ ] fix 2-step bouncing stuck in up position on controlStrategySwitch
      [ ] end position should be down. But it ends up being stuck up      
     
-[ ] "every bounce will be a bit higher"-bouncing
-[ ] back forth bouncing
-[ ] left right bouncing
 [ ] bring ball to halt by catching it softly.   
-
+[ ] "every bounce will be a bit higher"-bouncing
 
 [ ] add radar style turning radius with fade to ball position visualization
 

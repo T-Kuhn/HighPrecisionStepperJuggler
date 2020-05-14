@@ -76,36 +76,40 @@ namespace HighPrecisionStepperJuggler
             _strategies.Add(BallControlStrategyFactory.GoToWhenBallOnPlate(0.05f));
 
             GetBallBouncing(() => _onCheckPointPassedSubject.OnNext(1));
+            
 
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(10, AnalyticalTiltController.Instance));
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(10, AnalyticalTiltController.Instance));
 
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 action: () => _onCheckPointPassedSubject.OnNext(2)));
             
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(10, AnalyticalTiltController.Instance,
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(10, AnalyticalTiltController.Instance,
                 action: () => _onCheckPointPassedSubject.OnNext(3)));
+            
+            CircleBouncing(5);
 
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(40f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+            
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(0f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(-40f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(0f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(40f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(0f, 0f)));
-            _strategies.Add(BallControlStrategyFactory.Continuous2StepBouncing(20, AnalyticalTiltController.Instance,
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(-40f, 0f)));
 
             for (int i = 0; i < 5; i++)
             {
                 _strategies.Add(
-                    BallControlStrategyFactory.ContinuousBouncing(5, AnalyticalTiltController.Instance));
+                    BallControlStrategyFactory.Bouncing(5, AnalyticalTiltController.Instance));
                 _strategies.Add(
-                    BallControlStrategyFactory.ContinuousBouncingStrong(1, AnalyticalTiltController.Instance));
+                    BallControlStrategyFactory.BouncingStrong(1, AnalyticalTiltController.Instance));
                 _strategies.Add(BallControlStrategyFactory.Balancing(0.05f, 8, Vector2.zero,
                     AnalyticalTiltController.Instance));
             }
@@ -116,14 +120,14 @@ namespace HighPrecisionStepperJuggler
 
             GetBallBouncing();
 
-            _strategies.Add(BallControlStrategyFactory.ContinuousBouncing(20, AnalyticalTiltController.Instance));
+            _strategies.Add(BallControlStrategyFactory.Bouncing(20, AnalyticalTiltController.Instance));
 
             for (int i = 0; i < 5; i++)
             {
                 _strategies.Add(
-                    BallControlStrategyFactory.ContinuousBouncing(5, AnalyticalTiltController.Instance));
+                    BallControlStrategyFactory.Bouncing(5, AnalyticalTiltController.Instance));
                 _strategies.Add(
-                    BallControlStrategyFactory.ContinuousBouncingStrong(1, AnalyticalTiltController.Instance));
+                    BallControlStrategyFactory.BouncingStrong(1, AnalyticalTiltController.Instance));
                 _strategies.Add(
                     BallControlStrategyFactory.Balancing(0.05f, 8, Vector2.zero, AnalyticalTiltController.Instance));
             }
@@ -134,14 +138,34 @@ namespace HighPrecisionStepperJuggler
         private void GetBallBouncing(Action action = null)
         {
             _strategies.Add(
-                BallControlStrategyFactory.ContinuousBouncing(5, PIDTiltController.Instance, action: action));
+                BallControlStrategyFactory.Bouncing(5, PIDTiltController.Instance, action: action));
             _strategies.Add(
-                BallControlStrategyFactory.ContinuousBouncingStrong(1, PIDTiltController.Instance));
+                BallControlStrategyFactory.BouncingStrong(1, PIDTiltController.Instance));
 
             for (int i = 0; i < 4; i++)
             {
-                _strategies.Add(BallControlStrategyFactory.ContinuousBouncing(5, PIDTiltController.Instance));
-                _strategies.Add(BallControlStrategyFactory.ContinuousBouncingStrong(1, PIDTiltController.Instance));
+                _strategies.Add(BallControlStrategyFactory.Bouncing(5, PIDTiltController.Instance));
+                _strategies.Add(BallControlStrategyFactory.BouncingStrong(1, PIDTiltController.Instance));
+            }
+        }
+
+        private void CircleBouncing(int iterations = 1)
+        {
+            var angle = 0f;
+            var radius = 30f;
+            var numberOfSlices = 15;
+            var target = Vector2.zero;
+            
+            for (int j = 0; j < iterations; j++)
+            {
+                for (int i = 0; i < numberOfSlices; i++)
+                {
+                    angle = Mathf.PI * 2 * i / numberOfSlices;
+                    target.x = Mathf.Cos(angle) * radius;
+                    target.y = Mathf.Sin(angle) * radius;
+                    _strategies.Add(
+                        BallControlStrategyFactory.TwoStepBouncing(1, AnalyticalTiltController.Instance, target));
+                }
             }
         }
 
