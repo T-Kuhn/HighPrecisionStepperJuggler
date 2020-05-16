@@ -221,7 +221,7 @@ namespace HighPrecisionStepperJuggler
                     _gradientDescentZ.Hypothesis.Parameters.Theta_1
                 ));
 
-            _ballPositionVisualizer.SpawnPositionPoint(_ballData.CurrentUnityPositionVector);
+            _ballPositionVisualizer.VisualizePositionPoint(_ballData.CurrentUnityPositionVector);
 
             if (_machineController.IsReadyForNextInstruction && _isExecuteControlStrategies.Value)
             {

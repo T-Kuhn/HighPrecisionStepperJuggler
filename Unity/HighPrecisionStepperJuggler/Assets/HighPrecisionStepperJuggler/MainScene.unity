@@ -3539,10 +3539,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77751dda6647a234ebb6fbf7b1a677c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 655863204052711980, guid: 50a95d9937cd0164bb5cc04020029f05, type: 3}
-  _smallPrefab: {fileID: 3160438038718964063, guid: 4e6aa95c364e3294aaf9d5f181a022b0,
+  _prefab: {fileID: -8551165535386872863, guid: 50a95d9937cd0164bb5cc04020029f05,
+    type: 3}
+  _trailPrefab: {fileID: 3139591670115698834, guid: 4e6aa95c364e3294aaf9d5f181a022b0,
     type: 3}
   _cameraHeight: {fileID: 408827753}
+  NumberOfGameObectsInPool: 50
+  NumberOfTrailGameObectsInPool: 800
 --- !u!4 &602902453
 Transform:
   m_ObjectHideFlags: 0

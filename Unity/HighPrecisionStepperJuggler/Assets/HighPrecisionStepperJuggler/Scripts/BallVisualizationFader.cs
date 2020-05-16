@@ -5,37 +5,32 @@ namespace HighPrecisionStepperJuggler
     public class BallVisualizationFader : MonoBehaviour
     {
         private static readonly int UnlitColor = Shader.PropertyToID("_UnlitColor");
-        
+
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private bool _isSmallBall;
 
         private float _countDown;
         private float _totalFadeTime;
 
-        private void Start()
+        public void Reset()
         {
-            if (_isSmallBall)
-            {
-                _countDown = Constants.SmallBallVisualizationFadeOutTime;
-            }
-            else
-            {
-                _countDown = Constants.BallVisualizationFadeOutTime;
-            }
-            
+            _countDown = _isSmallBall
+                ? Constants.SmallBallVisualizationFadeOutTime
+                : Constants.BallVisualizationFadeOutTime;
+
             _totalFadeTime = _countDown;
         }
 
         private void Update()
         {
             _countDown -= Time.deltaTime;
-            if (_countDown <= 0.0f)
+            var alpha = _countDown <= 0.0f ? 0f : _countDown / _totalFadeTime;
+            if (alpha <= 0f)
             {
-                Destroy(gameObject);
+                transform.position = Vector3.up * 1000f;
                 return;
             }
-            
-            var alpha = _countDown / _totalFadeTime;
+
             var color = _meshRenderer.material.GetColor(UnlitColor);
             color.a = alpha;
             _meshRenderer.material.SetColor(UnlitColor, color);

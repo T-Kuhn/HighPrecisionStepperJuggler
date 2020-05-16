@@ -1,26 +1,62 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace HighPrecisionStepperJuggler
 {
     public class BallPositionVisualizer : MonoBehaviour
     {
-        [SerializeField] private GameObject _prefab;
-        [SerializeField] private GameObject _smallPrefab;
+        [SerializeField] private BallVisualizationFader _prefab;
+        [SerializeField] private BallVisualizationFader _trailPrefab;
         [SerializeField] private GameObject _cameraHeight;
 
-        private bool _visualizeTrail;
+        public int NumberOfGameObectsInPool;
+        public int NumberOfTrailGameObectsInPool;
 
-        public void SpawnPositionPoint(Vector3 position)
+        private List<BallVisualizationFader> _gameObjectPool;
+        private List<BallVisualizationFader> _trailGameObjectPool;
+        private bool _visualizeTrail;
+        private int _currentIndex;
+        private int _currentTrailIndex;
+
+        private void Start()
         {
-            var go = Instantiate(_prefab);
-            go.transform.position = new Vector3(-position.x, position.y + _cameraHeight.transform.position.y + 0.02f,
-                -position.z);
+            _gameObjectPool = new List<BallVisualizationFader>();
+            _trailGameObjectPool = new List<BallVisualizationFader>();
+
+            for (int i = 0; i < NumberOfGameObectsInPool; i++)
+            {
+                _gameObjectPool.Add(Instantiate(_prefab, transform));
+            }
+
+            for (int i = 0; i < NumberOfTrailGameObectsInPool; i++)
+            {
+                _trailGameObjectPool.Add(Instantiate(_trailPrefab, transform));
+            }
+        }
+
+        public void VisualizePositionPoint(Vector3 position)
+        {
+            _gameObjectPool[_currentIndex].Reset(); 
+            _gameObjectPool[_currentIndex].transform.position = 
+                new Vector3(-position.x, position.y + _cameraHeight.transform.position.y + 0.02f, -position.z);
 
             if (_visualizeTrail)
             {
-                var smallBall = Instantiate(_smallPrefab);
-                smallBall.transform.position = new Vector3(-position.x,
-                    position.y + _cameraHeight.transform.position.y + 0.02f, -position.z);
+                _trailGameObjectPool[_currentTrailIndex].Reset();
+                _trailGameObjectPool[_currentTrailIndex].transform.position = 
+                    new Vector3(-position.x, position.y + _cameraHeight.transform.position.y + 0.02f, -position.z);
+            }
+
+            _currentIndex++;
+            if (_currentIndex >= NumberOfGameObectsInPool)
+            {
+                _currentIndex = 0;
+            }
+
+            _currentTrailIndex++;
+            if (_currentTrailIndex >= NumberOfTrailGameObectsInPool)
+            {
+                _currentTrailIndex = 0;
             }
         }
 

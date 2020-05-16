@@ -3,12 +3,12 @@ TODO:
 
 
 [X] circle bouncing with moving control target
-    [ ] use improved two-step bouncing to make sure that the machine uses the new target when moving down.
+    [X] use improved two-step bouncing to make sure that the machine uses the new target when moving down.
     [ ] test circle bouncing 
 
-[ ] check if we're happy with the graph animations
-    
 [ ] fix ball position spawning every frame (bad performance impact)
+
+[ ] check if we're happy with the graph animations
 
 [ ] animate camera
     [ ] implement smooth camera moves with set positions
