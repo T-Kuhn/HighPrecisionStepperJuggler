@@ -69,6 +69,43 @@ namespace HighPrecisionStepperJuggler
             }, duration);
         }
 
+        public static IBallControlStrategy StepBouncing_Up(ITiltController tiltController,
+            Vector2? target = null, float highPos = 0.058f, float moveTime = 0.1f,
+            Action action = null)
+        {
+            return new BallControlStrategy((ballData, machineController, instructionCount) =>
+            {
+                if (!ballData.BallIsMovingUp && ballData.CurrentPositionVector.z < 140f )
+                {
+                    // if we're in here, the ball is coming downwards
+                    BallControlling.MoveToHeightWithXYTiltCorrection(machineController, tiltController,
+                        ballData, highPos, moveTime, target);
+
+                    return true;
+                }
+                return false;
+            }, 1, true, onStrategyExecutionStart: action);
+        }
+
+        public static IBallControlStrategy StepBouncing_Down(ITiltController tiltController,
+            Vector2? target = null, float lowPos = 0.05f, float moveTime = 0.1f,
+            Action action = null)
+        {
+            return new BallControlStrategy((ballData, machineController, instructionCount) =>
+            {
+                if (ballData.BallIsMovingUp)
+                {
+                    // if we're in here, the ball is moving upwards
+                    // so if the ball IS moving up, and the last thing we did was hitting the ball, then we should move down again
+                    BallControlling.MoveToHeightWithXYTiltCorrection(machineController, tiltController,
+                        ballData, lowPos, moveTime, target);
+
+                    return true;
+                }
+                return false;
+            }, 1, true, onStrategyExecutionStart: action);
+        }
+
         // NOTE: Duration needs to be a multiple of 2 since both the upwards motion and the downwards motion
         //       count as 1 instructionSent
         public static IBallControlStrategy TwoStepBouncing(int duration, ITiltController tiltController,
@@ -83,27 +120,10 @@ namespace HighPrecisionStepperJuggler
                 {
                     // if we're in here, the ball is coming downwards
 
-                    var tilt = tiltController.CalculateTilt(
-                        new Vector2(ballData.CurrentPositionVector.x, ballData.CurrentPositionVector.y),
-                        new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y),
-                        target ?? Vector2.zero,
-                        ballData.CalculatedOnBounceDownwardsVelocity,
-                        ballData.AirborneTime);
-
-                    var xCorrection = instructionCount % 2 == 1
-                        ? Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle)
-                        : 0f;
-                    var yCorrection = instructionCount % 2 == 0
-                        ? Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle)
-                        : 0f;
-
-                    machineController.SendInstructions(new List<HLInstruction>()
-                    {
-                        new HLInstruction(highPos, xCorrection, yCorrection, moveTime),
-                    });
+                    BallControlling.MoveToHeightWithAlternatingXYTiltCorrection(machineController, tiltController,
+                        ballData, highPos, moveTime, instructionCount, target);
 
                     currentPositionIsUp = true;
-                    // instructionSent: true
                     return true;
                 }
 
@@ -112,24 +132,8 @@ namespace HighPrecisionStepperJuggler
                     // if we're in here, the ball is moving upwards
                     // so if the ball IS moving up, and the last thing we did was hitting the ball, then we should move down again
 
-                    var tilt = tiltController.CalculateTilt(
-                        ballData.PredictedPositionVectorOnHit,
-                        new Vector2(ballData.CurrentVelocityVector.x, ballData.CurrentVelocityVector.y),
-                        target ?? Vector2.zero,
-                        ballData.CalculatedOnBounceDownwardsVelocity,
-                        ballData.AirborneTime);
-
-                    var xCorrection = instructionCount % 2 == 1
-                        ? Mathf.Clamp(tilt.xTilt, c.MinTiltAngle, c.MaxTiltAngle)
-                        : 0f;
-                    var yCorrection = instructionCount % 2 == 0
-                        ? Mathf.Clamp(tilt.yTilt, c.MinTiltAngle, c.MaxTiltAngle)
-                        : 0f;
-
-                    machineController.SendInstructions(new List<HLInstruction>()
-                    {
-                        new HLInstruction(lowPos, xCorrection, yCorrection, moveTime),
-                    });
+                    BallControlling.MoveToHeightWithAlternatingXYTiltCorrection(machineController, tiltController,
+                        ballData, lowPos, moveTime, instructionCount, target);
 
                     currentPositionIsUp = false;
                     return true;
@@ -140,12 +144,14 @@ namespace HighPrecisionStepperJuggler
             }, duration, true, onStrategyExecutionStart: action);
         }
 
+
+
         // stable bouncing with low height
         public static IBallControlStrategy TwoStepBouncingLow(int duration, ITiltController tiltController)
         {
             return TwoStepBouncing(duration, tiltController, null, 0.05f, 0.055f, 0.06f);
         }
-        
+
         public static IBallControlStrategy Balancing(float height, int duration, Vector2 target,
             ITiltController tiltController)
         {

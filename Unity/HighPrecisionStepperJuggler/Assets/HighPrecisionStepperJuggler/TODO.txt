@@ -1,39 +1,37 @@
 
+TODO:
 
-[ ] fix ball position spawning every frame (bad performance impact)
-[X] figure out whether or not velocity data is reliable
-[X] change plate to octagon (import new model data).
-[X] update CAD data to reflect new plate design.
-
-[ ] fix runtime error that occurs when no camera is connected.
-[ ] Write latex math file
-
-lower link length: 89
-upper link length: 80
-upper most link length: 35 + 6.5 + 8 = 49.5 (from plate edge to joint) 
-upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
-
-memo:
 
 [X] circle bouncing with moving control target
+    [ ] use improved two-step bouncing to make sure that the machine uses the new target when moving down.
     [ ] test circle bouncing 
 
-[X] fix 2-step bouncing stuck in up position on controlStrategySwitch
-     [X] end position should be down. But it ends up being stuck up      
-
-[ ] show current control algorithm (maybe)
-[X] animate coordinate system with a new timeAnimator class (also animate data time axis scale (x10/x100))
+[ ] check if we're happy with the graph animations
     
-[ ] come up with new flex
-[ ] get a good routine going
+[ ] fix ball position spawning every frame (bad performance impact)
 
 [ ] animate camera
     [ ] implement smooth camera moves with set positions
-
-
+    
+[ ] show current control algorithm (maybe)
+[ ] add x10/x100 somewhere
+    
+[ ] come up with new flex
+[ ] get a good routine going
     
 [ ] bring ball to halt by catching it softly.   
 [ ] "every bounce will be a bit higher"-bouncing
+[ ] zig-zag bouncing
+
+// vid:
+[ ] front view, change to unity graphics, look around, end up in top view, change to realtime video again (top view)
+[ ] first half: bouncing patterns and data visualization
+[ ] second half: bouncing patterns (again) with close up footage and in game camera changes (top view, motor close up view, + maybe one more view)
+[ ] give me ball back dance? while close up view and change to top view to get good sync of video streams between switches
+
+
+
+// next iteration TODO:
 
 [ ] add radar style turning radius with fade to ball position visualization
 
@@ -59,10 +57,13 @@ memo:
 [X] check whether or not the tilt is constant when moving up with tilted plate
     [ ] turns out we DO have a problem with the tilt shifting ever so slightly while moving upwards with a tilted plate
 
+[ ] fix runtime error that occurs when no camera is connected.
+[ ] Write latex math file
 
-// vid:
-[ ] front view, change to unity graphics, look around, ent up in top view, change to realtime video again (top view)
-[ ] first half: bouncing patterns and data visualization
-[ ] second half: bouncing patterns (again) with close up footage and in game camera changes (top view, motor close up view, + maybe one more view)
-[ ] give me ball back dance? while close up view and change to top view to get good sync of video streams between switches
+memo:
+
+lower link length: 89
+upper link length: 80
+upper most link length: 35 + 6.5 + 8 = 49.5 (from plate edge to joint) 
+upper most link from joint to motor axis center: 49.5 + 21.023 = 70.523
 

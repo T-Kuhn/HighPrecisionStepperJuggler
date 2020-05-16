@@ -154,7 +154,7 @@ namespace HighPrecisionStepperJuggler
             var radius = 30f;
             var numberOfSlices = 15;
             var target = Vector2.zero;
-            
+
             for (int j = 0; j < iterations; j++)
             {
                 for (int i = 0; i < numberOfSlices; i++)
@@ -163,7 +163,9 @@ namespace HighPrecisionStepperJuggler
                     target.x = Mathf.Cos(angle) * radius;
                     target.y = Mathf.Sin(angle) * radius;
                     _strategies.Add(
-                        BallControlStrategyFactory.TwoStepBouncing(2, AnalyticalTiltController.Instance, target));
+                        BallControlStrategyFactory.StepBouncing_Down(AnalyticalTiltController.Instance, target));
+                    _strategies.Add(
+                        BallControlStrategyFactory.StepBouncing_Up(AnalyticalTiltController.Instance, target));
                 }
             }
         }
