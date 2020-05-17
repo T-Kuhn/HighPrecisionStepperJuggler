@@ -1,23 +1,23 @@
 
 TODO:
 
+[ ] add fade-able current position cross for circle bouncing to better see how much the ball is lagging behind
 
-[X] circle bouncing with moving control target
-    [X] use improved two-step bouncing to make sure that the machine uses the new target when moving down.
-    [ ] test circle bouncing 
-
-[ ] fix ball position spawning every frame (bad performance impact)
-
-[ ] check if we're happy with the graph animations
-
+[ ] show current control algorithm (maybe)
+[ ] add a slowed down data sequence to circleBouncing (after 2 full cycles)
 [ ] animate camera
     [ ] implement smooth camera moves with set positions
+    [ ] implement feature that allows us to overlay imageData fullscreen over ingame camera output at 50% opacy
+        to match ingame camera positioning to real life camera positioning
+    [ ] make both graph view overlay and camera view overlay fade-able
     
-[ ] show current control algorithm (maybe)
-[ ] add x10/x100 somewhere
-    
-[ ] come up with new flex
+[ ] try to rebuild 5 time bouncing into strong bounce into balancing with twoStep-bouncing
+[ ] TwostepBouncingLow needs improvement (it fails after a short time)
+    [ ] try tuned down correctionTilt to fix
+
 [ ] get a good routine going
+    [ ] come up with new flex
+    [ ] tweak graph animations
     
 [ ] bring ball to halt by catching it softly.   
 [ ] "every bounce will be a bit higher"-bouncing

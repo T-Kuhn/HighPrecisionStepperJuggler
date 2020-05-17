@@ -17,7 +17,8 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private GradientDescentView _gradientDescentViewX;
         [SerializeField] private GradientDescentView _gradientDescentViewY;
         [SerializeField] private GradientDescentView _gradientDescentViewZ;
-        [SerializeField] private TargetVisualizer _targetVisualizer;
+        [SerializeField] private CrossVisualizer _targetCrossVisualizer;
+        [SerializeField] private CrossVisualizer _currentPositionCrossVisualizer;
 
         private readonly GradientDescent _gradientDescentX = new GradientDescent(
             Constants.NumberOfTrainingSetsUsedForXYGD,
@@ -54,8 +55,8 @@ namespace HighPrecisionStepperJuggler
             _gradientDescentViewY.GradientDescent = _gradientDescentY;
             _gradientDescentViewZ.GradientDescent = _gradientDescentZ;
 
-            AnalyticalTiltController.Instance.TargetVisualizer = _targetVisualizer;
-            PIDTiltController.Instance.TargetVisualizer = _targetVisualizer;
+            AnalyticalTiltController.Instance.TargetCrossVisualizer = _targetCrossVisualizer;
+            PIDTiltController.Instance.TargetCrossVisualizer = _targetCrossVisualizer;
 
             _onCheckPointPassedSubject.OnNext(0);
         }
@@ -221,6 +222,8 @@ namespace HighPrecisionStepperJuggler
                 ));
 
             _ballPositionVisualizer.VisualizePositionPoint(_ballData.CurrentUnityPositionVector);
+            _currentPositionCrossVisualizer.UpdateCrossPosition(
+                new Vector2(_ballData.CurrentPositionVector.x, _ballData.CurrentPositionVector.y));
 
             if (_machineController.IsReadyForNextInstruction && _isExecuteControlStrategies.Value)
             {

@@ -109,7 +109,8 @@ namespace HighPrecisionStepperJuggler.MachineLearning
 
         private void ShowTarget(CompositeDisposable cd)
         {
-            InvokeActionAtTime(() => _graphAnimator.FadeInTarget(), 1f, cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInCurrentPositionCross(), 1f, cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInTargetCross(), 1.5f, cd);
         }
     }
 }

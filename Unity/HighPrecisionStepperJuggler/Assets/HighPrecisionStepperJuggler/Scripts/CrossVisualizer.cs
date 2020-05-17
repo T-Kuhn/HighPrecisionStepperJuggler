@@ -2,14 +2,14 @@
 
 namespace HighPrecisionStepperJuggler
 {
-    public class TargetVisualizer : MonoBehaviour
+    public class CrossVisualizer : MonoBehaviour
     {
         [SerializeField] private GameObject originLineX;
         [SerializeField] private GameObject middleLineX;
         [SerializeField] private GameObject originLineY;
         [SerializeField] private GameObject middleLineY;
 
-        public void UpdateTargetPosition(Vector2 target)
+        public void UpdateCrossPosition(Vector2 target)
         {
             var x = target.x / 2f;
             var y = target.y / 2f;

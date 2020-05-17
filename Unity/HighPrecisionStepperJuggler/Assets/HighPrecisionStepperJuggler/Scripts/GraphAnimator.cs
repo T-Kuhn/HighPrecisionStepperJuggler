@@ -3,7 +3,6 @@ using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace HighPrecisionStepperJuggler.MachineLearning
 {
@@ -31,7 +30,8 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         [SerializeField] private Material _tiltX;
         [SerializeField] private Material _tiltY;
         
-        [SerializeField] private Material _target;
+        [SerializeField] private Material _targetCross;
+        [SerializeField] private Material _currentPositionCross;
         
         [SerializeField] private Material _predictedHitPositionX;
         [SerializeField] private Material _predictedHitPositionY;
@@ -55,9 +55,10 @@ namespace HighPrecisionStepperJuggler.MachineLearning
                 _gradientDescentLineZ,
                 _tiltX,
                 _tiltY,
-                _target,
+                _targetCross,
                 _predictedHitPositionX,
-                _predictedHitPositionY
+                _predictedHitPositionY,
+                _currentPositionCross
             };
             
             SetGridToInvisible();
@@ -105,8 +106,11 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         public void FadeOutTiltX() => FadeOutMaterial(_tiltX);
         public void FadeOutTiltY() => FadeOutMaterial(_tiltY);
         
-        public void FadeInTarget() => FadeInMaterial(_target);
-        public void FadeOutTarget() => FadeOutMaterial(_target);
+        public void FadeInTargetCross() => FadeInMaterial(_targetCross);
+        public void FadeOutTargetCross() => FadeOutMaterial(_targetCross);
+        
+        public void FadeInCurrentPositionCross() => FadeInMaterial(_currentPositionCross);
+        public void FadeOutCurrentPositionCross() => FadeOutMaterial(_currentPositionCross);
         
         public void FadeInPredictedHitPositionX() => FadeInMaterial(_predictedHitPositionX);
         public void FadeInPredictedHitPositionY() => FadeInMaterial(_predictedHitPositionY);

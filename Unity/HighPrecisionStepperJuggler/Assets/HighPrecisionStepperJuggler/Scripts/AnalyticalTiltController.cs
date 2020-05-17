@@ -9,12 +9,12 @@ namespace HighPrecisionStepperJuggler.MachineLearning
 
         public static AnalyticalTiltController Instance => INSTANCE;
 
-        public TargetVisualizer TargetVisualizer
+        public CrossVisualizer TargetCrossVisualizer
         {
-            set { _targetVisualizer = value; }
+            set { _targetCrossVisualizer = value; }
         }
 
-        private TargetVisualizer _targetVisualizer;
+        private CrossVisualizer _targetCrossVisualizer;
 
         public (float xTilt, float yTilt) CalculateTilt(
             Vector2 position,
@@ -23,7 +23,7 @@ namespace HighPrecisionStepperJuggler.MachineLearning
             float calculatedOnBounceDownwardsVelocity,
             float airborneTime)
         {
-            _targetVisualizer.UpdateTargetPosition(targetPosition);
+            _targetCrossVisualizer.UpdateCrossPosition(targetPosition);
             
             float AngleBetween(Vector2 vector1, Vector2 vector2)
             {
