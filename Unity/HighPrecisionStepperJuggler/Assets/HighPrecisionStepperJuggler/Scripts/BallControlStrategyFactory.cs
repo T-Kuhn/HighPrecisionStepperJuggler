@@ -146,10 +146,18 @@ namespace HighPrecisionStepperJuggler
 
 
 
-        // stable bouncing with low height
-        public static IBallControlStrategy TwoStepBouncingLow(int duration, ITiltController tiltController)
+        // stable bouncing with shallow plate (not much up down movement)
+        public static IBallControlStrategy TwoStepBouncingWithShallowMovement(int duration, ITiltController tiltController,
+            Vector2? target)
         {
-            return TwoStepBouncing(duration, tiltController, null, 0.05f, 0.055f, 0.06f);
+            return TwoStepBouncing(duration, tiltController, target, 0.05f, 0.054f, 0.06f);
+        }
+        
+        // TODO: fix this ControlStrategy. Bouncing isn't stable.
+        public static IBallControlStrategy TwoStepBouncingLow(int duration,
+            ITiltController tiltController, Vector2? target)
+        {
+            return TwoStepBouncing(duration, tiltController, target, 0.05f, 0.054f, 0.07f);
         }
 
         public static IBallControlStrategy Balancing(float height, int duration, Vector2 target,

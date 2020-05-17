@@ -77,7 +77,6 @@ namespace HighPrecisionStepperJuggler
 
             GetBallBouncing(() => _onCheckPointPassedSubject.OnNext(1));
             
-
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance));
 
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(40, AnalyticalTiltController.Instance,
@@ -86,7 +85,7 @@ namespace HighPrecisionStepperJuggler
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 action: () => _onCheckPointPassedSubject.OnNext(3)));
             
-            CircleBouncing(5);
+            CircleBouncing(10);
 
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(40f, 0f)));
