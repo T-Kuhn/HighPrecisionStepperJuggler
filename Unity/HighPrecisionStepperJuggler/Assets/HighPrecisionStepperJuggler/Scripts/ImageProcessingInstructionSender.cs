@@ -19,6 +19,7 @@ namespace HighPrecisionStepperJuggler
         [SerializeField] private GradientDescentView _gradientDescentViewZ;
         [SerializeField] private CrossVisualizer _targetCrossVisualizer;
         [SerializeField] private CrossVisualizer _currentPositionCrossVisualizer;
+        [SerializeField] private MachineStateView _machineStateView;
 
         private readonly GradientDescent _gradientDescentX = new GradientDescent(
             Constants.NumberOfTrainingSetsUsedForXYGD,
@@ -76,9 +77,15 @@ namespace HighPrecisionStepperJuggler
             _strategies.Add(BallControlStrategyFactory.GoToWhenBallOnPlate(0.01f));
             _strategies.Add(BallControlStrategyFactory.GoToWhenBallOnPlate(0.05f));
 
-            GetBallBouncing(() => _onCheckPointPassedSubject.OnNext(1));
+            GetBallBouncing(() =>
+            {
+                _onCheckPointPassedSubject.OnNext(1);
+                _machineStateView.Set("Get Ball Bouncing", MachineStateView.TiltControlType.PIDTiltController);
+            });
             
-            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance));
+            _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
+                action: () => _machineStateView.Set("Two Step Bouncing",
+                        MachineStateView.TiltControlType.AnalyticalTiltControl)));
 
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(40, AnalyticalTiltController.Instance,
                 action: () => _onCheckPointPassedSubject.OnNext(2)));
@@ -86,10 +93,12 @@ namespace HighPrecisionStepperJuggler
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 action: () => _onCheckPointPassedSubject.OnNext(3)));
             
-            CircleBouncing(10);
+            CircleBouncing(10, () => _machineStateView.Set("Circle Bouncing",
+                MachineStateView.TiltControlType.AnalyticalTiltControl));
 
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
-                new Vector2(40f, 0f)));
+                new Vector2(40f, 0f), action: () => _machineStateView.Set("Two Step Bouncing",
+                    MachineStateView.TiltControlType.AnalyticalTiltControl)));
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
                 new Vector2(0f, 0f)));
             _strategies.Add(BallControlStrategyFactory.TwoStepBouncing(20, AnalyticalTiltController.Instance,
@@ -148,7 +157,7 @@ namespace HighPrecisionStepperJuggler
             }
         }
 
-        private void CircleBouncing(int iterations = 1)
+        private void CircleBouncing(int iterations = 1, Action action = null)
         {
             var angle = 0f;
             var radius = 30f;
@@ -163,7 +172,8 @@ namespace HighPrecisionStepperJuggler
                     target.x = Mathf.Cos(angle) * radius;
                     target.y = Mathf.Sin(angle) * radius;
                     _strategies.Add(
-                        BallControlStrategyFactory.StepBouncing_Down(AnalyticalTiltController.Instance, target));
+                        BallControlStrategyFactory.StepBouncing_Down(AnalyticalTiltController.Instance, target,
+                            action: action));
                     _strategies.Add(
                         BallControlStrategyFactory.StepBouncing_Up(AnalyticalTiltController.Instance, target));
                 }

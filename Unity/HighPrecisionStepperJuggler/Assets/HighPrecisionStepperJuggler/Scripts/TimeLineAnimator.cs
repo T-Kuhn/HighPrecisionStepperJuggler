@@ -10,6 +10,7 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         [SerializeField] private ImageProcessingInstructionSender _imageProcessingInstructionSender;
         [SerializeField] private GraphAnimator _graphAnimator;
         [SerializeField] private GraphTimeScaleAnimator _graphTimeScaleAnimator;
+        [SerializeField] private MachineStateView _machineStateView;
 
         private void Start()
         {
@@ -38,6 +39,7 @@ namespace HighPrecisionStepperJuggler.MachineLearning
                 {
                     cd.Clear();
                     _graphAnimator.Reset();
+                    _machineStateView.Set("", MachineStateView.TiltControlType.None);
                 }).AddTo(this);
         }
 
@@ -75,11 +77,11 @@ namespace HighPrecisionStepperJuggler.MachineLearning
 
         private void ShowHeightData(CompositeDisposable cd)
         {
-            InvokeActionAtTime(() => _graphAnimator.FadeInVerticalLine(), 1f, cd);
-            InvokeActionAtTime(() => _graphAnimator.FadeInDottedHorizontalBottomLine(), 1.5f, cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInVerticalLine(), 2f, cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInDottedHorizontalBottomLine(), 2.5f, cd);
 
-            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentDataPointZ(), 2f, cd);
-            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentLineZ(), 2.0f, cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentDataPointZ(), 3f, cd);
+            InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentLineZ(), 3f, cd);
         }
 
         private void ShowXYData(CompositeDisposable cd)

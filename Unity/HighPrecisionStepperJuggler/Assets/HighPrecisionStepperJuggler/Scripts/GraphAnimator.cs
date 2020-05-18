@@ -75,7 +75,7 @@ namespace HighPrecisionStepperJuggler.MachineLearning
             _tweeners.Add(DOTween.To(() => 0f, x => SetAlpha(material, x), 1f, 1f));
         
         private void FadeOutMaterial(Material material) => 
-                    _tweeners.Add(DOTween.To(() => 1f, x => SetAlpha(material, x), 0f, 1f));
+            _tweeners.Add(DOTween.To(() => 1f, x => SetAlpha(material, x), 0f, 1f));
 
         public void FadeInHorizontalLine() => FadeInMaterial(_horizontalLine);
         public void FadeInVerticalLine() => FadeInMaterial(_verticalLine);
