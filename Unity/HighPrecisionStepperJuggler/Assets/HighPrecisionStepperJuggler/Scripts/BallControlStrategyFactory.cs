@@ -39,7 +39,7 @@ namespace HighPrecisionStepperJuggler
         }
 
         public static IBallControlStrategy BouncingStrong(int duration, ITiltController tiltController,
-            float lowPos = 0.05f, float highPos = 0.08f, float moveTime = 0.1f)
+            float lowPos = 0.05f, float highPos = 0.08f, float moveTime = 0.1f, Action action = null)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
@@ -66,7 +66,7 @@ namespace HighPrecisionStepperJuggler
                 }
 
                 return false;
-            }, duration);
+            }, duration, onStrategyExecutionStart: action);
         }
 
         public static IBallControlStrategy StepBouncing_Up(ITiltController tiltController,
@@ -148,20 +148,20 @@ namespace HighPrecisionStepperJuggler
 
         // stable bouncing with shallow plate (not much up down movement)
         public static IBallControlStrategy TwoStepBouncingWithShallowMovement(int duration, ITiltController tiltController,
-            Vector2? target)
+            Vector2? target, Action action = null)
         {
-            return TwoStepBouncing(duration, tiltController, target, 0.05f, 0.054f, 0.06f);
+            return TwoStepBouncing(duration, tiltController, target, 0.05f, 0.054f, 0.06f, action);
         }
         
         // TODO: fix this ControlStrategy. Bouncing isn't stable.
         public static IBallControlStrategy TwoStepBouncingLow(int duration,
-            ITiltController tiltController, Vector2? target)
+            ITiltController tiltController, Vector2? target, Action action = null)
         {
-            return TwoStepBouncing(duration, tiltController, target, 0.05f, 0.054f, 0.07f);
+            return TwoStepBouncing(duration, tiltController, target, 0.05f, 0.054f, 0.07f, action);
         }
 
         public static IBallControlStrategy Balancing(float height, int duration, Vector2 target,
-            ITiltController tiltController)
+            ITiltController tiltController, Action action = null)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
@@ -187,10 +187,10 @@ namespace HighPrecisionStepperJuggler
                 }
 
                 return false;
-            }, duration);
+            }, duration, onStrategyExecutionStart: action);
         }
 
-        public static IBallControlStrategy GoTo(float height, float time = 0.5f)
+        public static IBallControlStrategy GoTo(float height, float time = 0.5f, Action action = null)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
@@ -199,10 +199,10 @@ namespace HighPrecisionStepperJuggler
                     new HLInstruction(height, 0f, 0f, time),
                 });
                 return true;
-            }, 1);
+            }, 1, onStrategyExecutionStart: action);
         }
 
-        public static IBallControlStrategy GoToWhenBallOnPlate(float height, float time = 0.5f)
+        public static IBallControlStrategy GoToWhenBallOnPlate(float height, float time = 0.5f, Action action = null)
         {
             return new BallControlStrategy((ballData, machineController, instructionCount) =>
             {
@@ -216,7 +216,7 @@ namespace HighPrecisionStepperJuggler
                 }
 
                 return false;
-            }, 1);
+            }, 1, onStrategyExecutionStart: action);
         }
     }
 }

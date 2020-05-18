@@ -1,13 +1,14 @@
 
 TODO:
 
-[X] add fade-able current position cross for circle bouncing to better see how much the ball is lagging behind
-
 [ ] animate camera
-    [ ] implement smooth camera moves with set positions
     [ ] implement feature that allows us to overlay imageData fullscreen over ingame camera output at 50% opacy
         to match ingame camera positioning to real life camera positioning
     [ ] make both graph view overlay and camera view overlay fade-able
+    [ ] implement smooth camera moves with set positions
+    [ ] use F keys to switch camera positions.
+    
+[ ] make different BallControlStrategyCollections (the main sequence, the top view sequence, the close up sequence)
     
 [ ] show current control algorithm (maybe)
     [ ] maybe add some black space at the bottom of the graph animation fo make room for this
