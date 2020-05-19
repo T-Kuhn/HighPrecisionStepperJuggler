@@ -149,6 +149,10 @@ namespace UnityTemplateProjects
                 m_TargetCameraState.yaw += mouseMovement.x * mouseSensitivityFactor;
                 m_TargetCameraState.pitch += mouseMovement.y * mouseSensitivityFactor;
             }
+            else
+            {
+                return;
+            }
 
             // Translation
             var translation = GetInputTranslationDirection() * Time.deltaTime;
