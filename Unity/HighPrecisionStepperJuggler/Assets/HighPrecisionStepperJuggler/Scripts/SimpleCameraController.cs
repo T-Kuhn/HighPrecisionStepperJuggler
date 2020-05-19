@@ -73,15 +73,6 @@ namespace UnityTemplateProjects
         bool m_rotate;
         private float m_rightMultiplier;
 
-        [Range(0f, 1f)]
-        public float CameraRotHeight;
-        
-        [Range(0f, 1f)]
-        public float CameraRotLookAtHeight;
-        
-        [Range(0f, 1f)]
-        public float Radius;
-
         void OnEnable()
         {
             m_TargetCameraState.SetFromTransform(transform);
@@ -126,7 +117,6 @@ namespace UnityTemplateProjects
 
         void Update()
         {
-            // Exit Sample  
             if (Input.GetKey(KeyCode.Escape))
             {
                 Application.Quit();
@@ -158,49 +148,6 @@ namespace UnityTemplateProjects
 
                 m_TargetCameraState.yaw += mouseMovement.x * mouseSensitivityFactor;
                 m_TargetCameraState.pitch += mouseMovement.y * mouseSensitivityFactor;
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                m_rotate = !m_rotate;
-                m_rightMultiplier = 0.12f;
-            }
-
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                Radius = 0.001f;
-                m_rightMultiplier = 0f;
-                CameraRotHeight = 0.75f;
-                
-            }
-
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                Radius = 0.41f;
-                m_rightMultiplier = 0.12f;
-                CameraRotHeight = 0.49f;
-            }
-
-            if (m_rotate)
-            {
-                m_TargetCameraState.y = CameraRotHeight;
-                m_TargetCameraState.x = Mathf.Cos(Time.time * 0.1f) * Radius;
-                m_TargetCameraState.z = Mathf.Sin(Time.time * 0.1f) * Radius;
-
-                var lookRot = Quaternion.LookRotation(
-                    new Vector3(-m_TargetCameraState.x,
-                        CameraRotLookAtHeight - m_TargetCameraState.y,
-                        -m_TargetCameraState.z), Vector3.up);
-                var eulerRot = lookRot.eulerAngles;
-
-                var right = transform.right * m_rightMultiplier;
-                m_TargetCameraState.x += right.x;
-                m_TargetCameraState.y += right.y;
-                m_TargetCameraState.z += right.z;
-
-                m_TargetCameraState.pitch = eulerRot.x;
-                m_TargetCameraState.yaw = eulerRot.y;
-                m_TargetCameraState.roll = eulerRot.z;
             }
 
             // Translation
