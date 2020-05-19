@@ -2,18 +2,21 @@
 using UnityEngine.Experimental.Rendering.HDPipeline;
 using UnityEngine.Rendering;
 
-public class ViewRenderTextureSetter : MonoBehaviour
+namespace HighPrecisionStepperJuggler.MachineLearning
 {
-    [SerializeField] private Volume _volume;
-    [SerializeField] private RenderTexture _renderTexture;
-    
-    void Start()
+    public class ViewRenderTextureSetter : MonoBehaviour
     {
-        foreach (var c in _volume.profile.components)
+        [SerializeField] private Volume _volume;
+        [SerializeField] private RenderTexture _renderTexture;
+
+        void Start()
         {
-            if (c is OverlayComponent oc)
+            foreach (var c in _volume.profile.components)
             {
-                oc.secondOverlayParameter.value = _renderTexture;
+                if (c is OverlayComponent oc)
+                {
+                    oc.secondOverlayParameter.value = _renderTexture;
+                }
             }
         }
     }

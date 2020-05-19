@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityTemplateProjects
+namespace HighPrecisionStepperJuggler.MachineLearning
 {
     public class SimpleCameraController : MonoBehaviour
     {

@@ -10,6 +10,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
 
         public TextureParameter overlayParameter = new TextureParameter(null);
         public TextureParameter secondOverlayParameter = new TextureParameter(null);
+        public TextureParameter fullScreenOverlay = new TextureParameter(null);
 
         public ColorParameter tintColor = new ColorParameter(new Color(1,1,1,1), false, true, true);
 

@@ -4,7 +4,9 @@
     {
         _OverlayTex("Texture", 2D) = "white" {}
         _SecondOverlayTex("Texture", 2D) = "white" {}
+        _FullScreenOverlayTex("Texture", 2D) = "white" {}
         _TintColor("Color", Color) = (1,1,1,1)
+        _FullScreenOverlayOpacity ("FullScreenOverlay Opacity", Range (0.02,0.15)) = 0.0
     }
     HLSLINCLUDE
         #pragma target 4.5
@@ -39,7 +41,9 @@
 
         sampler2D _OverlayTex;
         sampler2D _SecondOverlayTex;
+        sampler2D _FullScreenOverlayTex;
         float4 _TintColor;
+        float _FullScreenOverlayOpacity;
 
         float4 Frag(Varyings input) : SV_Target
         {
@@ -74,6 +78,7 @@
 
             float4 col = tex2D(_OverlayTex, uv);
             float4 secondCol = tex2D(_SecondOverlayTex, uv2);
+            float4 fullScreenOverlayCol = tex2D(_FullScreenOverlayTex, input.texcoord);
 
             float4 resultCol;
             if(uv.x < 1.0 && uv.y < 1.0)
@@ -89,7 +94,7 @@
                 resultCol = float4(outColor, 1);
             }
 
-            return resultCol;
+            return lerp(resultCol, fullScreenOverlayCol, _FullScreenOverlayOpacity);
         }
     ENDHLSL
 

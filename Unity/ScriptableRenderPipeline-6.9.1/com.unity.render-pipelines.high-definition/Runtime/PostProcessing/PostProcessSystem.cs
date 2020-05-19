@@ -2152,7 +2152,9 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
         {
             m_OverlayShaderMaterial.SetTexture("_OverlayTex", m_Overlay.overlayParameter.value);
             m_OverlayShaderMaterial.SetTexture("_SecondOverlayTex", m_Overlay.secondOverlayParameter.value);
+            m_OverlayShaderMaterial.SetTexture("_FullScreenOverlayTex", m_Overlay.fullScreenOverlay.value);
             m_OverlayShaderMaterial.SetColor("_TintColor", m_Overlay.tintColor.value);
+            m_OverlayShaderMaterial.SetFloat("_FullScreenOverlayOpacity", m_Overlay.fullScreenOverlay.overrideState ? 0.5f : 0f);
             m_OverlayShaderMaterial.SetTexture(HDShaderIDs._InputTexture, source);
             HDUtils.DrawFullScreen(cmd, m_OverlayShaderMaterial, destination);
         }
