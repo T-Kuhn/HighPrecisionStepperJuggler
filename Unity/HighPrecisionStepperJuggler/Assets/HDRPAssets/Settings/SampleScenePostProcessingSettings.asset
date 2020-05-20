@@ -18,11 +18,17 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   overlayParameter:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 0}
   secondOverlayParameter:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 0}
+  fullScreenOverlay:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: 4114b77a1e52bfd47a812b5bb1beb631, type: 3}
+  fullScreenOverlayOpacity:
+    m_OverrideState: 0
+    m_Value: 0.58
   tintColor:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}

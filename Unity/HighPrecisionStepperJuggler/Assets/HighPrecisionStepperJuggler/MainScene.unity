@@ -7351,9 +7351,9 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 2
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_GateFitMode: 1
+  m_FOVAxisMode: 1
+  m_SensorSize: {x: 21.95, y: 9.35}
   m_LensShift: {x: 0, y: 0}
   m_FocalLength: 18
   m_NormalizedViewPortRect:
@@ -7364,7 +7364,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 100
-  field of view: 67.380135
+  field of view: 29.118616
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -7389,8 +7389,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297650280}
-  m_LocalRotation: {x: 0.010028764, y: 0.95723903, z: -0.2871855, w: 0.03342761}
-  m_LocalPosition: {x: -0.24, y: 0.51, z: 0.52}
+  m_LocalRotation: {x: -0.096256964, y: 0.8883167, z: -0.39270726, w: -0.21773644}
+  m_LocalPosition: {x: 0.19767404, y: 0.52736974, z: 0.40520856}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7436,9 +7436,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   rotationLerpTime: 0.01
   invertY: 0
-  CameraRotHeight: 0.49
-  CameraRotLookAtHeight: 0.17
-  Radius: 0.41
 --- !u!1 &1328164680
 GameObject:
   m_ObjectHideFlags: 0

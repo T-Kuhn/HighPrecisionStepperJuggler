@@ -1,37 +1,45 @@
 
 TODO:
 
+// time intensive:
 [ ] animate camera
-    [ ] implement feature that allows us to overlay imageData fullscreen over ingame camera output at 50% opacy
+    [X] implement feature that allows us to overlay imageData fullscreen over ingame camera output at 50% opacy
         to match ingame camera positioning to real life camera positioning
-    [ ] make both graph view overlay and camera view overlay fade-able
+        [ ] make overlay fade adjustable
+    [ ] make both graph view overlay and camera view overlay deactivatable
+         1. fade out all graphs via video editing software
+         2. real camera footage only of twoStepBouncing ball
+         
+         !THIS NEEDS TO HAPPEN AUTOMATICALLY!
+         3. STOP the drawing of all graphs and video streams in Unity
+         
+         4. fade over with matching unity rendering (no graphs and camera stream)
+         5. move camera (close up arm)
+         6. fade over to real camera footage
+         7. fade back to unity footage
+         7. move camera again (top view)
+         8. fade over to real camera footage
+         
+         This can be done manually
+         9. START the drawing of all graphs and video streams in Unity
+         10. fade in graph and camera streams in video editing software
+         
     [ ] implement smooth camera moves with set positions
-    [ ] use F keys to switch camera positions.
-    
-[ ] make different BallControlStrategyCollections (the main sequence, the top view sequence, the close up sequence)
-    
-[ ] show current control algorithm (maybe)
-    [ ] maybe add some black space at the bottom of the graph animation fo make room for this
-     - Bouncing
-     - TwoStepBouncing
-     - Analytical Control
-     - PID Control
-    
-[ ] add a slowed down data sequence to circleBouncing (after 2 full cycles)
-    
-[ ] try to rebuild 5 time bouncing into strong bounce into balancing with twoStep-bouncing
+    [ ] use F keys to switch camera positions?
 
+// easy:
+[ ] try to rebuild 5 time bouncing into strong bounce into balancing with twoStep-bouncing
+[ ] make different BallControlStrategyCollections (the main sequence, the top view sequence, the close up sequence)
+[ ] add a slowed down data sequence to circleBouncing (after 2 full cycles)
 [ ] TwostepBouncingLow needs improvement (it fails after a short time)
     [ ] try tuned down correctionTilt to fix
-
 [ ] get a good routine going
     [ ] come up with new flex
     [ ] tweak graph animations
-    
 [ ] bring ball to halt by catching it softly.   
     [ ] this might just work be switching the up-down positions of one of the current Bounce ControlStrategies
 [ ] "every bounce will be a bit higher"-bouncing
-[ ] zig-zag bouncing
+[ ] zig-zag bouncing (maybe moving towards center)
 
 // vid:
 [ ] front view, change to unity graphics, look around, end up in top view, change to realtime video again (top view)
