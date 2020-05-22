@@ -11,6 +11,7 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         [SerializeField] private GraphAnimator _graphAnimator;
         [SerializeField] private GraphTimeScaleAnimator _graphTimeScaleAnimator;
         [SerializeField] private MachineStateView _machineStateView;
+        [SerializeField] private CameraTweener _cameraTweener;
 
         private void Start()
         {
@@ -82,6 +83,10 @@ namespace HighPrecisionStepperJuggler.MachineLearning
 
             InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentDataPointZ(), 3f, cd);
             InvokeActionAtTime(() => _graphAnimator.FadeInGradientDescentLineZ(), 3f, cd);
+            
+            InvokeActionAtTime(() => _cameraTweener.GoToPosition1(), 4f, cd);
+            InvokeActionAtTime(() => _cameraTweener.GoToPosition2(), 8f, cd);
+            InvokeActionAtTime(() => _cameraTweener.GoToPosition3(), 12f, cd);
         }
 
         private void ShowXYData(CompositeDisposable cd)

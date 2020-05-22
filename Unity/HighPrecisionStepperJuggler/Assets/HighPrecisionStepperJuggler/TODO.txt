@@ -3,38 +3,18 @@ TODO:
 
 // time intensive:
 [ ] animate camera
-    [X] implement feature that allows us to overlay imageData fullscreen over ingame camera output at 50% opacy
-        to match ingame camera positioning to real life camera positioning
-        [ ] make overlay fade adjustable
-    [ ] make both graph view overlay and camera view overlay deactivatable
-         1. fade out all graphs via video editing software
-         2. real camera footage only of twoStepBouncing ball
-         
-         !THIS NEEDS TO HAPPEN AUTOMATICALLY!
-         3. STOP the drawing of all graphs and video streams in Unity
-         
-         4. fade over with matching unity rendering (no graphs and camera stream)
-         5. move camera (close up arm)
-         6. fade over to real camera footage
-         7. fade back to unity footage
-         7. move camera again (top view)
-         8. fade over to real camera footage
-         
-         This can be done manually
-         9. START the drawing of all graphs and video streams in Unity
-         10. fade in graph and camera streams in video editing software
-         
     [ ] implement smooth camera moves with set positions
-    [ ] use F keys to switch camera positions?
-
+    [ ] make camera position switch programmable via TimeLineAnimator
+    
 // easy:
+[ ] fix lighting (it should have the same direction as real lights)!
 [ ] try to rebuild 5 time bouncing into strong bounce into balancing with twoStep-bouncing
 [ ] make different BallControlStrategyCollections (the main sequence, the top view sequence, the close up sequence)
 [ ] add a slowed down data sequence to circleBouncing (after 2 full cycles)
 [ ] TwostepBouncingLow needs improvement (it fails after a short time)
     [ ] try tuned down correctionTilt to fix
 [ ] get a good routine going
-    [ ] come up with new flex
+    [ ] come up with new flex?
     [ ] tweak graph animations
 [ ] bring ball to halt by catching it softly.   
     [ ] this might just work be switching the up-down positions of one of the current Bounce ControlStrategies
@@ -45,9 +25,38 @@ TODO:
 [ ] front view, change to unity graphics, look around, end up in top view, change to realtime video again (top view)
 [ ] first half: bouncing patterns and data visualization
 [ ] second half: bouncing patterns (again) with close up footage and in game camera changes (top view, motor close up view, + maybe one more view)
-[ ] give me ball back dance? while close up view and change to top view to get good sync of video streams between switches
-
-
+ 
+script:
+        [ ] setup camera at front position
+        [ ] find matching in-game camera position (pos1)
+        0. all kind of crazy stuff for 1 min.
+        1. fade out all graphs via video editing software
+        2. real camera footage only of twoStepBouncing ball
+         
+        first routine ends here. 
+         
+        [ ] setup camera at close up position
+        [ ] find matching in-game camera position (pos2)
+        [ ] deactivate all graphs and texts for this build
+        0. STOP the drawing of all graphs and video streams in Unity and rebuild
+        1. routine starts with two-step bouncing and in-game camera at pos1
+        2. fade over from real footage
+        3. camera move from pos1 to pos2 after x bounces
+        4. stop taking footage after another x bounces
+         
+        second routine ends here.
+         
+        [ ] setup camera at top view position
+        [ ] find matching in-game camera position (pos3)
+        [ ] deactivate all graphs and texts for this build
+        0. STOP the drawing of all graphs and video streams in Unity and rebuild
+        1. routine starts with twostep bouncing and in-game camera at pos2
+        3. camera move from pos1 to pos2 and then to pos3 after x bounces
+        4. activate text and graph drawing again
+        5. all kind of stuff for about 1min
+        6. end
+         
+         
 
 // next iteration TODO:
 

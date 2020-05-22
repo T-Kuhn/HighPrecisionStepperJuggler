@@ -36,6 +36,8 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         [SerializeField] private Material _predictedHitPositionX;
         [SerializeField] private Material _predictedHitPositionY;
 
+        [SerializeField] private OverlayActivator _overlayActivator;
+
         private Material[] _allMaterials;
         
         private void Awake()
@@ -116,6 +118,9 @@ namespace HighPrecisionStepperJuggler.MachineLearning
         public void FadeInPredictedHitPositionY() => FadeInMaterial(_predictedHitPositionY);
         public void FadeOutPredictedHitPositionX() => FadeOutMaterial(_predictedHitPositionX);
         public void FadeOutPredictedHitPositionY() => FadeOutMaterial(_predictedHitPositionY);
+
+        public void SetVideoOverlayTo(bool flag) => _overlayActivator.SetVideoOverlayWithTextsTo(flag);
+        public void SetGraphOverlayTo(bool flag) => _overlayActivator.SetGraphOverlayWithTextsTo(flag);
         
         private void SetGridToInvisible()
         {

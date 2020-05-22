@@ -18,17 +18,17 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   overlayParameter:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 0}
   secondOverlayParameter:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 0}
   fullScreenOverlay:
     m_OverrideState: 1
     m_Value: {fileID: 2800000, guid: 4114b77a1e52bfd47a812b5bb1beb631, type: 3}
   fullScreenOverlayOpacity:
     m_OverrideState: 0
-    m_Value: 0.58
+    m_Value: 1
   tintColor:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -51,6 +51,7 @@ MonoBehaviour:
   - {fileID: 3109681608999342120}
   - {fileID: 396278178000043239}
   - {fileID: -7610046736956500591}
+  - {fileID: 4538161051340441407}
 --- !u!114 &396278178000043239
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -147,3 +148,27 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
     min: 0.001
+--- !u!114 &4538161051340441407
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b709909182ba0943abef2c49ed59205, type: 3}
+  m_Name: PaniniProjection
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  distance:
+    m_OverrideState: 1
+    m_Value: 1
+    min: 0
+    max: 1
+  cropToFit:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
